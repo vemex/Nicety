@@ -51,7 +51,12 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
             },
             {
                 test: /(vendor\.scss|global\.scss)/,
-                loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+                loaders: [{ loader: 'style-loader', options: { sourceMap: true } },
+                        { loader: 'css-loader', options: { sourceMap: true } },
+                        { loader: 'postcss-loader', options: { sourceMap: true } },
+                        { loader: 'sass-loader', options: { sourceMap: true } }
+                    ]
+                    // ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader?sourceMap']
             },
             {
                 test: /\.css$/,
