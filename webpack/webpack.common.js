@@ -19,7 +19,10 @@ module.exports = (options) => {
     return {
         resolve: {
             extensions: ['.ts', '.js'],
-            modules: ['node_modules']
+            modules: ['node_modules'],
+                alias: {
+                  'vue$': 'vue/dist/vue.esm.js'
+                } 
         },
         stats: {
             children: false

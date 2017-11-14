@@ -33,6 +33,10 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
                 use: ["babel-loader"]
                     //exclude: ['node_modules']
             },
+            {
+                test:/\.vue$/,
+                loader:'vue-loader'
+              },
             // {
             //     test: /\.ts$/,
             //     use: [{

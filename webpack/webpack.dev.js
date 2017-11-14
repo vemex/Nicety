@@ -17,12 +17,7 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
         // proxy: [{
         //     context: [
         //         /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
-        //         '/api',
-        //         '/management',
-        //         '/swagger-resources',
-        //         '/v2/api-docs',
-        //         '/h2-console',
-        //         '/auth'
+        //         '/api'
         //     ],
         //     target: 'http://127.0.0.1:8080',
         //     secure: false
@@ -44,6 +39,10 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
                 loaders: 'babel-loader',
                 exclude: ['node_modules']
             },
+            {
+                test:/\.vue$/,
+                loader:'vue-loader'
+              },
             {
                 test: /\.scss$/,
                 loaders: ['to-string-loader', 'css-loader', 'sass-loader'],
