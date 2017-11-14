@@ -8,8 +8,7 @@ window.bootstrap=require("exports-loader?bootstrap!bootstrap")
 
 
 new Vue({
-  el: '#app',
- 
+  el: '#app', 
   data: {
     currentRoute: window.location.pathname 
   },

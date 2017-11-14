@@ -14,6 +14,13 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: './target/www',
+        proxy:{
+            '/*': {
+                target: 'index.html',
+                changeOrigin: true,
+                secure: false
+                }
+        }
         // proxy: [{
         //     context: [
         //         /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
