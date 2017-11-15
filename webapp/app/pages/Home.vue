@@ -1,5 +1,5 @@
 <template>
-  <main-layout>
+  <div>
     <p>Welcome home</p>
     <button type="button" class="btn btn-primary">Primary</button>
 
@@ -28,15 +28,15 @@
     </div>
   </div>
 </div>
-  </main-layout>
+  </div>
 </template>
 
 <script>
-  import MainLayout from '../layouts/Main.vue'
+ // import MainLayout from '../layouts/Main.vue'
  
   export default {
     components: {
-      MainLayout
+   //   MainLayout
     }
   }
 </script>

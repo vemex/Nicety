@@ -14,13 +14,13 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: './target/www',
-        proxy:{
-            '/*': {
-                target: 'index.html',
-                changeOrigin: true,
-                secure: false
-                }
-        }
+        // proxy:{
+        //     '/*': {
+        //         target: 'index.html',
+        //         changeOrigin: true,
+        //         secure: false
+        //         }
+        // }
         // proxy: [{
         //     context: [
         //         /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
@@ -47,9 +47,9 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
                 exclude: ['node_modules']
             },
             {
-                test:/\.vue$/,
-                loader:'vue-loader'
-              },
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
             {
                 test: /\.scss$/,
                 loaders: ['to-string-loader', 'css-loader', 'sass-loader'],

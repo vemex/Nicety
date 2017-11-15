@@ -1,18 +1,18 @@
 <template>
-  <main-layout>
+  <div>
     <p>About page</p>
 
 
     <button type="button" class="btn btn-primary">Primary</button>
-  </main-layout>
+  </div>
 </template>
 
 <script>
-  import MainLayout from '../layouts/Main.vue'
+  //import MainLayout from '../layouts/Main.vue'
 
   export default {
     components: {
-      MainLayout
+   //   MainLayout
     }
   }
 </script>

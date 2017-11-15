@@ -1,5 +1,5 @@
 <template>
-  <main-layout> 
+  <div> 
       
     <div>
         <div class="row"> 
@@ -83,15 +83,15 @@
         </div> 
     </div>
 
-  </main-layout>
+  </div>
 </template>
 
 <script>
-import MainLayout from "../layouts/Main.vue";
+//import MainLayout from "../layouts/Main.vue";
 
 export default {
   components: {
-    MainLayout
+   // MainLayout
   }
 };
 </script>
