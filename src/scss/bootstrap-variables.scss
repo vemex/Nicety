@@ -106,7 +106,7 @@ $border-width: 1px !default;
 $border-color: $gray-200 !default;
 $border-radius: .16rem !default;
 $border-radius-lg: .3rem !default;
-$border-radius-sm: .2rem !default;
+$border-radius-sm: .1rem !default;
 $component-active-color: $white !default;
 $component-active-bg: theme-color("primary") !default;
 $caret-width: .3em !default;
@@ -338,7 +338,7 @@ $form-feedback-invalid-color: theme-color("danger") !default;
 // Dropdown menu container and contents.
 $dropdown-min-width: 10rem !default;
 $dropdown-padding-y: .5rem !default;
-$dropdown-spacer: .125rem !default;
+$dropdown-spacer: .0rem !default;
 $dropdown-bg: $white !default;
 $dropdown-border-color: rgba($black,
 .15) !default;
@@ -349,7 +349,7 @@ $dropdown-box-shadow: 0 .5rem 1rem rgba($black,
 $dropdown-link-color: $gray-900 !default;
 $dropdown-link-hover-color: darken($gray-900,
 5%) !default;
-$dropdown-link-hover-bg: $gray-100 !default;
+$dropdown-link-hover-bg: $gray-200 !default;
 $dropdown-link-active-color: $component-active-color !default;
 $dropdown-link-active-bg: $component-active-bg !default;
 $dropdown-link-disabled-color: $gray-600 !default;
@@ -552,8 +552,8 @@ $list-group-border-color: rgba($black,
 .125) !default;
 $list-group-border-width: $border-width !default;
 $list-group-border-radius: $border-radius !default;
-$list-group-item-padding-y: .75rem !default;
-$list-group-item-padding-x: 1.25rem !default;
+$list-group-item-padding-y: .4rem !default;
+$list-group-item-padding-x: 1rem !default;
 $list-group-hover-bg: $gray-100 !default;
 $list-group-active-color: $component-active-color !default;
 $list-group-active-bg: $component-active-bg !default;

@@ -7,6 +7,9 @@ import Breadcrumb from "./pages/Breadcrumb.vue"
 import Button from "./pages/Button.vue"
 import ButtonGroup from "./pages/ButtonGroup.vue"
 import Form from "./pages/Form.vue"
+import Popovers from "./pages/Popovers.vue"
+import Navbar from "./pages/Navbar.vue"
+import ListGroup from "./pages/ListGroup.vue"
 
 const routes = [
     { path: '/Home', component: Home },
@@ -17,6 +20,9 @@ const routes = [
     { path: "/Button", component: Button },
     { path: "/ButtonGroup", component: ButtonGroup },
     { path: "/Form", component: Form },
+    { path: "/Popovers", component: Popovers },
+    { path: "/Navbar", component: Navbar },
+    { path: "/ListGroup", component: ListGroup },
     { path: "/Breadcrumb", component: Breadcrumb }
 ];
 // export default {
