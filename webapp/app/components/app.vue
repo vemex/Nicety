@@ -15,6 +15,7 @@
                     <router-link class="nav-item" tag="li" to="/Breadcrumb"><a class="nav-link">Breadcrumb</a></router-link>
                     <router-link class="nav-item" tag="li" to="/Button"><a class="nav-link">Button</a></router-link>
                     <router-link class="nav-item" tag="li" to="/ButtonGroup"><a class="nav-link">Button Group</a></router-link>
+                    <router-link class="nav-item" tag="li" to="/Form"><a class="nav-link">Form</a></router-link>
                     <router-link class="nav-item" tag="li" to="/About"><a class="nav-link">About</a></router-link>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
