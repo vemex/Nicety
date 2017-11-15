@@ -81,8 +81,33 @@
             </div>
     
         </div> 
-    </div>
 
+        
+    </div>
+    <br/>
+    <div class="row mb-3">
+  <div class="col-md-4">
+    
+      <div class="p-3 swatch-100">100</div>
+    
+      <div class="p-3 swatch-200">200</div>
+    
+      <div class="p-3 swatch-300">300</div>
+    
+      <div class="p-3 swatch-400">400</div>
+    
+      <div class="p-3 swatch-500">500</div>
+    
+      <div class="p-3 swatch-600">600</div>
+    
+      <div class="p-3 swatch-700">700</div>
+    
+      <div class="p-3 swatch-800">800</div>
+    
+      <div class="p-3 swatch-900">900</div>
+    
+  </div>
+</div>
   </div>
 </template>
 

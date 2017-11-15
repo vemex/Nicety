@@ -11,6 +11,8 @@
                     <router-link class="nav-item" tag="li" to="/Home"><a class="nav-link">Home</a></router-link>
                     <router-link class="nav-item" tag="li" to="/ThemeColor"><a class="nav-link">ThemeColor</a></router-link>
                     <router-link class="nav-item" tag="li" to="/Alerts"><a class="nav-link">Alerts</a></router-link>
+                    <router-link class="nav-item" tag="li" to="/Badges"><a class="nav-link">Badges</a></router-link>
+                    <router-link class="nav-item" tag="li" to="/Breadcrumb"><a class="nav-link">Breadcrumb</a></router-link>
                     <router-link class="nav-item" tag="li" to="/About"><a class="nav-link">About</a></router-link>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
