@@ -1,13 +1,76 @@
- .navbar-dark .navbar-nav .show>.nav-link,
- .navbar-dark .navbar-nav .active>.nav-link,
- .navbar-dark .navbar-nav .nav-link.show,
- .navbar-dark .navbar-nav .nav-link.active {
-     background-color: $cyan;
- }
- 
- .navbar-dark .navbar-nav .nav-item>a,
- {
-     @include hover {
-         background-color: $cyan;
-     }
- }
+//  .navbar-dark .navbar-nav .show>.nav-link,
+//  .navbar-dark .navbar-nav .active>.nav-link,
+//  .navbar-dark .navbar-nav .nav-link.show,
+//  .navbar-dark .navbar-nav .nav-link.active {
+//      background-color: $cyan;
+//  }
+//  .navbar-light .navbar-light .navbar-nav .show>.nav-link,
+//  .navbar-light .navbar-nav .active>.nav-link,
+//  .navbar-light .navbar-nav .nav-link.show,
+//  .navbar-light .navbar-nav .nav-link.active {
+//      background-color: rgba($cyan, .4);
+//  }
+//  .navbar-dark .navbar-nav .nav-item>a,
+//  {
+//      @include hover {
+//          background-color: $cyan;
+//      }
+//  }
+//  .navbar-light .navbar-nav .nav-item>a,
+//  {
+//      @include hover {
+//          background-color: rgba($cyan, .4);
+//      }
+//  }
+// White links against a dark background
+.navbar-dark {
+    .navbar-nav {
+        .nav-link {
+            @include hover-focus {
+                background-color: $navbar-dark-hover-backgroundcolor;
+            }
+            &.disabled {
+                background-color: transparent;
+            }
+        }
+        .show>.nav-link,
+        .active>.nav-link,
+        .nav-link.show,
+        .nav-link.active {
+            background-color: $navbar-dark-hover-backgroundcolor;
+        }
+    }
+    .navbar-text {
+        a {
+            @include hover-focus {
+                background-color: $navbar-dark-hover-backgroundcolor;
+            }
+        }
+    }
+}
+
+.navbar-light {
+    .navbar-nav {
+        .nav-link {
+            @include hover-focus {
+                background-color: $navbar-light-hover-backgroundcolor;
+            }
+            &.disabled {
+                background-color: transparent;
+            }
+        }
+        .show>.nav-link,
+        .active>.nav-link,
+        .nav-link.show,
+        .nav-link.active {
+            background-color: $navbar-light-hover-backgroundcolor;
+        }
+    }
+    .navbar-text {
+        a {
+            @include hover-focus {
+                background-color: $navbar-light-hover-backgroundcolor;
+            }
+        }
+    }
+}

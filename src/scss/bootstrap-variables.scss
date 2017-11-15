@@ -25,7 +25,7 @@ $purple: #6f42c1 !default;
 $pink: #e83e8c !default;
 $red: #d4333f !default;
 $orange: #ed7d20 !default;
-$yellow: #ffc107 !default;
+$yellow: #fce174 !default;
 $green: #00aa00 !default;
 $teal: #20c997 !default;
 $cyan: #4b9fd5 !default;
@@ -35,7 +35,7 @@ $primary: $blue !default;
 $secondary: $gray-600 !default;
 $success: $green !default;
 $info: $cyan !default;
-$warning: $orange !default;
+$warning: $yellow !default;
 $danger: $red !default;
 $light: $gray-200 !default;
 $dark: $gray-900 !default;
@@ -394,9 +394,9 @@ $navbar-toggler-padding-x: .75rem !default;
 $navbar-toggler-font-size: $font-size-lg !default;
 $navbar-toggler-border-radius: $btn-border-radius !default;
 $navbar-dark-color: rgba($white,
-.5) !default;
+.8) !default;
 $navbar-dark-hover-color: rgba($white,
-.75) !default;
+.8) !default;
 $navbar-dark-active-color: $white !default;
 $navbar-dark-disabled-color: rgba($white,
 .25) !default;
@@ -406,9 +406,9 @@ $navbar-dark-toggler-icon-bg: str-replace(url("data:image/svg+xml;charset=utf8,%
 $navbar-dark-toggler-border-color: rgba($white,
 .1) !default;
 $navbar-light-color: rgba($black,
-.5) !default;
+.9) !default;
 $navbar-light-hover-color: rgba($black,
-.7) !default;
+.9) !default;
 $navbar-light-active-color: rgba($black,
 .9) !default;
 $navbar-light-disabled-color: rgba($black,
