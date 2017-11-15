@@ -13,6 +13,8 @@
                     <router-link class="nav-item" tag="li" to="/Alerts"><a class="nav-link">Alerts</a></router-link>
                     <router-link class="nav-item" tag="li" to="/Badges"><a class="nav-link">Badges</a></router-link>
                     <router-link class="nav-item" tag="li" to="/Breadcrumb"><a class="nav-link">Breadcrumb</a></router-link>
+                    <router-link class="nav-item" tag="li" to="/Button"><a class="nav-link">Button</a></router-link>
+                    <router-link class="nav-item" tag="li" to="/ButtonGroup"><a class="nav-link">Button Group</a></router-link>
                     <router-link class="nav-item" tag="li" to="/About"><a class="nav-link">About</a></router-link>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">

@@ -4,7 +4,8 @@ import About from "./pages/About.vue"
 import Alerts from "./pages/Alerts.vue"
 import Badges from "./pages/Badges.vue"
 import Breadcrumb from "./pages/Breadcrumb.vue"
-
+import Button from "./pages/Button.vue"
+import ButtonGroup from "./pages/ButtonGroup.vue"
 
 const routes = [
     { path: '/Home', component: Home },
@@ -12,6 +13,8 @@ const routes = [
     { path: '/Alerts', component: Alerts },
     { path: '/About', component: About },
     { path: "/Badges", component: Badges },
+    { path: "/Button", component: Button },
+    { path: "/ButtonGroup", component: ButtonGroup },
     { path: "/Breadcrumb", component: Breadcrumb }
 ];
 // export default {
