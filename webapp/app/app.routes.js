@@ -10,6 +10,17 @@ import Form from "./pages/Form.vue"
 import Popovers from "./pages/Popovers.vue"
 import Navbar from "./pages/Navbar.vue"
 import ListGroup from "./pages/ListGroup.vue"
+import Card from "./pages/Card.vue"
+import Collapse from "./pages/Collapse.vue"
+import Dropdown from "./pages/Dropdown.vue"
+import InputGroup from "./pages/InputGroup.vue"
+import Jumbotron from "./pages/Jumbotron.vue"
+import Modal from "./pages/Modal.vue"
+import Navs from "./pages/Navs.vue"
+import Pagination from "./pages/Pagination.vue"
+import Progress from "./pages/Progress.vue"
+import Scrollspy from "./pages/Scrollspy.vue"
+import Tooltips from "./pages/Tooltips.vue"
 
 const routes = [
     { path: '/Home', component: Home },
@@ -23,12 +34,18 @@ const routes = [
     { path: "/Popovers", component: Popovers },
     { path: "/Navbar", component: Navbar },
     { path: "/ListGroup", component: ListGroup },
+    { path: "/Card", component: Card },
+    { path: "/Collapse", component: Collapse },
+    { path: "/Dropdown", component: Dropdown },
+    { path: "/InputGroup", component: InputGroup },
+    { path: "/Jumbotron", component: Jumbotron },
+    { path: "/Modal", component: Modal },
+    { path: "/Pagination", component: Pagination },
+    { path: "/Navs", component: Navs },
+    { path: "/Progress", component: Progress },
+    { path: "/Scrollspy", component: Scrollspy },
+    { path: "/Tooltips", component: Tooltips },
     { path: "/Breadcrumb", component: Breadcrumb }
-];
-// export default {
-//     '/': 'Home',
-//     '/about': 'About',
-//     '/ThemeColor': 'ThemeColor'
-// }
+]; 
 
 export default routes;

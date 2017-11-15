@@ -11,6 +11,14 @@
                     <router-link class="nav-item" tag="li" to="/ThemeColor"><a class="nav-link">ThemeColor</a></router-link>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Layout
+                    </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                            <router-link class="dropdown-item" to="/Alerts">Grid</router-link> 
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Components
                     </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
@@ -19,10 +27,21 @@
                             <router-link class="dropdown-item" to="/Breadcrumb">Breadcrumb</router-link>
                             <router-link class="dropdown-item" to="/Button">Button</router-link>
                             <router-link class="dropdown-item" to="/ButtonGroup">Button Group</router-link>
+                            <router-link class="dropdown-item" to="/Card">Card</router-link>
+                            <router-link class="dropdown-item" to="/Collapse">Collapse</router-link>
+                            <router-link class="dropdown-item" to="/Dropdown">Dropdown</router-link>
                             <router-link class="dropdown-item" to="/Form">Form</router-link>
-                            <router-link class="dropdown-item" to="/Popovers">Popovers</router-link>
-                            <router-link class="dropdown-item" to="/Navbar">Navbar</router-link>
+                            <router-link class="dropdown-item" to="/InputGroup">InputGroup</router-link>
+                            <router-link class="dropdown-item" to="/Jumbotron">Jumbotron</router-link>
                             <router-link class="dropdown-item" to="/ListGroup">ListGroup</router-link> 
+                            <router-link class="dropdown-item" to="/Modal">Modal</router-link> 
+                            <router-link class="dropdown-item" to="/Navs">Navs</router-link> 
+                            <router-link class="dropdown-item" to="/Navbar">Navbar</router-link>
+                            <router-link class="dropdown-item" to="/Pagination">Pagination</router-link> 
+                            <router-link class="dropdown-item" to="/Popovers">Popovers</router-link>
+                            <router-link class="dropdown-item" to="/Progress">Progress</router-link> 
+                            <router-link class="dropdown-item" to="/Scrollspy">Scrollspy</router-link> 
+                            <router-link class="dropdown-item" to="/Tooltips">Tooltips</router-link> 
                         </div>
                     </li>
 
@@ -32,8 +51,31 @@
                     </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
                             <router-link class="dropdown-item" to="/Alerts">Menu</router-link> 
+                            <router-link class="dropdown-item" to="/Alerts">Tables</router-link> 
+                            <router-link class="dropdown-item" to="/Alerts">Tabs</router-link> 
+                            <router-link class="dropdown-item" to="/Alerts">Charts</router-link> 
                         </div>
                     </li>
+ 
+                    <router-link class="nav-item" tag="li" to="/Tooltips"><a class="nav-link">Utils</a></router-link>
+                    <router-link class="nav-item" tag="li" to="/Navbar"><a class="nav-link">Widgets</a></router-link>
+                    <router-link class="nav-item" tag="li" to="/Scrollspy"><a class="nav-link">Icons</a></router-link>
+
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Pages
+                    </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                            <router-link class="dropdown-item" to="/Alerts">Mail Box</router-link> 
+                            <router-link class="dropdown-item" to="/Alerts">Search</router-link> 
+                            <router-link class="dropdown-item" to="/Alerts">FAQ</router-link> 
+                            <router-link class="dropdown-item" to="/Alerts">Login</router-link> 
+                            <router-link class="dropdown-item" to="/Alerts">404</router-link> 
+                            <router-link class="dropdown-item" to="/Tooltips">Regist</router-link> 
+                            <router-link class="dropdown-item" to="/Alerts">505</router-link> 
+                        </div>
+                    </li>
+                    
                     <router-link class="nav-item" tag="li" to="/About"><a class="nav-link">About</a></router-link>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
