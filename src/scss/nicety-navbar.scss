@@ -1,6 +1,23 @@
+.navbar-expand {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+  
+      &#{$infix} { 
+        .navbar-nav {
+            @include media-breakpoint-up($next) {
+                .nav-link {
+                    padding:$nav-link-padding-y $nav-link-padding-x;
+                }
+            }
+        }
+      }
+    }
+}
+
 .navbar-dark {
     .navbar-nav {
-        .nav-link {
+        .nav-link { 
             @include hover-focus {
                 background-color: $navbar-dark-hover-backgroundcolor;
             }
@@ -14,6 +31,7 @@
         .nav-link.active {
             background-color: $navbar-dark-hover-backgroundcolor;
         }
+         
     }
     .navbar-text {
         a {
