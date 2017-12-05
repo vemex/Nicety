@@ -1,9 +1,18 @@
-a{
-    &:focus {
-        outline:none;
-      }
+html {
+    font-size: 12px;
 }
 
-body{
+a {
+    &:focus {
+        outline: none;
+    }
+}
+
+body {
     line-height: 1.2em;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100vh;
+    padding-top: 2.34em;
 }

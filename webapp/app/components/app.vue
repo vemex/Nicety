@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="app">
         <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
             <a class="navbar-brand" href="#">Nicety</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,10 +84,19 @@
                 </form>
             </div>
         </nav>
-        <main role="main" class="container">
+        <main role="main" class="body">
             <div class="starter-template">
                 <router-view></router-view>
             </div>
         </main>
+        <app-footer></app-footer>
     </div>
 </template>
+<<script>
+import AppFooter from "./footer.vue"
+
+export default {
+  components:{AppFooter}
+}
+</script>
+
