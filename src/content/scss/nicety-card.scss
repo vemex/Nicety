@@ -1,0 +1,31 @@
+.card {
+    .card-header {
+        padding: 0em;
+        position: relative;
+        height: 2.8em;
+        .card-title {
+            float: left;
+            font-size: 1.5em;
+            padding: 0.5em;
+            font-weight: 600;
+            margin-bottom: 0rem;
+        }
+        .card-control {
+            position: relative;
+            float: right;
+            button {
+                height: 100%;
+                background: transparent;
+                &:hover {
+                    background: #ffffff;
+                    @include transition(transition-base)
+                }
+            }
+            height: 100%
+        }
+    }
+    &:hover {
+        @include box-shadow($card-box-shadow);
+        @include transition($card-hover-transition);
+    }
+}

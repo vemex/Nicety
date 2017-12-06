@@ -20,9 +20,9 @@ module.exports = (options) => {
         resolve: {
             extensions: ['.ts', '.js'],
             modules: ['node_modules'],
-                alias: {
-                  'vue$': 'vue/dist/vue.esm.js'
-                } 
+            alias: {
+                'vue$': 'vue/dist/vue.esm.js'
+            }
         },
         stats: {
             children: false
@@ -43,8 +43,12 @@ module.exports = (options) => {
                     exclude: ['./webapp/index.html']
                 },
                 {
-                    test: /\.(jpe?g|png|gif|svg|woff2?|ttf|eot)$/i,
+                    test: /\.(jpe?g|png|gif)$/i,
                     loaders: ['file-loader?hash=sha512&digest=hex&name=content/[hash].[ext]']
+                },
+                {
+                    test: /\.(svg|woff2?|ttf|eot)$/i,
+                    loaders: ['file-loader?name=content/fonts/[name].[ext]']
                 },
                 {
                     test: /manifest.webapp$/,
