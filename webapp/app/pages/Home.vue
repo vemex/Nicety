@@ -1,90 +1,51 @@
 <template>
-  <div>
-    <p>Welcome home1111</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home</p>
-    <p>Welcome home1111</p>
-    <button type="button" class="btn btn-primary">Primary</button>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Launch demo mo∏dal
-    </button>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <div class="row">
+    <div class="col-lg-7">
+      <div class="card">
+        <div class="card-header">
+          Featured
+          <div class="card-control">
+            <button class="btn">X</button>
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown
+      </button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="#">Dropdown link</a>
+                <a class="dropdown-item" href="#">Dropdown link</a>
+              </div>
+            </div>
           </div>
-          <div class="modal-body">
-            ...
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">Special title treatment</h4>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+
+           <div class="card">
+        <div class="card-header">
+          Featured
+          <div class="card-control">
+            <button class="btn">X</button>
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown
+      </button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="#">Dropdown link</a>
+                <a class="dropdown-item" href="#">Dropdown link</a>
+              </div>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">Special title treatment</h4>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
     </div>
