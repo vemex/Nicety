@@ -1,11 +1,12 @@
 .card {
-    .card-header {
+    .card-header.bar {
         padding: 0em;
         position: relative;
         height: 2.8em;
+        line-height: 1.5; 
         .card-title {
             float: left;
-            font-size: 1.5em;
+            font-size: 1.2em;
             padding: 0.5em;
             font-weight: 600;
             margin-bottom: 0rem;
