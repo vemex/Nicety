@@ -7,10 +7,11 @@ module.exports = {
     isExternalLib
 };
 
-// return the version number from `pom.xml` file
+// return the version number from `package.json` file
 function parseVersion() {
-
-    return "0.0.1";
+    var file = "./package.json";
+    var result = JSON.parse(fs.readFileSync(file));
+    return result.version;
 }
 
 const _root = path.resolve(__dirname, '..');
