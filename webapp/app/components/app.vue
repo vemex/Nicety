@@ -55,7 +55,7 @@
                             <router-link class="dropdown-item" to="/Alerts">Charts</router-link>
                         </div>
                     </li>
-                    <router-link class="nav-item" tag="li" to="/Tooltips"><a class="nav-link">Utils</a></router-link>
+                    <router-link class="nav-item" tag="li" to="/UtilsDemo"><a class="nav-link">Utils</a></router-link>
                     <router-link class="nav-item" tag="li" to="/Navbar"><a class="nav-link">Widgets</a></router-link>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

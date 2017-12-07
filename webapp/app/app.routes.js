@@ -23,6 +23,7 @@ import Scrollspy from "./pages/Scrollspy.vue"
 import Tooltips from "./pages/Tooltips.vue"
 import Grid from "./pages/layout/Grid.vue"
 import IconsThemify from "./pages/icons/themify.vue"
+import UtilsDemo from "./pages/utils/UtilsDemo.vue"
 
 const routes = [
     { path: '/Home', component: Home },
@@ -49,7 +50,8 @@ const routes = [
     { path: "/Tooltips", component: Tooltips },
     { path: "/Grid", component: Grid },
     { path: "/Breadcrumb", component: Breadcrumb },
-    { path: "/IconsThemify", component: IconsThemify }
+    { path: "/IconsThemify", component: IconsThemify },
+    { path: "/UtilsDemo", component: UtilsDemo }
 ];
 
 export default routes;
