@@ -15,6 +15,8 @@
                             </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/Grid">Grid</router-link>
+                            <router-link class="dropdown-item" to="/Flex">Flex</router-link>
+                            <router-link class="dropdown-item" to="/DataTable">DataTable</router-link>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

@@ -24,6 +24,8 @@ import Tooltips from "./pages/Tooltips.vue"
 import Grid from "./pages/layout/Grid.vue"
 import IconsThemify from "./pages/icons/themify.vue"
 import UtilsDemo from "./pages/utils/UtilsDemo.vue"
+import Flex from "./pages/layout/Flex.vue"
+import DataTable from "./pages/layout/DataTable.vue"
 
 const routes = [
     { path: '/Home', component: Home },
@@ -51,7 +53,9 @@ const routes = [
     { path: "/Grid", component: Grid },
     { path: "/Breadcrumb", component: Breadcrumb },
     { path: "/IconsThemify", component: IconsThemify },
-    { path: "/UtilsDemo", component: UtilsDemo }
+    { path: "/UtilsDemo", component: UtilsDemo },
+    { path: "/Flex", component: Flex },
+    { path: "/DataTable", component: DataTable }
 ];
 
 export default routes;
