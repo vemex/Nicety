@@ -1,26 +1,27 @@
 <template>
     <div  >
         <border-utils></border-utils>
+        <color-utils></color-utils>
+        <display-utils></display-utils>
 
     </div>
 </template>
 <<style>
-    .bd-example [class^=border] {
-        display: inline-block;
-        width: 5rem;
-        height: 5rem;
-        margin: .25rem;
-        background-color: #f5f5f5;
-        border: 1px solid;
-        text-align:center;
-        vertical-align: bottom;
+ 
+
+    .utils-demo .card {
+        float: left;
+        margin-right: 2em;
+        margin-bottom: 2em;
     }
 </style>
 
 <<script>
 import BorderUtils from "./BorderUtils.vue"
+import ColorUtils from "./ColorUtils.vue"
+import DisplayUtils from "./DisplayUtils.vue"
 export default {
-  components:{BorderUtils}
+  components:{BorderUtils,ColorUtils,DisplayUtils}
 }
 </script>
 
