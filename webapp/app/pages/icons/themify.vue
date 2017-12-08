@@ -1,11 +1,10 @@
 <<template>
-    <div class="panel">
+    <div class="card">
         <!--Panel body-->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Arrows &amp; Direction Icons</div>
-            </div>
-            <div class="card-body clearfix demo-icon-list row">
+        <div class="card-body">
+            <h4 class="card-title">Arrows &amp; Direction Icons </h4>
+            <hr>
+            <div class="clearfix demo-icon-list row">
                 <div class="col-sm-6 col-md-3">
                     <div class="demo-icon"><i class="ti-arrow-up"></i><span>ti-arrow-up</span></div>
                 </div>
@@ -106,12 +105,10 @@
                     <div class="demo-icon"><i class="ti-exchange-vertical"></i><span>ti-exchange-vertical</span></div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Web App Icons</div>
-            </div>
-            <div class="card-body clearfix demo-icon-list row">
+            <br>
+            <h4 class="card-title">Web App Icons</h4>
+            <hr>
+            <div class="clearfix demo-icon-list row">
                 <div class="col-sm-6 col-md-3">
                     <div class="demo-icon"><i class="ti-wand"></i><span>ti-wand</span></div>
                 </div>
@@ -684,12 +681,9 @@
                 </div>
             </div>
             <br>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Control Icons</div>
-            </div>
-            <div class="clearfix card-body demo-icon-list row">
+            <h4 class="card-title">Control Icons</h4>
+            <hr>
+            <div class="clearfix demo-icon-list row">
                 <div class="col-sm-6 col-md-3">
                     <div class="demo-icon"><i class="ti-control-stop"></i><span>ti-control-stop</span></div>
                 </div>
@@ -724,12 +718,10 @@
                     <div class="demo-icon"><i class="ti-control-eject"></i><span>ti-control-eject</span></div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Text Editor</div>
-            </div>
-            <div class="clearfix  card-body  demo-icon-list row">
+            <br>
+            <h4 class="card-title">Text Editor</h4>
+            <hr>
+            <div class="clearfix demo-icon-list row">
                 <div class="col-sm-6 col-md-3">
                     <div class="demo-icon"><i class="ti-paragraph"></i><span>ti-paragraph</span></div>
                 </div>
@@ -773,11 +765,9 @@
                     <div class="demo-icon"><i class="ti-quote-left"></i><span>ti-quote-left</span></div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Layout Icons</div>
-            </div>
+            <br>
+            <h4 class="card-title">Layout Icons</h4>
+            <hr>
             <div class="clearfix demo-icon-list row">
                 <div class="col-sm-6 col-md-3">
                     <div class="demo-icon"><i class="ti-layout-width-full"></i><span>ti-layout-width-full</span></div>
@@ -966,12 +956,10 @@
                     <div class="demo-icon"><i class="ti-layout-column2-alt"></i><span>ti-layout-column2-alt</span></div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Brand Icons</div>
-            </div>
-            <div class="clearfix  card-body  demo-icon-list row">
+            <br>  <h4 class="card-title">Brand Icons</h4>
+                <hr>
+            <div class="clearfix demo-icon-list row">
+              
                 <div class="col-sm-6 col-md-3">
                     <div class="demo-icon"><i class="ti-flickr"></i><span>ti-flickr</span></div>
                 </div>
