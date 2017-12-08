@@ -3,26 +3,40 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <a class="navbar-brand" href="#">Nicety</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                                          <span class="navbar-toggler-icon"></span>
-                                        </button>
+                                              <span class="navbar-toggler-icon"></span>
+                                            </button>
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <router-link class="nav-item" tag="li" to="/Home"><a class="nav-link">Home</a></router-link>
                     <router-link class="nav-item" tag="li" to="/ThemeColor"><a class="nav-link">ThemeColor</a></router-link>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Layout
-                            </a>
+                                  Layout
+                                </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/Grid">Grid</router-link>
-                            <router-link class="dropdown-item" to="/Flex">Flex</router-link>
-                            <router-link class="dropdown-item" to="/DataTable">DataTable</router-link>
+                            <router-link class="dropdown-item" to="/Flex">Flex</router-link> 
+                            <router-link class="dropdown-item" to="/Display">Display</router-link>  
+                        </div>
+                    </li>
+
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Content
+                                </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <router-link class="dropdown-item" to="/Reboot">Reboot-baseline</router-link>
+                            <router-link class="dropdown-item" to="/Typography">Typography</router-link>
+                            <router-link class="dropdown-item" to="/Code">Code</router-link>
+                            <router-link class="dropdown-item" to="/Images">Images</router-link>
+                            <router-link class="dropdown-item" to="/Tables">Tables</router-link>
+                            <router-link class="dropdown-item" to="/Figures">Figures</router-link> 
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Components
-                            </a>
+                                  Components
+                                </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/Alerts">Alerts</router-link>
                             <router-link class="dropdown-item" to="/Badges">Badges</router-link>
@@ -48,8 +62,8 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Plugins
-                            </a>
+                                  Plugins
+                                </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/Alerts">Menu</router-link>
                             <router-link class="dropdown-item" to="/Alerts">Tables</router-link>
@@ -61,16 +75,16 @@
                     <router-link class="nav-item" tag="li" to="/Navbar"><a class="nav-link">Widgets</a></router-link>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Icons
-                            </a>
+                                  Icons
+                                </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/IconsThemify">Icons Themify</router-link>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Pages
-                            </a>
+                                  Pages
+                                </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/Alerts">Mail Box</router-link>
                             <router-link class="dropdown-item" to="/Alerts">Search</router-link>
