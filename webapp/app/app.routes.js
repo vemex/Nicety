@@ -28,6 +28,7 @@ import PremiumSolid from "./pages/icons/PremiumSolid.vue"
 import UtilsDemo from "./pages/utils/UtilsDemo.vue"
 import Flex from "./pages/layout/Flex.vue"
 import DataTable from "./pages/layout/DataTable.vue"
+import Reboot from "./pages/content/Reboot.vue"
 
 const routes = [
     { path: '/Home', component: Home },
@@ -59,6 +60,7 @@ const routes = [
     { path: "/PremiumSolid", component: PremiumSolid },
     { path: "/UtilsDemo", component: UtilsDemo },
     { path: "/DataTable", component: DataTable },
+    { path: "/Reboot", component: Reboot },
     { path: "/Flex", component: Flex }
 ];
 
