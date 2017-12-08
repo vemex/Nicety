@@ -79,6 +79,8 @@
                                 </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/IconsThemify">Icons Themify</router-link>
+                            <router-link class="dropdown-item" to="/PremiumLine">Icons Premium Line</router-link>
+                            <router-link class="dropdown-item" to="/PremiumSolid">Icons Premium Solid</router-link>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

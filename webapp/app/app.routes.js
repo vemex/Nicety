@@ -23,6 +23,8 @@ import Scrollspy from "./pages/components/Scrollspy.vue"
 import Tooltips from "./pages/components/Tooltips.vue"
 import Grid from "./pages/layout/Grid.vue"
 import IconsThemify from "./pages/icons/themify.vue"
+import PremiumLine from "./pages/icons/PremiumLine.vue"
+import PremiumSolid from "./pages/icons/PremiumSolid.vue"
 import UtilsDemo from "./pages/utils/UtilsDemo.vue"
 import Flex from "./pages/layout/Flex.vue"
 import DataTable from "./pages/layout/DataTable.vue"
@@ -53,6 +55,8 @@ const routes = [
     { path: "/Grid", component: Grid },
     { path: "/Breadcrumb", component: Breadcrumb },
     { path: "/IconsThemify", component: IconsThemify },
+    { path: "/PremiumLine", component: PremiumLine },
+    { path: "/PremiumSolid", component: PremiumSolid },
     { path: "/UtilsDemo", component: UtilsDemo },
     { path: "/DataTable", component: DataTable },
     { path: "/Flex", component: Flex }
