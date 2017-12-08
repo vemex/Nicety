@@ -8,7 +8,7 @@
                     <div class="card-title">显示类说明</div>
                 </div>
                 <div class="card-body">
-                    <table>
+                    <table class="table"> 
                         <thead>
                             <tr>
                                 <th>Screen Size</th>
