@@ -54,8 +54,8 @@ const routes = [
     { path: "/Breadcrumb", component: Breadcrumb },
     { path: "/IconsThemify", component: IconsThemify },
     { path: "/UtilsDemo", component: UtilsDemo },
-    { path: "/Flex", component: Flex },
-    { path: "/DataTable", component: DataTable }
+    { path: "/DataTable", component: DataTable },
+    { path: "/Flex", component: Flex }
 ];
 
 export default routes;
