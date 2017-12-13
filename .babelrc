@@ -1,1 +1,9 @@
-{ "presets": ["es2015"] }
+{ "presets": ["es2015"],
+  "ignore":[
+    "jquery.js",
+    "jquery.min.js",
+    "angular.js",
+    "angular.min.js",
+    "bootstrap.js",
+    "bootstrap.min.js"
+  ]}

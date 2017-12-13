@@ -29,6 +29,7 @@ import UtilsDemo from "./pages/utils/UtilsDemo.vue"
 import Flex from "./pages/layout/Flex.vue"
 import DataTable from "./pages/layout/DataTable.vue"
 import Reboot from "./pages/content/Reboot.vue"
+//const Reboot = () => require("./pages/content/Reboot.vue") ;
 
 const routes = [
     { path: '/Home', component: Home },

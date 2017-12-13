@@ -49,6 +49,7 @@
         "write-file-webpack-plugin": "^4.2.0"
     },
     "scripts": {
+        "packagelib": "npm run webpack:lib",
         "lint": "tslint --type-check --project './tsconfig.json' -e 'node_modules/**'",
         "lint:fix": "npm run lint -- --fix",
         "ngc": "ngc -p tsconfig-aot.json",
@@ -61,6 +62,7 @@
         "test:watch": "npm test -- --watch",
         "webpack:dev": "npm run webpack-dev-server -- --config webpack/webpack.dev.js --progress --inline --hot --profile --port=9060 --watch-content-base",
         "webpack:build:main": "npm run webpack -- --config webpack/webpack.dev.js --progress --profile",
+        "webpack:lib": "npm run webpack -- --config webpack/webpack.test.js --progress --profile",
         "webpack:build": "npm run cleanup && npm run webpack:build:main",
         "webpack:prod:main": "npm run webpack -- --config webpack/webpack.prod.js --progress --profile",
         "webpack:prod": "npm run cleanup && npm run webpack:prod:main && npm run clean-www",
