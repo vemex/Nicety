@@ -1,10 +1,13 @@
-var path = require('path');
-var dirVars = require('./base/dir-vars.config.js');
-var pageArr = require('./base/page-entries.config.js');
+const path = require('path');
+const dirVars = require('./base/dir-vars.config.js');
 var configEntry = {};
 
-pageArr.forEach((page) => {
-  configEntry[page] = path.resolve(dirVars.pagesDir, page + '/page');
-});
-
-module.exports = configEntry;
+module.exports = function () {
+    return {
+        entry: {
+            main: './webapp/app/app.main',//主入口程序
+            polyfills: './webapp/app/polyfills',//兼容处理js
+            global: './webapp/content/scss/global.scss'//全局的scss
+        }
+    };
+};

@@ -1,3 +1,12 @@
-module.exports = {
-  jquery: 'window.jQuery',
+/**
+ * 使用外部库
+ *
+ */
+
+module.exports = function () {
+    return {
+        externals: {
+            jquery: 'window.jQuery',
+        }
+    };
 };

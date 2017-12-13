@@ -10,7 +10,7 @@ import AppView from "./components/app.vue"
 //require("expose-loader?Popper!popper.js")
 // window.bootstrap = require("exports-loader?bootstrap!bootstrap")
 //
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 //
 const router = new VueRouter({
     routes: routes,
@@ -21,4 +21,4 @@ const app = new Vue({
     el: '#app',
     router: router,
     render: h => h(AppView)
-})
+});
