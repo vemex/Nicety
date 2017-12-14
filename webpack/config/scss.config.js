@@ -1,7 +1,7 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const  utils=require('../utils.js');
 
-const extractSASS = new ExtractTextPlugin(`[name]-sass.[hash].css`);
+const extractSASS = new ExtractTextPlugin(`content/style/[name]-sass.[hash].css`);
 
 
 let config = {};
@@ -39,15 +39,11 @@ let buildDevConfig = function (option) {
                     loaders: extractSASS.extract({
                         fallback: {loader: 'style-loader', options: {sourceMap: true}},
                         use: [
-                            //  ['css-loader', 'postcss-loader', 'sass-loader?sourceMap']}
-                            // { loader: 'style-loader', options: { sourceMap: true } },
                             {loader: 'css-loader', options: {sourceMap: true}},
                             {loader: 'postcss-loader', options: {sourceMap: true}},
                             {loader: 'sass-loader', options: {sourceMap: true}}
                         ]
-                    }),
-
-                    // ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader?sourceMap']
+                    })
                 },
             ]
         },

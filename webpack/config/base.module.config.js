@@ -24,11 +24,11 @@ module.exports = function (option) {
                 },
                 {
                     test: /\.(jpe?g|png|gif)$/i,
-                    loaders: ['file-loader?hash=sha512&digest=hex&name=content/images/[hash].[ext]']
+                    loaders: ['file-loader?hash=sha512&digest=hex&name=./content/images/[hash].[ext]&publicPath=../../']
                 },
                 {
                     test: /\.(svg|woff2?|ttf|eot)$/i,
-                    loaders: ['file-loader?name=content/fonts/[name].[ext]']
+                    loaders: ['file-loader?name=./content/fonts/[name].[ext]&publicPath=../../']
                 },
                 {
                     test: /manifest.webapp$/,
