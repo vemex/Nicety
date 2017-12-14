@@ -28,7 +28,7 @@ const PremiumLine = resolve => require.ensure([], () => resolve(require('./pages
 const PremiumSolid = resolve => require.ensure([], () => resolve(require('./pages/icons/PremiumSolid.vue')), 'PremiumSolid');
 const UtilsDemo = resolve => require.ensure([], () => resolve(require('./pages/utils/UtilsDemo.vue')), 'UtilsDemo');
 const Flex = resolve => require.ensure([], () => resolve(require('./pages/layout/Flex.vue')), 'Flex');
-const DataTable = resolve => require.ensure([], () => resolve(require('./pages/content/DataTable.vue')), 'DataTable'); 
+const DataTable = resolve => require.ensure([], () => resolve(require('./pages/content/DataTable.vue')), 'DataTable');
 const Reboot = resolve => require.ensure([], () => resolve(require('./pages/content/Reboot.vue')), 'Reboot');
 const Display = resolve => require.ensure([], () => resolve(require('./pages/utils/DisplayUtils.vue')), 'Display');
 const AgGrid = resolve => require.ensure([], () => resolve(require('./pages/plugins/AgGrid.vue')), 'AgGrid');

@@ -1,6 +1,6 @@
 $ag-style: 'nicety' !default;
 $ag-root-font-family: Calibri, 'Segoe UI', Thonburi, Arial, Verdana, sans-serif !default;
-$ag-root-font-size: 10pt !default;
+$ag-root-font-size: 1em !default;
 
 $ag-scrollbar-background: inherit !default;
 $ag-scrollbar-thumb: inherit !default;
@@ -67,6 +67,9 @@ $ag-select-foreground: #222 !default;
 $ag-menu-option-padding: 2px 4px 2px 4px !default;
 $ag-menu-option-shortcut-padding: 2px 2px 2px 2px !default;
 
+$ag-header-background-1:#ECEFF1;
+$ag-header-foreground-1:rgba(10,18,32,.64);
+$ag-border-1:rgb(223, 228, 231);
 @import '~ag-grid/src/styles/theme-common';
 
 .ag-nicety {

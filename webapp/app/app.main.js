@@ -1,6 +1,6 @@
  import './vendor.js';
 //require("jquery")
-
+//TODO replace scss file in vendor scss
  import "../../node_modules/ag-grid/dist/styles/ag-grid.css";
 
 import Vue from "vue"
