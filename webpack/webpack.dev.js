@@ -25,6 +25,7 @@ const vueConfig = require("./config/vue.module.config.js");
 let option = {env: "development", apiURL: ''};
 
 let config = webpackMerge(
+    resolveConfig(option),
     baseModuleConfig(option),
     basePluginConfig(option),
     commonChunkConfig(option),

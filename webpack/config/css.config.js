@@ -5,10 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = (option) => {
     return {
         module: {
-            rules: [{
-                test: /\.css$/,
-                loaders: ['to-string-loader', 'css-loader']
-            }]
+            rules: [
+                {
+                    test: /\.css$/,
+                    loader: 'style-loader!css-loader'
+                }
+            ]
         },
         plugins: []
 

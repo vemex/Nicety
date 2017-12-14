@@ -28,11 +28,11 @@ const PremiumLine = resolve => require.ensure([], () => resolve(require('./pages
 const PremiumSolid = resolve => require.ensure([], () => resolve(require('./pages/icons/PremiumSolid.vue')), 'PremiumSolid');
 const UtilsDemo = resolve => require.ensure([], () => resolve(require('./pages/utils/UtilsDemo.vue')), 'UtilsDemo');
 const Flex = resolve => require.ensure([], () => resolve(require('./pages/layout/Flex.vue')), 'Flex');
-const DataTable = resolve => require.ensure([], () => resolve(require('./pages/layout/DataTable.vue')), 'DataTable');
-//import Reboot from "./pages/content/Reboot.vue"
-
+const DataTable = resolve => require.ensure([], () => resolve(require('./pages/content/DataTable.vue')), 'DataTable'); 
 const Reboot = resolve => require.ensure([], () => resolve(require('./pages/content/Reboot.vue')), 'Reboot');
-//const Reboot = () => require("./pages/content/Reboot.vue") ;
+const Display = resolve => require.ensure([], () => resolve(require('./pages/utils/DisplayUtils.vue')), 'Display');
+const AgGrid = resolve => require.ensure([], () => resolve(require('./pages/plugins/AgGrid.vue')), 'AgGrid');
+
 
 const routes = [
     {path: '/Home', component: Home},
@@ -65,6 +65,8 @@ const routes = [
     {path: "/UtilsDemo", component: UtilsDemo},
     {path: "/DataTable", component: DataTable},
     {path: "/Reboot", component: Reboot},
+    {path: "/Display", component: Display},
+    {path: "/AgGrid", component: AgGrid},
     {path: "/Flex", component: Flex}
 ];
 

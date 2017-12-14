@@ -1,5 +1,8 @@
  import './vendor.js';
 //require("jquery")
+
+ import "../../node_modules/ag-grid/dist/styles/ag-grid.css";
+
 import Vue from "vue"
 import VueRouter from "vue-router"
 //

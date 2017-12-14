@@ -29,7 +29,7 @@
                             <router-link class="dropdown-item" to="/Typography">Typography</router-link>
                             <router-link class="dropdown-item" to="/Code">Code</router-link>
                             <router-link class="dropdown-item" to="/Images">Images</router-link>
-                            <router-link class="dropdown-item" to="/Tables">Tables</router-link>
+                            <router-link class="dropdown-item" to="/DataTable">Tables</router-link>
                             <router-link class="dropdown-item" to="/Figures">Figures</router-link> 
                         </div>
                     </li>
@@ -66,7 +66,7 @@
                                 </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" to="/Alerts">Menu</router-link>
-                            <router-link class="dropdown-item" to="/Alerts">Tables</router-link>
+                            <router-link class="dropdown-item" to="/AgGrid">AgGrid</router-link>
                             <router-link class="dropdown-item" to="/Alerts">Tabs</router-link>
                             <router-link class="dropdown-item" to="/Alerts">Charts</router-link>
                         </div>

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-7">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header bar">
           <div class="card-title">Special title treatment</div>
           <div class="card-control">
             <button class="btn" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="ti-angle-down icon-lg" ></i></button>
@@ -21,7 +21,7 @@
     </div>
     <div class="col-lg-4">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header bar">
           <div class="card-title">Special title treatment</div>
           <div class="card-control">
             <button class="btn"><i class="ti-reload icon-lg"></i></button>
