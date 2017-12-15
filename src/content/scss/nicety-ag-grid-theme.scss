@@ -1,3 +1,6 @@
+
+@import "~ag-grid/src/styles/ag-grid.scss";
+
 $ag-style: 'nicety' !default;
 $ag-root-font-family: Calibri, 'Segoe UI', Thonburi, Arial, Verdana, sans-serif !default;
 $ag-root-font-size: 1em !default;
@@ -5,7 +8,7 @@ $ag-root-font-size: 1em !default;
 $ag-scrollbar-background: inherit !default;
 $ag-scrollbar-thumb: inherit !default;
 
-$ag-border-1: 1px solid #9bc2e6 !default;
+$ag-border-1: 1px solid rgba($dark, .1) !default;
 
 $ag-border-color-1: #000 !default;
 $ag-border-color-2: #808080 !default;
@@ -18,25 +21,25 @@ $ag-header-foreground-1: #fff !default;
 
 $ag-separator-color: #d3d3d3 !default;
 
-$ag-cell-focused-border: 2px solid #217346 !default;
-$ag-cell-no-focus-border-top: 2px solid transparent !default;
-$ag-cell-no-focus-border-bottom: 1px dotted #9bc2e6 !default;
-$ag-cell-ltr-no-focus-border-right: 1px dotted #9bc2e6 !default;
-$ag-cell-ltr-no-focus-border-left: 2px solid transparent !default;
-$ag-cell-rtl-no-focus-border-right: 2px solid transparent !default;
-$ag-cell-rtl-no-focus-border-left: 1px dotted #9bc2e6 !default;
+$ag-cell-focused-border: 0px solid #217346 !default;
+$ag-cell-no-focus-border-top: 0px solid #217346 !default;
+$ag-cell-no-focus-border-bottom: 0px dotted #9bc2e6 !default;
+$ag-cell-ltr-no-focus-border-right: 1px solid rgba($dark, .1) !default;
+$ag-cell-ltr-no-focus-border-left: 0px solid transparent !default;
+$ag-cell-rtl-no-focus-border-right: 1px solid rgba($dark, .1) !default;
+$ag-cell-rtl-no-focus-border-left: 0px dotted #9bc2e6 !default;
 
 $ag-cell-highlight-border: 1px solid darkgreen !default;
 
-$ag-cell-padding: 2px !default;
+$ag-cell-padding: 0.4rem !default;
 
 $ag-row-selected-background-color: #c7c7c7 !default;
-$ag-row-odd-background-color: #ddebf7 !default;
-$ag-row-even-background-color: #fff !default;
+$ag-row-odd-background-color: rgba($dark, .03) !default;
+$ag-row-even-background-color: rgba($white,1) !default;
 $ag-row-floating-background-color: #f0f0f0 !default;
 $ag-row-stub-background-color: #f0f0f0 !default;
 
-$ag-value-change-delta-up-color: darkgreen !default;
+$ag-value-change-delta-up-color: $card-bg !default;
 $ag-value-change-delta-down-color: darkred !default;
 $ag-value-change-value-highlight-background-color: #cec !default;
 
@@ -67,38 +70,53 @@ $ag-select-foreground: #222 !default;
 $ag-menu-option-padding: 2px 4px 2px 4px !default;
 $ag-menu-option-shortcut-padding: 2px 2px 2px 2px !default;
 
-$ag-header-background-1:#ECEFF1;
-$ag-header-foreground-1:rgba(10,18,32,.64);
-$ag-border-1:rgb(223, 228, 231);
+$ag-header-background-1: #ECEFF1;
+$ag-header-foreground-1: rgba(10, 18, 32, .64);
+//$ag-border-1:;
 @import '~ag-grid/src/styles/theme-common';
 
 .ag-nicety {
-  .ag-floating-filter-body {
-    input {
-      background-color: $ag-select-background;
-      color: $ag-foreground-1;
+    .ag-floating-filter-body {
+        input {
+            background-color: $ag-select-background;
+            color: $ag-foreground-1;
+            &[readonly] {
+                background: rgba($ag-select-background, 0.3);
+            }
+        }
 
-      &[readonly] {
-        background: rgba($ag-select-background, 0.3);
-      }
     }
-  }
-
-  .ag-header {
-    .ag-icon-asc,
-    .ag-icon-desc,
-    .ag-icon-expanded,
-    .ag-icon-contracted,
-    .ag-icon-menu,
-    .ag-icon-filter {
-      filter: invert(100%);
+    .ag-cell{
+        padding-left: 1rem;
     }
-  }
+    .ag-cell-focus {
+        background-color:rgba($primary,0.8) ;
+        color: $white;
+    }
+    .ag-row-hover,
+    .ag-header-cell.ag-column-hover{
+        background-color:rgba($info,0.3) ;
+    }
+    .ag-header-row{
+        font-size: 1.1rem;
+        .ag-header-cell{
+            padding: 0.75rem;
+        }
+    }
+    .ag-header {
+        .ag-icon-asc,
+        .ag-icon-desc,
+        .ag-icon-expanded,
+        .ag-icon-contracted,
+        .ag-icon-menu,
+        .ag-icon-filter {
+            filter: invert(100%);
+        }
+    }
 
-
-  .ag-tab-header .ag-icon {
-    filter: invert(100%);
-  }
+    .ag-tab-header .ag-icon {
+        filter: invert(100%);
+    }
 }
 
 //stick in an override
