@@ -7,6 +7,7 @@ module.exports = function () {
     return {
         externals: {
             jquery: 'window.jQuery',
+            echarts:'window.echarts'
         }
     };
 };

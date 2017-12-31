@@ -68,7 +68,7 @@
                             <router-link class="dropdown-item" to="/Alerts">Menu</router-link>
                             <router-link class="dropdown-item" to="/AgGrid">AgGrid</router-link>
                             <router-link class="dropdown-item" to="/Alerts">Tabs</router-link>
-                            <router-link class="dropdown-item" to="/Alerts">Charts</router-link>
+                            <router-link class="dropdown-item" to="/ECharts">Charts</router-link>
                         </div>
                     </li>
                     <router-link class="nav-item" tag="li" to="/UtilsDemo"><a class="nav-link">Utils</a></router-link>

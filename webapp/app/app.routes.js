@@ -32,6 +32,7 @@ const DataTable = resolve => require.ensure([], () => resolve(require('./pages/c
 const Reboot = resolve => require.ensure([], () => resolve(require('./pages/content/Reboot.vue')), 'Reboot');
 const Display = resolve => require.ensure([], () => resolve(require('./pages/utils/DisplayUtils.vue')), 'Display');
 const AgGrid = resolve => require.ensure([], () => resolve(require('./pages/plugins/AgGrid.vue')), 'AgGrid');
+const ECharts = resolve => require.ensure([], () => resolve(require('./pages/ECharts/ECharts.vue')), 'ECharts');
 
 
 const routes = [
@@ -67,6 +68,7 @@ const routes = [
     {path: "/Reboot", component: Reboot},
     {path: "/Display", component: Display},
     {path: "/AgGrid", component: AgGrid},
+    {path: "/ECharts", component: ECharts},
     {path: "/Flex", component: Flex}
 ];
 
