@@ -33,6 +33,7 @@ const Reboot = resolve => require.ensure([], () => resolve(require('./pages/cont
 const Display = resolve => require.ensure([], () => resolve(require('./pages/utils/DisplayUtils.vue')), 'Display');
 const AgGrid = resolve => require.ensure([], () => resolve(require('./pages/plugins/AgGrid.vue')), 'AgGrid');
 const ECharts = resolve => require.ensure([], () => resolve(require('./pages/ECharts/ECharts.vue')), 'ECharts');
+const Metismenu = resolve => require.ensure([], () => resolve(require('./pages/plugins/Metismenu.vue')), 'Metismenu');
 
 
 const routes = [
@@ -69,6 +70,7 @@ const routes = [
     {path: "/Display", component: Display},
     {path: "/AgGrid", component: AgGrid},
     {path: "/ECharts", component: ECharts},
+    {path: "/Metismenu", component: Metismenu},
     {path: "/Flex", component: Flex}
 ];
 

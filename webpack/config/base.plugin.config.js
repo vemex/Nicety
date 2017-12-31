@@ -16,6 +16,8 @@ module.exports = function (option) {
                 {from: './webapp/data', to: 'data'},
                 {from: dirVars.libDir + '/jquery/dist/jquery.min.js', to: 'libs/jquery.min.js'},
                 {from: dirVars.libDir + '/echarts/dist/echarts.js', to: 'libs/echarts.js'},
+                {from: dirVars.libDir + '/metismenu/dist/metismenu.js', to: 'libs/metismenu.js'},
+                {from: dirVars.libDir + '/metismenu/dist/metismenu.css', to: 'libs/styles/metismenu.css'},
                 {from: dirVars.libDir + '/popper.js/dist/umd/popper.min.js', to: 'libs/popper.min.js'},
                 {from: dirVars.libDir + '/bootstrap/dist/js/bootstrap.min.js', to: 'libs/bootstrap.min.js'}
             ]),
