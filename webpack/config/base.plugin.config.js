@@ -19,6 +19,8 @@ module.exports = function (option) {
                 {from: dirVars.libDir + '/metismenu/dist/metismenu.js', to: 'libs/metismenu.js'},
                 {from: dirVars.libDir + '/metismenu/dist/metismenu.css', to: 'libs/styles/metismenu.css'},
                 {from: dirVars.libDir + '/popper.js/dist/umd/popper.min.js', to: 'libs/popper.min.js'},
+                {from: dirVars.libDir + '/highcharts/highcharts.js', to: 'libs/highcharts.min.js'},
+                {from: dirVars.libDir + '/highcharts/themes/grid-light.js', to: 'libs/themes/grid-light.min.js'},
                 {from: dirVars.libDir + '/bootstrap/dist/js/bootstrap.min.js', to: 'libs/bootstrap.min.js'}
             ]),
             new MergeJsonWebpackPlugin({

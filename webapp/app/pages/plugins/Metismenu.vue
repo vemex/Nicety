@@ -1,5 +1,5 @@
 <template>
-    <nav class="sidebar-nav">
+    <nav class="topbar-nav">
     <ul class="metismenu" id="menu1">
         <li>
             <a class="has-arrow" href="#">
