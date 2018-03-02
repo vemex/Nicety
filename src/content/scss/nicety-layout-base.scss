@@ -13,16 +13,145 @@
     background-color: #f3f3f3;
 }
 
-.page-footer {
-    min-height: 5em;
-    padding: 0.83em;
-    line-height: 1.5;
-    border-top: 1px solid #e6e6e6;
-    box-sizing: border-box;
-    background-color: #f3f3f3;
-    color: #595959;
-    font-size: 1em;
-    text-align: center;
+.navigator-side {}
+
+body {
+    display: flex;
+    #dashboard-app {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        box-sizing: border-box;
+        header {
+            flex: 1;
+            height: 64px;
+            background: $gray-400;
+        }
+        .dashboard-body {
+            display: flex;
+            flex-direction: row;
+            background: $gray-500;
+            flex: 1;
+            overflow: hidden;
+            .aside-left {
+                background: $gray-600;
+                width: 150px;
+            }
+            main {
+                overflow: hidden;
+                flex: 1;
+                .content {
+                    display: block;
+                    overflow: auto;
+                }
+            }
+        }
+        .footer {
+            min-height: 5em;
+            padding: 0.83em;
+            line-height: 1.5;
+            border-top: 1px solid #e6e6e6;
+            box-sizing: border-box;
+            background-color: #f3f3f3;
+            color: #595959;
+            font-size: 1em;
+            text-align: center;
+        }
+    }
+    #dashboard-app.fixed-header {
+        header {
+            @extend .fixed-top;
+        }
+        .dashboard-body {
+            padding-top: 64px;
+        }
+    }
+    #dashboard-app.fixed-footer {
+        .footer {
+            @extend .fixed-bottom;
+        }
+        .dashboard-body {
+            padding-bottom: 60px;
+            display: flex;
+            width: 100%;
+        }
+    }
+    #dashboard-app.fixed-header-base {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        box-sizing: border-box;
+        header {
+            display: block;
+            backface-visibility: hidden;
+            z-index: 101;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: $gray-400;
+        }
+        .dashboard-body {
+            display: flex;
+            flex-direction: row;
+            background: $gray-500;
+            flex: 1;
+            overflow: hidden;
+            .aside-left {
+                display: block;
+                position: fixed;
+                padding-top: 64px !important;
+                background: $gray-600;
+                width: 150px;
+                height: 100%;
+            }
+            main {
+                display: block;
+                position: fixed;
+                padding-top: 64px !important;
+                padding-bottom: 60px !important;
+                padding-left: 150px !important;
+                overflow: hidden;
+                flex: 1;
+                height: 100%;
+                width: 100%;
+                .content {
+                    display: block;
+                    overflow: auto;
+                    height: 100%;
+                }
+            }
+        }
+    }
 }
 
-.navigator-side {}
+
+/**
+* 滚动条样式
+**/
+
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+ ::-webkit-scrollbar-track,
+ ::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    border: 5px solid transparent;
+}
+
+ ::-webkit-scrollbar-track {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .2) inset;
+}
+
+ ::-webkit-scrollbar-thumb {
+    min-height: 20px;
+    background-clip: content-box;
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, .2) inset;
+}
+
+ ::-webkit-scrollbar-corner {
+    background: transparent;
+}

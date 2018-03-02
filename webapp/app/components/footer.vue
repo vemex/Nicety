@@ -1,5 +1,5 @@
 <<template>
-  <div class="page-footer fixed-bottom">
+  <div class="footer">
     <div>
       <!-- react-text: 45 -->© 2008-2017, SonarCloud.io by
       <!-- /react-text --><a href="http://www.sonarsource.com" title="SonarSource SA">SonarSource SA</a>
