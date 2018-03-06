@@ -10,17 +10,12 @@
                 <div>
 
 
-                    <button type="button" data-container="body" data-toggle="popover"  data-trigger="hover"  data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-                        <i class="pli-mail-2"></i>
-                    </button>
-                    <button type="button"  data-container="body" data-toggle="popover" data-trigger="hover"   data-placement="bottom" data-content="退出">
-                        <i class="pli-unlock"></i>
-                    </button>
+                
                     <div class="dropdown">
                         <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="pli-bell" ></i><span class="badge">4</span>
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
                             <form class="px-4 py-3">
                                 <div class="form-group">
                                     <label for="exampleDropdownFormEmail1">Email address</label>
@@ -43,6 +38,12 @@
                             <a class="dropdown-item" href="#">Forgot password?</a>
                         </div>
                     </div>
+                        <button type="button" data-container="body" data-toggle="popover"  data-trigger="hover"  data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                        <i class="pli-mail-2"></i>
+                    </button>
+                    <button type="button"  data-container="body" data-toggle="popover" data-trigger="hover"   data-placement="bottom" data-content="退出">
+                        <i class="pli-unlock"></i>
+                    </button>
                 </div>
 
             </div>

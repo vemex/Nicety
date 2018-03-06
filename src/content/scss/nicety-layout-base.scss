@@ -10,11 +10,12 @@
         padding: 1em;
         background-color: #f3f3f3;
     }
-
     .navigator-side {}
 }
 
-
+html {
+    overflow: hidden;
+}
 
 body {
     display: flex;
@@ -22,43 +23,45 @@ body {
         position: relative;
         display: flex;
         flex-direction: column;
-        flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
         box-sizing: border-box;
         overflow: hidden;
+        min-height: 100vh;
         header {
             display: flex;
             position: relative;
             flex-direction: row;
-            flex: 0;
+            flex-grow: 0;
+            flex-shrink: 0;
             height: $dashboard-layout-header-height;
             background: $dashboard-layout-header-background-color;
-
-            .header-bar{
-                flex-grow:1;
-                > div{
+            .header-bar {
+                flex-grow: 1;
+                >div {
                     @extend .float-right;
                     height: 100%;
                     display: flex;
                     flex-direction: row;
                 }
-                button{
+                button {
                     @extend .btn;
-                    @extend  .btn-outline-primary;
+                    @extend .btn-outline-primary;
                     @extend .text-light;
                     height: 100%;
-                    border-radius:0;
-                    border-width:0;
+                    border-radius: 0;
+                    border-width: 0;
                     font-size: 1.5em;
                 }
-                .dropdown-toggle:after{
+                .dropdown-toggle:after {
                     content: none;
                 }
             }
-            .aside-header{
+            .aside-header {
                 width: $dashboard-layout-left-side-width;
                 background: $dashboard-layout-header-background-color;
                 height: $dashboard-layout-header-height;
-                .sidebar-toggler{
+                .sidebar-toggler {
                     @extend .btn;
                     @extend .btn-outline-primary;
                     @extend .float-right;
@@ -66,18 +69,17 @@ body {
                     font-size: 1.5em;
                     color: cornsilk;
                 }
-
             }
-
         }
         .dashboard-body {
             display: flex;
             flex-direction: row;
             background: $gray-200;
-            flex: 1;
+            flex-grow: 1;
+            flex-shrink: 1;
             overflow: hidden;
             .aside-left {
-                background:$dashboard-layout-left-side-background;
+                background: $dashboard-layout-left-side-background;
                 width: $dashboard-layout-left-side-width;
             }
             main {
@@ -91,7 +93,8 @@ body {
             }
         }
         .footer {
-            flex: 0;
+            flex-grow: 0;
+            flex-shrink: 0;
             position: relative;
             height: $dashboard-layout-footer-height;
             padding: 0.5em;
@@ -118,102 +121,54 @@ body {
         }
         .dashboard-body {
             padding-bottom: $dashboard-layout-footer-height;
-
         }
     }
-    #dashboard-app.fixed-left-sider{
-        .aside-header{
+    #dashboard-app.fixed-left-sider {
+        .aside-header {
             position: fixed;
             z-index: 1;
         }
         .footer {
             margin-left: $dashboard-layout-left-side-width;
         }
-
         .dashboard-body {
-            //overflow: hidden;
-            //padding-top:0px !important;
-            //padding-bottom:0px !important;
             .aside-left {
                 display: block;
                 position: fixed;
                 z-index: 1;
-                //padding-top: $dashboard-layout-header-height;
                 width: $dashboard-layout-left-side-width;
                 overflow: hidden;
                 top: $dashboard-layout-header-height;
                 bottom: 0;
-                nav{
+                nav {
                     height: 100%;
                     overflow: auto;
                 }
             }
             main {
+                height: 100%;
                 display: block;
-                //position: absolute;
-                //padding-top:  $dashboard-layout-header-height;
-                //padding-bottom:$dashboard-layout-footer-height;
-                padding-left: $dashboard-layout-left-side-width ;
-                //overflow: hidden;
-                //flex: 1;
-                //height: 100%;
-                //width: 100%;
-                //.content {
-                //    display: block;
-                //    overflow: auto;
-                //    height: 100%;
-                //}
+                padding-left: $dashboard-layout-left-side-width;
             }
         }
     }
-
-            #dashboard-app.fixed-left-sider.fixed-header{
-                    .dashboard-body{
-                        main{
-                            height: 100%;
-                            width: 100%;
-                            overflow: hidden;
-                        }
-                    }
+    #dashboard-app.fixed-left-sider.fixed-header {
+        .dashboard-body {
+            main {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
             }
-    #dashboard-app.fixed-left-sider.fixed-header.fixed-footer{
-        .dashboard-body{
-            main{
+        }
+    }
+    #dashboard-app.fixed-left-sider.fixed-header.fixed-footer {
+        .dashboard-body {
+            main {
                 position: absolute;
                 margin-top: $dashboard-layout-header-height*-1;
-                padding-top:  $dashboard-layout-header-height;
-                padding-bottom:$dashboard-layout-footer-height;
+                padding-top: $dashboard-layout-header-height;
+                padding-bottom: $dashboard-layout-footer-height;
             }
         }
     }
-}
-
-
-/**
-* 滚动条样式
-**/
-
-::-webkit-scrollbar {
-    width: 14px;
-    height: 14px;
-}
-
- ::-webkit-scrollbar-track,
- ::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    border: 3px solid transparent;
-}
-
- ::-webkit-scrollbar-track {
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, .2) inset;
-}
-
- ::-webkit-scrollbar-thumb {
-    min-height: 20px;
-    background-clip: content-box;
-    box-shadow: 0 0 0 5px rgba(0, 0, 0, .2) inset;
-}
-
- ::-webkit-scrollbar-corner {
-    background: transparent;
 }
