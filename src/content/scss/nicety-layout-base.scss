@@ -13,10 +13,6 @@
     .navigator-side {}
 }
 
-html {
-    overflow: hidden;
-}
-
 body {
     display: flex;
     #dashboard-app {
@@ -27,7 +23,7 @@ body {
         flex-shrink: 1;
         box-sizing: border-box;
         overflow: hidden;
-        min-height: 100vh;
+        min-height: 100vh; //兼容IE10+ 使得高度最大化
         header {
             display: flex;
             position: relative;

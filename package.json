@@ -75,7 +75,7 @@
     "dependencies": {
         "ag-grid": "^15.0.0",
         "ag-grid-vue": "^15.0.0",
-        "bootstrap": "^4.0.0-beta.2",
+        "bootstrap": "^4.0.0",
         "echarts": "^3.8.5",
         "highcharts": "^6.0.4",
         "jquery": "^3.2.1",
