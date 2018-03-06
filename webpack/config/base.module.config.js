@@ -5,7 +5,7 @@
 const dirVars = require('./base/dir-vars.config.js');
 const path = require('path');
 
-module.exports = function (option) {
+module.exports = function(option) {
     return {
         module: {
             rules: [
@@ -34,7 +34,8 @@ module.exports = function (option) {
                     test: /manifest.webapp$/,
                     loader: 'file-loader?name=manifest.webapp!web-app-manifest-loader'
                 },
-
+                { test: /jquery-mousewheel/, loader: "imports-loader?define=>false&this=>window" },
+                { test: /malihu-custom-scrollbar-plugin/, loader: "imports-loader?define=>false&this=>window" }
                 //{test: require.resolve("jquery"), loader: "expose-loader?$!expose-loader?jQuery"}
             ]
         }

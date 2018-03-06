@@ -13,16 +13,37 @@
     .navigator-side {}
 }
 
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
     display: flex;
     #dashboard-app {
+        .mCSB_container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%; //兼容IE10+ 使得高度最大化 
+            min-height: 100vh\0;
+            >div {
+                display: flex;
+                min-height: 100%;
+                min-height: 100vh\0;
+                flex-direction: column;
+                flex-grow: 1;
+                flex-shrink: 1;
+            }
+        }
         position: relative;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
         flex-shrink: 1;
         box-sizing: border-box;
-        overflow: hidden;
+        overflow: auto;
+        height: 100%;
         min-height: 100vh; //兼容IE10+ 使得高度最大化
         header {
             display: flex;
@@ -77,10 +98,15 @@ body {
             .aside-left {
                 background: $dashboard-layout-left-side-background;
                 width: $dashboard-layout-left-side-width;
+                flex-shrink: 0;
             }
             main {
                 overflow: hidden;
-                flex: 1;
+                flex-grow: 1;
+                flex-shrink: 1;
+                //>div {
+                height: 100%;
+                // }
                 .content {
                     display: block;
                     overflow: auto;
@@ -104,25 +130,26 @@ body {
         }
     }
     #dashboard-app.fixed-header {
+        margin-top: $dashboard-layout-header-height;
+        height: 100%;
+        min-height: 0px;
         header {
             @extend .fixed-top;
         }
-        .dashboard-body {
-            padding-top: $dashboard-layout-header-height;
-        }
     }
     #dashboard-app.fixed-footer {
+        margin-bottom: $dashboard-layout-footer-height;
+        height: 100%;
+        min-height: 0px;
         .footer {
             @extend .fixed-bottom;
-        }
-        .dashboard-body {
-            padding-bottom: $dashboard-layout-footer-height;
         }
     }
     #dashboard-app.fixed-left-sider {
         .aside-header {
             position: fixed;
             z-index: 1;
+            top: 0px;
         }
         .footer {
             margin-left: $dashboard-layout-left-side-width;
@@ -148,23 +175,34 @@ body {
             }
         }
     }
-    #dashboard-app.fixed-left-sider.fixed-header {
-        .dashboard-body {
-            main {
-                height: 100%;
-                width: 100%;
-                overflow: hidden;
-            }
-        }
-    }
-    #dashboard-app.fixed-left-sider.fixed-header.fixed-footer {
-        .dashboard-body {
-            main {
-                position: absolute;
-                margin-top: $dashboard-layout-header-height*-1;
-                padding-top: $dashboard-layout-header-height;
-                padding-bottom: $dashboard-layout-footer-height;
-            }
-        }
-    }
+    // #dashboard-app.fixed-left-sider.fixed-header {
+    //     .dashboard-body {
+    //         main {
+    //             height: 100%;
+    //             width: 100%;
+    //             overflow: hidden;
+    //         }
+    //     }
+    // }
+    // #dashboard-app.fixed-left-sider.fixed-header.fixed-footer {
+    //     .dashboard-body {
+    //         main {
+    //             height: 100%;
+    //             width: 100%;
+    //             //position: absolute;
+    //             margin-top: $dashboard-layout-header-height*-1;
+    //             padding-top: $dashboard-layout-header-height;
+    //             padding-bottom: $dashboard-layout-footer-height;
+    //         }
+    //     }
+    // }
+    // #dashboard-app.fixed-header.fixed-footer {
+    //     // #mCSB_2_container {
+    //     //     min-height: 100%;
+    //     //     >div {
+    //     //         min-height: 100%;
+    //     //         min-height: 100vh\0; //兼容ie10+ TODO：多出header的高度需要滚动
+    //     //     }
+    //     // }
+    // }
 }

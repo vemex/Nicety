@@ -1,6 +1,8 @@
 <template>
-    <div id="dashboard-app" class="fixed-left-sider fixed-header fixed-footer">
-        <header>
+    <div id="dashboard-app" class="fixed-left-sider fixed-header fixed-footer"><!--fixed-left-sider fixed-header fixed-footer-->
+  
+     <div>
+        <header> 
             <div class="aside-header">
                 <label class="text-light text-lg-center">Nicety</label>
                 <button type="button" class="sidebar-toggler "><i class="pli-view-list"></i></button>
@@ -46,12 +48,12 @@
                     </button>
                 </div>
 
-            </div>
-
+            </div> 
         </header>
 
-        <div class="dashboard-body">
-            <div class="aside-left">
+        <div class="dashboard-body"> 
+            
+            <div class="aside-left" id="aside_left">
                 <nav class="sidebar-nav">
                     <ul class="metismenu" id="main-menu">
                         <li class="sidebar-search-wrapper">
@@ -153,11 +155,11 @@
                 </nav>
             </div>
 
-            <main>
-                <div class="content">
-                    <router-view></router-view>
-                </div>
-            </main>
+            <main> 
+                    <div class="content">
+                        <router-view></router-view>
+                    </div> 
+            </main> 
         </div>
            <app-footer></app-footer>
             <!--
@@ -170,6 +172,7 @@
                 </div>
             </main>
         </div>-->
+     </div>
     </div>
 </template>
 
@@ -185,7 +188,11 @@
                 delay:{ 'show': 500, 'hide': 100 },
                 offset:1
             });
-
+            if ($('#dashboard-app').hasClass('fixed-left-sider')) { 
+                $('#aside_left').mCustomScrollbar({ theme: "minimal",scrollInertia:50});
+            }
+            $('#dashboard-app').mCustomScrollbar({ theme: "minimal-dark",scrollInertia:50}); 
+            //$(body).mCustomScrollbar({ theme: "minimal-dark",scrollInertia:50}); 
         }
     }
 </script>

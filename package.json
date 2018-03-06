@@ -46,7 +46,8 @@
         "webpack-merge": "^4.1.1",
         "webpack-notifier": "^1.5.0",
         "webpack-visualizer-plugin": "^0.1.11",
-        "write-file-webpack-plugin": "^4.2.0"
+        "write-file-webpack-plugin": "^4.2.0",
+        "imports-loader": "^0.8.0"
     },
     "scripts": {
         "packagelib": "npm run webpack:lib",
@@ -79,6 +80,7 @@
         "echarts": "^3.8.5",
         "highcharts": "^6.0.4",
         "jquery": "^3.2.1",
+        "malihu-custom-scrollbar-plugin": "^3.1.5",
         "metismenu": "^2.7.2",
         "popper.js": "^1.12.7",
         "vue": "^2.5.3",

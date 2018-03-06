@@ -6,6 +6,11 @@ import VueRouter from "vue-router"
 import routes from './app.routes'
 //
 import AppView from "./components/app.dashboard.vue"
+
+var $ = require('jquery');
+require("jquery-mousewheel")($);
+require('malihu-custom-scrollbar-plugin')($);
+
 //
 Vue.use(VueRouter);
 //
