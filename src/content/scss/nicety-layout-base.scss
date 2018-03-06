@@ -4,38 +4,81 @@
     width: 100%;
     padding-top: 2.34em;
     padding-bottom: 5em;
+    .app-body {
+        overflow: auto;
+        height: 100%;
+        padding: 1em;
+        background-color: #f3f3f3;
+    }
+
+    .navigator-side {}
 }
 
-.app-body {
-    overflow: auto;
-    height: 100%;
-    padding: 1em;
-    background-color: #f3f3f3;
-}
 
-.navigator-side {}
 
 body {
     display: flex;
     #dashboard-app {
+        position: relative;
         display: flex;
         flex-direction: column;
         flex: 1;
         box-sizing: border-box;
+        overflow: hidden;
         header {
-            flex: 1;
-            height: 64px;
-            background: $gray-400;
+            display: flex;
+            position: relative;
+            flex-direction: row;
+            flex: 0;
+            height: $dashboard-layout-header-height;
+            background: $dashboard-layout-header-background-color;
+
+            .header-bar{
+                flex-grow:1;
+                > div{
+                    @extend .float-right;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: row;
+                }
+                button{
+                    @extend .btn;
+                    @extend  .btn-outline-primary;
+                    @extend .text-light;
+                    height: 100%;
+                    border-radius:0;
+                    border-width:0;
+                    font-size: 1.5em;
+                }
+                .dropdown-toggle:after{
+                    content: none;
+                }
+            }
+            .aside-header{
+                width: $dashboard-layout-left-side-width;
+                background: $dashboard-layout-header-background-color;
+                height: $dashboard-layout-header-height;
+                .sidebar-toggler{
+                    @extend .btn;
+                    @extend .btn-outline-primary;
+                    @extend .float-right;
+                    height: 100%;
+                    font-size: 1.5em;
+                    color: cornsilk;
+                }
+
+            }
+
         }
         .dashboard-body {
             display: flex;
             flex-direction: row;
-            background: $gray-500;
+            background: $gray-200;
             flex: 1;
             overflow: hidden;
             .aside-left {
-                background: $gray-600;
-                width: 150px;
+                background:$dashboard-layout-left-side-background;
+                width: $dashboard-layout-left-side-width;
             }
             main {
                 overflow: hidden;
@@ -43,12 +86,15 @@ body {
                 .content {
                     display: block;
                     overflow: auto;
+                    height: 100%;
                 }
             }
         }
         .footer {
-            min-height: 5em;
-            padding: 0.83em;
+            flex: 0;
+            position: relative;
+            height: $dashboard-layout-footer-height;
+            padding: 0.5em;
             line-height: 1.5;
             border-top: 1px solid #e6e6e6;
             box-sizing: border-box;
@@ -63,7 +109,7 @@ body {
             @extend .fixed-top;
         }
         .dashboard-body {
-            padding-top: 64px;
+            padding-top: $dashboard-layout-header-height;
         }
     }
     #dashboard-app.fixed-footer {
@@ -71,56 +117,72 @@ body {
             @extend .fixed-bottom;
         }
         .dashboard-body {
-            padding-bottom: 60px;
-            display: flex;
-            width: 100%;
+            padding-bottom: $dashboard-layout-footer-height;
+
         }
     }
-    #dashboard-app.fixed-header-base {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        box-sizing: border-box;
-        header {
-            display: block;
-            backface-visibility: hidden;
-            z-index: 101;
+    #dashboard-app.fixed-left-sider{
+        .aside-header{
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 64px;
-            background: $gray-400;
+            z-index: 1;
         }
+        .footer {
+            margin-left: $dashboard-layout-left-side-width;
+        }
+
         .dashboard-body {
-            display: flex;
-            flex-direction: row;
-            background: $gray-500;
-            flex: 1;
-            overflow: hidden;
+            //overflow: hidden;
+            //padding-top:0px !important;
+            //padding-bottom:0px !important;
             .aside-left {
                 display: block;
                 position: fixed;
-                padding-top: 64px !important;
-                background: $gray-600;
-                width: 150px;
-                height: 100%;
+                z-index: 1;
+                //padding-top: $dashboard-layout-header-height;
+                width: $dashboard-layout-left-side-width;
+                overflow: hidden;
+                top: $dashboard-layout-header-height;
+                bottom: 0;
+                nav{
+                    height: 100%;
+                    overflow: auto;
+                }
             }
             main {
                 display: block;
-                position: fixed;
-                padding-top: 64px !important;
-                padding-bottom: 60px !important;
-                padding-left: 150px !important;
-                overflow: hidden;
-                flex: 1;
-                height: 100%;
-                width: 100%;
-                .content {
-                    display: block;
-                    overflow: auto;
-                    height: 100%;
-                }
+                //position: absolute;
+                //padding-top:  $dashboard-layout-header-height;
+                //padding-bottom:$dashboard-layout-footer-height;
+                padding-left: $dashboard-layout-left-side-width ;
+                //overflow: hidden;
+                //flex: 1;
+                //height: 100%;
+                //width: 100%;
+                //.content {
+                //    display: block;
+                //    overflow: auto;
+                //    height: 100%;
+                //}
+            }
+        }
+    }
+
+            #dashboard-app.fixed-left-sider.fixed-header{
+                    .dashboard-body{
+                        main{
+                            height: 100%;
+                            width: 100%;
+                            overflow: hidden;
+                        }
+                    }
+            }
+    #dashboard-app.fixed-left-sider.fixed-header.fixed-footer{
+        .dashboard-body{
+            main{
+                position: absolute;
+                margin-top: $dashboard-layout-header-height*-1;
+                padding-top:  $dashboard-layout-header-height;
+                padding-bottom:$dashboard-layout-footer-height;
             }
         }
     }
@@ -139,7 +201,7 @@ body {
  ::-webkit-scrollbar-track,
  ::-webkit-scrollbar-thumb {
     border-radius: 999px;
-    border: 5px solid transparent;
+    border: 3px solid transparent;
 }
 
  ::-webkit-scrollbar-track {

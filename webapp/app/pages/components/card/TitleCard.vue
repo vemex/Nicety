@@ -1,5 +1,5 @@
 <<template>
-    <div class="mt-4">
+    <div id="title-card" class="mt-4">
         <h4>标题样式</h4>
         <hr>
         <div class="row">
@@ -92,7 +92,7 @@
             //   MainLayout
         },
         mounted: function() { //渲染完成
-            $('.collapse').collapse()
+            $('#title-card .collapse').collapse()
         }
     }
 </script>

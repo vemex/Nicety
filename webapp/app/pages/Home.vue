@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div id="home-page" class="row">
     <div class="col-lg-7">
       <div class="card">
         <div class="card-header bar">
@@ -45,7 +45,7 @@
       //   MainLayout
     },
      mounted: function () {//渲染完成
-     $('.collapse').collapse()
+     $('#home-page .collapse').collapse()
     }
   }
 </script>
