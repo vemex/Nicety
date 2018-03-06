@@ -23,17 +23,17 @@ body {
     display: flex;
     #dashboard-app {
         .mCSB_container {
-            display: flex;
+            display: grid;
             flex-direction: column;
             min-height: 100%; //兼容IE10+ 使得高度最大化 
-            min-height: 100vh\0;
+            //min-height: 100vh\0;
             >div {
                 display: flex;
-                min-height: 100%;
-                min-height: 100vh\0;
+                //min-height: 100%;
+                //min-height: 100vh\0;
                 flex-direction: column;
-                flex-grow: 1;
-                flex-shrink: 1;
+              //  flex-grow: 1;
+               // flex-shrink: 1;
             }
         }
         position: relative;

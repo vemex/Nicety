@@ -189,9 +189,11 @@
                 offset:1
             });
             if ($('#dashboard-app').hasClass('fixed-left-sider')) { 
-                $('#aside_left').mCustomScrollbar({ theme: "minimal",scrollInertia:50});
+                $('#aside_left').mCustomScrollbar({ theme: "minimal",scrollInertia:50,mouseWheel:{ preventDefault: true
+                }});
             }
-            $('#dashboard-app').mCustomScrollbar({ theme: "minimal-dark",scrollInertia:50}); 
+            $('#dashboard-app').mCustomScrollbar({ theme: "minimal-dark",scrollInertia:50});
+
             //$(body).mCustomScrollbar({ theme: "minimal-dark",scrollInertia:50}); 
         }
     }
