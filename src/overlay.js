@@ -142,21 +142,32 @@ const Overlay = (($) => {
                 }
                 const $element = $(this);
                 let data = $element.data(DATA_KEY);
+                let isInit = !data || (typeof config === "object" && config);
 
-                if (!data) {
+                if (isInit) {
+                    if (data) {
+                        data.hide($element);
+                        data.dispose();
+                    }
                     if ($element.attr('data-target')) {
                         config.target = $element.attr('data-target');
                     }
                     data = new Overlay($element, config);
-                    $element.data(DATA_KEY, data)
-                }
-
-                if (typeof config === "object" && config) {
+                    $element.data(DATA_KEY, data);
                     data._loadbox($element);
                     data['show']($element);
-                } else if (data[config]) {
+                }
+
+                if (typeof config == 'string') {
                     data[config]($element)
                 }
+
+                // if (typeof config === "object" && config) {
+
+                //     data['show']($element);
+                // } else if (data[config]) {
+                //     data[config]($element)
+                // }
             })
         }
     }

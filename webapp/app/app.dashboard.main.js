@@ -18,6 +18,15 @@ const router = new VueRouter({
     routes: routes,
     linkActiveClass: "active"
 });
+
+router.beforeEach(function(to, from, next) {
+    $('#dashboard-app > div > main').nyOverlay({ title: 'LOADING', target: '#dashboard-app > div > main' });
+    next();
+})
+router.afterEach(function() {
+    $('#dashboard-app > div > main').nyOverlay('hide');
+})
+
 //
 const app = new Vue({
     el: '#app',
