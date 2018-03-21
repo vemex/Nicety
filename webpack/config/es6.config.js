@@ -4,8 +4,8 @@ module.exports = function (option) {
             rules: [
                 {
                     test: /\.js$/,
-                    loaders: 'babel-loader',
-                    exclude: ['node_modules']
+                    exclude: /(node_modules|bower_components)/,
+                    loader: 'babel-loader',
                 }
             ]
         }
