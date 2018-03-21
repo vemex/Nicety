@@ -41,3 +41,25 @@ body {
  ::-webkit-scrollbar-corner {
     background: transparent;
 }
+
+body {
+    scrollbar-arrow-color: #181818;
+    /*上下按钮上三角箭头的颜色*/
+    scrollbar-face-color: #858484;
+    /*滚动条凸出部分的颜色*/
+    scrollbar-3dlight-color: blue;
+    /*滚动条亮边的颜色*/
+    scrollbar-highlight-color: #333;
+    /*滚动条空白部分的颜色*/
+    scrollbar-shadow-color: yellow;
+    /*滚动条阴影的颜色*/
+    scrollbar-darkshadow-color: green;
+    /*滚动条强阴影的颜色*/
+    scrollbar-track-color: #eee;
+    /*滚动条背景颜色*/
+    scrollbar-base-color: black;
+    /*滚动条的基本颜色*/
+    //Cursor: url(mouse.cur);
+    /*自定义个性鼠标*/
+    /*以上2项适用与：body、div、textarea、iframe*/
+}

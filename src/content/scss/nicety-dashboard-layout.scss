@@ -2,17 +2,19 @@ html,
 body {
     height: 100vh;
 }
+
 * {
     box-sizing: border-box;
 }
+
 #dashboard-app {
     min-height: 100vh;
     min-width: 290px;
-    position:   relative;
+    max-width: 100vw;
+    position: relative;
     height: auto;
     overflow: hidden;
-
-    > header {
+    >header {
         position: absolute;
         height: $dashboard-layout-header-height;
         top: 0;
@@ -20,65 +22,60 @@ body {
         right: 0;
         z-index: 100;
     }
-
-    > footer {
+    >footer {
         height: $dashboard-layout-footer-height;
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
     }
-
     .dashboard-body {
         position: relative;
         display: grid;
+        display: -ms-grid\0;
         grid-template-columns: $dashboard-layout-left-side-width auto;
+        -ms-grid-columns: $dashboard-layout-left-side-width 1fr;
         .page,
-        .aside-left{
-            padding-top:$dashboard-layout-header-height;
+        .aside-left {
+            padding-top: $dashboard-layout-header-height;
             padding-bottom: $dashboard-layout-footer-height;
             min-height: 100vh;
         }
-        .page{
+        .page {
             grid-column-start: 2;
             grid-column-end: 2;
+            -ms-grid-column: 2\0;
         }
     }
-
     header {
         display: flex;
         flex-direction: row;
         background-color: $dashboard-layout-header-background-color;
-
-        .aside-header > div,
+        .aside-header>div,
         .header-bar .dropdown,
-        .header-bar > div,
+        .header-bar>div,
         button {
             height: 100%;
         }
-
         .header-bar .dropdown,
-        .header-bar > div,
+        .header-bar>div,
         button {
             display: inline-block;
             font-size: 0;
         }
-
         .aside-header {
             width: $dashboard-layout-left-side-width;
             flex-grow: 0;
-            > div {
+            >div {
                 width: 100%;
             }
         }
-
         .header-bar {
             flex-grow: 1;
-            > div {
+            >div {
                 @extend .float-right;
             }
         }
-
         button {
             @extend .btn;
             @extend .btn-outline-primary;
@@ -98,9 +95,8 @@ body {
             width: $dashboard-layout-left-side-width;
             background: $dashboard-layout-left-side-background;
         }
-
     }
-    > footer {
+    >footer {
         border-top: 1px solid #e6e6e6;
         box-sizing: border-box;
         background-color: #f3f3f3;
@@ -112,13 +108,13 @@ body {
 }
 
 #dashboard-app.fixed-header {
-    > header{
+    >header {
         position: fixed;
     }
 }
 
-#dashboard-app.fixed-footer  {
-    > footer{
+#dashboard-app.fixed-footer {
+    >footer {
         position: fixed;
     }
 }
@@ -132,8 +128,9 @@ body {
         }
     }
 }
-body> .mCSB_scrollTools_vertical,
-.aside-left> .mCSB_scrollTools_vertical {
+
+body>.mCSB_scrollTools_vertical,
+.aside-left>.mCSB_scrollTools_vertical {
     margin-top: $dashboard-layout-header-height !important;
     margin-bottom: $dashboard-layout-footer-height !important;
 }
