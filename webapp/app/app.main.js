@@ -1,6 +1,7 @@
- import './vendor.js';
+import './vendor.js';
+import '../../src/index'
 
- import Vue from "vue"
+import Vue from "vue"
  import VueRouter from "vue-router"
  //
  import routes from './app.routes'

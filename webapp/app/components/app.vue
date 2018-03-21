@@ -115,7 +115,7 @@
 </template>
 
 <<script>
-    import AppFooter from "./footer.vue"
+    import AppFooter from "./app.footer.vue"
     export default {
         components: {
             AppFooter
