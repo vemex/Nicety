@@ -64,3 +64,4 @@ target/
 /.scannerwork
 /.idea
 /package-lock.json
+*.gz

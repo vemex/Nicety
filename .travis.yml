@@ -1,15 +1,18 @@
-#指定运行环境
 language: node_js
-#指定nodejs版本，可以指定多个
 node_js:
-  - 8.9.1
-
-#运行的脚本命令
+- 8.9.1
+install:
+- npm install
 script:
-  - npm install
-  - npm run build
-
-#指定分支，只有指定的分支提交时才会运行脚本
+- npm run build
+- tar czvf nicety.tar.gz ./target/www/
+deploy:
+  provider: releases
+  api_key:
+    secure: pV2FOAlzLlkuY1q/Qpi0sCifzsU4cBwHmWOAMEATDMSK4Vtp+Fzyn++lOXHgIuh20/YwaC78Fuz7TqpHz8CVtpQUbdNF6L08V4L/FegfPlSsAKjABTyi3pS41dC2p5pyqkuHSVc/tTea2qEJveh7ufnWjFP9O1cS4wziGlHC6SoVjX09EP5D0e3pqMbYfRdcFNKbYTD71kFhrHLk+Vre/lSD9/JP4dVdj1XSnuIvcfDrAROMciYwHXvdeg6Qc1jr+p89KuV7ojKMq4dOVKrWqORHDH+n69gCMGdYOmKJDPIh5BzfIIwD6q+WoZMZaOYlasSLVkPHkl0dSSQXLIpH5xBfRFRTIof29F+JFLJtJnW1cXH7NRyifkPbHkQYYioFvw2/GSwpl6gRcMJna3M9drOjfecq/29OUP7PiYAjfxFQvKfn4BjH1GU4UXbNe7W7vExDqtzMIB8gvftQ8r+XPkK92+DoIsLDFWMF6oYqcyBAwkOMl8Z0Y2y+W+Zqt07TJYKsEBBph7kML5VsR1+GD4hN/DjLEe6R1EIYTvwLcjaXAR897QLJE5bGrGzGqdQjOKWkYJtjTeRBUlRqP3i673vg39+tpKUmIwebFuBR98QTFd6DQYjtkdbtAyezyg4aBUCKgK6YcbF1g0YdqS5O1cvCDCgFbkZ8zRuTyMsQCFk=
+  file: "./nicety.tar.gz"
+  on:
+    repo: vemex/Nicety
 branches:
   only:
-    - master
+  - master
