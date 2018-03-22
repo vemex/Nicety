@@ -5,6 +5,7 @@ install:
 - npm install
 script:
 - npm run build
+befor_deploy:
 - tar czvf nicety.tar.gz ./target/www/
 deploy:
   provider: releases
@@ -15,7 +16,7 @@ deploy:
   on:
      tags: true
      repo: vemex/nicety
-     condition: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+" 
+     condition: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
 
 branches:
   only:
