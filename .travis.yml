@@ -15,9 +15,9 @@ deploy:
   skip_cleanup: true
   on:
      tags: true
-     repo: vemex/nicety
+#     repo: vemex/nicety
      condition: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
 
-branches:
-  only:
-  - master
+#branches:
+#  only:
+#  - master
