@@ -49,6 +49,8 @@ if (version) {
     fs.writeFileSync('package.json', JSON.stringify(packageInfo, null, 2));
     cmd("git add package.json");
     cmd("git commit -m '[auto]update version to "+version+"'");
-    cmd("git push --progress origin master:master");
+    cmd("git remote add p git@github.com:vemex/Nicety.git");
+
+    cmd("git push --progress p master:master");
 }
 console.log('finish release prepare');
