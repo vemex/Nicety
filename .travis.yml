@@ -1,16 +1,17 @@
 language: node_js
 node_js:
 - 8.9.1
-before_install:  
+before_install:
 install: 
 script:
 - node release.js
 - git config --local user.name "travis"  # 推送回gh-pages需要的基本配置
 - git config --local user.email vivlanwong120729@gmail.com
-- git status
+
 - git add package.json
 - git commit -m "Update version to ${res_tag_version}"
-- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master
+- git status
+- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" HEAD:master
 before_deploy:
 #- tar czvf nicety.tar.gz ./target/www/
 deploy:
