@@ -1,6 +1,6 @@
 {
   "name": "nicety",
-  "version": "v0.0.2",
+  "version": "v0.0.6",
   "description": "UI for business",
   "main": "src/index.js",
   "author": "Wang Wei Wei",
