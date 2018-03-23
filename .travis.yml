@@ -4,7 +4,7 @@ node_js:
 install:
 - npm install
 script:
-- npm run pre-release
+- node release.js $GITHUB_TOKEN
 - npm run build
 before_deploy:
 - tar czvf nicety.tar.gz ./target/www/

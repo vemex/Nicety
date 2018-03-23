@@ -1,7 +1,8 @@
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 
-
+const args  = process.argv.splice(2);
+const githubtoken=args[0];
 
 /**
  * 执行shell命令
@@ -48,8 +49,8 @@ if (version) {
     fs.writeFileSync('package.json', JSON.stringify(packageInfo, null, 2));
     cmd("git add package.json");
     cmd("git commit -m '[auto]update version to "+version+"'");
-    cmd("git remote add origin1");
-    cmd("git remote add origin1 https://vivlanwong:b25de20a43776a99d0fe2cbbdcc96320f8b756a5@github.com/vemex/Nicety.git");
+    cmd("git remote rm origin1");
+    cmd("git remote add origin1 https://travis-ci:"+githubtoken+"@github.com/vemex/Nicety.git");
     cmd("git push --progress origin1 master:master");
 }
 console.log('finish release prepare');
