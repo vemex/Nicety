@@ -57,3 +57,11 @@ typings/
 # dotenv environment variables file
 .env
 
+target/
+
+# system
+.DS_Store
+/.scannerwork
+/.idea
+/package-lock.json
+*.gz
