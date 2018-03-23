@@ -1,11 +1,9 @@
 language: node_js
 node_js:
 - 8.9.1
-install:
-#- npm install
+install: 
 script:
 - npm run pre-release
-#- npm run build
 before_deploy:
 - tar czvf nicety.tar.gz ./target/www/
 deploy:
@@ -20,6 +18,6 @@ deploy:
 branches:
   only:
   - "/^^v[0-9]+.[0-9]+.[0-9]+$/"
-env:
-  global:
-    secure: EuasnR6VmS+WMOD7bg36djlC8p9M5KO4oM1UFmCSgr1p6Twg+P+y+OLjlS/kS42R3s7lW9d1uiX1LaGOFnMMgXuDHkbYQuYt1Mr8Okvfzxdk5RPv/4T00QXF78rUaA7Ahyde44AdbeV1486WyU8BeGhAa5Cf1ApNfWSoT8xUYzaArC8WXISQm/CXhFPjx9ET7ra13uf3xTYQ1K4g1DuvcKpPpyCt55f2hH5ulY/SBlNRqt/6KE/iK+rhU6Rz4Ex6F59WX3eqXcdfilvaYDQAqwIUSI/iDbhZu1r8Hfrf8fP1AIV0qwExi0MnQz9dABDipOUVCHRzzvdeE1mVMD7Fnl0ZmlDTQRa0w3gAtDoKGBqxuZIfHctzMXLy12yj/1nY6b9qHXjORIeCL871EPX2LBEy4kMBcZ/tlhepeqFNwLIjzwaqpTEUu1UGXZnWgbSSfCvGFLrZdK8vqfZngP+aQJ7ZHKatKUHQUC0qwvtR8sBhioihpJydlSns54v02oxmgsZwyMuHC24e5yzpTuI/snNkGlHgnxc/QTuqfItVc+u2K0qB875s9sJnxmOhypPYz2+lpBPNq9ZTI8H0oe+bwu9fBIR8mDJcsJs9LH7sC+tMw5vsOKqNSfdD1hSpP5BVHRXvKtYStrmWvsRW5ODi0NjH4c2NkbMuUJSk0XHGRp4=
+before_install:
+- openssl aes-256-cbc -K $encrypted_bb67803d4797_key -iv $encrypted_bb67803d4797_iv
+  -in id_rsa.enc -out ~\/.ssh/id_rsa -d

@@ -50,7 +50,7 @@ if (version) {
     cmd("git add package.json");
     cmd("git commit -m '[auto]update version to "+version+"'");
     cmd("git remote rm origin1");
-    cmd("git remote add origin1 https://travis-ci:"+githubtoken+"@github.com/vemex/Nicety.git");
+    cmd("git remote add origin1 git@github.com:vemex/Nicety.git");
     cmd("git push --progress origin1 master:master");
 }
 console.log('finish release prepare');
