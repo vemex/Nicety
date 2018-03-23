@@ -19,15 +19,15 @@ deploy:
 #     repo: vemex/nicety
      condition: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
 
-deploy:
-  provider: pages
-  local-dir: "target/www"
-  name: travis-roboot
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
-  keep-history: true
-  on:
-    branch: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
+#deploy:
+#  provider: pages
+#  local-dir: "target/www"
+#  name: travis-roboot
+#  skip-cleanup: true
+#  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+#  keep-history: true
+#  on:
+#    branch: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
 
 branches:
   only:
