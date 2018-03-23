@@ -3,8 +3,7 @@ node_js:
 - 8.9.1
 install: 
 script:
-- travis env list
-- npm run pre-release
+- node release.js $push_url
 before_deploy:
 - tar czvf nicety.tar.gz ./target/www/
 deploy:

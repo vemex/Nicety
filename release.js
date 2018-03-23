@@ -1,8 +1,8 @@
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 
-//const args  = process.argv.splice(2);
-const githubtoken=process.env["GITHUB_TOKEN"];
+const args  = process.argv.splice(2);
+const pushurl=args[0];
 
 /**
  * 执行shell命令
@@ -49,8 +49,7 @@ if (version) {
     fs.writeFileSync('package.json', JSON.stringify(packageInfo, null, 2));
     cmd("git add package.json");
     cmd("git commit -m '[auto]update version to "+version+"'");
-    cmd("git remote add p git@github.com:vemex/Nicety.git");
-
+    cmd("git remote add p "+pushurl+"");
     cmd("git push --progress p master:master");
 }
 console.log('finish release prepare');
