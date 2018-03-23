@@ -51,11 +51,9 @@ const version = getVersion();
 if (version) {
     console.log('update release version');
     packageInfo.version = version;
+    fs.writeFileSync('package.json', JSON.stringify(packageInfo, null, 2));
+    cmd("git add package.json");
+    cmd("git commit -m '[auto]update version to "+version+"'");
+    cmd("git push --process origin master:master");
 }
-
-cmd("git add package.json");
-cmd("git commit -m ")
-
-fs.writeFileSync('package.json', JSON.stringify(packageInfo, null, 2));
 console.log('finish release prepare');
-Contact GitHub API Training Shop Blog About
