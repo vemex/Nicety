@@ -9,7 +9,6 @@ script:
 - git config --local user.email vivlanwong120729@gmail.com
 - git add package.json
 - git commit -m "[auto]Update version to $TRAVIS_TAG"
-- git log -2
 - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" HEAD:master
 before_deploy:
 #- tar czvf nicety.tar.gz ./target/www/
