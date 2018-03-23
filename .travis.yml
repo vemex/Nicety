@@ -26,4 +26,4 @@ branches:
 
 env:
    global:
-     - GH_REF: github.com/lifengsofts/lifengsofts.github.io.git
+     - GH_REF: github.com/vemex/Nicety.git
