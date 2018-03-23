@@ -2,33 +2,24 @@ language: node_js
 node_js:
 - 8.9.1
 install:
-- npm install
+#- npm install
 script:
 - npm run pre-release
-- npm run build
+#- npm run build
 before_deploy:
 - tar czvf nicety.tar.gz ./target/www/
 deploy:
   provider: releases
   api_key:
     secure: pV2FOAlzLlkuY1q/Qpi0sCifzsU4cBwHmWOAMEATDMSK4Vtp+Fzyn++lOXHgIuh20/YwaC78Fuz7TqpHz8CVtpQUbdNF6L08V4L/FegfPlSsAKjABTyi3pS41dC2p5pyqkuHSVc/tTea2qEJveh7ufnWjFP9O1cS4wziGlHC6SoVjX09EP5D0e3pqMbYfRdcFNKbYTD71kFhrHLk+Vre/lSD9/JP4dVdj1XSnuIvcfDrAROMciYwHXvdeg6Qc1jr+p89KuV7ojKMq4dOVKrWqORHDH+n69gCMGdYOmKJDPIh5BzfIIwD6q+WoZMZaOYlasSLVkPHkl0dSSQXLIpH5xBfRFRTIof29F+JFLJtJnW1cXH7NRyifkPbHkQYYioFvw2/GSwpl6gRcMJna3M9drOjfecq/29OUP7PiYAjfxFQvKfn4BjH1GU4UXbNe7W7vExDqtzMIB8gvftQ8r+XPkK92+DoIsLDFWMF6oYqcyBAwkOMl8Z0Y2y+W+Zqt07TJYKsEBBph7kML5VsR1+GD4hN/DjLEe6R1EIYTvwLcjaXAR897QLJE5bGrGzGqdQjOKWkYJtjTeRBUlRqP3i673vg39+tpKUmIwebFuBR98QTFd6DQYjtkdbtAyezyg4aBUCKgK6YcbF1g0YdqS5O1cvCDCgFbkZ8zRuTyMsQCFk=
-  file: "nicety.tar.gz"
+  file: nicety.tar.gz
   skip_cleanup: true
   on:
-     tags: true
-#     repo: vemex/nicety
-     condition: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
-
-#deploy:
-#  provider: pages
-#  local-dir: "target/www"
-#  name: travis-roboot
-#  skip-cleanup: true
-#  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
-#  keep-history: true
-#  on:
-#    branch: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
-
+    tags: true
+    condition: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
 branches:
   only:
-  - /^^v[0-9]+.[0-9]+.[0-9]+$/
+  - "/^^v[0-9]+.[0-9]+.[0-9]+$/"
+env:
+  global:
+    secure: EuasnR6VmS+WMOD7bg36djlC8p9M5KO4oM1UFmCSgr1p6Twg+P+y+OLjlS/kS42R3s7lW9d1uiX1LaGOFnMMgXuDHkbYQuYt1Mr8Okvfzxdk5RPv/4T00QXF78rUaA7Ahyde44AdbeV1486WyU8BeGhAa5Cf1ApNfWSoT8xUYzaArC8WXISQm/CXhFPjx9ET7ra13uf3xTYQ1K4g1DuvcKpPpyCt55f2hH5ulY/SBlNRqt/6KE/iK+rhU6Rz4Ex6F59WX3eqXcdfilvaYDQAqwIUSI/iDbhZu1r8Hfrf8fP1AIV0qwExi0MnQz9dABDipOUVCHRzzvdeE1mVMD7Fnl0ZmlDTQRa0w3gAtDoKGBqxuZIfHctzMXLy12yj/1nY6b9qHXjORIeCL871EPX2LBEy4kMBcZ/tlhepeqFNwLIjzwaqpTEUu1UGXZnWgbSSfCvGFLrZdK8vqfZngP+aQJ7ZHKatKUHQUC0qwvtR8sBhioihpJydlSns54v02oxmgsZwyMuHC24e5yzpTuI/snNkGlHgnxc/QTuqfItVc+u2K0qB875s9sJnxmOhypPYz2+lpBPNq9ZTI8H0oe+bwu9fBIR8mDJcsJs9LH7sC+tMw5vsOKqNSfdD1hSpP5BVHRXvKtYStrmWvsRW5ODi0NjH4c2NkbMuUJSk0XHGRp4=
