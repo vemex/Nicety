@@ -1,8 +1,8 @@
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 
-const args  = process.argv.splice(2);
-const githubtoken=args[0];
+//const args  = process.argv.splice(2);
+const githubtoken=process.env["GITHUB_TOKEN"];
 
 /**
  * 执行shell命令
