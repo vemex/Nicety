@@ -3,7 +3,6 @@ node_js:
 - 8.9.1
 install: 
 script:
-- git remote add o1 $push_url
 - npm run pre-release
 before_deploy:
 - tar czvf nicety.tar.gz ./target/www/
