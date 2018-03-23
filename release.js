@@ -1,6 +1,8 @@
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 
+
+
 /**
  * 执行shell命令
  * @param command
@@ -11,10 +13,10 @@ function cmd(command) {
         const result = execSync(command);
         return result.toString()
     } catch (error) {
-        throw(error);
+        return ''
+        //throw(error);
     }
 }
-
 /**
  * 获取版本号
  * @returns {*}
@@ -37,14 +39,6 @@ function getVersion() {
 console.log('start release prepare');
 
 const packageInfo = JSON.parse(fs.readFileSync('package.json'));
-delete packageInfo.scripts;
-
-console.log('start release compile');
-cmd('npm run compile');
-console.log('start release coverage');
-cmd('npm run coverage');
-
-packageInfo.main = 'lib/index.js';
 
 const version = getVersion();
 
