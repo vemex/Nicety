@@ -19,7 +19,7 @@ branches:
   only:
   - "/^^v[0-9]+.[0-9]+.[0-9]+$/"
 before_install:
-//- mkdir ~/.ssh/
+#- mkdir ~/.ssh/
 - touch ~\/.ssh/id_rsa
 - chmod 600 ~/.ssh/id_rsa
 - openssl aes-256-cbc -K $encrypted_bb67803d4797_key -iv $encrypted_bb67803d4797_iv
