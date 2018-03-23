@@ -29,6 +29,6 @@ deploy:
   on:
     branch: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
 
-#branches:
-#  only:
-#  - master
+branches:
+  only:
+  - /^^v[0-9]+.[0-9]+.[0-9]+$/
