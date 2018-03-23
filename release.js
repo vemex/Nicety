@@ -47,10 +47,11 @@ if (version) {
     console.log('update release version');
     packageInfo.version = version;
     fs.writeFileSync('package.json', JSON.stringify(packageInfo, null, 2));
-    cmd("git add package.json");
-    cmd("git commit -m '[auto]update version to "+version+"'");
-    cmd("git remote rm p");
-    cmd("git remote add p "+pushurl+"");
-    cmd("git push --progress p master:master");
+    cmd("export res_tag_version="+version)
+    // cmd("git add package.json");
+    // cmd("git commit -m '[auto]update version to "+version+"'");
+    // cmd("git remote rm p");
+    // cmd("git remote add p "+pushurl+"");
+    // cmd("git push --progress p master:master");
 }
 console.log('finish release prepare');
