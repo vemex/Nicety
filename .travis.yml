@@ -16,7 +16,7 @@ script:
 - cp -r Nicety/target/www/*  nicety-pages
 - cd nicety-pages
 - git add .
-- git commit -m "[auto]Update version to $TRAVIS_TAG""
+- git commit -m "[auto]Update version to $TRAVIS_TAG"
 - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages
 before_deploy:
 - tar czvf nicety.tar.gz ./target/www/
