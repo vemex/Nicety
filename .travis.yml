@@ -15,7 +15,7 @@ script:
 - git clone  --depth 50 --branch gh-pages http://github.com/vemex/Nicety.git  nicety-pages
 - cp -r Nicety/target/www/*  nicety-pages
 - cd nicety-pages
-- git add
+- git add .
 - git commit -m "[auto]Update version to $TRAVIS_TAG""
 - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages
 before_deploy:
