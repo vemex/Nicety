@@ -4,6 +4,7 @@ node_js:
 before_install:
 install: 
 script:
+- if [ "$TRAVIS_TAGa" == "" ]; then
 - node release.js
 - git config --local user.name "travis"  # 推送回gh-pages需要的基本配置
 - git config --local user.email vivlanwong120729@gmail.com
@@ -19,8 +20,13 @@ script:
 - git commit -m "[auto]Update version to $TRAVIS_TAG"
 - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages
 - cd ../Nicety
+- else
+- echo 'test' 
+- fi
 before_deploy:
+- if [ "$TRAVIS_TAGa" != "" ]; then
 - tar czvf nicety.tar.gz ./target/www/
+- fi
 deploy:
   provider: releases
   api_key:
@@ -32,6 +38,7 @@ deploy:
     condition: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
 branches:
   only:
+  - master
   - "/^^v[0-9]+.[0-9]+.[0-9]+$/"
 
 env:
