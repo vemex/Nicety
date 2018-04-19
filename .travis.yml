@@ -3,24 +3,8 @@ node_js:
 - 8.9.1
 before_install:
 install: 
-script:
-- node release.js
-- git config --local user.name "travis"  # 推送回gh-pages需要的基本配置
-- git config --local user.email vivlanwong120729@gmail.com
-- git add package.json
-- git commit -m "[auto]Update version to $TRAVIS_TAG"
-- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" HEAD:master
-- npm run build
-- cd ../
-- git clone  --depth 50 --branch gh-pages http://github.com/vemex/Nicety.git  nicety-pages
-- cp -r Nicety/target/www/*  nicety-pages
-- cd nicety-pages
-- git add .
-- git commit -m "[auto]Update version to $TRAVIS_TAG"
-- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages
-- cd ../Nicety
-before_deploy:
-- tar czvf nicety.tar.gz ./target/www/
+script: .\build.sh
+before_deploy: .\package.sh
 deploy:
   provider: releases
   api_key:
@@ -32,6 +16,7 @@ deploy:
     condition: "$TRAVIS_TAG =~ ^v[0-9]+.[0-9]+.[0-9]+"
 branches:
   only:
+  - master
   - "/^^v[0-9]+.[0-9]+.[0-9]+$/"
 
 env:
