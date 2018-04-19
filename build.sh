@@ -1,4 +1,4 @@
 #!/bin/bash
-set -ev 
+#set -ev 
 
 echo "11"
