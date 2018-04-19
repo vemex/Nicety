@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - 8.9.1
 before_install:
-install:  
+install:  true
 script: ./build.sh
 before_deploy: ./package.sh 
 deploy:
