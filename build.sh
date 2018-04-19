@@ -1,6 +1,5 @@
 #!/bin/bash
-set -ev
-bundle exec rake:units
+set -ev 
 
 if [ "$TRAVIS_TAGa" == "" ]; then
     node release.js
