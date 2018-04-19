@@ -1,6 +1,5 @@
 #!/bin/bash
 set -ev
-bundle exec rake:units
 
 if [ "$TRAVIS_TAG" != "" ]; then
     node release.js
