@@ -18,5 +18,5 @@ if [ "$TRAVIS_TAG" != "" ]; then
     git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages
     cd ../Nicety
 else
-    echo 'test' 
+    echo test
 fi 
