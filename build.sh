@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ev
+#set -ev
 
 if [ "$TRAVIS_TAG" != "" ]; then
   echo $TRAVIS_TAG
