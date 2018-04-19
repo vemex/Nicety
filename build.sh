@@ -2,7 +2,7 @@
 set -ev
 bundle exec rake:units
 
-if [ "$TRAVIS_TAG" == "" ]; then
+if [ "$TRAVIS_TAG" != "" ]; then
     node release.js
     git config --local user.name "travis"  # 推送回gh-pages需要的基本配置
     git config --local user.email vivlanwong120729@gmail.com
