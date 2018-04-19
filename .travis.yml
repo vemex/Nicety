@@ -4,7 +4,7 @@ node_js:
 before_install:
 - chmod +x build.sh
 - chmod +x package.sh
-install:  true 
+install:   
 script: ./build.sh
 before_deploy: ./package.sh 
 deploy:
