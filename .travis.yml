@@ -21,6 +21,10 @@ branches:
   only:
   - master
   - "/^^v[0-9]+.[0-9]+.[0-9]+$/"
+addons:
+  sonarcloud:
+    organization: "vivlanwong-github"
+    token: "a02ab512a26e3861ed7c53afe31748da0fd80670"
 
 env:
    global:
