@@ -92,11 +92,11 @@ const Overlay = (($) => {
 
         _loadbox($el) {
             if ($el.data(DATA_TEMPLATE_KEY)) {
-                return null;
+                return ;
             }
             let icon = (this._config.displayIcon) ? '<span class="overlay-icon"> ' + this._getIconTemplate(this._config.iconType) + '  </span>' : '';
             $el.data(DATA_TEMPLATE_KEY, '<div class="overlay-content">' + icon + '<h4 class="overlay-title">' + this._config.title + '</h4><div>');
-            return null;
+            return ;
         }
 
         show($el) {
