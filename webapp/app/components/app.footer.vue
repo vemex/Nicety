@@ -1,4 +1,4 @@
-<<template>
+<template>
   <footer>
     <div>
       <!-- react-text: 45 -->© 2008-2017, Nicety.io by WANGWEIWEI

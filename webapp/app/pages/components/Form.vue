@@ -1,4 +1,4 @@
-<<template>
+<template>
     <div>
         <form>
             <div class="form-row">

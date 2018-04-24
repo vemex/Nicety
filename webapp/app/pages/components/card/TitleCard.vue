@@ -1,4 +1,4 @@
-<<template>
+<template>
     <div id="title-card" class="mt-4">
         <h4>标题样式</h4>
         <hr>
@@ -86,7 +86,7 @@
     </div>
 </template>
 
-<<script>
+<script>
     export default {
         components: {
             //   MainLayout

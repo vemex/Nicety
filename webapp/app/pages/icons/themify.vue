@@ -1,4 +1,4 @@
-<<template>
+<template>
     <div class="card">
         <!--Panel body-->
         <div class="card-body">

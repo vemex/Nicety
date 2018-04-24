@@ -114,7 +114,7 @@
 
     </div> 
 </template>
-<<style>
+<style>
 .grid-examples h3 {
   margin-top: 2rem;
 }

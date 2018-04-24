@@ -1,4 +1,4 @@
-<<template>
+<template>
     <div class="clearfix">
         <h4>显示辅助</h4>
         <hr>

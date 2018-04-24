@@ -8,7 +8,7 @@
      <layout-card></layout-card>
    </div>
 </template>
-<<script>
+<script>
 import  TitleCard from "./card/TitleCard.vue";
 import  ColorCard from "./card/ColorCard.vue";
 import  BaseCard from "./card/BaseCard.vue";

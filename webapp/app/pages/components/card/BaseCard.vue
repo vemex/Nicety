@@ -1,4 +1,4 @@
-<<template>
+<template>
     <div class="mt-2">
         <h4>基础样式</h4>
         <hr>

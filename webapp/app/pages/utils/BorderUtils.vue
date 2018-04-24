@@ -63,7 +63,7 @@
     </div>
 </template>
  
-<<style>
+<style>
        .bd-example [class^=border] {
         display: inline-block;
         width: 5rem;

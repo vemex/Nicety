@@ -6,7 +6,7 @@
 
     </div>
 </template>
-<<style>
+<style>
  
 
     .utils-demo .card {
@@ -16,7 +16,7 @@
     }
 </style>
 
-<<script>
+<script>
 import BorderUtils from "./BorderUtils.vue"
 import ColorUtils from "./ColorUtils.vue"
 import DisplayUtils from "./DisplayUtils.vue"

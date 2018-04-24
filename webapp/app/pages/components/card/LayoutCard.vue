@@ -1,4 +1,4 @@
-<<template>
+<template>
     <div>
         <div class="mt-4">
             <h4>等宽等高等边距布局</h4>

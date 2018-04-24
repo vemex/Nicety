@@ -1,4 +1,4 @@
-<<template>
+<template>
     <div class="mt-4">
         <h4>彩色样式</h4>
         <hr>

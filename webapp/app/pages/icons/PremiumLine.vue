@@ -1,4 +1,4 @@
-<<template>
+<template>
     <div id="page-content">
         <div class="card">
             <div class="card-body">
