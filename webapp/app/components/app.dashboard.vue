@@ -21,7 +21,6 @@
     </div>
 </template>
 
-<
 <script>
     import AppFooter from "./app.footer.vue"
     import AppHeaderBar from "./app.header.bar.vue"
