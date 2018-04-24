@@ -26,7 +26,7 @@
     import AppHeaderBar from "./app.header.bar.vue"
     import AppNavHeader from "./app.nav.header.vue"
     import AppNav from "./app.nav.vue"
-
+    import $ from 'jquery'
     export default {
         components: {
             AppFooter,
