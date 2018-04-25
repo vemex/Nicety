@@ -1,6 +1,7 @@
 
-@import "~ag-grid/src/styles/ag-grid.scss";
-
+//@import "~ag-grid/src/styles/ag-grid.scss";
+@import "./bootstrap-variables.scss"; 
+ 
 $ag-style: 'nicety' !default;
 $ag-root-font-family: Calibri, 'Segoe UI', Thonburi, Arial, Verdana, sans-serif !default;
 $ag-root-font-size: 1em !default;
@@ -9,7 +10,7 @@ $ag-scrollbar-background: inherit !default;
 $ag-scrollbar-thumb: inherit !default;
 
 $ag-border-1: 1px solid rgba($dark, .1) !default;
-
+ 
 $ag-border-color-1: #000 !default;
 $ag-border-color-2: #808080 !default;
 

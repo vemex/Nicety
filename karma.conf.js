@@ -2,8 +2,8 @@
 // Generated on Tue Apr 24 2018 12:40:32 GMT+0800 (China Standard Time)
 
 var webpackConfig = require('./webpack/webpack.prod.test.js');
-const jqueryFile =  'https://code.jquery.com/jquery-1.9.1.min.js' 
-module.exports = function(config) {
+const jqueryFile = 'https://code.jquery.com/jquery-1.9.1.min.js'
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -12,9 +12,9 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'sinon-chai',],
+    frameworks: ['mocha', 'sinon-chai', 'phantomjs-shim'],
 
-
+    //plugins: ['karma-coverage-istanbul-reporter','karma-mocha','karma-sinon-chai'],
     // list of files / patterns to load in the browser
     files: [
       'node_modules/jquery/dist/jquery.min.js',
@@ -25,7 +25,7 @@ module.exports = function(config) {
       'node_modules/highcharts/themes/grid-light.js',
       'node_modules/bootstrap/dist/js/bootstrap.min.js',
       'node_modules/jquery/dist/jquery.min.js',
-      'test/unit/**/*.js'
+      'test/unit/index.js'
     ],
 
 
@@ -37,16 +37,19 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/unit/**/*.js': [ 'webpack' ]
+      'test/unit/index.js': ['webpack', 'sourcemap']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec', 'coverage'],
+    reporters: ['spec-as-html', 'coverage-istanbul'],
 
-
+    specAsHtmlReporter : {
+      dir : "dist",              // path to write the file, defaults to `./`
+      outputFile: "spec.html"    // name of the file, defaults to `spec.html`
+    },
     // web server port
     port: 9876,
 
@@ -83,14 +86,38 @@ module.exports = function(config) {
     },
     webpackMiddleware: {
       noInfo: true
-  },
-  coverageReporter: {
-    dir: './coverage',
-    reporters: [
-        { type: 'lcov', subdir: '.' },
-        { type: 'text-summary' }
-    ]
-}
+    },
+
+    coverageIstanbulReporter: {
+
+      // reports can be any that are listed here: https://github.com/istanbuljs/istanbuljs/tree/aae256fb8b9a3d19414dcf069c592e88712c32c6/packages/istanbul-reports/lib
+      reports: ['html', 'lcovonly', 'text-summary'],
+
+      // base output directory. If you include %browser% in the path it will be replaced with the karma browser name
+      dir: 'coverage',
+
+      // Combines coverage information from multiple browsers into one report rather than outputting a report
+      // for each browser.
+      combineBrowserReports: true,
+
+      // if using webpack and pre-loaders, work around webpack breaking the source path
+      fixWebpackSourcePaths: true,
+
+      // stop istanbul outputting messages like `File [${filename}] ignored, nothing could be mapped`
+      skipFilesWithNoCoverage: true,
+
+      // Most reporters accept additional config options. You can pass these through the `report-config` option
+      'report-config': {
+
+        // all options available at: https://github.com/istanbuljs/istanbuljs/blob/aae256fb8b9a3d19414dcf069c592e88712c32c6/packages/istanbul-reports/lib/html/index.js#L135-L137
+        html: {
+          // outputs the report in ./coverage/html
+          subdir: 'html'
+        }
+
+      },
+
+    }
     //plugins: ['karma-browserify','karma-mocha'],
   })
 }

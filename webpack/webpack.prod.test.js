@@ -37,12 +37,51 @@ let config = webpackMerge(
     // resolveConfig(option),
     vueConfig(option),
     {
+        devtool: 'source-map',
         resolve: {
             extensions: ['.js', '.vue', '.json'],
             alias: { 
                 '@': utils.root('./'), // 调用组件的时候方便点
                 '$': 'jquery/dist/jquery.min.js'
             }
+        },
+        module: {
+            rules:[
+                // // babel-loader
+                // {
+                //     test: /\.js$/,
+                //     use: 'babel-loader',
+                //     include: [utils.root('./test')]
+                // },
+
+                // 为了统计代码覆盖率，对 js 文件加入 istanbul-instrumenter-loader
+                {
+                    test: /\.(js)$/,
+                    exclude: /node_modules|\.spec\.js$/,
+                    include: /src|webapp/,
+                    enforce: 'post',
+                    use: [{
+                        loader: "istanbul-instrumenter-loader",
+                        options: {
+                            esModules: true
+                        },
+                    }]
+                },
+
+                // vue loader
+                {
+                    test: /\.vue$/,
+                    use: [{
+                        loader: 'vue-loader',
+                        options: {
+                            // 为了统计代码覆盖率，对 vue 文件加入 istanbul-instrumenter-loader
+                            preLoaders: {
+                                js: 'istanbul-instrumenter-loader?esModules=true'
+                            }
+                        }
+                    }]
+                }
+            ]
         },
         plugins: [
             new webpack.optimize.UglifyJsPlugin({
