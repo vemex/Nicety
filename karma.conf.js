@@ -47,7 +47,7 @@ module.exports = function (config) {
     reporters: ['spec-as-html', 'coverage-istanbul'],
 
     specAsHtmlReporter : {
-      dir : "dist",              // path to write the file, defaults to `./`
+      dir : "target/test/",              // path to write the file, defaults to `./`
       outputFile: "spec.html"    // name of the file, defaults to `spec.html`
     },
     // web server port
@@ -94,7 +94,7 @@ module.exports = function (config) {
       reports: ['html', 'lcovonly', 'text-summary'],
 
       // base output directory. If you include %browser% in the path it will be replaced with the karma browser name
-      dir: 'coverage',
+      dir: 'target/coverage',
 
       // Combines coverage information from multiple browsers into one report rather than outputting a report
       // for each browser.
