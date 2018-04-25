@@ -1,7 +1,7 @@
 #!/bin/bash
 #set -ev
 npm install
-
+node global.js
 if [ "$TRAVIS_TAG" != "" ]; then
     node release.js
     git config --local user.name "travis"  # 推送回gh-pages需要的基本配置
@@ -20,5 +20,5 @@ if [ "$TRAVIS_TAG" != "" ]; then
     cd ../Nicety
 else
     karma start  --single-run --browsers PhantomJS
-    sonar-scanner
+    sonar-scanner -Dsonar.projectVersion=$projectVersion
 fi  
