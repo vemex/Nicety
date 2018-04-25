@@ -10,7 +10,7 @@ describe('overlay.js', () => {
             .to.equal(ss);
         testObj._loadbox(el);
             
-        testObj = new overlay(el, {displayIcon:true,iconType:'rotating-plane');
+        testObj = new overlay(el, {displayIcon:true,iconType:'rotating-plane'});
 
         testObj._loadbox(el);
     })
