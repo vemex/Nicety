@@ -27,6 +27,8 @@ else
     sonar-scanner -Dsonar.projectVersion=$PACKAGE_VERSION
     cd ../
     git clone  --depth 50 --branch gh-pages http://github.com/vemex/Nicety.git  nicety-pages
+    mkdir -p nicety-pages/reporter/test
+    mkdir -p nicety-pages/reporter/coverage
     cp -r Nicety/target/test/*  nicety-pages/reporter/test
     cp -r Nicety/target/coverage/html/*  nicety-pages/reporter/coverage
     cd nicety-pages
