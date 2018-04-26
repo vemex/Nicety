@@ -19,7 +19,7 @@ if [ "$TRAVIS_TAG" != "" ]; then
     git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages
     cd ../Nicety
 else
-    karma start  --single-run --browsers PhantomJS
+    npm run test
     echo $PACKAGE_VERSION
     sonar-scanner -Dsonar.projectVersion=$PACKAGE_VERSION
     cd ../
