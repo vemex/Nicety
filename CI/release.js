@@ -33,7 +33,7 @@ function getVersion() {
         }
         return null;
     } catch (e) {
-        return null;
+        return null; 
     }
 }
 
