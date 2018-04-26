@@ -8,8 +8,8 @@ before_script:
 - chmod +x CI/package.sh
 - chmod +x CI/global.sh
 script: 
-- .CI/global.sh
-- .CI/build.sh
+- ./CI/global.sh
+- ./CI/build.sh
 before_deploy: .CI/package.sh 
 deploy:
   provider: releases
