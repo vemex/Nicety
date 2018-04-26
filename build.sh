@@ -1,5 +1,8 @@
 #!/bin/bash
 #set -ev
+
+PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') 
+echo "$PACKAGE_VERSION"
 npm install
 node global.js
 if [ "$TRAVIS_TAG" != "" ]; then
@@ -20,6 +23,6 @@ if [ "$TRAVIS_TAG" != "" ]; then
     cd ../Nicety
 else
     karma start  --single-run --browsers PhantomJS
-    echo $projectVersion
-    sonar-scanner -Dsonar.projectVersion=$projectVersion
+    echo $PACKAGE_VERSION
+    sonar-scanner -Dsonar.projectVersion=$PACKAGE_VERSION
 fi  
