@@ -16,5 +16,5 @@ function cmd(command) {
 }
 
 const packageInfo = JSON.parse(fs.readFileSync('package.json'));
-
-cmd('export projectVersion='+packageInfo.version)
+console.log("export projectVersion"+packageInfo.version);
+cmd('export projectVersion='+packageInfo.version);
