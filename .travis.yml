@@ -30,3 +30,7 @@ addons:
 env:
    global:
      - GH_REF: github.com/vemex/Nicety.git
+     
+cache:
+  directories:
+    - node_modules
