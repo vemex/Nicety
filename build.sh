@@ -25,4 +25,12 @@ else
     karma start  --single-run --browsers PhantomJS
     echo $PACKAGE_VERSION
     sonar-scanner -Dsonar.projectVersion=$PACKAGE_VERSION
+    cd ../
+    git clone  --depth 50 --branch gh-pages http://github.com/vemex/Nicety.git  nicety-pages
+    cp -r Nicety/target/test/*  nicety-pages/reporter/test
+    cp -r Nicety/target/coverage/html/*  nicety-pages/reporter/coverage
+    cd nicety-pages
+    git add .
+    git commit -m "[auto]deliver reporter"
+    git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages
 fi  
