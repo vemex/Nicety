@@ -1,143 +1,115 @@
-/*
- * metismenu - v2.7.4
- * A jQuery menu plugin
- * https://github.com/onokumus/metismenu#readme
- *
- * Made by Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)
- * Under MIT License
- */
-
+/*!
+* metismenu - v2.7.7
+* A jQuery menu plugin
+* https://github.com/onokumus/metismenu#readme
+*
+* Made by Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)
+* Under MIT License
+*/
 (function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(['jquery'], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(require('jquery'));
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(global.jQuery);
-    global.metisMenu = mod.exports;
-  }
-})(this, function (_jquery) {
-  'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery')) :
+  typeof define === 'function' && define.amd ? define(['jquery'], factory) :
+  (global.metisMenu = factory(global.jQuery));
+}(this, (function ($) { 'use strict';
 
-  var _jquery2 = _interopRequireDefault(_jquery);
+  $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-      default: obj
-    };
-  }
-
-  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  };
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
     }
+
+    return obj;
   }
 
-  var _createClass = function () {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
+  function _objectSpread(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+      var ownKeys = Object.keys(source);
+
+      if (typeof Object.getOwnPropertySymbols === 'function') {
+        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+        }));
       }
+
+      ownKeys.forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
     }
 
-    return function (Constructor, protoProps, staticProps) {
-      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  }();
+    return target;
+  }
 
-  var Util = function ($) {
-    var transition = false;
+  var Util = function ($$$1) {
+    // eslint-disable-line no-shadow
+    var TRANSITION_END = 'transitionend';
+    var Util = {
+      // eslint-disable-line no-shadow
+      TRANSITION_END: 'mmTransitionEnd',
+      triggerTransitionEnd: function triggerTransitionEnd(element) {
+        $$$1(element).trigger(TRANSITION_END);
+      },
+      supportsTransitionEnd: function supportsTransitionEnd() {
+        return Boolean(TRANSITION_END);
+      }
+    };
 
     function getSpecialTransitionEndEvent() {
       return {
-        bindType: transition.end,
-        delegateType: transition.end,
+        bindType: TRANSITION_END,
+        delegateType: TRANSITION_END,
         handle: function handle(event) {
-          if ($(event.target).is(this)) {
-            return event.handleObj.handler.apply(this, arguments);
+          if ($$$1(event.target).is(this)) {
+            return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
           }
+
           return undefined;
         }
       };
     }
 
-    function transitionEndTest() {
-      if (typeof window !== 'undefined' && window.QUnit) {
-        return false;
-      }
-
-      return {
-        end: 'transitionend'
-      };
-    }
-
     function transitionEndEmulator(duration) {
-      var _this2 = this;
+      var _this = this;
 
       var called = false;
-
-      $(this).one(Util.TRANSITION_END, function () {
+      $$$1(this).one(Util.TRANSITION_END, function () {
         called = true;
       });
-
       setTimeout(function () {
         if (!called) {
-          Util.triggerTransitionEnd(_this2);
+          Util.triggerTransitionEnd(_this);
         }
       }, duration);
-
       return this;
     }
 
     function setTransitionEndSupport() {
-      transition = transitionEndTest();
-      $.fn.mmEmulateTransitionEnd = transitionEndEmulator;
+      $$$1.fn.mmEmulateTransitionEnd = transitionEndEmulator; // eslint-disable-line no-param-reassign
+      // eslint-disable-next-line no-param-reassign
 
-      if (Util.supportsTransitionEnd()) {
-        $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
-      }
+      $$$1.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
     }
 
-    var Util = {
-      TRANSITION_END: 'mmTransitionEnd',
-
-      triggerTransitionEnd: function triggerTransitionEnd(element) {
-        $(element).trigger(transition.end);
-      },
-      supportsTransitionEnd: function supportsTransitionEnd() {
-        return Boolean(transition);
-      }
-    };
-
     setTransitionEndSupport();
-
     return Util;
-  }(_jquery2.default);
+  }($);
 
-  var MetisMenu = function ($) {
-
+  var MetisMenu = function ($$$1) {
+    // eslint-disable-line no-shadow
     var NAME = 'metisMenu';
     var DATA_KEY = 'metisMenu';
-    var EVENT_KEY = '.' + DATA_KEY;
+    var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
     var TRANSITION_DURATION = 350;
-
     var Default = {
       toggle: true,
       preventDefault: true,
@@ -149,216 +121,222 @@
       parentTrigger: 'li',
       subMenu: 'ul'
     };
-
     var Event = {
-      SHOW: 'show' + EVENT_KEY,
-      SHOWN: 'shown' + EVENT_KEY,
-      HIDE: 'hide' + EVENT_KEY,
-      HIDDEN: 'hidden' + EVENT_KEY,
-      CLICK_DATA_API: 'click' + EVENT_KEY + DATA_API_KEY
+      SHOW: "show" + EVENT_KEY,
+      SHOWN: "shown" + EVENT_KEY,
+      HIDE: "hide" + EVENT_KEY,
+      HIDDEN: "hidden" + EVENT_KEY,
+      CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
     };
 
-    var MetisMenu = function () {
+    var MetisMenu =
+    /*#__PURE__*/
+    function () {
+      // eslint-disable-line no-shadow
       function MetisMenu(element, config) {
-        _classCallCheck(this, MetisMenu);
-
-        this._element = element;
-        this._config = this._getConfig(config);
-        this._transitioning = null;
-
+        this.element = element;
+        this.config = _objectSpread({}, Default, config);
+        this.transitioning = null;
         this.init();
       }
 
-      _createClass(MetisMenu, [{
-        key: 'init',
-        value: function init() {
-          var self = this;
-          $(this._element).find(this._config.parentTrigger + '.' + this._config.activeClass).has(this._config.subMenu).children(this._config.subMenu).attr('aria-expanded', true).addClass(this._config.collapseClass + ' ' + this._config.collapseInClass);
+      var _proto = MetisMenu.prototype;
 
-          $(this._element).find(this._config.parentTrigger).not('.' + this._config.activeClass).has(this._config.subMenu).children(this._config.subMenu).attr('aria-expanded', false).addClass(this._config.collapseClass);
+      _proto.init = function init() {
+        var self = this;
+        var conf = this.config;
+        $$$1(this.element).find(conf.parentTrigger + "." + conf.activeClass).has(conf.subMenu).children(conf.subMenu).attr('aria-expanded', true).addClass(conf.collapseClass + " " + conf.collapseInClass);
+        $$$1(this.element).find(conf.parentTrigger).not("." + conf.activeClass).has(conf.subMenu).children(conf.subMenu).attr('aria-expanded', false).addClass(conf.collapseClass);
+        $$$1(this.element).find(conf.parentTrigger).has(conf.subMenu).children(conf.triggerElement).on(Event.CLICK_DATA_API, function (e) {
+          // eslint-disable-line func-names
+          var eTar = $$$1(this);
+          var paRent = eTar.parent(conf.parentTrigger);
+          var sibLings = paRent.siblings(conf.parentTrigger).children(conf.triggerElement);
+          var List = paRent.children(conf.subMenu);
 
-          $(this._element).find(this._config.parentTrigger).has(this._config.subMenu).children(this._config.triggerElement).on(Event.CLICK_DATA_API, function (e) {
-            var _this = $(this);
-            var _parent = _this.parent(self._config.parentTrigger);
-            var _siblings = _parent.siblings(self._config.parentTrigger).children(self._config.triggerElement);
-            var _list = _parent.children(self._config.subMenu);
-            if (self._config.preventDefault) {
-              e.preventDefault();
-            }
-            if (_this.attr('aria-disabled') === 'true') {
-              return;
-            }
-            if (_parent.hasClass(self._config.activeClass)) {
-              _this.attr('aria-expanded', false);
-              self._hide(_list);
-            } else {
-              self._show(_list);
-              _this.attr('aria-expanded', true);
-              if (self._config.toggle) {
-                _siblings.attr('aria-expanded', false);
-              }
-            }
-
-            if (self._config.onTransitionStart) {
-              self._config.onTransitionStart(e);
-            }
-          });
-        }
-      }, {
-        key: '_show',
-        value: function _show(element) {
-          if (this._transitioning || $(element).hasClass(this._config.collapsingClass)) {
-            return;
+          if (conf.preventDefault) {
+            e.preventDefault();
           }
-          var _this = this;
-          var _el = $(element);
 
-          var startEvent = $.Event(Event.SHOW);
-          _el.trigger(startEvent);
-
-          if (startEvent.isDefaultPrevented()) {
+          if (eTar.attr('aria-disabled') === 'true') {
             return;
           }
 
-          _el.parent(this._config.parentTrigger).addClass(this._config.activeClass);
+          if (paRent.hasClass(conf.activeClass)) {
+            eTar.attr('aria-expanded', false);
+            self.hide(List);
+          } else {
+            self.show(List);
+            eTar.attr('aria-expanded', true);
 
-          if (this._config.toggle) {
-            this._hide(_el.parent(this._config.parentTrigger).siblings().children(this._config.subMenu + '.' + this._config.collapseInClass).attr('aria-expanded', false));
+            if (conf.toggle) {
+              sibLings.attr('aria-expanded', false);
+            }
           }
 
-          _el.removeClass(this._config.collapseClass).addClass(this._config.collapsingClass).height(0);
+          if (conf.onTransitionStart) {
+            conf.onTransitionStart(e);
+          }
+        });
+      };
 
-          this.setTransitioning(true);
+      _proto.show = function show(element) {
+        var _this = this;
 
-          var complete = function complete() {
-            // check if disposed
-            if (!_this._config || !_this._element) {
-              return;
-            }
-            _el.removeClass(_this._config.collapsingClass).addClass(_this._config.collapseClass + ' ' + _this._config.collapseInClass).height('').attr('aria-expanded', true);
+        if (this.transitioning || $$$1(element).hasClass(this.config.collapsingClass)) {
+          return;
+        }
 
-            _this.setTransitioning(false);
+        var elem = $$$1(element);
+        var startEvent = $$$1.Event(Event.SHOW);
+        elem.trigger(startEvent);
 
-            _el.trigger(Event.SHOWN);
-          };
+        if (startEvent.isDefaultPrevented()) {
+          return;
+        }
 
-          if (!Util.supportsTransitionEnd()) {
-            complete();
+        elem.parent(this.config.parentTrigger).addClass(this.config.activeClass);
+
+        if (this.config.toggle) {
+          this.hide(elem.parent(this.config.parentTrigger).siblings().children(this.config.subMenu + "." + this.config.collapseInClass).attr('aria-expanded', false));
+        }
+
+        elem.removeClass(this.config.collapseClass).addClass(this.config.collapsingClass).height(0);
+        this.setTransitioning(true);
+
+        var complete = function complete() {
+          // check if disposed
+          if (!_this.config || !_this.element) {
             return;
           }
 
-          _el.height(_el[0].scrollHeight).one(Util.TRANSITION_END, complete).mmEmulateTransitionEnd(TRANSITION_DURATION);
+          elem.removeClass(_this.config.collapsingClass).addClass(_this.config.collapseClass + " " + _this.config.collapseInClass).height('').attr('aria-expanded', true);
+
+          _this.setTransitioning(false);
+
+          elem.trigger(Event.SHOWN);
+        };
+
+        if (!Util.supportsTransitionEnd()) {
+          complete();
+          return;
         }
-      }, {
-        key: '_hide',
-        value: function _hide(element) {
 
-          if (this._transitioning || !$(element).hasClass(this._config.collapseInClass)) {
-            return;
-          }
-          var _this = this;
-          var _el = $(element);
+        elem.height(element[0].scrollHeight).one(Util.TRANSITION_END, complete).mmEmulateTransitionEnd(TRANSITION_DURATION);
+      };
 
-          var startEvent = $.Event(Event.HIDE);
-          _el.trigger(startEvent);
+      _proto.hide = function hide(element) {
+        var _this2 = this;
 
-          if (startEvent.isDefaultPrevented()) {
-            return;
-          }
+        if (this.transitioning || !$$$1(element).hasClass(this.config.collapseInClass)) {
+          return;
+        }
 
-          _el.parent(this._config.parentTrigger).removeClass(this._config.activeClass);
-          _el.height(_el.height())[0].offsetHeight;
+        var elem = $$$1(element);
+        var startEvent = $$$1.Event(Event.HIDE);
+        elem.trigger(startEvent);
 
-          _el.addClass(this._config.collapsingClass).removeClass(this._config.collapseClass).removeClass(this._config.collapseInClass);
+        if (startEvent.isDefaultPrevented()) {
+          return;
+        }
 
-          this.setTransitioning(true);
+        elem.parent(this.config.parentTrigger).removeClass(this.config.activeClass); // eslint-disable-next-line no-unused-expressions
 
-          var complete = function complete() {
-            // check if disposed
-            if (!_this._config || !_this._element) {
-              return;
-            }
-            if (_this._transitioning && _this._config.onTransitionEnd) {
-              _this._config.onTransitionEnd();
-            }
+        elem.height(elem.height())[0].offsetHeight;
+        elem.addClass(this.config.collapsingClass).removeClass(this.config.collapseClass).removeClass(this.config.collapseInClass);
+        this.setTransitioning(true);
 
-            _this.setTransitioning(false);
-            _el.trigger(Event.HIDDEN);
-
-            _el.removeClass(_this._config.collapsingClass).addClass(_this._config.collapseClass).attr('aria-expanded', false);
-          };
-
-          if (!Util.supportsTransitionEnd()) {
-            complete();
+        var complete = function complete() {
+          // check if disposed
+          if (!_this2.config || !_this2.element) {
             return;
           }
 
-          _el.height() == 0 || _el.css('display') == 'none' ? complete() : _el.height(0).one(Util.TRANSITION_END, complete).mmEmulateTransitionEnd(TRANSITION_DURATION);
-        }
-      }, {
-        key: 'setTransitioning',
-        value: function setTransitioning(isTransitioning) {
-          this._transitioning = isTransitioning;
-        }
-      }, {
-        key: 'dispose',
-        value: function dispose() {
-          $.removeData(this._element, DATA_KEY);
+          if (_this2.transitioning && _this2.config.onTransitionEnd) {
+            _this2.config.onTransitionEnd();
+          }
 
-          $(this._element).find(this._config.parentTrigger).has(this._config.subMenu).children(this._config.triggerElement).off('click');
+          _this2.setTransitioning(false);
 
-          this._transitioning = null;
-          this._config = null;
-          this._element = null;
-        }
-      }, {
-        key: '_getConfig',
-        value: function _getConfig(config) {
-          config = $.extend({}, Default, config);
-          return config;
-        }
-      }], [{
-        key: '_jQueryInterface',
-        value: function _jQueryInterface(config) {
-          return this.each(function () {
-            var $this = $(this);
-            var data = $this.data(DATA_KEY);
-            var _config = $.extend({}, Default, $this.data(), (typeof config === 'undefined' ? 'undefined' : _typeof(config)) === 'object' && config);
+          elem.trigger(Event.HIDDEN);
+          elem.removeClass(_this2.config.collapsingClass).addClass(_this2.config.collapseClass).attr('aria-expanded', false);
+        };
 
-            if (!data && /dispose/.test(config)) {
-              this.dispose();
+        if (!Util.supportsTransitionEnd()) {
+          complete();
+          return;
+        }
+
+        if (elem.height() === 0 || elem.css('display') === 'none') {
+          complete();
+        } else {
+          elem.height(0).one(Util.TRANSITION_END, complete).mmEmulateTransitionEnd(TRANSITION_DURATION);
+        }
+      };
+
+      _proto.setTransitioning = function setTransitioning(isTransitioning) {
+        this.transitioning = isTransitioning;
+      };
+
+      _proto.dispose = function dispose() {
+        $$$1.removeData(this.element, DATA_KEY);
+        $$$1(this.element).find(this.config.parentTrigger).has(this.config.subMenu).children(this.config.triggerElement).off('click');
+        this.transitioning = null;
+        this.config = null;
+        this.element = null;
+      };
+
+      MetisMenu.jQueryInterface = function jQueryInterface(config) {
+        // eslint-disable-next-line func-names
+        return this.each(function () {
+          var $this = $$$1(this);
+          var data = $this.data(DATA_KEY);
+
+          var conf = _objectSpread({}, Default, $this.data(), typeof config === 'object' && config ? config : {});
+
+          if (!data && /dispose/.test(config)) {
+            this.dispose();
+          }
+
+          if (!data) {
+            data = new MetisMenu(this, conf);
+            $this.data(DATA_KEY, data);
+          }
+
+          if (typeof config === 'string') {
+            if (data[config] === undefined) {
+              throw new Error("No method named \"" + config + "\"");
             }
 
-            if (!data) {
-              data = new MetisMenu(this, _config);
-              $this.data(DATA_KEY, data);
-            }
-
-            if (typeof config === 'string') {
-              if (data[config] === undefined) {
-                throw new Error('No method named "' + config + '"');
-              }
-              data[config]();
-            }
-          });
-        }
-      }]);
+            data[config]();
+          }
+        });
+      };
 
       return MetisMenu;
     }();
-
     /**
      * ------------------------------------------------------------------------
      * jQuery
      * ------------------------------------------------------------------------
      */
 
-    $.fn[NAME] = MetisMenu._jQueryInterface;
-    $.fn[NAME].Constructor = MetisMenu;
-    $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT;
-      return MetisMenu._jQueryInterface;
+
+    $$$1.fn[NAME] = MetisMenu.jQueryInterface; // eslint-disable-line no-param-reassign
+
+    $$$1.fn[NAME].Constructor = MetisMenu; // eslint-disable-line no-param-reassign
+
+    $$$1.fn[NAME].noConflict = function () {
+      // eslint-disable-line no-param-reassign
+      $$$1.fn[NAME] = JQUERY_NO_CONFLICT; // eslint-disable-line no-param-reassign
+
+      return MetisMenu.jQueryInterface;
     };
+
     return MetisMenu;
-  }(_jquery2.default);
-});
+  }($);
+
+  return MetisMenu;
+
+})));
+//# sourceMappingURL=metisMenu.js.map
