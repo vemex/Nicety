@@ -39,7 +39,7 @@ function getVersion() {
 
 console.log('start release prepare');
 
-const packageInfo = JSON.parse(fs.readFileSync('package.json'));
+const packageInfo = JSON.parse(fs.readFileSync('../package.json'));
 
 const version = getVersion();
 
