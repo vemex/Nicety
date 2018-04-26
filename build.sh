@@ -20,5 +20,6 @@ if [ "$TRAVIS_TAG" != "" ]; then
     cd ../Nicety
 else
     karma start  --single-run --browsers PhantomJS
+    echo $projectVersion
     sonar-scanner -Dsonar.projectVersion=$projectVersion
 fi  

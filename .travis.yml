@@ -7,6 +7,7 @@ before_script:
 - chmod +x build.sh
 - chmod +x package.sh
 - node global.js
+- echo $projectVersion
 script: ./build.sh
 before_deploy: ./package.sh 
 deploy:
@@ -30,7 +31,7 @@ addons:
 env:
    global:
      - GH_REF: github.com/vemex/Nicety.git
-     
+
 cache:
   directories:
     - node_modules
