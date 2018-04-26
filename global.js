@@ -7,7 +7,7 @@ const execSync = require('child_process').execSync;
  */
 function cmd(command) {
     try {
-        const result = execSync(command);
+        const result = execSync(command,{shell: '/bin/bash'});
         return result.toString()
     } catch (error) {
         return ''
@@ -16,5 +16,5 @@ function cmd(command) {
 }
 
 const packageInfo = JSON.parse(fs.readFileSync('package.json'));
-console.log("export projectVersion"+packageInfo.version);
-cmd('export projectVersion='+packageInfo.version);
+
+return packageInfo.version;
