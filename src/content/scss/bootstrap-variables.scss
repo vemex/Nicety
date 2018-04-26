@@ -1,39 +1,6 @@
 @import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/_variables";
-@import "~bootstrap/scss/mixins";
 
-@import "~bootstrap/scss/root";
-@import "~bootstrap/scss/print";
-@import "~bootstrap/scss/reboot";
-@import "~bootstrap/scss/type";
-@import "~bootstrap/scss/images";
-@import "~bootstrap/scss/code";
-@import "~bootstrap/scss/grid";
-@import "~bootstrap/scss/tables";
-@import "~bootstrap/scss/forms";
-@import "~bootstrap/scss/buttons";
-@import "~bootstrap/scss/transitions";
-@import "~bootstrap/scss/dropdown";
-@import "~bootstrap/scss/button-group";
-@import "~bootstrap/scss/input-group";
-@import "~bootstrap/scss/custom-forms";
-@import "~bootstrap/scss/nav";
-@import "~bootstrap/scss/navbar";
-@import "~bootstrap/scss/card";
-@import "~bootstrap/scss/breadcrumb";
-@import "~bootstrap/scss/pagination";
-@import "~bootstrap/scss/badge";
-@import "~bootstrap/scss/jumbotron";
-@import "~bootstrap/scss/alert";
-@import "~bootstrap/scss/progress";
-@import "~bootstrap/scss/media";
-@import "~bootstrap/scss/list-group";
-@import "~bootstrap/scss/close";
-@import "~bootstrap/scss/modal";
-@import "~bootstrap/scss/tooltip";
-@import "~bootstrap/scss/popover";
-@import "~bootstrap/scss/carousel";
-@import "~bootstrap/scss/utilities";
+
 // Variables
 //
 // Variables should follow the `$component-state-property-size` formula for
@@ -55,7 +22,7 @@ $gray-900: #212529 !default;
 $black: #000 !default;
 $grays: () !default;
 $grays: map-merge(( "100": $gray-100, "200": $gray-200, "300": $gray-300, "400": $gray-400, "500": $gray-500, "600": $gray-600, "700": $gray-700, "800": $gray-800, "900": $gray-900), $grays);
-$blue: #236a97 !default;
+$blue: #236a97 ;
 $indigo: #6610f2 !default;
 $purple: #6f42c1 !default;
 $pink: #e83e8c !default;
@@ -707,3 +674,5 @@ $pre-scrollable-max-height: 340px !default;
 $print-page-size: a3 !default;
 $print-body-min-width: map-get($grid-breakpoints,
 "lg") !default;
+
+
