@@ -1,4 +1,4 @@
-@import "./nicety-variables.scss"; 
+@import "./nicety-variables"; 
 
 .navbar-expand {
     @each $breakpoint in map-keys($grid-breakpoints) {
