@@ -1,0 +1,5 @@
+@mixin card-box-shadow($shadow...) {
+  @if $enable-card-shadows {
+    box-shadow: $shadow;
+  }
+}

@@ -1,6 +1,7 @@
 @import "./nicety-variables.scss"; 
 
 .card {
+    $enable-shadows: true;
     .card-header.bar {
         padding: 0em;
         position: relative;
@@ -30,7 +31,8 @@
         }
     }
     &:hover {
-        @include box-shadow($card-box-shadow);
+
+        @include card-box-shadow($card-box-shadow);
         @include transition($card-hover-transition);
     }
 }
