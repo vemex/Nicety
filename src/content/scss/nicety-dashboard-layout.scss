@@ -91,6 +91,9 @@ body {
         .dropdown-toggle:after {
             content: none;
         }
+        .dropdown-menu{
+            margin: 0;
+        }
     }
     .dashboard-body {
         .aside-left {

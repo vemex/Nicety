@@ -8,8 +8,6 @@ $yellow: #fce174 ;
 $green: #00aa00 ;
 $teal: #20c997 ;
 $cyan: #4b9fd5 ;
- 
-$enable-shadows: true;
 
 $border-radius: .16rem ;
 $border-radius-lg: .3rem ;
@@ -17,3 +15,8 @@ $border-radius-sm: .1rem ;
 $line-height-lg: 2.0 ;
 
 $input-btn-focus-width: 0rem !default;
+
+$enable-shadows:false;
+
+$alert-padding-y :0.5rem;
+$breadcrumb-padding-y:0.5rem;
