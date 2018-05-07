@@ -4,7 +4,7 @@
 
 
             <h4>Large Data Set Component (50,000 rows)</h4>
-            <ag-grid-vue style="width: 100%; height: 350px;" class="ag-nicety"
+            <ag-grid-vue style="width: 100%; height: 350px;" class="ag-theme-balham"
                          :gridOptions="gridOptions">
             </ag-grid-vue>
             <div id="page_controller">
@@ -37,7 +37,6 @@
         computed: {
             gridOptions: function () {
                 let gridOptions = {
-                    headerHeight: 35,
                     enableColResize: true,
                     enableSorting: true,
                     animateRows: true,
