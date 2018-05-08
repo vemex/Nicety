@@ -10,3 +10,13 @@
 
 [Demo Page ](https://vemex.github.io/Nicety/)
 [Unit-Test Reporter ](https://vemex.github.io/Nicety/reporter/test/spec.html)
+
+
+----------------------------------------
+Run step:
+1. run `npm install`
+2. run `npm run dashboard:start`
+
+build:
+1. run `npm install`
+2. run `npm run build`
