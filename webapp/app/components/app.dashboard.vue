@@ -13,7 +13,12 @@
                 <app-nav></app-nav>
             </div>
             <main class="page">
+                <div class="page-title">
+                     <breadcrumb></breadcrumb>
+                </div>
+                <div class="page-content">
                     <router-view></router-view>
+                </div>
             </main>
 
         </div>
@@ -27,12 +32,14 @@
     import AppNavHeader from "./app.nav.header.vue"
     import AppNav from "./app.nav.vue"
     import $ from 'jquery'
+    import Breadcrumb from "./breadcrumb.vue"
     export default {
         components: {
             AppFooter,
             AppHeaderBar,
             AppNavHeader,
-            AppNav
+            AppNav,
+            Breadcrumb
         },
         mounted: function () { //渲染完成
             $('#main-menu').metisMenu();

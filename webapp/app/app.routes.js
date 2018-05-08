@@ -37,8 +37,10 @@ const Metismenu = resolve => require.ensure([], () => resolve(require('./pages/p
 
 
 const routes = [
+
+    {path: '/', component: Home},
     {path: '/Home', component: Home},
-    {path: '/ThemeColor', component: ThemeColor},
+    {path: '/ThemeColor', component: ThemeColor,name:"Theme Color"},
     {path: '/Alerts', component: Alerts},
     {path: '/About', component: About},
     {path: "/Badges", component: Badges},

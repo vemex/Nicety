@@ -47,6 +47,10 @@ body {
             grid-column-start: 2;
             grid-column-end: 2;
             -ms-grid-column: 2\0;
+            .page-content{
+                margin-left: 12px;
+                margin-right: 12px;
+            }
         }
     }
     header {

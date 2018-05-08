@@ -5,7 +5,7 @@
                 展示
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <router-link tag="li" to="/Home"><a>Home</a></router-link>
+            <router-link tag="li" to="/"><a>Home</a></router-link>
 
             <router-link tag="li" to="/ThemeColor"><a>ThemeColor</a></router-link>
             <li>
