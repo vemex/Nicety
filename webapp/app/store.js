@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         breadListState:[
-            {name:'首页',path:'/'}
+            {name:'Home',path:'/'}
         ]
     },
     mutations: {
