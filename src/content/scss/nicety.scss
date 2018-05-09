@@ -38,15 +38,17 @@
 @import "~bootstrap/scss/utilities";
 
 @import "./mixins";
-@import "nicety-ag-grid-theme.scss";
+@import "./nicety-ag-grid-theme.scss";
 @import "./nicety-badage";
 @import "./nicety-navbar";
 @import "./nicety-dropdown";
 @import "./nicety-reboot";
+@import "./nicety-alert";
 @import "./nicety-dashboard-layout";
 @import "./nicety-card";
 @import "./nicety-ag-grid-theme";
 @import "./nicety-metisMenu";
 @import "./nicety-customerScrollbar";
-@import "./nicety-alert";
 @import "./nicety-tabs";
+@import "./nicety-notification";
+
