@@ -1,0 +1,32 @@
+.flat-tab{
+  .nav-tabs {
+    .nav-link.active,
+    .nav-item.show .nav-link {
+      color: $nav-tabs-link-active-color;
+      background-color: $nav-tabs-link-active-bg;
+      border-color: transparent ;
+      border-bottom: 2px solid $blue ;
+      @include transition($card-hover-transition);
+    }
+    .nav-link {
+      @include hover-focus {
+        border-color: transparent ;
+        border-bottom: 2px solid $blue ;
+        @include transition($card-hover-transition);
+      }
+    }
+
+  }
+  position: relative;
+  .flat-tab-bar{
+    position: absolute;
+    top:0px;
+    right: 0px;
+    button{
+      @extend .btn;
+      @extend .btn-link;
+      border-width:0px ;
+      font-size: 1.1rem;
+    }
+  }
+}

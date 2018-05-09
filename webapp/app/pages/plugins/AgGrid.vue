@@ -1,27 +1,43 @@
 <template>
-    <div class="card" style="width: 800px;">
-        <div class="card-body">
+    <div>
+        <div class="mb-2">
+            <div class="h2">网站订单分析</div>
+            <div class="text-black-50 font-italic">ID: tb_353c383a70e946e7bd7c1386fb4f94e8</div>
+        </div>
 
 
-            <h4>Large Data Set Component (50,000 rows)</h4>
-            <ag-grid-vue style="width: 100%; height: 350px;" class="ag-theme-balham"
-                         :gridOptions="gridOptions">
-            </ag-grid-vue>
-            <div id="page_controller">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">&lt;&lt;</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&gt;&gt;</a></li>
-                    </ul>
-                </nav>
+        <div class="flat-tab">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">数据预览</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">数据设计</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">筛选条件</a>
+                </li>
+
+            </ul >
+            <div class="flat-tab-bar">
+                <button type="button" class="btn btn-link"><i class="ti-settings"></i>设置</button>
+            </div>
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <ag-grid-vue style="width: 100%; height: 500px;" class="ag-theme-balham"
+                                 :gridOptions="gridOptions">
+                    </ag-grid-vue>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">ddddddddddddddddddd</div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">ddddddddddddddddddddddd</div>
             </div>
         </div>
 
 
+
     </div>
+
 </template>
 
 <script>
@@ -41,7 +57,7 @@
                     enableSorting: true,
                     animateRows: true,
                     pagination: true,
-                    paginationPageSize: 50,
+                    paginationPageSize: 5000,
 
                     suppressPaginationPanel: true,
                     onPaginationChanged: function () {
@@ -60,7 +76,7 @@
             // data created here so outside of vue (ie no reactive, not observed)
             // also frozen (prob unnecessarily)
             this.rowData = [];
-            for (let i = 0; i < 500; i++) {
+            for (let i = 0; i < 5000; i++) {
                 this.rowData.push(Object.freeze({
                     recordNumber: i,
                     value1: Math.floor(Math.random() * 10000),
