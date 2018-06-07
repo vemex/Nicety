@@ -53,7 +53,7 @@ let config = webpackMerge(
             // }),
             new BrowserSyncPlugin({
                 host: 'localhost',
-                port: 9000,
+                port: 9061,
                 proxy: {
                     target: 'http://localhost:9060'
                 }
