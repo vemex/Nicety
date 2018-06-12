@@ -47,9 +47,11 @@ body {
             grid-column-start: 2;
             grid-column-end: 2;
             -ms-grid-column: 2\0;
-            .page-content{
-                margin-left: 12px;
-                margin-right: 12px;
+            .page-content>div{
+                padding: 1em
+            }
+            .page-title .breadcrumb{
+                margin-bottom: 0px;
             }
         }
     }
@@ -131,6 +133,24 @@ body {
     }
 }
 
+#dashboard-app.fixed-header.fixed-left-sider.fixed-footer{
+    .dashboard-body {
+        padding-top: 3.5em;
+        height: 100vh;
+        overflow: hidden;
+        .page {
+            height:  100vh;
+            padding-top: 6em;
+            margin-top: -6em;
+            margin-bottom: -2.5em;
+            .page-content {
+                height: 100%;
+                overflow: auto;
+            }
+        }
+    }
+}
+
 #dashboard-app.fixed-left-sider {
     .dashboard-body {
         .aside-left {
@@ -138,6 +158,7 @@ body {
             top: 0;
             bottom: 0;
         }
+
     }
 }
 

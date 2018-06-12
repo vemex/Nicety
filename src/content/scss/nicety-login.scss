@@ -1,0 +1,24 @@
+.login-container {
+  @extend .d-flex;
+  @extend .justify-content-around;
+}
+
+.login {
+  @extend .d-flex;
+  @extend .justify-content-start;
+  @include card-box-shadow($card-box-shadow);
+  height: 384px;
+  width: 646px;
+  .login-banner {
+    width: 300px;
+    height: 100%;
+  }
+  .login-form {
+    width: 346px;
+    height: 100%;
+    @extend .p-5;
+    button[type=submit] {
+      width: 80px;
+    }
+  }
+}

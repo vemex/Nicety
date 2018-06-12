@@ -37,6 +37,8 @@
 @import "~bootstrap/scss/carousel";
 @import "~bootstrap/scss/utilities";
 
+@import "~magic-check/sass/magic-check";
+
 @import "./mixins";
 @import "./nicety-ag-grid-theme.scss";
 @import "./nicety-badage";
@@ -51,6 +53,7 @@
 @import "./nicety-customerScrollbar";
 @import "./nicety-tabs";
 @import "./nicety-notification";
+@import "./nicety-login";
 
 @import "./nicety-icons";
 @import "./nicety-icons-premium-line";
