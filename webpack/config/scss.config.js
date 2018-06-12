@@ -18,7 +18,7 @@ let buildProdConfig = function(option) {
                 test: /([\s\S]*\.scss)/,
                 use: extractSASS.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader', 'postcss-loader', 'sass-loader']
+                    use: ['css-loader', 'postcss-loader', {loader:'resolve-url-loader', options: { debug: true}},{ loader: 'sass-loader', options: { sourceMap: true }}]
                 })
             }, ]
         },
@@ -37,6 +37,7 @@ let buildDevConfig = function(option) {
                     use: [
                         { loader: 'css-loader', options: { sourceMap: true } },
                         { loader: 'postcss-loader', options: { sourceMap: true } },
+                        {loader:'resolve-url-loader', options: { debug: true}},
                         { loader: 'sass-loader', options: { sourceMap: true } }
                     ]
                 })
