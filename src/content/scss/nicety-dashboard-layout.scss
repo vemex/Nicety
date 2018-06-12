@@ -83,6 +83,10 @@ body {
             //.right-container {
             //    @extend .float-right;
             //}
+            >div{
+                @extend .d-flex ;
+                @extend  .justify-content-between;
+            }
         }
         button{
             font-size: 1rem;
