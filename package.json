@@ -65,6 +65,7 @@
     "webpack-merge": "^4.1.1",
     "webpack-notifier": "^1.5.0",
     "webpack-visualizer-plugin": "^0.1.11",
+    "resolve-url-loader": "^2.3.0",
     "write-file-webpack-plugin": "^4.2.0"
   },
   "scripts": {
@@ -99,6 +100,7 @@
     "echarts": "^3.8.5",
     "highcharts": "^6.0.4",
     "jquery": "^3.2.1",
+    "magic-check": "^1.0.3",
     "malihu-custom-scrollbar-plugin": "^3.1.5",
     "metismenu": "^2.7.2",
     "popper.js": "^1.12.9",
