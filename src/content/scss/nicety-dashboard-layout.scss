@@ -80,11 +80,16 @@ body {
         }
         .header-bar {
             flex-grow: 1;
-            >div {
-                @extend .float-right;
-            }
+            //.right-container {
+            //    @extend .float-right;
+            //}
         }
-        button {
+        button{
+            font-size: 1rem;
+            color: cornsilk;
+        }
+        .aside-header button,
+        .right-container button {
             @extend .btn;
             @extend .btn-outline-primary;
             color: cornsilk;
