@@ -94,6 +94,7 @@
     "pre-release": "node release.js"
   },
   "dependencies": {
+    "@shopify/draggable": "^1.0.0-beta.7",
     "ag-grid": "^17.1.1",
     "ag-grid-vue": "^17.1.0",
     "bootstrap": "^4.1.1",
