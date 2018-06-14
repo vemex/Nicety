@@ -1,2 +1,3 @@
-import '../overlay'
+import './overlay'
 import './notification'
+import './gridster'
