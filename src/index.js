@@ -1,2 +1,2 @@
-import './overlay'
+import '../overlay'
 import './notification'
