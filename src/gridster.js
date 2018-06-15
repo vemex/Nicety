@@ -9,6 +9,7 @@ const Gridster = (($) => {
     const DATA_KEY = 'ny.gridster';
     const JQUERY_NO_CONFLICT = $.fn[NAME];
 
+    const DefaultConfig = {};
 
     const Selector = {
         DraggableWrapper: '.drag-wrapper',
@@ -24,9 +25,19 @@ const Gridster = (($) => {
     };
     const Event = {};
 
-    let Utils = {
+    let DomUtils = {
+        newNode: function (htmlStr) {
+            return $(htmlStr)[0];
+        },
+        getElement: function (selector) {
+            return $(selector)[0];
+        },
+        appendTo: function (el, parentEl) {
+            $(el).appendTo(parentEl);
+            return el;
+        },
         getNumber: function (val) {
-            let result =val==""?0: Number.parseInt(val.substr(0, val.length - 2));
+            let result = val == "" ? 0 : Number.parseInt(val.substr(0, val.length - 2));
             if (isNaN(result)) {
                 throw  new Error("error val")
             }
@@ -44,7 +55,7 @@ const Gridster = (($) => {
             if (el.parentElement.tagName.toLowerCase() == tag) {
                 return el.parentElement;
             } else {
-                Utils.findParent(el.parentElement, tag);
+                DomUtils.findParent(el.parentElement, tag);
             }
         }
     };
@@ -125,7 +136,7 @@ const Gridster = (($) => {
             }
         }
         if (adjustPosition === undefined) {//当未获取到索引位置时，调整高度重构ranges索引
-            gridster._container.style.height = (Utils.getNumber(gridster._container.style.height) + ranges.equalWidth) + 'px';
+            gridster._container.style.height = (DomUtils.getNumber(gridster._container.style.height) + ranges.equalWidth) + 'px';
             gridster._ranges = initGridRanges(gridster._container, 12);
             return getMoveSuggestMirrorPosition(gridster, sourceSize, sourceIndex)
         } else {
@@ -180,7 +191,7 @@ const Gridster = (($) => {
      * @returns {{width: *, height: *}|*}
      */
     let getResizeSuggestDisplaySize = function (mouseOffset, initialSize) {
-         let displaySize = {
+        let displaySize = {
             width: mouseOffset.offsetX + initialSize.width,
             height: mouseOffset.offsetY + initialSize.height
         };
@@ -192,7 +203,7 @@ const Gridster = (($) => {
      * @param newSize
      * @returns {{width: number, height: number}}
      */
-    let getResizeSuggestMirrorSize = function (gridster,source, newSize) {
+    let getResizeSuggestMirrorSize = function (gridster, source, newSize) {
         let ranges = gridster._ranges;
         let rw = Number.parseInt(newSize.width / ranges.equalWidth);
         let rh = Number.parseInt(newSize.height / ranges.equalWidth);
@@ -202,17 +213,17 @@ const Gridster = (($) => {
         if (newSize.height % ranges.equalWidth !== 0) {
             rh += 1;
         }
-        let result= {
+        let result = {
             width: rw * ranges.equalWidth,
             height: rh * ranges.equalWidth,
         }
-        gridster._container.style.height = (Utils.getNumber(source.style.top) + result.height) + 'px';
+        gridster._container.style.height = (DomUtils.getNumber(source.style.top) + result.height) + 'px';
         return result;
     };
 
 
     let getResizeSource = function (resizeHandlerEL) {
-        return Utils.findParent(resizeHandlerEL, 'li')
+        return DomUtils.findParent(resizeHandlerEL, 'li')
     }
 
     /**
@@ -249,8 +260,8 @@ const Gridster = (($) => {
                 y: evt.sensorEvent.clientY,
             };
             this._initialPosition = {
-                x: Utils.getNumber($(evt.source).css("left")),
-                y: Utils.getNumber($(evt.source).css("top")),
+                x: DomUtils.getNumber($(evt.source).css("left")),
+                y: DomUtils.getNumber($(evt.source).css("top")),
             };
         }
 
@@ -280,8 +291,8 @@ const Gridster = (($) => {
             let ranges = this._owner._ranges;
 
             let sourceSize = {
-                width: Utils.getNumber(evt.source.style.width),
-                height: Utils.getNumber(evt.source.style.height)
+                width: DomUtils.getNumber(evt.source.style.width),
+                height: DomUtils.getNumber(evt.source.style.height)
             }
 
             //计算显示位置
@@ -293,37 +304,38 @@ const Gridster = (($) => {
 
             evt.mirror.style.transform = `translate3d(${this._owner._contianerRect.left}px, ${this._owner._contianerRect.top}px, 0)`;
             //设置镜像位置
-            Utils.setPosition(evt.mirror, newDragRectPosition);
+            DomUtils.setPosition(evt.mirror, newDragRectPosition);
 
             this._mirrorPosition = newDragRectPosition;
 
             //设置实时显示位置
-            Utils.setPosition(evt.source, displayPosition);
+            DomUtils.setPosition(evt.source, displayPosition);
         }
 
         dragEnd(evt) {
             //todo 监听鼠标释放时设置
-            Utils.setPosition(evt.originalSource, this._mirrorPosition);
+            DomUtils.setPosition(evt.originalSource, this._mirrorPosition);
         }
     }
 
     class ResizeDragController {
-        constructor(owner) {
+        constructor(owner,resizeDraggable) {
             this._owner = owner;
             let _ = this;
-            this._owner._resizeDraggable.on('drag:start', function (evt) {
+            this._resizeDraggable=resizeDraggable;
+            this._resizeDraggable.on('drag:start', function (evt) {
                 _.dragStart(evt);
             });
-            this._owner._resizeDraggable.on('mirror:create', function (evt) {
+            this._resizeDraggable.on('mirror:create', function (evt) {
                 _.mirrorCreate(evt);
             });
-            this._owner._resizeDraggable.on('mirror:created', function (evt) {
+            this._resizeDraggable.on('mirror:created', function (evt) {
                 _.mirrorCreated(evt);
             });
-            this._owner._resizeDraggable.on('drag:move', function (evt) {
+            this._resizeDraggable.on('drag:move', function (evt) {
                 _.dragMove(evt);
             });
-            this._owner._resizeDraggable.on('drag:stop', function (evt) {
+            this._resizeDraggable.on('drag:stop', function (evt) {
                 _.dragEnd(evt);
             });
         }
@@ -334,14 +346,14 @@ const Gridster = (($) => {
                 y: evt.sensorEvent.clientY,
             };
             this._initialPosition = {
-                x: Utils.getNumber($(evt.source).css("left")),
-                y: Utils.getNumber($(evt.source).css("top")),
+                x: DomUtils.getNumber($(evt.source).css("left")),
+                y: DomUtils.getNumber($(evt.source).css("top")),
             };
 
-            let source = Utils.findParent(evt.source, 'li');
+            let source = DomUtils.findParent(evt.source, 'li');
             this._initialSize = {
-                width: Utils.getNumber(source.style.width),
-                height: Utils.getNumber(source.style.height),
+                width: DomUtils.getNumber(source.style.width),
+                height: DomUtils.getNumber(source.style.height),
             };
         }
 
@@ -358,7 +370,7 @@ const Gridster = (($) => {
                 return;
             }
             evt.cancel();
-            Utils.setSize(evt.mirror, {
+            DomUtils.setSize(evt.mirror, {
                 width: this._initialSize.width,
                 height: this._initialSize.height
             });
@@ -370,18 +382,18 @@ const Gridster = (($) => {
             };
             let source = getResizeSource(evt.source);
             let displaySize = getResizeSuggestDisplaySize(mouseOffset, this._initialSize);
-            Utils.setSize(source, displaySize);
-            this._mirrorSize = getResizeSuggestMirrorSize(this._owner,source, displaySize);
-            Utils.setSize(evt.mirror, this._mirrorSize);
-            Utils.setPosition(evt.mirror, {
-                x: Utils.getNumber(source.style.left),
-                y: Utils.getNumber(source.style.top)
+            DomUtils.setSize(source, displaySize);
+            this._mirrorSize = getResizeSuggestMirrorSize(this._owner, source, displaySize);
+            DomUtils.setSize(evt.mirror, this._mirrorSize);
+            DomUtils.setPosition(evt.mirror, {
+                x: DomUtils.getNumber(source.style.left),
+                y: DomUtils.getNumber(source.style.top)
             });
         }
 
         dragEnd(evt) {
-            let source = Utils.findParent(evt.source, 'li');
-            Utils.setSize(source, this._mirrorSize);
+            let source = DomUtils.findParent(evt.source, 'li');
+            DomUtils.setSize(source, this._mirrorSize);
         }
     }
 
@@ -389,10 +401,8 @@ const Gridster = (($) => {
     class Gridster {
         constructor($el, config) {
             this._element = $el;
-            let container = $('<ul class="drag-wrapper">' +
-                '</ul>').appendTo(this._element)[0];
-
-            var li = $('<li><div class="gs-container">sss</div><span class="gs-resize-handle gs-resize-handle-both"></span></li>').appendTo(container);
+            let container = DomUtils.newNode('<ul class="drag-wrapper"></ul>');
+            DomUtils.appendTo(container, this._element);
             this._container = container;
             this._contianerRect = container.getBoundingClientRect();
             this._ranges = initGridRanges(container, 12);
@@ -400,16 +410,30 @@ const Gridster = (($) => {
                 draggable: 'li',
                 delay: 0,
             });
+            this._resizeControls = [];
+            this._moveController = new MoveDragController(this);
+            //this._resizeController = new ResizeDragController(this);
+            this.addBlock()
+            this.addBlock()
+            this.addBlock()
+        }
 
-            this._resizeDraggable = new Draggable(li[0], {
+        addBlock() {
+            var el = DomUtils.newNode('<li><div class="gs-container"></div><span class="gs-resize-handle gs-resize-handle-both"></span></li>');
+            DomUtils.appendTo(el, this._container);
+            let resizeDraggable = new Draggable(el, {
                 draggable: '.gs-resize-handle ',
                 delay: 0,
             });
+            DomUtils.setSize(el, {
+                width: this._ranges.equalWidth,
+                height: this._ranges.equalWidth
+            })
+            let resizeController = new ResizeDragController(this,resizeDraggable);
+            this._resizeControls.push(resizeController);
+        }
 
-            li.css("width", this._ranges.equalWidth)
-            li.css("height", this._ranges.equalWidth)
-            this._moveController = new MoveDragController(this);
-            this._resizeController = new ResizeDragController(this);
+        removeBlock() {
         }
 
         _show() {
