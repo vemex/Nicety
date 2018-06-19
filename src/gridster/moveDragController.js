@@ -1,5 +1,6 @@
 import {DomUtils} from "./Utils";
 import {Helper,Constant} from "./Utils";
+import  BaseDragController from "./BaseDragController"
 
 /**
  * 拖拽元素时，获取镜像元素的建议位置
@@ -79,34 +80,17 @@ let getMoveWindowEL=(el)=>el;
 /**
  * 拖动控制对象
  */
-class MoveDragController {
+class MoveDragController extends  BaseDragController{
 
-    constructor(gridster,moveSelector) {
-        this._moveSelector=moveSelector;
-        this._gridster = gridster;
-        let _ = this;
-        this._gridster._moveDraggable.on('drag:start', function (evt) {
-            _.dragStart(evt);
-        });
-        this._gridster._moveDraggable.on('mirror:create', function (evt) {
-            _.mirrorCreate(evt);
-        });
-        this._gridster._moveDraggable.on('mirror:created', function (evt) {
-            _.mirrorCreated(evt);
-        });
-        this._gridster._moveDraggable.on('drag:move', function (evt) {
-            _.dragMove(evt);
-        });
-        this._gridster._moveDraggable.on('drag:stop', function (evt) {
-            _.dragEnd(evt);
-        });
+    constructor(gridster) {
+        super(gridster);
+    }
+
+    IsHandler(srcEL){
+        return DomUtils.hasClass(srcEL, 'gs-move-handle');
     }
 
     dragStart(evt) {
-       if ( DomUtils.findParent(evt.originalEvent.srcElement, this._moveSelector)===undefined) {
-            evt.cancel();
-            return;
-        }
 
         this._initialMousePosition = {
             x: evt.sensorEvent.clientX,

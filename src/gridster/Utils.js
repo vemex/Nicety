@@ -24,6 +24,17 @@ const DomUtils = {
         el.style.width = size.width + "px";
         el.style.height = size.height + "px";
     },
+    hasClass:function (el,className) {
+        if  (typeof className==='string' ){
+            return  el.classList.contains(className);
+        }else{
+            let result=true;
+            for(let i in className){
+                result&=el.classList.contains(className[i])
+            }
+            return result;
+        }
+    },
     findParent: function (el, tag) {
         
         let result;

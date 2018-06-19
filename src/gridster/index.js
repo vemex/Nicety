@@ -39,31 +39,29 @@ const Gridster = (($) => {
             this._container = container;
             this._contianerRect = container.getBoundingClientRect();
             this._ranges = Helper.initGridRanges(container, 12);
-            this._moveDraggable = new Draggable(container, {
+            this._draggable = new Draggable(container, {
                 draggable: 'li',
                 delay: 0,
             });
-            this._resizeControls = [];
-            this._moveController = new MoveDragController(this,".gs-title");
-            //this._resizeController = new ResizeDragController(this);
+            this._moveController = new MoveDragController(this);
+            this._resizeControl = new ResizeDragController(this);
             this.addBlock();
             this.addBlock();
             this.addBlock();
         }
 
         addBlock() {
-            var el = DomUtils.newNode('<li class="gs-window-wrapper"><div class="gs-window"><div class="gs-title"></div><div class="gs-container"></div></div><span class="gs-resize-handle gs-resize-handle-both"></span></li>');
+            let  el = DomUtils.newNode('<li class="gs-window-wrapper">' +
+                '<div class="gs-window">' +
+                    '<div class="gs-title gs-move-handle"></div>' +
+                    '<div class="gs-container"></div>' +
+                '</div>' +
+                '<span class="gs-resize-handle gs-resize-handle-both"></span></li>');
             DomUtils.appendTo(el, this._container);
-            let resizeDraggable = new Draggable(el, {
-                draggable: '.gs-resize-handle ',
-                delay: 0,
-            });
             DomUtils.setSize(el, {
                 width: this._ranges.equalWidth,
                 height: this._ranges.equalWidth
-            })
-            let resizeController = new ResizeDragController(this,resizeDraggable);
-            this._resizeControls.push(resizeController);
+            });
         }
 
         removeBlock() {

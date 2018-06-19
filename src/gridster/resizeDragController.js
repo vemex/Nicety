@@ -1,5 +1,6 @@
 import {DomUtils} from "./Utils";
 import {Draggable} from '@shopify/draggable';
+import BaseDragController from "./BaseDragController";
 
 /**
  * resize时，显示元素的大小信息
@@ -44,33 +45,17 @@ let getResizeWindowsEL =  (resizeHandlerEL)=> DomUtils.findParent(resizeHandlerE
 /**
  * 拖拽大小控制对象
  */
-class ResizeDragController {
+class ResizeDragController extends  BaseDragController{
     /**
      *
      * @param {Gridster} gridster
-     * @param {Draggable} resizeDraggable
      */
-    constructor(gridster, resizeDraggable) {
-        this._gridster = gridster;
-        let _ = this;
-        this._resizeDraggable = resizeDraggable;
-        this._resizeDraggable.on('drag:start', function (evt) {
-            _.dragStart(evt);
-        });
-        this._resizeDraggable.on('mirror:create', function (evt) {
-            _.mirrorCreate(evt);
-        });
-        this._resizeDraggable.on('mirror:created', function (evt) {
-            _.mirrorCreated(evt);
-        });
-        this._resizeDraggable.on('drag:move', function (evt) {
-            _.dragMove(evt);
-        });
-        this._resizeDraggable.on('drag:stop', function (evt) {
-            _.dragEnd(evt);
-        });
+    constructor(gridster) {
+        super(gridster);
     }
-
+    IsHandler(srcEL){
+        return DomUtils.hasClass(srcEL, 'gs-resize-handle');
+    }
     dragStart(evt) {
         this._initialMousePosition = {
             x: evt.sensorEvent.clientX,
@@ -81,10 +66,9 @@ class ResizeDragController {
             y: DomUtils.getNumber($(evt.source).css("top")),
         };
 
-        let source = DomUtils.findParent(evt.source, 'li');
         this._initialSize = {
-            width: DomUtils.getNumber(source.style.width),
-            height: DomUtils.getNumber(source.style.height),
+            width: DomUtils.getNumber(evt.source.style.width),
+            height: DomUtils.getNumber(evt.source.style.height),
         };
     }
 
@@ -105,26 +89,24 @@ class ResizeDragController {
             width: this._initialSize.width,
             height: this._initialSize.height
         });
-        evt.mirror.style.transform = `translate3d(${this._gridster._contianerRect.left}px, ${this._gridster._contianerRect.top}px, 0)`;
+       // evt.mirror.style.transform = `translate3d(${this._gridster._contianerRect.left}px, ${this._gridster._contianerRect.top}px, 0)`;
         //计算鼠标的偏移距离（鼠标的当前坐标-拖拽开始时鼠标坐标）
         let mouseOffset = {
             offsetX: evt.sensorEvent.clientX - this._initialMousePosition.x,
             offsetY: evt.sensorEvent.clientY - this._initialMousePosition.y
         };
-        let resiezeWindowEL = getResizeWindowsEL(evt.source);
         let displaySize = getResizeSuggestDisplaySize(mouseOffset, this._initialSize);
-        DomUtils.setSize(resiezeWindowEL, displaySize);
-        this._mirrorSize = getResizeSuggestMirrorSize(this._gridster, resiezeWindowEL, displaySize);
+        DomUtils.setSize(evt.source, displaySize);
+        this._mirrorSize = getResizeSuggestMirrorSize(this._gridster, evt.source, displaySize);
         DomUtils.setSize(evt.mirror, this._mirrorSize);
-        DomUtils.setPosition(evt.mirror, {
-            x: DomUtils.getNumber(resiezeWindowEL.style.left),
-            y: DomUtils.getNumber(resiezeWindowEL.style.top)
-        });
+        // DomUtils.setPosition(evt.mirror, {
+        //     x: DomUtils.getNumber(resiezeWindowEL.style.left),
+        //     y: DomUtils.getNumber(resiezeWindowEL.style.top)
+        // });
     }
 
     dragEnd(evt) {
-        let source = getResizeWindowsEL(evt.source);
-        DomUtils.setSize(source, this._mirrorSize);
+        DomUtils.setSize(evt.originalSource, this._mirrorSize);
     }
 }
 
