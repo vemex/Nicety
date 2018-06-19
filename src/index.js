@@ -1,3 +1,3 @@
 import './overlay'
 import './notification'
-import './gridster'
+import './gridster/index'
