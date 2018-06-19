@@ -39,9 +39,6 @@ let getResizeSuggestMirrorSize =  (gridster, resizeWindowEL, newDisplaySize)=>{
 };
 
 
-let getResizeWindowsEL =  (resizeHandlerEL)=> DomUtils.findParent(resizeHandlerEL, 'li');
-
-
 /**
  * 拖拽大小控制对象
  */

@@ -20,7 +20,7 @@ let getMoveSuggestMirrorPosition = function (gridster, sourceSize, sourceIndex) 
     let adjustPosition;
     for (let index in ranges.ranges) {
         let item = ranges.ranges[index];
-        if (indexX == item.index.x &&
+        if (indexX === item.index.x &&
             item.index.y === indexY) {
             adjustPosition = item.position;
             break;
@@ -50,11 +50,10 @@ function getMoveSuggestIndex(displayPosition, sourceSize, ranges) {
     indexX = (indexX + rw) < ranges.maxWidthIndex ? indexX - (rw - 1) : (ranges.maxWidthIndex - (rw - 1));
     indexX = indexX < 0 ? 0 : indexX;
     indexY = indexY < 0 ? 0 : indexY;
-    let suggestIndex = {
+    return {
         x: indexX,
         y: indexY
-    }
-    return suggestIndex;
+    };
 }
 
 /**
@@ -74,8 +73,6 @@ function getMoveSuggestDisplayPosition(sourceSize, mouseOffset, ranges) {
     displayPosition.x = displayPosition.x >= (this._gridster._contianerRect.width - sourceSize.width) ? (this._gridster._contianerRect.width - sourceSize.width) : displayPosition.x;
     return displayPosition;
 }
-
-let getMoveWindowEL=(el)=>el;
 
 /**
  * 拖动控制对象
@@ -120,17 +117,17 @@ class MoveDragController extends  BaseDragController{
             offsetY: evt.sensorEvent.clientY - this._initialMousePosition.y
         };
         //获取鼠标的相对坐标，以容器的左上为为坐标原点
-        let relativeMousePosition = {
-            x: evt.sensorEvent.clientX - this._gridster._contianerRect.x,
-            y: evt.sensorEvent.clientY - this._gridster._contianerRect.y
-        };
+        // let relativeMousePosition = {
+        //     x: evt.sensorEvent.clientX - this._gridster._contianerRect.x,
+        //     y: evt.sensorEvent.clientY - this._gridster._contianerRect.y
+        // };
 
         let ranges = this._gridster._ranges;
 
         let sourceSize = {
             width: DomUtils.getNumber(evt.source.style.width),
             height: DomUtils.getNumber(evt.source.style.height)
-        }
+        };
 
         //计算显示位置
         let displayPosition = getMoveSuggestDisplayPosition.call(this, sourceSize, mouseOffset, ranges);
