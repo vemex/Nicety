@@ -74,7 +74,7 @@ class ResizeDragController extends  BaseDragController{
     }
 
     mirrorCreated(evt) {
-
+        evt.mirror.innerHTML = "";
     }
 
     dragMove(evt) {
