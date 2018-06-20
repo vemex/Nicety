@@ -1,5 +1,4 @@
 import {DomUtils} from "./Utils";
-import {Draggable} from '@shopify/draggable';
 import BaseDragController from "./BaseDragController";
 
 /**
