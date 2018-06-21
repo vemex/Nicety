@@ -10,57 +10,66 @@ const DomUtils = {
         return el;
     },
     getNumber: function (val) {
-        let result = val == "" ? 0 : Number.parseInt(val.substr(0, val.length - 2));
+        let result = val == "" || val == "auto" ? 0 : Number.parseInt(val.substr(0, val.length - 2));
         if (isNaN(result)) {
             throw  new Error("error val")
         }
         return result;
     },
     setPosition: function (el, newPosition) {
-        el.style.top = newPosition.y + "px";
-        el.style.left = newPosition.x + "px";
+        if (DomUtils.getNumber(el.style.top) !== newPosition.y ||
+            DomUtils.getNumber(el.style.left) !== newPosition.x) {
+            el.style.top = newPosition.y + "px";
+            el.style.left = newPosition.x + "px";
+        }
+
     },
     setSize: function (el, size) {
-        el.style.width = size.width + "px";
-        el.style.height = size.height + "px";
+        if (DomUtils.getNumber(el.style.width) !== size.width ||
+            DomUtils.getNumber(el.style.height) !== size.height) {
+            el.style.width = size.width + "px";
+            el.style.height = size.height + "px";
+        }
     },
-    hasClass:function (el,className) {
-        if  (typeof className==='string' ){
-            return  el.classList.contains(className);
-        }else{
-            let result=true;
-            for(let i in className){
-                result&=el.classList.contains(className[i])
+    hasClass: function (el, className) {
+        if (typeof className === 'string') {
+            return el.classList.contains(className);
+        } else {
+            let result = true;
+            for (let i in className) {
+                result &= el.classList.contains(className[i])
             }
             return result;
         }
     },
     findParent: function (el, tag) {
-        
+
         let result;
-        if (tag.substr(0, 1) === "."){
-            if (el.classList.contains(tag.substr(1)) ) {
-                result= el.parentElement;
+        if (tag.substr(0, 1) === ".") {
+            if (el.classList.contains(tag.substr(1))) {
+                result = el.parentElement;
             }
         } else {
-            if (el.tagName.toLowerCase() == tag ) {
-                result= el.parentElement;
+            if (el.tagName.toLowerCase() == tag) {
+                result = el.parentElement;
             }
         }
         if (result == undefined)
-            result= DomUtils.findParent(el.parentElement, tag);
+            result = DomUtils.findParent(el.parentElement, tag);
         return result;
-    }
+    },
+
 };
 
-const Helper={
+
+const Helper = {
     /**
      * 初始化区域Grid
      * @param el 区域元素
      * @param gridNumber 每行均分数量
      * @returns {{equalWidth: number, ranges: Array}}
      */
-    initGridRanges : function (el, gridNumber) {
+    initGridRanges: function (el, gridNumber) {
         let rect = el.getBoundingClientRect();
         let equalWidth = rect.width / gridNumber;
         let ranges = [];
@@ -106,8 +115,8 @@ const Helper={
     }
 }
 
-const  Constant={
-    ColumnCount:12
+const Constant = {
+    ColumnCount: 12
 };
-export {DomUtils,Helper,Constant} ;
+export {DomUtils, Helper, Constant} ;
 

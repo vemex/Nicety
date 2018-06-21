@@ -14,7 +14,9 @@ ul.drag-wrapper{
 .draggable-container--is-dragging  .draggable-mirror{
     background: slategray !important;
     opacity: 0.5;
-    transition: top 0.15s ease-in-out, left 0.15s ease-in-out,width 0.15s ease-in-out,height 0.15s ease-in-out;
+    transition: top 0.15s linear , left 0.15s linear , width 0.15s linear, height 0.15s linear;
+    //transition-delay: 0.01s;
+    -webkit-transition: top 0.15s linear , left 0.15s linear , width 0.15s linear, height 0.15s linear;
 }
 .draggable-container--is-dragging  .draggable-source--is-dragging{
     z-index: 999;

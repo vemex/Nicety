@@ -20,7 +20,7 @@ let getResizeSuggestDisplaySize = (mouseOffset, initialSize) => {
  * @param newDisplaySize 新的窗口显示大小
  * @returns {{width: number, height: number}} 建议Mirror对象的高度和宽度
  */
-let getResizeSuggestMirrorSize =  (gridster, resizeWindowEL, newDisplaySize)=>{
+let getResizeSuggestMirrorSize = (gridster, resizeWindowEL, newDisplaySize) => {
     let ranges = gridster._ranges;
 
     //向上取整
@@ -41,7 +41,7 @@ let getResizeSuggestMirrorSize =  (gridster, resizeWindowEL, newDisplaySize)=>{
 /**
  * 拖拽大小控制对象
  */
-class ResizeDragController extends  BaseDragController{
+class ResizeDragController extends BaseDragController {
     /**
      *
      * @param {Gridster} gridster
@@ -49,9 +49,11 @@ class ResizeDragController extends  BaseDragController{
     constructor(gridster) {
         super(gridster);
     }
-    IsHandler(srcEL){
+
+    IsHandler(srcEL) {
         return DomUtils.hasClass(srcEL, 'gs-resize-handle');
     }
+
     dragStart(evt) {
         this._initialMousePosition = {
             x: evt.sensorEvent.clientX,
@@ -85,7 +87,7 @@ class ResizeDragController extends  BaseDragController{
             width: this._initialSize.width,
             height: this._initialSize.height
         });
-       // evt.mirror.style.transform = `translate3d(${this._gridster._contianerRect.left}px, ${this._gridster._contianerRect.top}px, 0)`;
+        // evt.mirror.style.transform = `translate3d(${this._gridster._contianerRect.left}px, ${this._gridster._contianerRect.top}px, 0)`;
         //计算鼠标的偏移距离（鼠标的当前坐标-拖拽开始时鼠标坐标）
         let mouseOffset = {
             offsetX: evt.sensorEvent.clientX - this._initialMousePosition.x,
@@ -93,8 +95,10 @@ class ResizeDragController extends  BaseDragController{
         };
         let displaySize = getResizeSuggestDisplaySize(mouseOffset, this._initialSize);
         DomUtils.setSize(evt.source, displaySize);
-        this._mirrorSize = getResizeSuggestMirrorSize(this._gridster, evt.source, displaySize);
-        DomUtils.setSize(evt.mirror, this._mirrorSize);
+        let mirrorSize = getResizeSuggestMirrorSize(this._gridster, evt.source, displaySize);
+        DomUtils.setSize(evt.mirror, mirrorSize);
+
+        this._mirrorSize = mirrorSize;
         // DomUtils.setPosition(evt.mirror, {
         //     x: DomUtils.getNumber(resiezeWindowEL.style.left),
         //     y: DomUtils.getNumber(resiezeWindowEL.style.top)
