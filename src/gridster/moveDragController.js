@@ -1,6 +1,6 @@
 import {DomUtils} from "./Utils";
-import {Helper,Constant} from "./Utils";
-import  BaseDragController from "./BaseDragController"
+import {Helper, Constant} from "./Utils";
+import BaseDragController from "./BaseDragController"
 
 /**
  * 拖拽元素时，获取镜像元素的建议位置
@@ -27,11 +27,11 @@ let getMoveSuggestMirrorPosition = function (gridster, originalSourceSize, sugge
         }
     }
     if (adjustPosition === undefined) {//当未获取到索引位置时，调整高度重构ranges索引
-        gridster._container.style.height = (DomUtils.getNumber(gridster._container.style.height) + ranges.equalWidth) + 'px';
+        //gridster._container.style.height = (DomUtils.getNumber(gridster._container.style.height) + ranges.equalWidth) + 'px';
         gridster._ranges = Helper.initGridRanges(gridster._container, Constant.ColumnCount);
         return getMoveSuggestMirrorPosition(gridster, originalSourceSize, suggestSourceIndex)
     } else {
-        gridster._container.style.height = ((originalSourceSize.y) * ranges.equalWidth + originalSourceSize.height) + 'px';
+        //  gridster._container.style.height = ((originalSourceSize.y) * ranges.equalWidth + originalSourceSize.height) + 'px';
         return adjustPosition;
     }
 };
@@ -43,8 +43,8 @@ let getMoveSuggestMirrorPosition = function (gridster, originalSourceSize, sugge
  * @param originalSourceSize  拖动元素的原始大小
  * @returns {{x: number, y: number}}
  */
-function getMoveSuggestMirrorIndex(gridster,displayPosition, originalSourceSize) {
-    let ranges=gridster._ranges;
+function getMoveSuggestMirrorIndex(gridster, displayPosition, originalSourceSize) {
+    let ranges = gridster._ranges;
     let indexX = Math.round((displayPosition.x) / ranges.equalWidth);
     let indexY = Math.round((displayPosition.y) / ranges.equalWidth);
     let rw = Math.round(originalSourceSize.width / ranges.equalWidth);
@@ -66,7 +66,7 @@ function getMoveSuggestMirrorIndex(gridster,displayPosition, originalSourceSize)
  * @param initialPosition 拖动元素的初始位置
  * @returns {{y: *, x: *}}
  */
-function getMoveSuggestDisplayPosition(gridster,originalSourceSize, mouseOffset,initialPosition) {
+function getMoveSuggestDisplayPosition(gridster, originalSourceSize, mouseOffset, initialPosition) {
     let displayPosition = {
         y: initialPosition.y + mouseOffset.offsetY,
         x: initialPosition.x + mouseOffset.offsetX,
@@ -80,13 +80,13 @@ function getMoveSuggestDisplayPosition(gridster,originalSourceSize, mouseOffset,
 /**
  * 拖动控制对象
  */
-class MoveDragController extends  BaseDragController{
+class MoveDragController extends BaseDragController {
 
     constructor(gridster) {
         super(gridster);
     }
 
-    IsHandler(srcEL){
+    IsHandler(srcEL) {
         return DomUtils.hasClass(srcEL, 'gs-move-handle');
     }
 
@@ -119,13 +119,13 @@ class MoveDragController extends  BaseDragController{
             offsetX: evt.sensorEvent.clientX - this._initialMousePosition.x,
             offsetY: evt.sensorEvent.clientY - this._initialMousePosition.y
         };
-        
+
         //获取鼠标的相对坐标，以容器的左上为为坐标原点
-        this._relativeMousePosition = {
+        let relativeMousePosition = {
             x: evt.sensorEvent.clientX - this._gridster._contianerRect.x,
             y: evt.sensorEvent.clientY - this._gridster._contianerRect.y
-        }; 
-
+        };
+        //计算原始元素的大小信息
         let originalSourceSize = {
             width: DomUtils.getNumber(evt.source.style.width),
             height: DomUtils.getNumber(evt.source.style.height)
@@ -134,17 +134,27 @@ class MoveDragController extends  BaseDragController{
         //计算显示位置
         let displayPosition = getMoveSuggestDisplayPosition(this._gridster, originalSourceSize, mouseOffset, this._initialPosition);
 
-        //获取建议索引位置
-        let suggestSourceIndex = getMoveSuggestMirrorIndex(this._gridster, displayPosition, originalSourceSize);
-        //计算新的拖拽元素的位置
-        this._mirrorPosition = getMoveSuggestMirrorPosition(this._gridster, originalSourceSize, suggestSourceIndex);
+        let clientInfo={
+            EL:evt.mirror,
+            mouseOffset:mouseOffset,
+            relativeMousePosition:relativeMousePosition,
+            originalSourceSize:originalSourceSize,
+            displayPosition:displayPosition
+        }
+        this._gridster._layoutManager.update(evt.originalSource.getAttribute("item-id"),clientInfo)
 
-        //设定Mirror对象坐标原点为容器的左上角
-        evt.mirror.style.transform = `translate3d(${this._gridster._contianerRect.left}px, ${this._gridster._contianerRect.top}px, 0)`;
 
-        //设置镜像位置
-        DomUtils.setPosition(evt.mirror, this._mirrorPosition);
-
+        // //获取建议索引位置
+        // let suggestSourceIndex = getMoveSuggestMirrorIndex(this._gridster, displayPosition, originalSourceSize);
+        // //计算新的拖拽元素的位置
+        // this._mirrorPosition = getMoveSuggestMirrorPosition(this._gridster, originalSourceSize, suggestSourceIndex);
+        //
+        // //设定Mirror对象坐标原点为容器的左上角
+         evt.mirror.style.transform = `translate3d(${this._gridster._contianerRect.left}px, ${this._gridster._contianerRect.top}px, 0)`;
+        //
+        // //设置镜像位置
+        // DomUtils.setPosition(evt.mirror, this._mirrorPosition);
+        //
         //设置实时显示位置
         DomUtils.setPosition(evt.source, displayPosition);
     }
@@ -153,4 +163,5 @@ class MoveDragController extends  BaseDragController{
         DomUtils.setPosition(evt.originalSource, this._mirrorPosition);
     }
 }
+
 export default MoveDragController

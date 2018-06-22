@@ -33,7 +33,7 @@ let getResizeSuggestMirrorSize = (gridster, resizeWindowEL, newDisplaySize) => {
         height: rh * ranges.equalWidth,
     };
     //重置拖拽容器的高度
-    gridster._container.style.height = (DomUtils.getNumber(resizeWindowEL.style.top) + result.height) + 'px';
+    //gridster._container.style.height = (DomUtils.getNumber(resizeWindowEL.style.top) + result.height) + 'px';
     return result;
 };
 
@@ -93,12 +93,31 @@ class ResizeDragController extends BaseDragController {
             offsetX: evt.sensorEvent.clientX - this._initialMousePosition.x,
             offsetY: evt.sensorEvent.clientY - this._initialMousePosition.y
         };
+        //获取鼠标的相对坐标，以容器的左上为为坐标原点
+        let relativeMousePosition = {
+            x: evt.sensorEvent.clientX - this._gridster._contianerRect.x,
+            y: evt.sensorEvent.clientY - this._gridster._contianerRect.y
+        };
+        //计算原始元素的大小信息
+        let originalSourceSize = {
+            width: DomUtils.getNumber(evt.source.style.width),
+            height: DomUtils.getNumber(evt.source.style.height)
+        };
+        let displayPosition=this._initialPosition;
+        let clientInfo={
+            EL:evt.mirror,
+            mouseOffset:mouseOffset,
+            relativeMousePosition:relativeMousePosition,
+            originalSourceSize:originalSourceSize,
+            displayPosition:displayPosition
+        }
+        this._gridster._layoutManager.update(evt.originalSource.getAttribute("item-id"),clientInfo) ;
         let displaySize = getResizeSuggestDisplaySize(mouseOffset, this._initialSize);
         DomUtils.setSize(evt.source, displaySize);
-        let mirrorSize = getResizeSuggestMirrorSize(this._gridster, evt.source, displaySize);
-        DomUtils.setSize(evt.mirror, mirrorSize);
-
-        this._mirrorSize = mirrorSize;
+        // let mirrorSize = getResizeSuggestMirrorSize(this._gridster, evt.source, displaySize);
+        // DomUtils.setSize(evt.mirror, mirrorSize);
+        //
+        // this._mirrorSize = mirrorSize;
         // DomUtils.setPosition(evt.mirror, {
         //     x: DomUtils.getNumber(resiezeWindowEL.style.left),
         //     y: DomUtils.getNumber(resiezeWindowEL.style.top)
