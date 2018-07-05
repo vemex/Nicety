@@ -140,8 +140,8 @@ class MoveDragController extends BaseDragController {
             relativeMousePosition:relativeMousePosition,
             originalSourceSize:originalSourceSize,
             displayPosition:displayPosition
-        }
-        this._gridster._layoutManager.update(evt.originalSource.getAttribute("item-id"),clientInfo)
+        };
+        this._gridster._layoutManager.update(evt.originalSource.getAttribute("item-id"),clientInfo);
 
 
         // //获取建议索引位置
@@ -160,6 +160,7 @@ class MoveDragController extends BaseDragController {
     }
 
     dragEnd(evt) {
+
         DomUtils.setPosition(evt.originalSource, this._mirrorPosition);
     }
 }

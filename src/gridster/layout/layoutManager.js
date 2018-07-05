@@ -16,7 +16,7 @@ class GridsterLayoutManager {
         this._gridster=gridster;
         this._layoutInfoSubject=new Subject();
         this._layoutInfos=   new LayoutInfos() ;
-        this._layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
+        //this._layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
         this._currentSize={};
     }
 
@@ -33,11 +33,13 @@ class GridsterLayoutManager {
     resume(){
         this._suspend=false;
         let updateIds=[];
+        let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
+
         this._layoutInfos.forEach(function (item) {
             updateIds.push(item.itemId);
-            this._layoutStrategy.range(item);
+            layoutStrategy.range(item);
         });
-        this._currentSize=this._layoutStrategy.measure(this._currentSize);
+        this._currentSize=layoutStrategy.measure(this._currentSize);
         let updateInfo= {
             size:   this._currentSize,
             updateIds: updateIds,
@@ -62,6 +64,13 @@ class GridsterLayoutManager {
         this._layoutInfoSubject.unsubscribe(fn);
     }
 
+    apply(){
+        if ( this._tempLayoutInfos){
+            this._layoutInfos=this._tempLayoutInfos.clone();
+            //let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
+        }
+    }
+
     /**
      * 更新布局
      * @param clientMousePostion 当前项的位置客户端位置信息
@@ -69,16 +78,21 @@ class GridsterLayoutManager {
      */
     update(layoutItemId,clientInfo){
         let layoutItem=this._layoutInfos.getLayoutItem(layoutItemId);
-        this._layoutStrategy.range(layoutItem,clientInfo);
-        this._currentSize=this._layoutStrategy.measure( this._currentSize,clientInfo);
+        let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
+        let newLayoutInfos= layoutStrategy.range(layoutItem,clientInfo);
+        this._currentSize= layoutStrategy.measure( this._currentSize,clientInfo,newLayoutInfos?newLayoutInfos: this._layoutInfos);
         let updateInfo= {
             el:clientInfo.EL,
             size:   this._currentSize,
             updateIds: [layoutItem.itemId],
-            layoutInfos:this._layoutInfos
+            layoutInfos:newLayoutInfos?newLayoutInfos: this._layoutInfos
         };
         if (!this._suspend)
             this._layoutInfoSubject.next( updateInfo );
+        if (newLayoutInfos){
+            this._tempLayoutInfos=newLayoutInfos;
+        }
+        layoutItem=newLayoutInfos.getLayoutItem(layoutItemId);
         return layoutItem;
     }
 
@@ -88,10 +102,11 @@ class GridsterLayoutManager {
      */
     add(rect,EL,autoLayout){
         let layoutItem=this._layoutInfos.addLayoutItem(rect);
+        let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
         if (!this._suspend ){
             if (autoLayout)
-                this._layoutStrategy.range(layoutItem);
-            this._currentSize=this._layoutStrategy.measure( this._currentSize);
+                layoutStrategy.range(layoutItem);
+            this._currentSize=layoutStrategy.measure( this._currentSize);
 
             let updateInfo= {
                 el:EL,

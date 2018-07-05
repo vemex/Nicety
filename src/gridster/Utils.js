@@ -81,7 +81,7 @@ const Helper = {
             el.style.height = equalWidth + "px";
             return Helper.initGridRanges(el, gridNumber);
         }
-        while (indexH <= ((rect.height / equalWidth) - 1)) {
+        while (indexH <= (Math.ceil (rect.height / equalWidth) - 1)) {
             let position = {
                 x: indexW * equalWidth,
                 y: indexH * equalWidth
@@ -98,7 +98,7 @@ const Helper = {
                 }
             });
             if (position.x + equalWidth >= rect.width) {
-                maxWidthIndex = indexW;
+                maxWidthIndex = maxWidthIndex<indexW?indexW:maxWidthIndex;
                 indexW = 0;
                 indexH++;
             } else {

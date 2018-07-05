@@ -75,12 +75,22 @@ const Gridster = (($) => {
                     position:{indexX:0,indexY:0} ,
                     size:{rWidth:1,rHeight:1}
                 });
+            this.add(
+                {
+                    position:{indexX:0,indexY:1} ,
+                    size:{rWidth:1,rHeight:1}
+                });
+            this.add(
+                {
+                    position:{indexX:0,indexY:2} ,
+                    size:{rWidth:1,rHeight:1}
+                });
             this.add(  {
-                position:{indexX:0,indexY:0} ,
+                position:{indexX:1,indexY:0} ,
                 size:{rWidth:2,rHeight:3}
             });
             this.add(  {
-                position:{indexX:0,indexY:0} ,
+                position:{indexX:3,indexY:0} ,
                 size:{rWidth:4,rHeight:4}
             });
         }

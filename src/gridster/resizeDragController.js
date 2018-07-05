@@ -87,7 +87,7 @@ class ResizeDragController extends BaseDragController {
             width: this._initialSize.width,
             height: this._initialSize.height
         });
-        // evt.mirror.style.transform = `translate3d(${this._gridster._contianerRect.left}px, ${this._gridster._contianerRect.top}px, 0)`;
+        evt.mirror.style.transform = `translate3d(${this._gridster._contianerRect.left}px, ${this._gridster._contianerRect.top}px, 0)`;
         //计算鼠标的偏移距离（鼠标的当前坐标-拖拽开始时鼠标坐标）
         let mouseOffset = {
             offsetX: evt.sensorEvent.clientX - this._initialMousePosition.x,
