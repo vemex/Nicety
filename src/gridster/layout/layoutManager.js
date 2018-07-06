@@ -1,13 +1,14 @@
 import {Subject} from "@reactivex/rxjs/dist/esm2015/internal/Subject"
-import LayoutInfos from "./layoutInfos"
-import GridsterLayoutStrategy from "./layoutStrategy"
+import LayoutInfo from "./LayoutInfo"
+import GridsterLayoutStrategy from "./layoutPackingStrategy"
+import Packer from "./binPacker";
 
 /**
  * 布局信息管理器
  * 布局信息
  * {
  *      updateIds:[]
- *      layoutInfos:{}
+ *      layoutInfo:{}
  *      size:{}
  * }
  */
@@ -15,9 +16,9 @@ class GridsterLayoutManager {
     constructor(gridster) {
         this._gridster=gridster;
         this._layoutInfoSubject=new Subject();
-        this._layoutInfos=   new LayoutInfos() ;
-        //this._layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
+        this._layoutInfo= new LayoutInfo() ;
         this._currentSize={};
+        this._gridster._packer=new Packer( this._gridster._columns,Infinity);
     }
 
     /**
@@ -33,9 +34,9 @@ class GridsterLayoutManager {
     resume(){
         this._suspend=false;
         let updateIds=[];
-        let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
+        let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfo);
 
-        this._layoutInfos.forEach(function (item) {
+        this._layoutInfo.forEach(function (item) {
             updateIds.push(item.itemId);
             layoutStrategy.range(item);
         });
@@ -43,7 +44,7 @@ class GridsterLayoutManager {
         let updateInfo= {
             size:   this._currentSize,
             updateIds: updateIds,
-            layoutInfos:this._layoutInfos
+            layoutInfo:this._layoutInfo
         };
         this._layoutInfoSubject.next( updateInfo );
     }
@@ -66,8 +67,7 @@ class GridsterLayoutManager {
 
     apply(){
         if ( this._tempLayoutInfos){
-            this._layoutInfos=this._tempLayoutInfos.clone();
-            //let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
+            this._layoutInfo=this._tempLayoutInfos.clone();
         }
     }
 
@@ -77,32 +77,32 @@ class GridsterLayoutManager {
      * @param layoutItemId 当前布局项ID
      */
     update(layoutItemId,clientInfo){
-        let layoutItem=this._layoutInfos.getLayoutItem(layoutItemId);
-        let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
-        let newLayoutInfos= layoutStrategy.range(layoutItem,clientInfo);
-        this._currentSize= layoutStrategy.measure( this._currentSize,clientInfo,newLayoutInfos?newLayoutInfos: this._layoutInfos);
+        let layoutItem=this._layoutInfo.getLayoutItem(layoutItemId);
+        let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfo);
+        let newLayoutInfo= layoutStrategy.range(layoutItem,clientInfo);
+        this._currentSize= layoutStrategy.measure( this._currentSize,clientInfo,newLayoutInfo?newLayoutInfo: this._layoutInfo);
         let updateInfo= {
             el:clientInfo.EL,
             size:   this._currentSize,
             updateIds: [layoutItem.itemId],
-            layoutInfos:newLayoutInfos?newLayoutInfos: this._layoutInfos
+            layoutInfo:newLayoutInfo?newLayoutInfo: this._layoutInfo
         };
         if (!this._suspend)
             this._layoutInfoSubject.next( updateInfo );
-        if (newLayoutInfos){
-            this._tempLayoutInfos=newLayoutInfos;
+        if (newLayoutInfo){
+            this._tempLayoutInfos=newLayoutInfo;
         }
-        layoutItem=newLayoutInfos.getLayoutItem(layoutItemId);
+        layoutItem=newLayoutInfo.getLayoutItem(layoutItemId);
         return layoutItem;
     }
 
     /**
      * 添加区域信息
-     * @param rect {position:{indexX,indexY:},size:{rWdith,rHeight}}
+     * @param rect {x,y:wdith:height}
      */
     add(rect,EL,autoLayout){
-        let layoutItem=this._layoutInfos.addLayoutItem(rect);
-        let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfos);
+        let layoutItem=this._layoutInfo.addLayoutItem(rect);
+        let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfo);
         if (!this._suspend ){
             if (autoLayout)
                 layoutStrategy.range(layoutItem);
@@ -112,7 +112,7 @@ class GridsterLayoutManager {
                 el:EL,
                 size:   this._currentSize,
                 updateIds: [layoutItem.itemId],
-                layoutInfos:this._layoutInfos
+                layoutInfo:this._layoutInfo
             };
             this._layoutInfoSubject.next( updateInfo );
         }
@@ -120,7 +120,7 @@ class GridsterLayoutManager {
     }
 
     getLayoutInfo(){
-        return this._layoutInfos;
+        return this._layoutInfo;
     }
 
     remove(){

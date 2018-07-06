@@ -154,15 +154,17 @@ let findUpRect = function (layoutInfos, layoutItem) {
  * 计算竖向关联投影重叠块（以当前块的水平宽度为基准）
  * @param layoutInfos 布局信息
  * @param layoutItem 当前计算参照项
+ * @param direction 查找方向，1为向下-1为向上
  * @param conditionCallBack 额外条件项
  */
-let calculateVerticalRelateShadowOverlayRect=function (layoutInfos,layoutItem,conditionCallBack) {
+let calculateVerticalRelateShadowOverlayRect=function (layoutInfos,layoutItem,direction,conditionCallBack) {
     let findItems=[];
     layoutInfos.forEach(function (item) {
         if (item.itemId === layoutItem.itemId) {
             return false;
         }
-        if(item.rect.position.indexY===layoutItem.rect.position.indexY+layoutItem.rect.size.rHeight) {
+        let height=direction===-1?item.rect.size.rHeight:layoutItem.rect.size.rHeight;
+        if(item.rect.position.indexY===layoutItem.rect.position.indexY+height*direction) {
             if (checkVerticalOverlap(item.rect, layoutItem.rect)) {
                 if (conditionCallBack===undefined || conditionCallBack(layoutInfos, item, layoutItem)) {
                     findItems.push(item);
@@ -173,7 +175,7 @@ let calculateVerticalRelateShadowOverlayRect=function (layoutInfos,layoutItem,co
     let result = [];
     for (let key in findItems) {
         let item = findItems[key];
-        let temp = calculateVerticalRelateShadowOverlayRect( layoutInfos, item,conditionCallBack);
+        let temp = calculateVerticalRelateShadowOverlayRect( layoutInfos, item,direction,conditionCallBack);
         result = result.concat(temp);
     }
     result = result.concat(findItems);
@@ -248,11 +250,21 @@ class GridsterLayoutStrategy {
             let offset = calculateOffsetIndexY(layoutInfos, newUpdateLayoutItem, maxSetIndexY);
 
             //更新原来位置信息
-            let cacheUpdateItems=[updateLayoutItem];
-            let origionUpdateItems =  calculateVerticalRelateShadowOverlayRect(layoutInfos,updateLayoutItem,function (_layoutInfos, _layoutItem1, _layoutItem2) {
-                let result=  !checkVerticalOverlap(_layoutItem1.rect,adjustRect) ;//&& !findUpRect(layoutInfos, _layoutItem1);
+            let cacheUpdateItems=[];
+            let origionUpdateItems =  calculateVerticalRelateShadowOverlayRect(layoutInfos,updateLayoutItem,1,function (_layoutInfos, _layoutItem1, _layoutItem2) {
+                let result=!checkVerticalOverlap(_layoutItem1.rect,adjustRect);//建议位置是否与当前为重叠，
+                if(result){
+                    let upItems= calculateVerticalRelateShadowOverlayRect(layoutInfos, _layoutItem1,-1,function (layoutInfos, layoutItem1, layoutItem2) {
+                        return updateLayoutItem.itemId!==layoutItem1.itemId;
+                    });
+                    cacheUpdateItems=cacheUpdateItems.concat(upItems);
+                }
+
+                //let result=  && !findUpRect(layoutInfos, _layoutItem1);
                 return result;
             });
+            console.log("origion Up Items:");
+            console.log(cacheUpdateItems);
             console.log("origion");
             console.log(origionUpdateItems);
 
@@ -263,7 +275,8 @@ class GridsterLayoutStrategy {
                 if (item.itemId === updateLayoutItem.itemId) {
                     return false;
                 }
-                if(item.rect.position.indexY===adjustRect.position.indexY) {
+                //if(item.rect.position.indexY===adjustRect.position.indexY) {
+                if(hitRectTest(item.rect,adjustRect)){
                    if( checkVerticalOverlap(item.rect,adjustRect)){
                        hitLayoutItems.push(item);
                    }
@@ -273,9 +286,23 @@ class GridsterLayoutStrategy {
             updateLayoutItem.rect = adjustRect;
             let updateItems=[];
             //如果碰撞布局想不为空，则以当前布局项为基准查找垂直方向上的布局项
+            let findItems=hitLayoutItems.concat([]);
             for (let key in hitLayoutItems){
                 let item =hitLayoutItems[key];
-                updateItems=  updateItems.concat(calculateVerticalRelateShadowOverlayRect(layoutInfos, item)) ;
+                updateItems=  updateItems.concat(calculateVerticalRelateShadowOverlayRect(layoutInfos, item,1,function (layoutInfos, layoutItemm1, layoutItem2) {
+                    let result=false;
+                    for (let key in findItems){
+                        let item =findItems[key];
+                        if (item.itemId===layoutItemm1.itemId){
+                            result=true;
+                            break;
+                        }
+                    }
+                    if (!result){
+                        findItems.push(layoutItemm1);
+                    }
+                    return !result;
+                })) ;
                 //updateItems=updateItems.concat([hitLayoutItem]);
             }
             updateItems=updateItems.concat(hitLayoutItems);

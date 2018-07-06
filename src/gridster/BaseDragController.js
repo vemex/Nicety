@@ -2,40 +2,41 @@ import {DomUtils} from "./Utils";
 
 let applyDraggableLayoutInfo = function (info) {
     let itemId = info.updateIds[0];
-    let layoutItem = info.layoutInfos.getLayoutItem(itemId);
+    let layoutItem = info.layoutInfo.getLayoutItem(itemId);
     let e = this._gridster._ranges.equalWidth;
 
     let position = {
-        x: e * layoutItem.rect.position.indexX,
-        y: e * layoutItem.rect.position.indexY
+        x: e * layoutItem.rect.x,
+        y: e * layoutItem.rect.y
     };
     let size = {
-        width: e * layoutItem.rect.size.rWidth,
-        height: e * layoutItem.rect.size.rHeight
+        width: e * layoutItem.rect.width,
+        height: e * layoutItem.rect.height
     };
     DomUtils.setSize(info.el,size);
     DomUtils.setPosition(info.el, position);
     this._gridster._moveController._mirrorPosition = position;
+    this._gridster._resizeControl._mirrorPosition = position;
     this._gridster._resizeControl._mirrorSize = size;
 
     //更新所有布局位置信息
-    info.layoutInfos.forEach(function (item) {
+    info.layoutInfo.forEach(function (item) {
         if (item.itemId=== itemId){
             return
         }
         let postion1 = {
-            x: e * item.rect.position.indexX,
-            y: e * item.rect.position.indexY
+            x: e * item.rect.x,
+            y: e * item.rect.y
         };
         let size1 = {
-            width: e * item.rect.size.rWidth,
-            height: e * item.rect.size.rHeight
+            width: e * item.rect.width,
+            height: e * item.rect.height
         };
         let el=$(`li.gs-window-wrapper[item-id=${item.itemId}]`)[0];
         DomUtils.setSize(el,size1);
         DomUtils.setPosition(el, postion1);
     });
-    this._gridster._container.style.height = info.size.rHeight * e + 'px';
+    this._gridster._container.style.height = info.size.height * e + 'px';
 };
 
 const BaseDragController = class BaseDragController {

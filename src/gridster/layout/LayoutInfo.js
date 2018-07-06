@@ -1,4 +1,5 @@
 import Utils from "../../utils"
+import Rect from "./rect"
 
 //判断对象的数据类型
 function isClass(o){
@@ -30,19 +31,21 @@ function deepClone(obj){
     return result;
 }
 /**
- *  model
+ *  布局信息模型
  * [
  *      {
  *          itemId:xxxx
  *          rect:{
- *              position:{indexX:,indexY:}//单位制
- *              size:{rWidth:,rHeight:}//单位制
+ *              x:
+ *              y:
+ *              width:
+ *              height:
  *          }
  *
  *      }
  * ]
  */
-class LayoutInfos {
+class LayoutInfo {
     constructor(){
         this._items=[];
     }
@@ -50,7 +53,7 @@ class LayoutInfos {
     addLayoutItem(rect){
         let layoutItem={
             itemId:Utils.uID(),
-            rect:rect
+            rect:new Rect(rect)
         };
         this._items.push(layoutItem);
         return layoutItem;
@@ -76,7 +79,7 @@ class LayoutInfos {
         }
     }
     clone(){
-        let result= new LayoutInfos();
+        let result= new LayoutInfo();
         result._items=deepClone(this._items);
         return result;
     }
@@ -84,4 +87,4 @@ class LayoutInfos {
 
 }
 
-export default LayoutInfos;
+export default LayoutInfo;

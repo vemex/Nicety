@@ -125,6 +125,7 @@ class ResizeDragController extends BaseDragController {
     }
 
     dragEnd(evt) {
+        DomUtils.setPosition(evt.originalSource, this._mirrorPosition);
         DomUtils.setSize(evt.originalSource, this._mirrorSize);
     }
 }
