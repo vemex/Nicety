@@ -29,19 +29,20 @@ const Gridster = (($) => {
     const DATA_KEY = 'ny.gridster';
     const EVENT_KEY = `.${DATA_KEY}`;
     const DATA_API_KEY = '.data-api';
+    const ITEM_KEY = 'gridster.item';
 
     const JQUERY_NO_CONFLICT = $.fn[NAME];
 
     const DefaultConfig = {
-        columns:12,
-        minable:{
-            width:3,
-            height:3,
+        columns: 12,
+        min: {
+            width: 3,
+            height: 3,
         },
-        operators:[{
-            content:"",
-            className:"",
-            type:""
+        operators: [{
+            content: "",
+            className: "",
+            type: ""
         }]
     };
 
@@ -56,13 +57,20 @@ const Gridster = (($) => {
         message: 'string'
     };
 
-    const Class = {
-        Drag_Warp: 'drag-wrapper',
+    const Classes = {
+        DragWarp: 'gs-window-wrapper',
+        DragWindow: 'gs-window',
+        DragWindowHeader: 'gs-header',
+        DragWindowTitle: 'gs-title',
+        DragWindowControl: 'gs-control',
+        DragWindowBody: 'gs-container',
+        ResizeHandler: 'gs-resize-handle',
+        MoveHandler: 'gs-move-handle',
     };
 
     const Event = {
         WINDOW_CLICK_DATA_API: `click.window.${EVENT_KEY}${DATA_API_KEY}`,
-        OPERATION_KEY: `operation.`,
+        WINDOW_KEY: `window.`
     };
 
     class Gridster {
@@ -90,28 +98,76 @@ const Gridster = (($) => {
                 }
             });
             this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
+            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
+            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
+            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
+            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
+            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
+            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
         }
 
         add(item) {
-            let el = DomUtils.newNode('<li class="gs-window-wrapper">' +
-                '<div class="gs-window">' +
-                '<div class="gs-header gs-move-handle "></div>' +
-                '<div class="gs-container"></div>' +
-                '</div>' +
-                '<span class="gs-resize-handle gs-resize-handle-both"></span></li>');
+            let el = DomUtils.newNode(`<li class="${Classes.DragWarp}">
+                <div class="${Classes.DragWindow}">
+                <div class="${Classes.DragWindowHeader} ${Classes.MoveHandler}"></div>
+                <div class="${Classes.DragWindowBody}"></div>
+                </div>
+                <span class="${Classes.ResizeHandler}"></span></li>`);
             DomUtils.appendTo(el, this._container);
             let layoutItem = this._layoutManager.add(item.rect, el, true);
             $(el).attr("item-id", layoutItem.itemId);
-            $(`<div class="gs-title">${layoutItem.itemId}</div>`).appendTo($('.gs-header', el));
-            let control = $(`<div class="gs-control"><button data-type="refresh" class="btn"><i class="ti-reload icon-lg" ></i></button><button  data-type="close" class="btn"><i class="ti-close icon-lg"></i></button></div>`).appendTo($('.gs-header', el));
+            item.itemId=layoutItem.itemId;
+            $(`<div class="${Classes.DragWindowTitle}">${layoutItem.itemId}</div>`).appendTo($(`.${Classes.DragWindowHeader}`, el));
+            let control = $(`<div class="${Classes.DragWindowControl}"></div>`).appendTo($(`.${Classes.DragWindowHeader}`, el));
+
+            $('<button data-type="load" class="btn"><i class="ti-reload icon-lg" ></i></button>').appendTo(control);
+            $('<button  data-type="close" class="btn"><i class="ti-close icon-lg"></i></button>').appendTo(control);
             $('button', control).data(DATA_KEY, this);
+            $('button', control).data(ITEM_KEY, item);
+            this.load(item,el);
         }
 
-        removeBlock() {
+        close(item) {
+            this._inClosing=true;
+            this._element.nyOverlay({ title: 'WAITING', target: `li[item-id=${item.itemId}] .${Classes.DragWindowBody}`,'iconType':'pulse'});
+            const event = $.Event(Event.WINDOW_KEY + 'close');
+            event.item = item;
+            event.gridster = this;
+            let _=this;
+            event.next = function () {
+                _._element.nyOverlay('hide');
+                _.remove(item);
+                this._inClosing=false;
+            };
+            this.trigger(event);
+        }
+
+        load(item) {
+            if (this._inClosing){
+                return;
+            }
+            this._element.nyOverlay({ title: 'LOADING', target: `li[item-id=${item.itemId}] .${Classes.DragWindowBody}`,'iconType':'pulse'});
+            const event = $.Event(Event.WINDOW_KEY + 'load');
+            event.el=$(`li[item-id=${item.itemId}] .${Classes.DragWindowBody}`)[0];
+            event.item = item;
+            event.gridster = this;
+            let _=this;
+            event.next = function () {
+                _._element.nyOverlay('hide');
+            };
+            this.trigger(event);
+        }
+
+        trigger(event) {
+            this._element.trigger(event);
+        }
+
+        remove(item) {
+            $(`li[item-id=${item.itemId}]`).remove();
         }
 
         _getConfig(config) {
-
+            return config;
         }
 
         dispose() {
@@ -132,6 +188,9 @@ const Gridster = (($) => {
                     data = new Gridster($element, config);
                     $element.data(DATA_KEY, data);
                 }
+                if(typeof config==='string') {
+                    data[config].call(data,arguments.slice(1))
+                }
             });
         };
     }
@@ -140,11 +199,15 @@ const Gridster = (($) => {
         Event.WINDOW_CLICK_DATA_API,
         Selector.WindowBarButton,
         function (evt) {
-            let gridster=$(evt.currentTarget).data(DATA_KEY);
+            let gridster = $(evt.currentTarget).data(DATA_KEY);
+            let item = $(evt.currentTarget).data(ITEM_KEY);
             let dataType = $(evt.currentTarget).attr('data-type');
-            if (dataType) {
-                const operationEvent = $.Event(Event.OPERATION_KEY+dataType);
-                operationEvent.dataType=dataType;
+            let action = gridster[dataType];
+            if (action)
+                action.call(gridster,item);
+            else{
+                const operationEvent = $.Event(Event.WINDOW_KEY + dataType);
+                operationEvent.dataType = dataType;
                 gridster._element.trigger(operationEvent);
             }
         }

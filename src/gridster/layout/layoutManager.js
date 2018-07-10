@@ -21,6 +21,10 @@ class GridsterLayoutManager {
         this._gridster._packer=new Packer( this._gridster._columns,Infinity);
     }
 
+    init(){
+        this._layoutInfo.addLayoutItem();
+    }
+
     /**
      * 挂起布局计算
      */

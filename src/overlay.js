@@ -124,9 +124,9 @@ const Overlay = (($) => {
         }
 
         dispose() {
-            $.removeData(this._element, DATA_KEY)
-            $.removeData(this._element, DATA_OVER_DIV_KEY)
-            $.removeData(this._element, DATA_TEMPLATE_KEY)
+            this._element.removeData(DATA_KEY);
+            this._element.removeData( DATA_OVER_DIV_KEY);
+            this._element.removeData( DATA_TEMPLATE_KEY);
             this._element = null;
             this._config = null;
         }
