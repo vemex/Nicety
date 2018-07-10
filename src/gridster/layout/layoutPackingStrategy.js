@@ -107,7 +107,7 @@ class GridsterLayoutStrategy {
 
             return layoutInfo;
         }else{
-            this._gridster._packer.pack(updateLayoutItem.rect);
+            this._gridster._packer.rowPack(updateLayoutItem.rect);
         }
     }
 }

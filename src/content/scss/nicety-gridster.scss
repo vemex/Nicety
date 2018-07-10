@@ -3,30 +3,41 @@ ul.drag-wrapper{
     padding: 0px;
     margin: 0px;
     width:100%;
-    overflow: hidden;
-    background: #0b7285;
+    overflow: visible;
+    background: transparent;
     li{
         position: absolute;
         list-style: none;
     }
+    li:hover,
+    ul:hover{
+        outline:0;
+    }
 
 }
+ul.drag-wrapper:hover{
+    outline:0;
+}
+
 .draggable-container--is-dragging  .draggable-mirror{
+
     background: slategray !important;
-    opacity: 0.5;
-    transition: top 0.15s linear , left 0.15s linear , width 0.15s linear, height 0.15s linear;
-    //transition-delay: 0.01s;
-    -webkit-transition: top 0.15s linear , left 0.15s linear , width 0.15s linear, height 0.15s linear;
+    opacity: 0.3;
+    //transition: top 0.15s linear , left 0.15s linear , width 0.15s linear, height 0.15s linear;
+    ////transition-delay: 0.01s;
+    //-webkit-transition: top 0.15s linear , left 0.15s linear , width 0.15s linear, height 0.15s linear;
 }
 .draggable-container--is-dragging  .draggable-source--is-dragging{
     z-index: 999;
 }
 
 .gs-window-wrapper {
-    /*padding: 5px;*/
+
+    padding: 5px;
     .gs-window {
 
-        background-color: darkcyan;
+        border: 1px silver solid ;
+        background-color: white;
         width: 100%;
         height: 100%;
         .gs-container{
@@ -34,7 +45,7 @@ ul.drag-wrapper{
         }
         .gs-title {
             height: 30px;
-            background-color: #00aa00;
+            background-color: white;
         }
 
     }
@@ -47,8 +58,8 @@ ul.drag-wrapper{
     .gs-resize-handle-both {
         width: 20px;
         height: 20px;
-        bottom: -8px;
-        right: -8px;
+        bottom: 0px;
+        right: 0px;
         background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pg08IS0tIEdlbmVyYXRvcjogQWRvYmUgRmlyZXdvcmtzIENTNiwgRXhwb3J0IFNWRyBFeHRlbnNpb24gYnkgQWFyb24gQmVhbGwgKGh0dHA6Ly9maXJld29ya3MuYWJlYWxsLmNvbSkgLiBWZXJzaW9uOiAwLjYuMSAgLS0+DTwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DTxzdmcgaWQ9IlVudGl0bGVkLVBhZ2UlMjAxIiB2aWV3Qm94PSIwIDAgNiA2IiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojZmZmZmZmMDAiIHZlcnNpb249IjEuMSINCXhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiDQl4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjZweCIgaGVpZ2h0PSI2cHgiDT4NCTxnIG9wYWNpdHk9IjAuMzAyIj4NCQk8cGF0aCBkPSJNIDYgNiBMIDAgNiBMIDAgNC4yIEwgNCA0LjIgTCA0LjIgNC4yIEwgNC4yIDAgTCA2IDAgTCA2IDYgTCA2IDYgWiIgZmlsbD0iIzAwMDAwMCIvPg0JPC9nPg08L3N2Zz4=);
         background-position: top left;
         background-repeat: no-repeat;

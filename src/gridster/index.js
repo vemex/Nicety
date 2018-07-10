@@ -74,48 +74,52 @@ const Gridster = (($) => {
                 {
                     x: 0,
                     y: 0,
-                    height: 1,
+                    height: 3,
                     width: 3
                 });
             this.add(
                 {
                     x: 0,
                     y: 0,
-                    height: 1,
-                    width:6
+                    height: 3,
+                    width: 3
                 });
             this.add(
                 {
                     x: 0,
                     y: 0,
-                    height: 4,
+                    height: 3,
                     width: 3
                 });
             this.add({
                 x: 0,
                 y: 0,
-                height: 5,
-                width: 1
+                height: 3,
+                width: 3
             });
             this.add({
                 x: 0,
                 y: 0,
-                height: 5,
-                width: 1
+                height: 3,
+                width: 3
             });
         }
 
         add(rect) {
             let el = DomUtils.newNode('<li class="gs-window-wrapper">' +
-                '<div class="gs-window">' +
-                '<div class="gs-title gs-move-handle"></div>' +
-                '<div class="gs-container"></div>' +
+                '<div class="gs-window card">' +
+                '<div class="gs-title gs-move-handle card-header bar bg-primary text-white"></div>' +
+                '<div class="gs-container card-body bg-light"></div>' +
                 '</div>' +
                 '<span class="gs-resize-handle gs-resize-handle-both"></span></li>');
             DomUtils.appendTo(el, this._container);
             let layoutItem = this._layoutManager.add(rect, el, true);
             $(el).attr("item-id", layoutItem.itemId);
-            $('.gs-title',el).text( layoutItem.itemId);
+            let title= $(`<div class="card-title">${layoutItem.itemId}</div>`).appendTo($('.gs-title', el));
+            $(`<div class="card-control text-white">
+                            <button class="btn text-white"><i class="ti-reload icon-lg" ></i></button>
+                            <button class="btn text-white"><i class="ti-close icon-lg"></i></button>
+                        </div>`).appendTo($('.gs-title', el));
         }
 
         removeBlock() {
