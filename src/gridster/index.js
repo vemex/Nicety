@@ -2,8 +2,9 @@ import $ from 'jquery'
 import {Draggable} from '@shopify/draggable';
 
 import {DomUtils, Helper, Constant} from "./Utils"
-import MoveDragController from "./moveDragController"
-import ResizeDragController from "./resizeDragController"
+import ControllerManager from "./controllers/ControllerManager"
+import MoveDragController from "./controllers/moveDragController"
+import ResizeDragController from "./controllers/resizeDragController"
 import GridsterLayoutManager from "./layout/layoutManager"
 
 let iniApplyLayoutInfo = function (info) {
@@ -26,13 +27,29 @@ const Gridster = (($) => {
     const VERSION = '0.0.1';
 
     const DATA_KEY = 'ny.gridster';
+    const EVENT_KEY = `.${DATA_KEY}`;
+    const DATA_API_KEY = '.data-api';
+
     const JQUERY_NO_CONFLICT = $.fn[NAME];
 
-    const DefaultConfig = {};
+    const DefaultConfig = {
+        columns:12,
+        minable:{
+            width:3,
+            height:3,
+        },
+        operators:[{
+            content:"",
+            className:"",
+            type:""
+        }]
+    };
 
     const Selector = {
-        DraggableWrapper: '.drag-wrapper',
-        DraggableNode: '.drag-wrapper > ul > li'
+        DraggableWrapper: 'ul.drag-wrapper',
+        DraggableWindow: 'ul.drag-wrapper > li.gs-window-wrapper',
+        WindowBarButton: 'ul.drag-wrapper > li.gs-window-wrapper > div.gs-window>div.gs-header>div.gs-control>button',
+
     };
 
     const DefaultType = {
@@ -43,7 +60,10 @@ const Gridster = (($) => {
         Drag_Warp: 'drag-wrapper',
     };
 
-    const Event = {};
+    const Event = {
+        WINDOW_CLICK_DATA_API: `click.window.${EVENT_KEY}${DATA_API_KEY}`,
+        OPERATION_KEY: `operation.`,
+    };
 
     class Gridster {
         constructor($el, config) {
@@ -55,14 +75,13 @@ const Gridster = (($) => {
             this._columns = Constant.ColumnCount;
             this._ranges = Helper.initGridRanges(container, Constant.ColumnCount);
             this._layoutManager = new GridsterLayoutManager(this);
-
             this._draggable = new Draggable(container, {
                 draggable: 'li',
                 delay: 0,
             });
-
-            this._moveController = new MoveDragController(this);
-            this._resizeControl = new ResizeDragController(this);
+            this._controllerManager = new ControllerManager(this);
+            this._controllerManager.regist(new MoveDragController(this));
+            this._controllerManager.regist(new ResizeDragController(this));
 
             let _ = this;
             this._layoutManager.subscribe(function (infos) {
@@ -70,56 +89,22 @@ const Gridster = (($) => {
                     iniApplyLayoutInfo.call(_, infos);
                 }
             });
-            this.add(
-                {
-                    x: 0,
-                    y: 0,
-                    height: 3,
-                    width: 3
-                });
-            this.add(
-                {
-                    x: 0,
-                    y: 0,
-                    height: 3,
-                    width: 3
-                });
-            this.add(
-                {
-                    x: 0,
-                    y: 0,
-                    height: 3,
-                    width: 3
-                });
-            this.add({
-                x: 0,
-                y: 0,
-                height: 3,
-                width: 3
-            });
-            this.add({
-                x: 0,
-                y: 0,
-                height: 3,
-                width: 3
-            });
+            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
         }
 
-        add(rect) {
+        add(item) {
             let el = DomUtils.newNode('<li class="gs-window-wrapper">' +
-                '<div class="gs-window card">' +
-                '<div class="gs-title gs-move-handle card-header bar bg-primary text-white"></div>' +
-                '<div class="gs-container card-body bg-light"></div>' +
+                '<div class="gs-window">' +
+                '<div class="gs-header gs-move-handle "></div>' +
+                '<div class="gs-container"></div>' +
                 '</div>' +
                 '<span class="gs-resize-handle gs-resize-handle-both"></span></li>');
             DomUtils.appendTo(el, this._container);
-            let layoutItem = this._layoutManager.add(rect, el, true);
+            let layoutItem = this._layoutManager.add(item.rect, el, true);
             $(el).attr("item-id", layoutItem.itemId);
-            let title= $(`<div class="card-title">${layoutItem.itemId}</div>`).appendTo($('.gs-title', el));
-            $(`<div class="card-control text-white">
-                            <button class="btn text-white"><i class="ti-reload icon-lg" ></i></button>
-                            <button class="btn text-white"><i class="ti-close icon-lg"></i></button>
-                        </div>`).appendTo($('.gs-title', el));
+            $(`<div class="gs-title">${layoutItem.itemId}</div>`).appendTo($('.gs-header', el));
+            let control = $(`<div class="gs-control"><button data-type="refresh" class="btn"><i class="ti-reload icon-lg" ></i></button><button  data-type="close" class="btn"><i class="ti-close icon-lg"></i></button></div>`).appendTo($('.gs-header', el));
+            $('button', control).data(DATA_KEY, this);
         }
 
         removeBlock() {
@@ -151,6 +136,19 @@ const Gridster = (($) => {
         };
     }
 
+    $(document).on(
+        Event.WINDOW_CLICK_DATA_API,
+        Selector.WindowBarButton,
+        function (evt) {
+            let gridster=$(evt.currentTarget).data(DATA_KEY);
+            let dataType = $(evt.currentTarget).attr('data-type');
+            if (dataType) {
+                const operationEvent = $.Event(Event.OPERATION_KEY+dataType);
+                operationEvent.dataType=dataType;
+                gridster._element.trigger(operationEvent);
+            }
+        }
+    );
 
     $.fn[NAME] = Gridster._jQueryInterface;
     $.fn[NAME].Constructor = Gridster;

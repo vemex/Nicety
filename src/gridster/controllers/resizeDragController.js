@@ -1,4 +1,4 @@
-import {DomUtils} from "./Utils";
+import {DomUtils} from "../Utils";
 import BaseDragController from "./BaseDragController";
 
 /**

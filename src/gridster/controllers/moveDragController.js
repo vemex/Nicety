@@ -1,5 +1,5 @@
-import {DomUtils} from "./Utils";
-import {Helper, Constant} from "./Utils";
+import {DomUtils} from "../Utils";
+import {Helper, Constant} from "../Utils";
 import BaseDragController from "./BaseDragController"
 
 /**
@@ -160,7 +160,6 @@ class MoveDragController extends BaseDragController {
     }
 
     dragEnd(evt) {
-
         DomUtils.setPosition(evt.originalSource, this._mirrorPosition);
     }
 }

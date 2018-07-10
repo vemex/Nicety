@@ -19,7 +19,10 @@
         .card-control {
             position: relative;
             float: right;
+            font-size: 0;
             button {
+                font-size: 1rem;
+                border-radius: 0px;
                 height: 100%;
                 background: transparent;
                 &:hover {
