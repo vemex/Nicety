@@ -59,6 +59,17 @@ class LayoutInfo {
         return layoutItem;
     }
 
+    removeLayoutIem(layoutItemId){
+        let index =null
+        for (let key in this._items) {
+            if (this._items[key].itemId === layoutItemId) {
+                index=key;
+                break;
+            }
+        }
+        this._items.splice(index,1);
+    }
+
     getLayoutItem(itemId){
         let result=undefined;
         this.forEach(function (item) {

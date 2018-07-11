@@ -4,7 +4,10 @@ import {DomUtils} from "../Utils";
 let applyDraggableLayoutInfo = function (info) {
     let itemId = info.updateIds[0];
     let layoutItem = info.layoutInfo.getLayoutItem(itemId);
-    let e = this._gridster._ranges.equalWidth;
+    if (!layoutItem) {
+        return;
+    }
+    let e = this._gridster._getDividedLength();
 
     let position = {
         x: e * layoutItem.rect.x,
@@ -14,8 +17,10 @@ let applyDraggableLayoutInfo = function (info) {
         width: e * layoutItem.rect.width,
         height: e * layoutItem.rect.height
     };
-    DomUtils.setSize(info.el,size);
-    DomUtils.setPosition(info.el, position);
+    if (info.el) {
+        DomUtils.setSize(info.el, size);
+        DomUtils.setPosition(info.el, position);
+    }
 
     for (let key in this.registControllers){
         let controller=this.registControllers[key];
@@ -25,7 +30,7 @@ let applyDraggableLayoutInfo = function (info) {
 
     //更新所有布局位置信息
     info.layoutInfo.forEach(function (item) {
-        if (item.itemId=== itemId){
+        if (item.itemId=== itemId && info.el){
             return
         }
         let postion1 = {

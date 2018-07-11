@@ -30,6 +30,7 @@ class GridsterLayoutManager {
      */
     suspend(){
         this._suspend=true;
+        this._gridster._packer=new Packer( this._gridster._columns,Infinity);
     }
 
     /**
@@ -40,6 +41,11 @@ class GridsterLayoutManager {
         let updateIds=[];
         let layoutStrategy =new GridsterLayoutStrategy( this._gridster,this._layoutInfo);
 
+        this._gridster.relayout=true;
+        function verticalSorter(a, b) {
+            return a.rect.y - b.rect.y || a.rect.x - b.rect.x;
+        }
+        this._layoutInfo._items.sort(verticalSorter);
         this._layoutInfo.forEach(function (item) {
             updateIds.push(item.itemId);
             layoutStrategy.range(item);
@@ -50,8 +56,11 @@ class GridsterLayoutManager {
             updateIds: updateIds,
             layoutInfo:this._layoutInfo
         };
+        this._gridster.relayout=false;
         this._layoutInfoSubject.next( updateInfo );
     }
+
+
 
     /**
      * 订阅布局信息的更新
@@ -127,7 +136,15 @@ class GridsterLayoutManager {
         return this._layoutInfo;
     }
 
-    remove(){
+    remove(layoutItemId){
+        let isSuspend=this._suspend;
+        if (!isSuspend) {
+            this.suspend();
+        }
+        this._layoutInfo.removeLayoutIem(layoutItemId);
+        if (!isSuspend) {
+            this.resume();
+        }
     }
 }
 

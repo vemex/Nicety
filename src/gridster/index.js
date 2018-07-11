@@ -1,23 +1,45 @@
 import $ from 'jquery'
 import {Draggable} from '@shopify/draggable';
 
-import {DomUtils, Helper, Constant} from "./Utils"
+import {DomUtils} from "./Utils"
 import ControllerManager from "./controllers/ControllerManager"
 import MoveDragController from "./controllers/moveDragController"
 import ResizeDragController from "./controllers/resizeDragController"
 import GridsterLayoutManager from "./layout/layoutManager"
 
-let iniApplyLayoutInfo = function (info) {
+let initApplyLayoutInfo = function (info) {
+    let itemId = info.updateIds[0];
     let layoutItem = info.layoutInfo.getLayoutItem(info.updateIds[0]);
-    let e = this._ranges.equalWidth;
-    DomUtils.setSize(info.el, {
-        width: e * layoutItem.rect.width,
-        height: e * layoutItem.rect.height
+    let e = this._getDividedLength();
+    if (info.el) {
+        DomUtils.setSize(info.el, {
+            width: e * layoutItem.rect.width,
+            height: e * layoutItem.rect.height
+        });
+        DomUtils.setPosition(info.el, {
+            x: e * layoutItem.rect.x,
+            y: e * layoutItem.rect.y
+        });
+    }
+
+    //更新所有布局位置信息
+    info.layoutInfo.forEach(function (item) {
+        if (item.itemId=== itemId && info.el){
+            return
+        }
+        let postion1 = {
+            x: e * item.rect.x,
+            y: e * item.rect.y
+        };
+        let size1 = {
+            width: e * item.rect.width,
+            height: e * item.rect.height
+        };
+        let el=$(`li.gs-window-wrapper[item-id=${item.itemId}]`)[0];
+        DomUtils.setSize(el,size1);
+        DomUtils.setPosition(el, postion1);
     });
-    DomUtils.setPosition(info.el, {
-        x: e * layoutItem.rect.x,
-        y: e * layoutItem.rect.y
-    });
+
     this._container.style.height = info.size.height * e + 'px';
 };
 
@@ -43,7 +65,8 @@ const Gridster = (($) => {
             content: "",
             className: "",
             type: ""
-        }]
+        }],
+        items:[]
     };
 
     const Selector = {
@@ -51,10 +74,6 @@ const Gridster = (($) => {
         DraggableWindow: 'ul.drag-wrapper > li.gs-window-wrapper',
         WindowBarButton: 'ul.drag-wrapper > li.gs-window-wrapper > div.gs-window>div.gs-header>div.gs-control>button',
 
-    };
-
-    const DefaultType = {
-        message: 'string'
     };
 
     const Classes = {
@@ -76,12 +95,12 @@ const Gridster = (($) => {
     class Gridster {
         constructor($el, config) {
             this._element = $el;
+            this._config=Gridster._getConfig(config);
             let container = DomUtils.newNode('<ul class="drag-wrapper"></ul>');
             DomUtils.appendTo(container, this._element);
             this._container = container;
             this._contianerRect = container.getBoundingClientRect();
-            this._columns = Constant.ColumnCount;
-            this._ranges = Helper.initGridRanges(container, Constant.ColumnCount);
+            this._columns = this._config.columns;
             this._layoutManager = new GridsterLayoutManager(this);
             this._draggable = new Draggable(container, {
                 draggable: 'li',
@@ -94,19 +113,43 @@ const Gridster = (($) => {
             let _ = this;
             this._layoutManager.subscribe(function (infos) {
                 if (!_._onDragging) {//当处于拖拽状态时财之用
-                    iniApplyLayoutInfo.call(_, infos);
+                    initApplyLayoutInfo.call(_, infos);
                 }
             });
-            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
-            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
-            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
-            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
-            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
-            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
-            this.add({rect: {x: 0, y: 0, width: 3, height: 3}, title: ""})
+            this._initItems();
+        }
+        
+        _initItems(){
+
+            if (!this._config.relayout) {
+                this._init=true;
+               this._layoutManager.suspend();
+            }
+            for(let key in  this._config.items) {
+                this.add(this._config.items[key]);
+            }
+            if (!this._config.relayout) {
+                this._init=false;
+                this._layoutManager.resume();
+                let _=this;
+                $('li',this._container).each(function () {
+                    let item = $(this).data(ITEM_KEY);
+                    _.load(item);
+                })
+            }
         }
 
-        add(item) {
+        /**
+         * 获取等分长度
+         * @returns {number}
+         * @private
+         */
+        _getDividedLength(){
+            this._contianerRect =  this._container.getBoundingClientRect();
+            return this._contianerRect.width/this._columns;
+        }
+
+        _buildWindowNode(item){
             let el = DomUtils.newNode(`<li class="${Classes.DragWarp}">
                 <div class="${Classes.DragWindow}">
                 <div class="${Classes.DragWindowHeader} ${Classes.MoveHandler}"></div>
@@ -114,38 +157,48 @@ const Gridster = (($) => {
                 </div>
                 <span class="${Classes.ResizeHandler}"></span></li>`);
             DomUtils.appendTo(el, this._container);
-            let layoutItem = this._layoutManager.add(item.rect, el, true);
-            $(el).attr("item-id", layoutItem.itemId);
-            item.itemId=layoutItem.itemId;
-            $(`<div class="${Classes.DragWindowTitle}">${layoutItem.itemId}</div>`).appendTo($(`.${Classes.DragWindowHeader}`, el));
+            $(`<div class="${Classes.DragWindowTitle}">${item.title}</div>`).appendTo($(`.${Classes.DragWindowHeader}`, el));
             let control = $(`<div class="${Classes.DragWindowControl}"></div>`).appendTo($(`.${Classes.DragWindowHeader}`, el));
-
+            for (let key in this._config.operators) {
+                let operator=this._config.operators[key];
+                if (operator.type && operator.type!==''){
+                    $(`<button data-type="${operator.type}" class="btn ${operator.className}">${operator.content}</button>`).appendTo(control);
+                }
+            }
             $('<button data-type="load" class="btn"><i class="ti-reload icon-lg" ></i></button>').appendTo(control);
             $('<button  data-type="close" class="btn"><i class="ti-close icon-lg"></i></button>').appendTo(control);
-            $('button', control).data(DATA_KEY, this);
-            $('button', control).data(ITEM_KEY, item);
-            this.load(item,el);
+           return el;
+        }
+        add(item) {
+            let el =this._buildWindowNode(item);
+            let layoutItem = this._layoutManager.add(item.rect, el, true);
+            $(el).attr("item-id", layoutItem.itemId);
+
+            item={
+                ...layoutItem,
+                ...item
+            };
+            $(`.${Classes.DragWindowControl} button`, el).data(DATA_KEY, this);
+            $(`.${Classes.DragWindowControl} button`, el).data(ITEM_KEY, item);
+            $(el).data(ITEM_KEY, item);
+            if ( ! this._init) {
+                this.load(item);
+            }
         }
 
         close(item) {
-            this._inClosing=true;
-            this._element.nyOverlay({ title: 'WAITING', target: `li[item-id=${item.itemId}] .${Classes.DragWindowBody}`,'iconType':'pulse'});
-            const event = $.Event(Event.WINDOW_KEY + 'close');
-            event.item = item;
-            event.gridster = this;
             let _=this;
-            event.next = function () {
-                _._element.nyOverlay('hide');
+            this._trigger('close',item,function () {
                 _.remove(item);
-                this._inClosing=false;
-            };
-            this.trigger(event);
+                _._layoutManager.remove(item.itemId);
+            });
         }
 
         load(item) {
-            if (this._inClosing){
-                return;
-            }
+            this._trigger('load',item);
+        }
+
+        _trigger(eventType,item,fun) {
             this._element.nyOverlay({ title: 'LOADING', target: `li[item-id=${item.itemId}] .${Classes.DragWindowBody}`,'iconType':'pulse'});
             const event = $.Event(Event.WINDOW_KEY + 'load');
             event.el=$(`li[item-id=${item.itemId}] .${Classes.DragWindowBody}`)[0];
@@ -154,19 +207,25 @@ const Gridster = (($) => {
             let _=this;
             event.next = function () {
                 _._element.nyOverlay('hide');
+                if (fun){
+                    fun(event);
+                }
             };
-            this.trigger(event);
-        }
-
-        trigger(event) {
             this._element.trigger(event);
+            if (!event.async) {
+                event.next();
+            }
         }
 
         remove(item) {
             $(`li[item-id=${item.itemId}]`).remove();
         }
 
-        _getConfig(config) {
+        static _getConfig(config) {
+            config = {
+                ...DefaultConfig,
+                ...config
+            };
             return config;
         }
 
@@ -206,9 +265,7 @@ const Gridster = (($) => {
             if (action)
                 action.call(gridster,item);
             else{
-                const operationEvent = $.Event(Event.WINDOW_KEY + dataType);
-                operationEvent.dataType = dataType;
-                gridster._element.trigger(operationEvent);
+                gridster._trigger(dataType,item)
             }
         }
     );

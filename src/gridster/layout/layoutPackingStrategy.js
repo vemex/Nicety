@@ -1,23 +1,24 @@
 import Packer from "./binPacker"
-import  Rect from "./rect"
+import Rect from "./rect"
 
 /**
  * 计算推荐的矩形位置
  */
-let calculateAdjustRect = function (clientInfo, ranges) {
-    let offsetX = ranges.equalWidth * 0.8;
-    let offsetY = ranges.equalWidth * 0.2;
-    let indexX = Math.floor((clientInfo.displayPosition.x + offsetX) / ranges.equalWidth);
-    let indexY = Math.floor((clientInfo.displayPosition.y + offsetY) / ranges.equalWidth);
-    let rW = Math.ceil(clientInfo.originalSourceSize.width / ranges.equalWidth);
-    let rH = Math.ceil(clientInfo.originalSourceSize.height / ranges.equalWidth);
+let calculateAdjustRect = function (clientInfo, gridster) {
+    let e = gridster._getDividedLength();
+    let offsetX = e * 0.8;
+    let offsetY = e * 0.2;
+    let indexX = Math.floor((clientInfo.displayPosition.x + offsetX) / e);
+    let indexY = Math.floor((clientInfo.displayPosition.y + offsetY) / e);
+    let rW = Math.round(clientInfo.originalSourceSize.width / e);
+    let rH = Math.round(clientInfo.originalSourceSize.height / e);
 
-    indexX = (indexX + rW) <= ranges.maxWidthIndex ? indexX : (ranges.maxWidthIndex + 1 - (rW));
+    indexX = (indexX + rW) <= (gridster._columns-1) ? indexX : (gridster._columns  - (rW));
 
     indexX = indexX < 0 ? 0 : indexX;
     indexY = indexY < 0 ? 0 : indexY;
-
-    return  new Rect({x:indexX,y:indexY,width:rW,height:rH});
+console.log(clientInfo.originalSourceSize.width / e )
+    return new Rect({x: indexX, y: indexY, width: rW, height: rH});
 };
 /**
  * 判断两个矩形是否一致，位置和大小
@@ -31,6 +32,7 @@ let equalRect = (rect1, rect2) => {
         rect1.width === rect2.width &&
         rect1.height === rect2.height;
 };
+
 /***
  * 布局策略类
  */
@@ -73,41 +75,44 @@ class GridsterLayoutStrategy {
      *}
      */
     range(updateLayoutItem, clientInfo) {
-        if(clientInfo) {
+        if (clientInfo) {
             let layoutInfo = this._layoutInfo.clone();
             updateLayoutItem = layoutInfo.getLayoutItem(updateLayoutItem.itemId);
-            let ranges = this._gridster._ranges;
+           // let ranges = this._gridster._ranges;
             //根据当前客户端的位置信息获取建议位置
-            let adjustRect = calculateAdjustRect(clientInfo, ranges);
+            let adjustRect = calculateAdjustRect(clientInfo, this._gridster);
             //如果建议位置与当前位置信息相等则直接返回
             if (equalRect(updateLayoutItem.rect, adjustRect)) {
                 return layoutInfo;
             }
-            console.log(adjustRect);
-            updateLayoutItem.rect=adjustRect;
+            updateLayoutItem.rect = adjustRect;
             let shiftPacker = new Packer(this._gridster._columns, Infinity);
 
-            function verticalSorter( a, b ) {
-                if (a.rect.y === b.rect.y ){
-                    if (a===updateLayoutItem){
+            function verticalSorter(a, b) {
+                if (a.rect.y === b.rect.y) {
+                    if (a === updateLayoutItem) {
                         return -1;
                     }
-                    if (b===updateLayoutItem){
+                    if (b === updateLayoutItem) {
                         return 1;
                     }
                 }
 
                 return a.rect.y - b.rect.y || a.rect.x - b.rect.x;
             }
+
             layoutInfo._items.sort(verticalSorter);
-            console.log(JSON.stringify(layoutInfo._items));
             layoutInfo.forEach(function (item) {
                 shiftPacker.columnPack(item.rect);
             });
 
             return layoutInfo;
-        }else{
-            this._gridster._packer.pack(updateLayoutItem.rect);
+        } else {
+            if ( this._gridster.relayout)
+                this._gridster._packer.columnPack(updateLayoutItem.rect);
+            else
+                this._gridster._packer.pack(updateLayoutItem.rect);
+
         }
     }
 }

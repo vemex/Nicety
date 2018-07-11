@@ -14,31 +14,6 @@ let getResizeSuggestDisplaySize = (mouseOffset, initialSize) => {
     };
 };
 /**
- * 当resize大小时，获取mirror对象建议大小
- * @param gridster gridster
- * @param resizeWindowEL resize控制对象窗口
- * @param newDisplaySize 新的窗口显示大小
- * @returns {{width: number, height: number}} 建议Mirror对象的高度和宽度
- */
-let getResizeSuggestMirrorSize = (gridster, resizeWindowEL, newDisplaySize) => {
-    let ranges = gridster._ranges;
-
-    //向上取整
-    let rw = Math.ceil(newDisplaySize.width / ranges.equalWidth);
-    let rh = Math.ceil(newDisplaySize.height / ranges.equalWidth);
-
-    //获取整数的宽度
-    let result = {
-        width: rw * ranges.equalWidth,
-        height: rh * ranges.equalWidth,
-    };
-    //重置拖拽容器的高度
-    //gridster._container.style.height = (DomUtils.getNumber(resizeWindowEL.style.top) + result.height) + 'px';
-    return result;
-};
-
-
-/**
  * 拖拽大小控制对象
  */
 class ResizeDragController extends BaseDragController {
@@ -114,14 +89,6 @@ class ResizeDragController extends BaseDragController {
         this._gridster._layoutManager.update(evt.originalSource.getAttribute("item-id"),clientInfo) ;
         let displaySize = getResizeSuggestDisplaySize(mouseOffset, this._initialSize);
         DomUtils.setSize(evt.source, displaySize);
-        // let mirrorSize = getResizeSuggestMirrorSize(this._gridster, evt.source, displaySize);
-        // DomUtils.setSize(evt.mirror, mirrorSize);
-        //
-        // this._mirrorSize = mirrorSize;
-        // DomUtils.setPosition(evt.mirror, {
-        //     x: DomUtils.getNumber(resiezeWindowEL.style.left),
-        //     y: DomUtils.getNumber(resiezeWindowEL.style.top)
-        // });
     }
 
     dragEnd(evt) {
