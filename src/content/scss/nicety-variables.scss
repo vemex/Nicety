@@ -1,15 +1,36 @@
 @import "./bootsrap-customer.scss";
 $magic-checkbox-size: 16px !default;
+/**
+布局
+ */
+$dasboard-primary-background:$primary;
+$dasboard-primary-color:$light;
+$dasboard-primary-hover-background:darken($dasboard-primary-background,5%) ;
+
+$dashboard-layout-header-height: 3.5em !default;//布局header部分高度
+$dashboard-layout-header-background-color: darken($dasboard-primary-background,10%)  !default;
+$dashboard-layout-footer-height: 2.5em !default;
+$dashboard-layout-left-side-width: 17em!default;
+$dashboard-layout-left-side-background: darken( $dasboard-primary-background,5%)  !default;
+
+$dashboard-layout-left-side-menu-background:darken( $dasboard-primary-background,5%) !default;
+$dashboard-layout-left-side-menu-hover-background: darken($dasboard-primary-background,10%) !default;
+$dashboard-layout-left-side-menu-color: $dasboard-primary-color !default;
+$dashboard-layout-left-side-menu-hover-color: $dasboard-primary-color !default;
+
+/**
+gridster
+ */
+$gridster-header-backgroud-color: darken($dasboard-primary-background,5%) !default;
+$gridster-header-color:$light !default;
+$gridster-shadow-backgroud-color:$gray-600 !default;
+
+/**
+卡片
+ */
+$enable-card-shadows:true;
 
 $navbar-dark-hover-backgroundcolor: rgba($cyan, .9) !default;
 $navbar-light-hover-backgroundcolor: rgba($cyan, .4) !default;
 $card-box-shadow:0 0rem 1rem rgba(0, 0, 0, 0.175) !default;
 $card-hover-transition:all .2s ease-in;
-
-$dashboard-layout-header-height: 3.5em !default;//布局header部分高度
-$dashboard-layout-header-background-color: #2D5F8B !default;//布局header部分高度
-$dashboard-layout-footer-height: 2.5em !default;//布局footer部分高度
-$dashboard-layout-left-side-width: 17em!default;//布局footer部分高度
-$dashboard-layout-left-side-background: linear-gradient(to right,#4276A4 100%,#4276A4 100%)!default;//布局footer部分高度
-
-$enable-card-shadows:true;

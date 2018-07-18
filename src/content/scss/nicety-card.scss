@@ -25,10 +25,6 @@
                 border-radius: 0px;
                 height: 100%;
                 background: transparent;
-                &:hover {
-                    background: #ffffff;
-                    @include transition(transition-base)
-                }
             }
             height: 100%
         }

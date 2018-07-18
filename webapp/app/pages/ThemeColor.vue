@@ -43,6 +43,9 @@
             <div class="col-md-4">
                 <div class="p-3 mb-3 swatch-cyan">Cyan</div>
             </div>
+            <div class="col-md-4">
+                <div class="p-3 mb-3 swatch-dark-blue">dark-blue</div>
+            </div>
         
         </div>
         

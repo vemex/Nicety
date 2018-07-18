@@ -24,7 +24,7 @@ ul.drag-wrapper:hover{
 
 .draggable-container--is-dragging  .draggable-mirror{
 
-    background: slategray !important;
+    background: $gridster-shadow-backgroud-color !important;
     opacity: 0.3;
     //transition: top 0.15s linear , left 0.15s linear , width 0.15s linear, height 0.15s linear;
     ////transition-delay: 0.01s;
@@ -45,7 +45,8 @@ ul.drag-wrapper:hover{
             @extend .bg-light;
         }
         .gs-header {
-            @extend  .bg-primary;
+            background-color: $gridster-header-backgroud-color;
+            color: $gridster-header-color;
             @extend  .card-header;
             @extend  .bar;
             .gs-title{
@@ -53,6 +54,12 @@ ul.drag-wrapper:hover{
             }
             .gs-control{
                 @extend  .card-control;
+                button{
+                    @extend .btn;
+                    @extend .btn-outline-primary;
+                    color: $gridster-header-color;
+                    border-width: 0px;
+                }
             }
         }
 

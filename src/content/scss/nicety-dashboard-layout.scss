@@ -90,13 +90,13 @@ body {
         }
         button{
             font-size: 1rem;
-            color: cornsilk;
+            color: $dasboard-primary-color;
         }
         .aside-header button,
         .right-container button {
             @extend .btn;
             @extend .btn-outline-primary;
-            color: cornsilk;
+            color: $dasboard-primary-color;
             font-size: 1rem;
             i{
                 font-size: 1.5rem;

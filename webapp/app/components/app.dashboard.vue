@@ -9,7 +9,7 @@
             </div>
         </header>
         <div class="dashboard-body">
-            <div class="aside-left" id="aside_left">
+            <div  class="aside-left collapse" id="aside_left">
                 <app-nav></app-nav>
             </div>
             <main class="page">
@@ -42,6 +42,8 @@
             Breadcrumb
         },
         mounted: function () { //渲染完成
+
+            $('.collapse').collapse()
             $('#main-menu').metisMenu();
             $('[data-toggle="popover"]').popover({
                 delay: {'show': 500, 'hide': 100},

@@ -1,13 +1,21 @@
-$blue: #236a97;
-$indigo: #6610f2 ;
-$purple: #6f42c1 ;
-$pink: #e83e8c ;
-$red: #d4333f ;
-$orange: #ed7d20 ;
-$yellow: #fce174 ;
-$green: #00aa00 ;
-$teal: #20c997 ;
-$cyan: #4b9fd5 ;
+//$blue: #336699;
+//$indigo: #6610f2 ;
+//$purple: #6f42c1 ;
+//$pink: #e83e8c ;
+//$red: #d4333f ;
+//$orange: #ed7d20 ;
+//$yellow: #fce174 ;
+//$green: #00aa00 ;
+//$teal: #20c997 ;
+//$cyan: #4b9fd5 ;
+$dark-blue:#336699;
+$colors: (
+        "dark-blue":$dark-blue
+);
+$primary:$dark-blue;
+
+
+//$secondary:#333333;
 
 $border-radius: .16rem ;
 $border-radius-lg: .3rem ;

@@ -49,7 +49,7 @@
     position: relative;
     display: block;
     padding: 9px 15px;
-    color: $light;
+    color:$dashboard-layout-left-side-menu-color;
     outline-width: 0;
     transition: all .3s ease-out;
 }
@@ -67,9 +67,9 @@
 .sidebar-nav .metismenu a:active ,
 .sidebar-nav .metismenu li.active > a
 {
-    color: $light;
+    color: $dashboard-layout-left-side-menu-hover-color;
     text-decoration: none;
-    background: #3c678e;
+    background:$dashboard-layout-left-side-menu-hover-background ;
 }
 
 
@@ -109,7 +109,7 @@
     position: relative;
     display: block;
     padding: 15px;
-    color: #adb5bd;
+    color: $dashboard-layout-left-side-menu-color;
     outline-width: 0;
     transition: all .3s ease-out;
 }
@@ -118,9 +118,9 @@
 .topbar-nav .metismenu a:hover,
 .topbar-nav .metismenu a:focus,
 .topbar-nav .metismenu a:active {
-    color: #f8f9fa;
+    color: $dashboard-layout-left-side-menu-hover-color;
     text-decoration: none;
-    background: #0b7285;
+    background: $dashboard-layout-left-side-menu-hover-background;
 }
 
 @media (min-width: 992px) {
