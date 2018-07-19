@@ -3,6 +3,7 @@
   @extend .table-striped ;
   @extend .table-borderless;
   width:auto;
+  border: 1px solid #d4d4d4;
   th.col-group-label{
     @extend .border-0;
     text-align: right;
@@ -12,6 +13,8 @@
     text-align: center;
     background-color: #d9e4f1;
     border: 1px solid #d4d4d4;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   th.col-label-empty{
     background-color: #f2f2f2;
@@ -21,6 +24,12 @@
   tbody{
     td{
       border: 1px solid #d4d4d4;
+      text-align: center;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    td.sum-value {
+      @extend  .font-weight-bold;
     }
     td.cell-value{
       text-align: right;
