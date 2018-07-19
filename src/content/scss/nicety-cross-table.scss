@@ -1,0 +1,31 @@
+.cross-table {
+  @extend .table;
+  @extend .table-striped ;
+  @extend .table-borderless;
+  width:auto;
+  th.col-group-label{
+    @extend .border-0;
+    text-align: right;
+  }
+
+  th.col-label{
+    text-align: center;
+    background-color: #d9e4f1;
+    border: 1px solid #d4d4d4;
+  }
+  th.col-label-empty{
+    background-color: #f2f2f2;
+    border: 1px solid #d4d4d4;
+
+  }
+  tbody{
+    td{
+      border: 1px solid #d4d4d4;
+    }
+    td.cell-value{
+      text-align: right;
+      border-top-width: 0px;
+      border-bottom-width: 0px;
+    }
+  }
+}
