@@ -27,9 +27,11 @@
       text-align: center;
       padding-left: 1rem;
       padding-right: 1rem;
+      color: #757575;
     }
     td.sum-value {
       @extend  .font-weight-bold;
+      color: $dark;
     }
     td.cell-value{
       text-align: right;
