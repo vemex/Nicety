@@ -1,0 +1,19 @@
+
+.bd-example [class^=border] {
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;
+    margin: .25rem;
+    background-color: #f5f5f5;
+    border: 1px solid;
+    text-align:center;
+    vertical-align: bottom;
+}
+
+
+.utils-demo .card {
+    float: left;
+    margin-right: 2em;
+    margin-bottom: 2em;
+}
+

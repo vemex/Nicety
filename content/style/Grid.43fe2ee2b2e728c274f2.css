@@ -1,0 +1,22 @@
+
+.grid-examples h3 {
+  margin-top: 2rem;
+}
+.grid-examples .row {
+  margin-bottom: 1rem;
+}
+.grid-examples .row .row {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+.grid-examples [class*="col-"] {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: rgba(86, 61, 124, .15);
+  border: 1px solid rgba(86, 61, 124, .2);
+}
+.grid-examples hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
