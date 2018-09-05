@@ -2,7 +2,7 @@ const  utils=require( "../utils");
 //const log=require('log')
 let config = {};
 
-let buildProdConfig=function (option) {
+let doProdConfig=function (option) {
     config={
         "a":"pro"
     };
@@ -10,7 +10,7 @@ let buildProdConfig=function (option) {
 
 };
 
-let buildBuildConfig=function (option) {
+let doBuildConfig=function (option) {
     config={
         "a":"build"
 
@@ -19,7 +19,7 @@ let buildBuildConfig=function (option) {
 
 };
 
-let buildDevConfig=function (option) {
+let doDevConfig=function (option) {
     config={
         "a":"dev"
 
@@ -29,6 +29,6 @@ let buildDevConfig=function (option) {
 };
 
 module.exports =  function (option) {
-    utils. checkEnviroment(option,buildDevConfig,buildProdConfig,buildBuildConfig);
+    utils. checkEnviroment(option,doDevConfig,doProdConfig,doBuildConfig);
     return config;
 };

@@ -5,9 +5,9 @@ var configEntry = {};
 module.exports = function() {
     return {
         entry: {
-            main: './webapp/app/app.dashboard.main', //主入口程序
-            polyfills: './webapp/app/polyfills', //兼容处理js
-            global: './webapp/content/scss/global.scss' //全局的scss
+            polyfills: './app/polyfills', //兼容处理js
+            main: './app/app.dashboard.main', //主入口程序
+            global: './public/content/scss/global.scss' //全局的scss
         }
     };
 };

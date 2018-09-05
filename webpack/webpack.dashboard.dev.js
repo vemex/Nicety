@@ -15,17 +15,16 @@ const constainsConfig = require("./config/constains.config.js");
 const cssConfig = require("./config/css.config.js");
 const scssConfig = require("./config/scss.config.js");
 const es6Config = require("./config/es6.config.js");
-const entryConfig = require("./config/entry.dashboard.config.js");
+const entryConfig = require("./config/entry.dashboard.config");
 const externalsConfig = require("./config/externals.config.js");
 const outputConfig = require("./config/output.config.js");
 const resolveConfig = require("./config/resolve.config.js");
 const vueConfig = require("./config/vue.module.config.js");
 
 
-let option = { env: "development", apiURL: '' };
+let option = {env: "development", apiURL: 'http://localhost:9060/Api/'};
 
 let config = webpackMerge(
-    resolveConfig(option),
     baseModuleConfig(option),
     basePluginConfig(option),
     commonChunkConfig(option),
@@ -36,11 +35,26 @@ let config = webpackMerge(
     entryConfig(option),
     externalsConfig(option),
     outputConfig(option),
-    // resolveConfig(option),
-    vueConfig(option), {
+    resolveConfig(option),
+    vueConfig(option),
+    {
+
+        mode:option.env,
         devtool: 'source-map',
         devServer: {
-            contentBase: './target/www'
+            contentBase: './target/www',
+            hot:true,
+            hotOnly: true,
+            proxy: {
+                '/uploads': {
+                    target: 'http://localhost:9090/uploads',
+                    secure: false
+                },
+                '/chunksdone': {
+                    target: 'http://localhost:9090/chunksdone',
+                    secure: false
+                }
+            }
         },
         plugins: [
             // new webpack.optimize.UglifyJsPlugin({
@@ -60,14 +74,16 @@ let config = webpackMerge(
             }, {
                 reload: false
             }),
+            new webpack.HotModuleReplacementPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
             new webpack.NamedModulesPlugin(),
             new WriteFilePlugin(),
             new webpack.WatchIgnorePlugin([
                 utils.root('src/test'),
             ]),
+            //编译完成通知
             new WebpackNotifierPlugin({
-                title: 'Nicety Demo',
+                title: 'DataOcean',
                 contentImage: path.join(__dirname, 'logo-jhipster.png')
             })
         ]

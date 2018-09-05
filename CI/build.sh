@@ -12,7 +12,7 @@ if [ "$TRAVIS_TAG" != "" ]; then
     npm run build
     cd ../
     git clone  --depth 50 --branch gh-pages http://github.com/vemex/Nicety.git  nicety-pages
-    cp -r Nicety/target/www/*  nicety-pages
+    cp -r Nicety/target/dist/*  nicety-pages
     cd nicety-pages
     git add .
     git commit -m "[auto]Update version to $TRAVIS_TAG"

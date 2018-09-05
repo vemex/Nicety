@@ -9,7 +9,6 @@ module.exports = function(option) {
     return {
         module: {
             rules: [
-                //{test: /bootstrap\/dist\/js\/umd\//, loader: 'imports-loader?jQuery=jquery'},
                 {
                     test: /\.html$/,
                     loader: 'html-loader',
@@ -20,20 +19,24 @@ module.exports = function(option) {
                         minifyJS: false,
                         minifyCSS: false
                     },
-                    exclude: [path.resolve(dirVars.webappRootDir, './index.html')]
+                    exclude: [path.resolve(dirVars.publicDir, './*.html')]
                 },
                 {
                     test: /\.(jpe?g|png|gif)$/i,
                     loaders: ['file-loader?hash=sha512&digest=hex&name=./content/images/[hash].[ext]&publicPath=../../']
                 },
                 {
+                    test: /mCSB_buttons\.(jpe?g|png|gif)$/i,
+                    loaders: ['file-loader?hash=sha512&digest=hex&name=./content/images/[hash].[ext]&publicPath=../../']
+                },
+                {
                     test: /\.(svg|woff2?|ttf|eot)$/i,
                     loaders: ['file-loader?name=./content/fonts/[name].[ext]&publicPath=../../']
                 },
-                {
-                    test: /manifest.webapp$/,
-                    loader: 'file-loader?name=manifest.webapp!web-app-manifest-loader'
-                },
+                // {
+                //                 //     test: /manifest.webapp$/,
+                //                 //     loader: 'file-loader?name=manifest.webapp!web-app-manifest-loader'
+                //                 // },
                 { test: /jquery-mousewheel/, loader: "imports-loader?define=>false&this=>window" },
                 { test: /malihu-custom-scrollbar-plugin/, loader: "imports-loader?define=>false&this=>window" }
                 //{test: require.resolve("jquery"), loader: "expose-loader?$!expose-loader?jQuery"}

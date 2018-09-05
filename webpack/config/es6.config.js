@@ -2,8 +2,7 @@ module.exports = function(option) {
     return {
         module: {
             rules: [{
-                test: /\.js$/,
-                //exclude: /(node_modules|bower_components)/,
+                test: /[\s\S]*\.js/,
                 loader: 'babel-loader',
             }]
         }

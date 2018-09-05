@@ -1,53 +1,59 @@
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const utils = require('../utils.js');
 
-const extractSASS = new ExtractTextPlugin(`content/style/[name]-sass.[hash].css`);
+const utils = require('../utils.js');
+const dirVars = require('./base/dir-vars.config.js');
+let path = require('path');
+
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+
+
+//const extractSASS = new ExtractTextPlugin(`content/style/[name]-sass.[hash].css`);
 
 
 let config = {};
 
-let buildBuildConfig = function(option) {
+let doBuildConfig = function(option) {
     config = {};
 
 };
 
-let buildProdConfig = function(option) {
+let doProdConfig = function(option) {
     config = {
         module: {
             rules: [{
-                test: /([\s\S]*\.scss)/,
-                use: extractSASS.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'postcss-loader', {loader:'resolve-url-loader', options: { debug: true}},{ loader: 'sass-loader', options: { sourceMap: true }}]
-                })
-            }, ]
+                test:/[\s\S]*\.scss/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    {loader:'resolve-url-loader', options: { debug: true}},
+                    { loader: 'sass-loader', options: { sourceMap: true }}]
+            }]
         },
-        plugins: [extractSASS]
+        plugins: []
     };
 
 };
 
-let buildDevConfig = function(option) {
+let doDevConfig = function(option) {
     config = {
         module: {
-            rules: [{
-                test: /([\s\S]*\.scss)/,
-                loaders: extractSASS.extract({
-                    fallback: { loader: 'style-loader', options: { sourceMap: true } },
-                    use: [
-                        { loader: 'css-loader', options: { sourceMap: true } },
-                        { loader: 'postcss-loader', options: { sourceMap: true } },
-                        {loader:'resolve-url-loader', options: { debug: true}},
-                        { loader: 'sass-loader', options: { sourceMap: true } }
+            rules: [  {
+                test: /[\s\S]*\.scss/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    { loader: 'css-loader', options: { sourceMap: true } },
+                    { loader: 'postcss-loader', options: { sourceMap: true } },
+                    { loader:'resolve-url-loader', options: { debug: true}},
+                    { loader: 'sass-loader', options: { sourceMap: true } }
                     ]
-                })
             }, ]
         },
-        plugins: [extractSASS]
+        plugins: []
     };
 };
 
 module.exports = function(option) {
-    utils.checkEnvironment(option, buildDevConfig, buildProdConfig, buildBuildConfig);
+    utils.checkEnvironment(option, doDevConfig, doProdConfig, doBuildConfig);
     return config;
 };

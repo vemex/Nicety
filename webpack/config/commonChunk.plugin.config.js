@@ -6,24 +6,29 @@ const utils = require('../utils');
 
 module.exports = function (option) {
     return {
-        plugins:
-            [
-                new webpack.optimize.CommonsChunkPlugin({
-                    name: 'polyfills',
-                    chunks: ['polyfills']
-                }),
-                new webpack.optimize.CommonsChunkPlugin({
-                    name: 'vendor',
-                    chunks: ['main'],
-                    minChunks: module => utils.isExternalLib(module)
-                }),
-                new webpack.optimize.CommonsChunkPlugin({
-                    name: ['polyfills', 'vendor'].reverse()
-                }),
-                new webpack.optimize.CommonsChunkPlugin({
-                    name: ['manifest'],
-                    minChunks: Infinity,
-                })]
-    };
+        optimization: {
+            splitChunks: {
+                chunks: "async",
+                minSize: 30000,
+                minChunks: 1,
+                maxAsyncRequests: 5,
+                maxInitialRequests: 3,
+                automaticNameDelimiter: '~',
+                name: true,
+                cacheGroups: {
+                    vendors: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name:'vendor',
+                        priority: -10
+                    },
+                    default: {
+                        minChunks: 2,
+                        priority: -20,
+                        reuseExistingChunk: true
+                    }
+                }
+            }
+        }
+    }
 
 };

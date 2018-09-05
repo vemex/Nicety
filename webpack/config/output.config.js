@@ -1,8 +1,26 @@
 var dirVars = require('./base/dir-vars.config.js');
-module.exports = function () {
+const utils = require('../utils.js');
+
+
+let outPath =  dirVars.runDir;
+
+let doBuildConfig = function(option) {
+};
+
+let doProdConfig = function(option) {
+    outPath=dirVars.buildDir
+
+};
+
+let doDevConfig = function(option) {
+    outPath=dirVars.runDir
+};
+
+module.exports = function (option) {
+    utils.checkEnvironment(option, doDevConfig, doProdConfig, doBuildConfig);
     return {
         output: {
-            path: dirVars.buildDir,
+            path: outPath,
             filename: 'app/[name].bundle.js',
             chunkFilename: 'app/[id].chunk.js'
             // path: dirVars.buildDir,

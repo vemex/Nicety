@@ -8,7 +8,7 @@ module.exports = function (option) {
     let DATAS = {
         VERSION: `'${utils.parseVersion()}'`,
         DEBUG_INFO_ENABLED: option.env === 'development',
-        SERVER_API_URL: `"${option.apiUrl}"`
+        SERVER_API_URL: `"${option.apiURL}"`
     };
     return {
         module: {
