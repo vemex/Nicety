@@ -1,1 +1,1 @@
-import '../content/scss/vendor.scss';
+import '../public/content/scss/vendor.scss';

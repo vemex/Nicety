@@ -1,5 +1,5 @@
 import './vendor.js';
-import '../../src/index'
+import '../src/index'
 import Vue from "vue"
 import Vuex from 'vuex'
 import VueRouter from "vue-router"
