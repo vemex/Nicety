@@ -37,7 +37,6 @@
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/print";
 
-@import "~magic-check/sass/magic-check";
 
 @import "./mixins";
 @import "./nicety-ag-grid-theme.scss";
@@ -57,8 +56,10 @@
 @import "./nicety-gridster";
 @import "./nicety-cross-table";
 @import "./nicety-input";
+@import "./nicety-checkbox";
 @import "./nicety-tag";
 @import "./nicety-select";
+@import "./nicety-tree";
 
 @import "./nicety-icons";
 @import "./nicety-icons-premium-line";

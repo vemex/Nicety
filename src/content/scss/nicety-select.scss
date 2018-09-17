@@ -199,3 +199,10 @@
   }
 }
 
+.input-group {
+  .nicety.select.form-control{
+    @extend .form-control;
+    padding-top: 0.1rem;
+  }
+}
+
