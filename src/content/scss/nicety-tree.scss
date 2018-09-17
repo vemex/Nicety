@@ -1,0 +1,57 @@
+
+.nicety.tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1em
+}
+
+.nicety.tree li {
+  line-height: 2em;
+  white-space: nowrap;
+  cursor: pointer
+}
+
+.nicety.tree li,.nicety.tree li i {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+.nicety.tree li i {
+  vertical-align: middle;
+  text-align: center;
+  padding: 0;
+  width: 1em;
+  display: inline-block
+}
+
+.nicety.tree li .title {
+  padding: .2em .4em
+}
+
+.nicety.tree li .title:hover {
+  color: #2185d0
+}
+
+.nicety.tree li.active>.title {
+  background: #ecf6fd
+}
+
+.nicety.tree li>.nicety.tree {
+  padding-left: 1.5em
+}
+
+.nicety.tree-select>.content {
+  box-shadow: 0 1px 5px rgba(0,0,0,.2);
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 10;
+  background: #fff;
+  min-width: 100%;
+  height: 260px;
+  overflow: auto;
+  padding: 0 .5em
+}

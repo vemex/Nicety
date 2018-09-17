@@ -1,0 +1,111 @@
+
+.nicety.checkbox,.nicety.radio {
+  position: relative;
+  display: inline-block;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  outline: 0;
+  vertical-align: baseline;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1em
+}
+
+.nicety.checkbox span,.nicety.radio span {
+  padding: 0 8px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+.nicety.checkbox.active>label:before,.nicety.checkbox.open>label:before,.nicety.radio.active>label:before,.nicety.radio.open>label:before {
+  border-color: #2185d0
+}
+
+.nicety.checkbox.active>label:after,.nicety.checkbox.open>label:after,.nicety.radio.active>label:after,.nicety.radio.open>label:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 1em;
+  content: ""!important;
+  text-align: center;
+  width: 1em;
+  height: 1em;
+  opacity: 1;
+  transform: scale(.4555555);
+  background: #2185d0
+}
+
+.nicety.checkbox.disabled,.nicety.radio.disabled {
+  cursor: default;
+  opacity: .55!important;
+  background-image: none!important;
+  box-shadow: none!important;
+  pointer-events: none!important
+}
+
+.nicety.checkbox.disabled>label:before,.nicety.radio.disabled>label:before {
+  background: #fdfdfd
+}
+
+.nicety.checkbox>input,.nicety.radio>input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0!important;
+  outline: 0;
+  z-index: -1
+}
+
+.nicety.checkbox>label,.nicety.radio>label {
+  padding-left: 1em;
+  cursor: pointer
+}
+
+.nicety.checkbox>label:hover:before,.nicety.radio>label:hover:before {
+  border-color: #2185d0
+}
+
+.nicety.checkbox>label:before,.nicety.radio>label:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: ""!important;
+  background: #fff;
+  border-radius: 1rem;
+  transform: none;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #d9d9d9
+}
+
+.nicety.checkbox.active>label:after,.nicety.checkbox.open>label:after {
+  display: inline-block;
+  font: normal normal normal 1rem/1rem FontAwesome;
+  transform: scale(.8222);
+  color: #fff;
+  border-radius: 2px
+}
+
+.nicety.checkbox.active>label:before,.nicety.checkbox.open>label:before {
+  background: #2185d0
+}
+
+.nicety.checkbox.active>label:after {
+  content: "\F00C"!important
+}
+
+.nicety.checkbox.open>label:before {
+  background: #2185d0
+}
+
+.nicety.checkbox>label:before {
+  border-radius: 2px
+}
+
+.nicety.checkboxes.vertical .checkbox,.nicety.checkboxes.vertical .radio,.nicety.radios.vertical .checkbox,.nicety.radios.vertical .radio {
+  display: block;
+  margin-bottom: .6em
+}
