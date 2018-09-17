@@ -1,0 +1,201 @@
+
+.nicety.select {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #e9e9e9;
+  line-height: 1.5em;
+  transition: box-shadow .1s ease,width .1s ease;
+  border-radius: 2px;
+  cursor: pointer;
+  padding: .5em 2.6em .5em .75em;
+  position: relative;
+  text-align: left;
+  color: rgba(0,0,0,.87);
+  font-size: 1em;
+  min-width: 10em;
+  width: 100%;
+  vertical-align: baseline;
+  word-wrap: break-word;
+  white-space: normal;
+  outline: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-shadow: inset 0 1px 2px hsla(0,0%,4%,.06)
+}
+
+.nicety.select+.select {
+  margin-top: .5em
+}
+
+.nicety.select:hover {
+  border-color: #c0c1c2
+}
+
+.nicety.select.active {
+  border-color: rgba(16,142,233,.8)
+}
+
+.nicety.select.disabled {
+  cursor: default;
+  opacity: .55!important;
+  background-image: none!important;
+  box-shadow: none!important;
+  pointer-events: none!important
+}
+
+.nicety.select.multiple {
+  padding: .16666667em 2.6em .16666667em .33333333em
+}
+
+.nicety.select.multiple>.text {
+  margin: .33433333em 0 .33433333em .41666667em
+}
+
+.nicety.select.multiple>.tag~input {
+  margin: 0
+}
+
+.nicety.select.multiple>input {
+  margin: .33433333em 0 .33433333em .41666667em;
+  width: 1em;
+  position: static;
+  padding: 0;
+  line-height: 1.5em
+}
+
+.nicety.select.multiple.search>.text {
+  position: absolute;
+  display: inline-block;
+  margin-left: .83333333em
+}
+
+.nicety.select>.tag {
+  text-transform: none;
+  background: #e8e8e8;
+  cursor: pointer;
+  display: inline-block;
+  padding: .35em .6em;
+  line-height: 1em;
+  margin: .23533333em .35em;
+  margin-left: 0;
+  box-shadow: inset 0 0 0 1px rgba(34,36,38,.15);
+  transition: background .1s ease;
+  border: none;
+  border-radius: 2px;
+  color: rgba(0,0,0,.6);
+  font-size: 1em
+}
+
+.nicety.select>.tag~input {
+  margin-left: 0
+}
+
+.nicety.select>.tag>i {
+  opacity: .6;
+  margin-left: .35em;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  font-size: .9em;
+  margin-top: -.05em
+}
+
+.nicety.select>.tag>i:hover {
+  opacity: 1
+}
+
+.nicety.select>.text {
+  cursor: text;
+  position: relative;
+  left: 0;
+  z-index: 2;
+  line-height: 1.5em;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.nicety.select>.text.hint {
+  opacity: .6
+}
+
+.nicety.select>input {
+  padding: .5em 2.6em .5em .75em;
+  border: none;
+  -webkit-tap-highlight-color: rgba(255,255,255,0);
+  background: transparent;
+  font-size: inherit;
+  margin: 0;
+  line-height: 1.5em;
+  vertical-align: baseline;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  outline: 0
+}
+
+.nicety.select>input:focus {
+  border: none
+}
+
+.nicety.select>i {
+  font-size: 1em;
+  display: inline-block;
+  cursor: default;
+  line-height: 1em;
+  text-align: center;
+  top: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  width: 2.6em;
+  opacity: .5;
+  border-radius: 0 2px 2px 0;
+  transition: opacity .3s ease;
+  z-index: 2;
+  position: absolute
+}
+
+.nicety.select>i:after,.nicety.select>i:before {
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 100%;
+  margin-top: -.5em
+}
+
+.nicety.select>.menu.vertical {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  overflow: auto;
+  margin: 0 -1px;
+  min-width: calc(100% + 2px);
+  width: auto;
+  z-index: 10;
+  max-height: 360px
+}
+
+.nicety.select>.menu.vertical>.item:first-child {
+  border-top: 1px solid #fafafa
+}
+
+
+.nicety.select{
+  .menu{
+    @extend  .dropdown-menu;
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    box-shadow: 0 0rem 1rem rgba(0, 0, 0, 0.175);
+    .item{
+      @extend .dropdown-item;
+    }
+  }
+}
+
