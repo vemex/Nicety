@@ -54,7 +54,7 @@
                 this.$emit('close', index)
             },
             addHandler () {
-                this.isClickAdd = true
+                this.isClickAdd = true;
                 this.$nextTick(() => {
                     this.$refs.newTagInput.focus()
                 })
@@ -64,8 +64,8 @@
             },
             addDoneHandler (event) {
                 // console.log(event.target)
-                this.isClickAdd = false
-                let v = event.target.value
+                this.isClickAdd = false;
+                let v = event.target.value;
                 if (!/^\s*$/.test(v)) {
                     this.$emit('add', v)
                 }

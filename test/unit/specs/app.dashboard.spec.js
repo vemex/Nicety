@@ -6,8 +6,8 @@ const assert = require('assert');
 window.$ = require('jquery');
 describe('#app.dashboard.vue', () => {
     it('should render correct contents', () => {
-        const Constructor = Vue.extend(Dashboard)
-        const vm = new Constructor().$mount() 
+        const Constructor = Vue.extend(Dashboard);
+        const vm = new Constructor().$mount();
         expect($('#dashboard-app',vm.$el))
           .to.be.a('object')
       })

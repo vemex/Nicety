@@ -17,7 +17,7 @@ let calculateAdjustRect = function (clientInfo, gridster) {
 
     indexX = indexX < 0 ? 0 : indexX;
     indexY = indexY < 0 ? 0 : indexY;
-console.log(clientInfo.originalSourceSize.width / e )
+console.log(clientInfo.originalSourceSize.width / e );
     return new Rect({x: indexX, y: indexY, width: rW, height: rH});
 };
 /**

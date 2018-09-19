@@ -24,7 +24,7 @@ const Overlay = (($) => {
 
     const Selector = {
         OverlayButton: 'button[data-role="overlay"]'
-    }
+    };
 
     const DefaultType = {
         target: 'string',
@@ -96,7 +96,7 @@ const Overlay = (($) => {
             }
             let icon = (this._config.displayIcon) ? '<span class="overlay-icon"> ' + this._getIconTemplate(this._config.iconType) + '  </span>' : '';
             $el.data(DATA_TEMPLATE_KEY, '<div class="overlay-content">' + icon + '<h4 class="overlay-title">' + this._config.title + '</h4><div>');
-            return ;
+
         }
 
         show($el) {
@@ -186,7 +186,7 @@ const Overlay = (($) => {
             };
             $(this).nyOverlay(config);
         }
-    )
+    );
 
     $.fn[NAME] = Overlay._jQueryInterface;
     $.fn[NAME].Constructor = Overlay;

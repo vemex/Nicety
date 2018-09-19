@@ -30,7 +30,7 @@ const Notification = (($) => {
 
     const Selector = {
         AlertButton: 'button[data-role="alert"]'
-    }
+    };
 
     const DefaultType = {
         message: 'string'

@@ -2,7 +2,7 @@
 // Generated on Tue Apr 24 2018 12:40:32 GMT+0800 (China Standard Time)
 
 var webpackConfig = require('./webpack/webpack.prod.test.js');
-const jqueryFile = 'https://code.jquery.com/jquery-1.9.1.min.js'
+const jqueryFile = 'https://code.jquery.com/jquery-1.9.1.min.js';
 module.exports = function (config) {
   config.set({
 
@@ -120,4 +120,4 @@ module.exports = function (config) {
     }
     //plugins: ['karma-browserify','karma-mocha'],
   })
-}
+};

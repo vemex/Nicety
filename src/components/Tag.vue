@@ -50,7 +50,7 @@
                 this.$emit('click', this.index)
             },
             closeHandler (event) {
-                this.$emit('close', this.index)
+                this.$emit('close', this.index);
                 this.closed = true
             }
         }

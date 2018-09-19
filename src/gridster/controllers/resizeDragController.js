@@ -85,7 +85,7 @@ class ResizeDragController extends BaseDragController {
             relativeMousePosition:relativeMousePosition,
             originalSourceSize:originalSourceSize,
             displayPosition:displayPosition
-        }
+        };
         this._gridster._layoutManager.update(evt.originalSource.getAttribute("item-id"),clientInfo) ;
         let displaySize = getResizeSuggestDisplaySize(mouseOffset, this._initialSize);
         DomUtils.setSize(evt.source, displaySize);

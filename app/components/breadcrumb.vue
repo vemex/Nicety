@@ -17,7 +17,7 @@
         },
         methods: {
             getBreadcrumb(isreload) {
-                console.log('getBreadcrumb')
+                console.log('getBreadcrumb');
                 var breadNumber= typeof(this.$route.meta.breadNumber)!="undefined"?this.$route.meta.breadNumber:1;//面包屑位置索引放到meta里预设好，首页索引为0，一级默认为1
                 var breadLength=this.$store.state.breadListState.length;//目前breadlist集合数组个数
                 var curName=this.$route.name;

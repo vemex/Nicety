@@ -48,7 +48,7 @@
 .nicety.select.multiple {
   padding: .16666667em 2.6em .16666667em .33333333em
 }
-
+.nicety.select>.text,
 .nicety.select.multiple>.text {
   margin: .33433333em 0 .33433333em .41666667em
 }
@@ -64,7 +64,7 @@
   padding: 0;
   line-height: 1.5em
 }
-
+.nicety.select.search>.text,
 .nicety.select.multiple.search>.text {
   position: absolute;
   display: inline-block;
@@ -189,6 +189,8 @@
 .nicety.select{
   .menu{
     @extend  .dropdown-menu;
+    max-height: 400px;
+    overflow: auto;
     display: block;
     width: 100%;
     margin-top: 0.5rem;

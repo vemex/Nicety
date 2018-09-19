@@ -60,7 +60,7 @@ class LayoutInfo {
     }
 
     removeLayoutIem(layoutItemId){
-        let index =null
+        let index =null;
         for (let key in this._items) {
             if (this._items[key].itemId === layoutItemId) {
                 index=key;

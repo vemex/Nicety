@@ -17,11 +17,11 @@ const router = new VueRouter({
 
 router.beforeEach(function() {
     console.log('befor');
-})
+});
 router.afterEach(function() {
     console.log('afeter');
 
-})
+});
 const app = new Vue({
     el: '#app',
     router: router,

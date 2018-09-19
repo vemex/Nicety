@@ -113,7 +113,7 @@ const Helper = {
             ranges: ranges
         };
     }
-}
+};
 
 const Constant = {
     ColumnCount: 12

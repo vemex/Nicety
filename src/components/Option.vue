@@ -1,6 +1,6 @@
 <template>
     <li :class="classObject" @click="clickHandler">
-        <slot>{{ content }}</slot>
+        <slot>{{ itemDisplay }}</slot>
     </li>
 </template>
 <script>
@@ -8,8 +8,9 @@
         name: 'nicety-option',
         props: {
             disabled: { type: Boolean, default: false },
-            index: { type: [String, Number], required: true },
-            content: { type: String, required: true }
+            itemKey: { type: [String, Number], required: true },
+            itemDisplay: { type: String, required: true },
+            data:{ type: Object, required: false }
         },
         data () {
             return {
@@ -27,7 +28,7 @@
         },
         methods: {
             clickHandler (evt) {
-                evt.index = this.index;
+                evt.itemKey = this.itemKey;
                 this.$emit('click', evt)
             }
         }

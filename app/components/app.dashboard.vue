@@ -43,7 +43,7 @@
         },
         mounted: function () { //渲染完成
 
-            $('.collapse').collapse()
+            $('.collapse').collapse();
             $('#main-menu').metisMenu();
             $('[data-toggle="popover"]').popover({
                 delay: {'show': 500, 'hide': 100},

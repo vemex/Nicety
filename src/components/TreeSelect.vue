@@ -76,9 +76,9 @@
         },
         methods: {
             initData (v) {
-                this.selectedKey = Array.isArray(v) ? (v[0] || '') : v || ''
-                this.checkedKeys = this.multiple ? v || [] : []
-                this.checkedItems = []
+                this.selectedKey = Array.isArray(v) ? (v[0] || '') : v || '';
+                this.checkedKeys = this.multiple ? v || [] : [];
+                this.checkedItems = [];
                 this.resetValuesWithData(this.data)
             },
             resetValuesWithData (items) {
@@ -103,8 +103,8 @@
                 this.visible = !this.visible
             },
             itemClickHandler (item) {
-                if (this.multiple) return
-                this.emitChange(item.key, item)
+                if (this.multiple) return;
+                this.emitChange(item.key, item);
                 this.awayHandler()
             },
             itemCheckedHandler (checkedKeys) {
@@ -114,25 +114,25 @@
                 this.emitChange(this.checkedKeys.filter((key) => key !== item.key), [])
             },
             clearHandler () {
-                this.visible = false
+                this.visible = false;
                 this.emitChange([], [])
             },
             emitChange (v, vv) {
                 if (this.multiple) {
-                    this.checkedKeys = v
+                    this.checkedKeys = v;
                     this.checkedItems = []
                 } else {
-                    if (v.length <= 0) v = ''
-                    this.selectedKey = v || ''
+                    if (v.length <= 0) v = '';
+                    this.selectedKey = v || '';
                     this.selectedItem = null
                 }
-                this.resetValuesWithData(this.data)
-                this.$emit('input', v)
-                this.$emit('change', v, vv)
+                this.resetValuesWithData(this.data);
+                this.$emit('input', v);
+                this.$emit('change', v, vv);
                 notify.field.change(this)
             },
             awayHandler () {
-                this.visible = false
+                this.visible = false;
                 this.showClear = false
             }
         }
