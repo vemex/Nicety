@@ -17,13 +17,13 @@ const Notification = (($) => {
 
     const Default = {
         message: '',
-        show:function () {
+        show: function () {
 
-        },close:function () {
+        }, close: function () {
 
-        },cancel:function () {
+        }, cancel: function () {
             return true;
-        },confirm:function () {
+        }, confirm: function () {
 
         }
     };
@@ -60,8 +60,8 @@ const Notification = (($) => {
                 '<div class="">'
                 + '<div class="alert-message">' + this._config.message + '</div>'
                 + '<div class="alert-operation">'
-                + '<button type="button" data-role="alert" class="alert-cancel">Cancel</button>\n' +
-                '<button type="button" data-role="alert" class="alert-confirm">Confirm</button>'
+                + '<button type="button" data-role="alert" class="alert-cancel">'+ $[NAME].config.text.cancel+'</button>\n' +
+                '<button type="button" data-role="alert" class="alert-confirm">'+ $[NAME].config.text.confirm+'</button>'
                 + '</div>'
                 + '</div>'
                 + '</div>');
@@ -127,21 +127,28 @@ const Notification = (($) => {
         function () {
             let data = $('body').data(DATA_KEY);
             if ($(this).hasClass('alert-cancel')) {
-                let cancelResult=data._config.cancel.call(data);
-                if (cancelResult===undefined || cancelResult){
+                let cancelResult = data._config.cancel.call(data);
+                if (cancelResult === undefined || cancelResult) {
                     data._close();
                 }
             }
-            if ($(this).hasClass('alert-confirm')){
-                data._config.confirm.call(data);
+            if ($(this).hasClass('alert-confirm')) {
+                if (data._config.confirm.call(data)) {
+                    data._close();
+                }
             }
         }
     );
+    $[NAME] = {
+        config: {text: {}}
+    };
 
-    $[NAME] = Notify._jQueryInterface;
-    $[NAME].Constructor = Notify;
-    $[NAME].noConflict = function () {
-        $[NAME] = JQUERY_NO_CONFLICT;
+    $[NAME].config.text.cancel = "Cancel";
+    $[NAME].config.text.confirm = "Confirm";
+    $.fn[NAME] = Notify._jQueryInterface;
+    $.fn[NAME].Constructor = Notify;
+    $.fn[NAME].noConflict = function () {
+        $.fn[NAME] = JQUERY_NO_CONFLICT;
         return Notify._jQueryInterface
     };
 
