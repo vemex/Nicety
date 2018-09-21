@@ -116,6 +116,12 @@
                     }
                 },
             },
+            values:{
+                handler: function (newValue, oldValue) {
+                    console.log(newValue)
+
+                }
+            }
         },
         computed: {
             valueEmpty() {
@@ -264,9 +270,9 @@
                 this.resetValues()
             },
             clearHandler() { // 清除项，针对单选
-                this.values = [];
+                this.values.splice(0);
                 this.awayHandler();
-                this.emitChange([])
+                this.emitChange(this.values)
             },
             clickHandler() {
                 this.visible = !this.visible;
@@ -331,7 +337,7 @@
             },
             emitChange(values) {//触发选择项改变事件
                 let v = this.multiple ? values : values[0];
-                this.$emit('input', v);
+                //this.$emit('input', v);
                 this.$emit('change', v);
                 notify.field.change(this)
             },
