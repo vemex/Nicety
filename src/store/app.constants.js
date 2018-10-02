@@ -24,7 +24,7 @@ const mutations = {
     setCopyright(state, copyright) {
         state.copyright = copyright;
     },
-    setSiteNamen(state, siteName) {
+    setSiteName(state, siteName) {
         state.siteName = siteName;
     },
     setLang(state, lang) {
