@@ -8,7 +8,7 @@
         name: 'nicety-option',
         props: {
             disabled: { type: Boolean, default: false },
-            itemKey: { type: [String, Number], required: true },
+            index: { type: [String, Number], required: true },
             itemDisplay: { type: String, required: true },
             data:{ type: Object, required: false }
         },

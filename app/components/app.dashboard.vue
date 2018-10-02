@@ -9,42 +9,43 @@
             </div>
         </header>
         <div class="dashboard-body">
-            <div  class="aside-left collapse" id="aside_left">
-                <app-nav></app-nav>
+            <div class="aside-left collapse" id="aside_left">
+                <nicety-nav></nicety-nav>
             </div>
             <main class="page">
-                <div class="page-title">
-                     <breadcrumb></breadcrumb>
-                </div>
-                <div class="page-content">
-                    <router-view></router-view>
-                </div>
+                <app-main></app-main>
+
             </main>
 
         </div>
-    <app-footer></app-footer>
+        <app-footer></app-footer>
     </div>
 </template>
 
 <script>
     import AppFooter from "./app.footer.vue"
+    import AppMain from "../../src/components/app.tab.main"
     import AppHeaderBar from "./app.header.bar.vue"
     import AppNavHeader from "./app.nav.header.vue"
     import AppNav from "./app.nav.vue"
     import $ from 'jquery'
-    import Breadcrumb from "./breadcrumb.vue"
+    import NicetyNavItem from "../../src/components/app.nav.item";
+    import NicetyNav from "../../src/components/app.nav";
+
     export default {
         components: {
+            NicetyNav,
+            NicetyNavItem,
+            AppMain,
             AppFooter,
             AppHeaderBar,
             AppNavHeader,
             AppNav,
-            Breadcrumb
         },
         mounted: function () { //渲染完成
 
             $('.collapse').collapse();
-            $('#main-menu').metisMenu();
+            //  $('#main-menu').metisMenu();
             $('[data-toggle="popover"]').popover({
                 delay: {'show': 500, 'hide': 100},
                 offset: 1
@@ -56,9 +57,9 @@
                     }
                 });
             }
-           // $('#dashboard-app').mCustomScrollbar({theme: "minimal-dark", scrollInertia: 50});
+            // $('#dashboard-app').mCustomScrollbar({theme: "minimal-dark", scrollInertia: 50});
 
-           // $('body').mCustomScrollbar({ theme: "minimal-dark",scrollInertia:0});
+            // $('body').mCustomScrollbar({ theme: "minimal-dark",scrollInertia:0});
         }
     }
 </script>

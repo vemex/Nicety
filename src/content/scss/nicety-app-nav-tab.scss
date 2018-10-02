@@ -1,0 +1,35 @@
+.dashboard-body {
+  .page {
+    .nav-tabs { //main tab 样式
+      background: $gray-100;
+      border-bottom: 1px solid #c5c5c5;
+      .nav-item {
+        user-select: none;
+        border-right: 1px solid #c5c5c5;
+      }
+      .nav-link {
+        border: 0;
+        * {
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          cursor: default;
+        }
+        .close-tab {
+          transition: 0.3s;
+          &:hover {
+            transform: rotate(90deg) scale(1);
+            color: $gray-600;
+          }
+          cursor: pointer;
+        }
+        &:hover,
+        &.active {
+          background: $breadcrumb-bg;
+          border-bottom: 2px $breadcrumb-bg solid;
+        }
+      }
+    }
+  }
+}

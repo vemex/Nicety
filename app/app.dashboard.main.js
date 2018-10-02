@@ -8,7 +8,7 @@ import routes from './app.routes'
 //
 import AppView from "./components/app.dashboard.vue"
 
-import store from './store'
+import store from './store/index'
 var $ = require('jquery');
 require("jquery-mousewheel")($);
 require('malihu-custom-scrollbar-plugin')($);
@@ -22,7 +22,13 @@ const router = new VueRouter({
     linkActiveClass: "active"
 });
 
+let appStore= {
+    $store: store,
+};
+appStore.$store.dispatch('AppNav/initRoutes',routes);
 router.beforeEach(function(to, from, next) {
+    appStore.$store.dispatch("AppNav/activeRoute",to);
+    appStore.$store.dispatch("AppNav/openTab",to);
     $('#dashboard-app > div > main').nyOverlay({ title: 'LOADING', target: '#dashboard-app > div > main' });
     next();
 });

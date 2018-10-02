@@ -107,7 +107,7 @@
         </nav>
         <main role="main" class="app-body">
             <div class="container">
-                <router-view></router-view>
+                <app-main></app-main>
                 <app-footer></app-footer>
             </div>
         </main>
@@ -116,9 +116,11 @@
 
 <script>
     import AppFooter from "./app.footer.vue"
+    import AppMain from "./app.main.vue"
     export default {
         components: {
-            AppFooter
+            AppFooter,
+            AppMain
         }
     }
 </script>

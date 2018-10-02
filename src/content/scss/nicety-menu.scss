@@ -1,0 +1,209 @@
+
+.menu-item-padding {
+  padding: 1.2rem;
+}
+
+$menu-item-indent:1.2;
+
+.nicety {
+  &.menu {
+    user-select:none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    background-color: $dashboard-layout-left-side-menu-background;
+    //.user-select(none);
+    z-index: 5;
+
+    .item {
+      //display: flex;
+      //flex: 0 0 auto;
+      line-height: 1rem;
+      @extend .menu-item-padding;
+
+      margin: 0;
+      vertical-align: middle;
+      text-align: left;
+      font-weight: 400;
+      color: $dashboard-layout-left-side-menu-color;
+      white-space: nowrap;
+      cursor: pointer;
+      -webkit-transition: all .3s;
+      transition: all .3s;
+
+      &:not(.header):not(.submenu):hover {
+        background: $dashboard-layout-left-side-menu-hover-background;
+      }
+      &.active, &.active:not(.header):not(.submenu):hover {
+        background: $dashboard-layout-left-side-menu-hover-background;
+        //background: @active-background-color;
+        //color: @active-color;
+        // font-weight: bold;
+      }
+
+      //  .disabled
+    ;
+
+      > i.expand {
+        float: right;
+      }
+    }
+
+    .optgroup {
+      .header {
+        //.item ;
+        // padding-left: @padding-horizontal/2;
+        color: lighten($dashboard-layout-left-side-menu-color, 40%) !important;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    &.vertical {
+      // max-height: 264px;
+      //  .box-shadow
+      //;
+      //  .border
+    ;
+
+      > .item {
+        //   border-top: 1px solid @menu-item-border-color;
+        // min-width: @menu-min-width;
+
+        &:first-child {
+          border-top: none;
+        }
+      }
+    }
+
+    &.horizontal {
+      display: flex;
+      // border-bottom: @border-style;
+
+      > .item {
+        position: relative;
+        float: left;
+        border: 0;
+        border-bottom: 3px solid transparent;
+
+        &:hover, &.active {
+          border-bottom: 3px solid; ////@border-color;
+        }
+      }
+    }
+
+    &.inline {
+      .item {
+        border-top: none;
+        border-right: 3px solid $dashboard-layout-left-side-menu-background; //@border-color;
+
+        &.active:not(.submenu) {
+          border-right-color: $yellow;
+        }
+      }
+
+    }
+
+    &.compact {
+      display: inline-flex;
+      vertical-align: middle;
+    }
+
+    // size
+    //.font-sizes
+  ;
+  }
+}
+
+.nicety.menu {
+  .submenu {
+    position: relative;
+
+    &:after {
+      position: absolute;
+      right: 1.2rem;
+      top: 0.75rem;
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .menu {
+      font-size: inherit;
+    }
+  }
+
+  &.horizontal .submenu {
+    > .menu {
+      position: absolute;
+      top: 2 *2 + 1.5;
+      left: 0;
+      //margin-top: 5px;
+    }
+  }
+
+  &.vertical .submenu {
+    &:after {
+      content: "\f105";
+    }
+
+    > .menu {
+      position: absolute;
+      left: 100%;
+      top: -1px;
+      margin-left: 5px;
+    }
+  }
+
+  &.inline {
+
+    ul li{
+      padding-left: $menu-item-indent*2rem;
+    }
+    ul ul li {
+      padding-left: $menu-item-indent*3rem;
+    }
+  }
+  &.inline .submenu {
+    padding: 0;
+
+    &.item.active {
+      background-color: transparent;
+      font-weight: 400;
+      .title{
+        background-color: $dashboard-layout-left-side-menu-hover-background;
+      }
+    }
+    &.item.active:after {
+      -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+    &:after {
+      content: "\f107";
+    }
+
+    > .title {
+      @extend .menu-item-padding;
+      &:hover {
+        background-color: $dashboard-layout-left-side-menu-hover-background;
+      }
+    }
+    > .menu {
+      box-shadow: none;
+      border: none;
+
+      .item {
+        margin-right: -3px;
+      }
+    }
+  }
+}
+
