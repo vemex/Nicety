@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <app-tab-main v-if="useTabView"> </app-tab-main>
+    <div v-else>
         <div class="page-title">
             <app-breadcrumb></app-breadcrumb>
         </div>
@@ -13,10 +14,18 @@
 </template>
 <script>
     import AppBreadcrumb from "./app.breadcrumb"
+    import AppTabMain from "./app.tab.main"
 
+    import { mapGetters } from 'vuex'
     export default {
         components: {
-            AppBreadcrumb
+            AppBreadcrumb,
+            AppTabMain
+        },
+        computed:{
+            ...mapGetters("AppViewSettings",{
+                useTabView:"useTabView"
+            })
         }
     }
 </script>
