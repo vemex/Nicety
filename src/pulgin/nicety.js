@@ -4,6 +4,10 @@ import AppBreadcrumb from '../../src/store/app.breadcrumb'
 import AppConstants from '../../src/store/app.constants'
 import AppNav from '../../src/store/app.nav'
 import AppViewSettings from '../../src/store/app.view.settings'
+import VueI18n from 'vue-i18n'
+import LanguageManager from './languageManager'
+
+
 
 
 const Nicety = {};
@@ -46,17 +50,27 @@ let initStore = function (Vue, options) {
     return appStore;
 };
 
-let initRoutes = function (Vue, options, appStore) {
+let initRoutes = function (Vue, options, appStore, languageManager) {
     Vue.use(VueRouter);
     let router = new VueRouter({routes: options.routes, linkActiveClass: "active"});
     appStore.$store.dispatch('AppNav/initRoutes', options.routes);
+
     router.beforeEach(function (to, from, next) {
-        appStore.$store.dispatch("AppNav/activeRoute", to);
-        if (options.appSettings.useTabView) {
-            appStore.$store.dispatch("AppNav/openTab", to);
+        let lang = to.query.lang;
+        if (lang){
+            lang=  appStore.$store.getters['AppViewSettings/currentLang']
+        } else{
+            appStore.$store.commit("AppViewSettings/setCurrentLang",lang);
         }
-        $('#dashboard-app > div > main').nyOverlay({title: 'LOADING', target: '#dashboard-app > div > main'});
-        next();
+        languageManager.loadLanguageAsync(lang).then(function (lang) {
+            appStore.$store.dispatch("AppNav/activeRoute", to);
+            if (options.appSettings.useTabView) {
+                appStore.$store.dispatch("AppNav/openTab", to);
+            }
+            $('#dashboard-app > div > main').nyOverlay({title: 'LOADING', target: '#dashboard-app > div > main'});
+            next();
+        });
+
     });
     router.afterEach(function () {
         $('#dashboard-app > div > main').nyOverlay('hide');
@@ -66,14 +80,28 @@ let initRoutes = function (Vue, options, appStore) {
 
 Nicety.install = function (Vue, options) {
     let appStore = initStore(Vue, options);
-    let router = initRoutes(Vue, options, appStore);
-    appStore.$store.commit("AppConstants/setVersion",options.appSettings.version);
-    appStore.$store.commit("AppConstants/setSiteName",options.appSettings.siteName);
-    appStore.$store.commit("AppConstants/setCopyright",options.appSettings.copyright);
-    appStore.$store.commit("AppConstants/setCopyrightTimeRange",options.appSettings.copyrightTimeRange);
-    appStore.$store.commit("AppConstants/setLang",options.appSettings.lang);
-    appStore.$store.commit("AppViewSettings/setUseTabView",options.appSettings.useTabView);
+
+    appStore.$store.commit("AppConstants/setVersion", options.appSettings.version);
+    appStore.$store.commit("AppConstants/setSiteName", options.appSettings.siteName);
+    appStore.$store.commit("AppConstants/setCopyright", options.appSettings.copyright);
+    appStore.$store.commit("AppConstants/setCopyrightTimeRange", options.appSettings.copyrightTimeRange);
+    appStore.$store.commit("AppConstants/setDefaultLang", options.appSettings.defaultLang);//设置默认语言
+    appStore.$store.commit("AppViewSettings/setCurrentLang", options.appSettings.defaultLang);//设置当前语言
+    appStore.$store.commit("AppViewSettings/setUseTabView", options.appSettings.useTabView);
+
+    Vue.use(VueI18n);
+    let lang=  appStore.$store.getters['AppConstants/defaultLang'];
+    const i18n = new VueI18n({
+        locale: "", // set locale
+        fallbackLocale: lang,
+        messages: {}
+    });
+    let languageManager = new LanguageManager(i18n,lang);
+
+    let router = initRoutes(Vue, options, appStore, languageManager);
+
     new Vue({
+        i18n,
         store: appStore.$store,
         el: '#app',
         router: router,

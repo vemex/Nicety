@@ -9,13 +9,22 @@ body {
   box-sizing: border-box;
 }
 
+/***
+布局方案描述：
+默认情况下整个布局区域的最小高度为100vh
+header 部分靠上显示，postion 方式为绝对布局，z-index:1000，宽度100%
+body 部分中间显示，最小高度为100vh, 上部偏移 header 部分高度，宽度100%
+footer 布局方式靠底部显示，position：绝对布局，宽度100%
+整体布局方式由内而外的撑高。
+如果出现滚动，header+body+footer 整体滚动。
+ */
 #dashboard-app {
-  min-height: 100vh;
   min-width: 290px;
   max-width: 100vw;
   position: relative;
-  height: auto;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
   > header {
     position: absolute;
     height: $dashboard-layout-header-height;
@@ -26,118 +35,19 @@ body {
   }
   > footer {
     height: $dashboard-layout-footer-height;
-    position: absolute;
+    position: static;
     bottom: 0;
     left: 0;
     right: 0;
   }
-  .dashboard-body {
+  > .dashboard-body {
     position: relative;
-    display: grid;
-    display: -ms-grid \0
-  ;
-    grid-template-columns: $dashboard-layout-left-side-width auto;
-    -ms-grid-columns: $dashboard-layout-left-side-width 1fr;
-    .page,
-    .aside-left {
-      padding-top: $dashboard-layout-header-height;
-      padding-bottom: $dashboard-layout-footer-height;
-      min-height: 100vh;
-    }
-    .page {
-      grid-column-start: 2;
-      grid-column-end: 2;
-      -ms-grid-column: 2 \0
-    ;
-      .page-content > div {
-        padding: 1em
-      }
-      .page-title .breadcrumb {
-        margin-bottom: 0px;
-      }
-    }
-  }
-  header {
-    display: flex;
-    flex-direction: row;
-    background-color: $dashboard-layout-header-background-color;
-    .aside-header > div,
-    .header-bar .dropdown,
-    .header-bar > div,
-    button {
-      height: 100%;
-    }
-    .header-bar .dropdown,
-    .header-bar > div,
-    .right-container > div,
-    .left-container > div,
-    button {
-      display: inline-block;
-      font-size: 0;
-    }
-    .aside-header {
-      width: $dashboard-layout-left-side-width;
-      flex-grow: 0;
-      > div {
-        width: 100%;
-      }
-    }
-    .header-bar {
-      flex-grow: 1;
-      //.right-container {
-      //    @extend .float-right;
-      //}
-      > div {
-        @extend .d-flex ;
-        @extend .justify-content-between;
-      }
-    }
-    button {
-      font-size: 1rem;
-      color: $dasboard-primary-color;
-    }
-    .left-container > div,
-    .right-container > div {
-      height: 100%;
-    }
-    .aside-header button,
-    .left--container button,
-    .right-container button {
-      @extend .btn;
-      @extend .btn-outline-primary;
-      display: block;
-      color: $dasboard-primary-color;
-      font-size: 1rem;
-      i {
-        font-size: 1.5rem;
-      }
-      border-width: 0;
-      height: 100%;
-    }
-    .sidebar-toggler {
-      @extend .float-right;
-    }
-    .dropdown-toggle:after {
-      content: none;
-    }
-    .dropdown-menu {
-      margin: 0;
-    }
-  }
-  .dashboard-body {
-    .aside-left {
-      width: $dashboard-layout-left-side-width;
-      background: $dashboard-layout-left-side-background;
-    }
-  }
-  > footer {
-    border-top: 1px solid #e6e6e6;
-    box-sizing: border-box;
-    background-color: #f3f3f3;
-    color: #595959;
-    font-size: 1em;
-    text-align: center;
-    padding: 0.5em;
+    padding-top: ($dashboard-layout-header-height);
+    margin-top: ($dashboard-layout-header-height*-1);
+    top: $dashboard-layout-header-height;
+    padding-bottom: $dashboard-layout-footer-height;
+    margin-bottom: ($dashboard-layout-header-height)-($dashboard-layout-footer-height);
+    min-height: 100vh;
   }
 }
 
@@ -151,57 +61,71 @@ body {
   > footer {
     position: fixed;
   }
-}
-
-#dashboard-app.fixed-header.fixed-left-sider.fixed-footer {
   .dashboard-body {
-    padding-top: 3.5em;
-    height: 100vh;
-    overflow: hidden;
-    .page {
-      height: 100vh;
-      padding-top: 6em;
-      margin-top: -6em;
-      margin-bottom: -2.5em;
-      .page-content {
-        height: 100%;
-        overflow: auto;
-      }
-    }
+    margin-bottom: $dashboard-layout-header-height;
   }
 }
 
+
 #dashboard-app.fixed-left-sider {
+  header {
+    left:  $dashboard-layout-left-side-width;
+    .header-bar {
+      padding-left: 0;
+      margin-left: 0;
+    }
+  }
+  .aside-header {
+    display: none;
+  }
   .dashboard-body {
     .aside-left {
       position: fixed;
-      top: 0;
-      bottom: 0;
+      height: 100vh;
+    }
+  }
+}
+
+#dashboard-app.fixed-header.fixed-left-sider.fixed-footer {
+
+  header {
+    left: 0;
+    .aside-header {
+      display: block;
+    }
+    .header-bar {
+      padding-left: $dashboard-layout-left-side-width;
+      margin-left: $dashboard-layout-left-side-width*-1;
+    }
+  }
+
+  .dashboard-body {
+    .aside-left {
+      position: fixed;
+      padding-top: $dashboard-layout-header-height+( $dashboard-layout-footer-height);
+      margin-top: ($dashboard-layout-header-height+( $dashboard-layout-footer-height))*-1;
+      top: $dashboard-layout-header-height;
+    }
+    overflow: auto;
+    .page{
+      padding-top: $dashboard-layout-header-height+( $dashboard-layout-footer-height);
+      margin-top: ($dashboard-layout-header-height+( $dashboard-layout-footer-height))*-1;
+      top: $dashboard-layout-header-height;
+      overflow: hidden;
+      height: 100vh;
+      > div{
+        height: 100%;
+        overflow: auto;
+        overflow-x: hidden;
+      }
     }
 
   }
 }
 
-header {
-  .right-container button,
-  .right-container label {
-    font-size: 1rem;
-  }
-}
 
 body > .mCSB_scrollTools_vertical,
 .aside-left > .mCSB_scrollTools_vertical {
   margin-top: $dashboard-layout-header-height !important;
   margin-bottom: $dashboard-layout-footer-height !important;
-}
-
-footer {
-  height: $dashboard-layout-footer-height;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  text-align: center;
-  padding: 5px;
 }

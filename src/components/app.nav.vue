@@ -6,8 +6,10 @@
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </span>
             <nicety-menu :mode="'inline'">
-                <nicety-nav-item v-for="(route, index) in routes" v-bind:key="index"
-                                 :route="route"></nicety-nav-item>
+                <template v-for="(route, index) in routes">
+                    <nicety-nav-item v-bind:key="index"
+                                     :route="route"></nicety-nav-item>
+                </template>
             </nicety-menu>
         </div>
     </nav>
@@ -18,6 +20,7 @@
     import NicetyNavItem from "./app.nav.item";
     import NicetyMenu from "./Menu";
     import {mapState, mapActions, mapGetters} from 'vuex'
+
     export default {
         name: "nicety-nav",
         components: {NicetyMenu, NicetyNavItem, NicetyMenuItem, NicetyOption},

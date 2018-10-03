@@ -1,12 +1,17 @@
 <template>
-    <nicety-menu-item  :class="[{'active':route.meta.active}]"  :index="route.path" v-if="route.children" :trigger="'click'" :mode="'inline'">
+    <nicety-menu-item :class="[{'active':route.meta.active}]" :index="route.path"
+                      v-if="route.children&& route.meta.displayInNav"
+                      :trigger="'click'" :mode="'inline'">
         <template slot="title">{{route.meta.display}}</template>
-        <template v-for="item in route.children" >
-            <nicety-nav-item :route="item"  v-if="item.children"></nicety-nav-item>
-            <nicety-option :class="[{'active':item.meta.active}]"  :index="item.path" :item-display="item.meta.display" v-else @click="itemClickHandler(item.path)"></nicety-option>
+        <template v-for="item in route.children">
+            <nicety-nav-item :route="item" v-if="item.children"></nicety-nav-item>
+            <nicety-option :class="[{'active':item.meta.active}]" :index="item.path"
+                           :item-display="item.meta.display" v-else
+                           @click="itemClickHandler(item.path)"></nicety-option>
         </template>
     </nicety-menu-item>
-    <nicety-option :class="[{'active':route.meta.active}]" :index="route.path"  :item-display="route.meta.display" v-else @click="itemClickHandler(route.path)"></nicety-option>
+    <nicety-option :class="[{'active':route.meta.active}]" :index="route.path" :item-display="route.meta.display"
+                   v-else-if="route.meta.displayInNav" @click="itemClickHandler(route.path)"></nicety-option>
 </template>
 <script>
     import NicetyMenuItem from "./MenuItem"
@@ -18,16 +23,16 @@
         props: {
             "route": [Number, String, Array, Object]
         },
-        watch:{
-            route:function () {
+        watch: {
+            route: function () {
                 console.log(this.route);
             }
         },
         mounted: function () {
             //console.log(this.route)
         },
-        methods:{
-            itemClickHandler:function (path) {
+        methods: {
+            itemClickHandler: function (path) {
                 this.$router.push(path);
             }
         }

@@ -10,10 +10,10 @@ $dasboard-primary-background:$primary;
 $dasboard-primary-color:$light;
 $dasboard-primary-hover-background:darken($dasboard-primary-background,5%) ;
 
-$dashboard-layout-header-height: 3.5em !default;//布局header部分高度
+$dashboard-layout-header-height: 3.5rem!default;//布局header部分高度
 $dashboard-layout-header-background-color: darken($dasboard-primary-background,10%)  !default;
-$dashboard-layout-footer-height: 2.5em !default;
-$dashboard-layout-left-side-width: 17em!default;
+$dashboard-layout-footer-height: 2.5rem !default;
+$dashboard-layout-left-side-width: 17rem !default;
 $dashboard-layout-left-side-background: darken( $dasboard-primary-background,5%)  !default;
 
 $dashboard-layout-left-side-menu-background:darken( $dasboard-primary-background,5%) !default;

@@ -1,0 +1,30 @@
+#dashboard-app {
+  > .dashboard-body {
+    .aside-left {
+      width: $dashboard-layout-left-side-width;
+      background: $dashboard-layout-left-side-background;
+    }
+    display: grid;
+    display: -ms-grid \0;
+    grid-template-columns: $dashboard-layout-left-side-width auto;
+    -ms-grid-columns: $dashboard-layout-left-side-width 1fr;
+    .page,
+    .aside-left {
+      //padding-top: $dashboard-layout-header-height;
+      //padding-bottom: $dashboard-layout-footer-height;
+      //min-height: 100vh;
+    }
+    .page {
+      grid-column-start: 2;
+      grid-column-end: 2;
+      -ms-grid-column: 2 \0
+    ;
+      .page-content > div {
+        padding: 1em
+      }
+      .page-title .breadcrumb {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}

@@ -67,6 +67,9 @@ let createRoute = function (originRoute) {
     if (meta.active === undefined) {
         meta.active = false;
     }
+    if (meta.displayInNav === undefined) {
+        meta.displayInNav = true;
+    }
     return {
         name: originRoute.name,
         path: originRoute.path,
@@ -81,14 +84,12 @@ let createRoute = function (originRoute) {
 let copyRoutes = function (routes, parent) {
     let result = [];
     routes.forEach(function (value) {
-        if (value.meta.display) {
-            let newRoute = createRoute(value);
-            newRoute.meta.canClose = newRoute.path !== '/';
-            if (value.children) {
-                newRoute.children = copyRoutes(value.children, value);
-            }
-            result.push(newRoute)
+        let newRoute = createRoute(value);
+        newRoute.meta.canClose = newRoute.path !== '/';
+        if (value.children) {
+            newRoute.children = copyRoutes(value.children, value);
         }
+        result.push(newRoute)
     });
     return result;
 };
@@ -113,16 +114,16 @@ const mutations = {
         })
     },
     pushTab(state, router) {
-        let path=undefined;
-        if (router instanceof  Object){
-            path=router.fullPath;
-        } else{
-            path=router;
+        let path = undefined;
+        if (router instanceof Object) {
+            path = router.fullPath;
+        } else {
+            path = router;
         }
-        let findRouter=undefined;
+        let findRouter = undefined;
         loopRoute(state.routes, null, function (parent, value) {
             if (path === value.path) {
-                findRouter=value;
+                findRouter = value;
             }
         });
         if (findRouter) {
@@ -137,7 +138,12 @@ const mutations = {
             if (findItem !== null) {
                 findItem.active = true
             } else {
-                state.openTabs.push({url: path, active: true, display: findRouter.meta.display,canClose:findRouter.meta.canClose});
+                state.openTabs.push({
+                    url: path,
+                    active: true,
+                    display: findRouter.meta.display,
+                    canClose: findRouter.meta.canClose
+                });
             }
         }
 

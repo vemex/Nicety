@@ -1,8 +1,15 @@
 <template>
-    <div id="dashboard-app" class="fixed-header fixed-left-sider">
+    <div id="dashboard-app" class="fixed-left-sider  fixed-header fixed-footer">
         <header>
             <app-nav-header></app-nav-header>
             <app-header-bar>
+                <template slot="left">
+                    <button type="button" data-container="body" data-toggle="popover" data-trigger="hover"
+                            data-placement="bottom"
+                            data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                        <i class="pli-mail-2"></i>
+                    </button>
+                </template>
                 <template slot="right">
                     <div class="dropdown">
                         <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
