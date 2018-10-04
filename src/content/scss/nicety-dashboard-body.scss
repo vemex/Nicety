@@ -8,15 +8,14 @@
       }
     }
     display: grid;
-    display: -ms-grid \0
-  ;
+    display: -ms-grid;
     grid-template-columns: $dashboard-layout-left-side-width auto;
     -ms-grid-columns: $dashboard-layout-left-side-width 1fr;
     .page {
+      position: relative;
       grid-column-start: 2;
       grid-column-end: 2;
-      -ms-grid-column: 2 \0
-    ;
+      -ms-grid-column: 2;
       .page-content .tool-bar {
         @extend .navbar;
         @extend .navbar-expand-lg;

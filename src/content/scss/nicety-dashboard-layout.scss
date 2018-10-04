@@ -111,7 +111,6 @@ footer 布局方式靠底部显示，position：绝对布局，宽度100%
     .page {
       padding-top: $dashboard-layout-header-height+( $dashboard-layout-footer-height);
       margin-top: ($dashboard-layout-header-height+( $dashboard-layout-footer-height))*-1;
-      top: $dashboard-layout-header-height;
       overflow: hidden;
       height: 100vh;
       > div {
