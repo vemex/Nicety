@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import AppBreadcrumb from '../../src/store/app.breadcrumb'
-import AppConstants from  '../../src/store/app.constants'
 
 // Vue.use(Vuex);
 

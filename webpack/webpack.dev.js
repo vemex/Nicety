@@ -25,7 +25,6 @@ const vueConfig = require("./config/vue.module.config.js");
 let option = {env: "development", apiURL: ''};
 
 let config = webpackMerge(
-    resolveConfig(option),
     baseModuleConfig(option),
     basePluginConfig(option),
     commonChunkConfig(option),
@@ -36,22 +35,27 @@ let config = webpackMerge(
     entryConfig(option),
     externalsConfig(option),
     outputConfig(option),
-    // resolveConfig(option),
+    resolveConfig(option),
     vueConfig(option),
     {
+        mode:option.env,
         devtool: 'source-map',
         devServer: {
-            contentBase: './target/www'
+            contentBase: './target/www',
+            hot:true,
+            hotOnly: true,
+            proxy: {
+                '/uploads': {
+                    target: 'http://localhost:9090/uploads',
+                    secure: false
+                },
+                '/chunksdone': {
+                    target: 'http://localhost:9090/chunksdone',
+                    secure: false
+                }
+            }
         },
         plugins: [
-            // new webpack.optimize.UglifyJsPlugin({
-            //     output: {
-            //         comments: false,  // remove all comments
-            //     },
-            //     compress: {
-            //         warnings: false
-            //     }
-            // }),
             new BrowserSyncPlugin({
                 host: 'localhost',
                 port: 9061,
@@ -61,6 +65,7 @@ let config = webpackMerge(
             }, {
                 reload: false
             }),
+            new webpack.HotModuleReplacementPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
             new webpack.NamedModulesPlugin(),
             new WriteFilePlugin(),

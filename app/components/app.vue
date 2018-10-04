@@ -1,126 +1,67 @@
 <template>
-    <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="#">Nicety</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                                              <span class="navbar-toggler-icon"></span>
-                                            </button>
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <router-link class="nav-item" tag="li" to="/Home"><a class="nav-link">Home</a></router-link>
-                    <router-link class="nav-item" tag="li" to="/ThemeColor"><a class="nav-link">ThemeColor</a></router-link>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Layout
-                                </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link class="dropdown-item" to="/Grid">Grid</router-link>
-                            <router-link class="dropdown-item" to="/Flex">Flex</router-link> 
-                            <router-link class="dropdown-item" to="/Display">Display</router-link>  
+    <app :fixed-header="true" :fixed-footer="true" :fixed-aside-left="true" :fixed-page-title="true" :fixed-nav-tabs="true">
+        <template slot="nav-header-bar-left">
+            <button type="button" data-container="body" data-toggle="popover" data-trigger="hover"
+                    data-placement="bottom"
+                    data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                <i class="pli-mail-2"></i>
+            </button>
+        </template>
+        <template slot="nav-header-bar-right">
+            <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    <i class="pli-bell"></i><span class="badge">4</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2"
+                     x-placement="bottom-start"
+                     style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <form class="px-4 py-3">
+                        <div class="form-group">
+                            <label for="exampleDropdownFormEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleDropdownFormEmail1"/>
                         </div>
-                    </li>
-
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Content
-                                </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link class="dropdown-item" to="/Reboot">Reboot-baseline</router-link>
-                            <router-link class="dropdown-item" to="/Typography">Typography</router-link>
-                            <router-link class="dropdown-item" to="/Code">Code</router-link>
-                            <router-link class="dropdown-item" to="/Images">Images</router-link>
-                            <router-link class="dropdown-item" to="/DataTable">Tables</router-link>
-                            <router-link class="dropdown-item" to="/Figures">Figures</router-link> 
+                        <div class="form-group">
+                            <label for="exampleDropdownFormPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleDropdownFormPassword1"
+                                   placeholder="Password">
                         </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Components
-                                </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link class="dropdown-item" to="/Alerts">Alerts</router-link>
-                            <router-link class="dropdown-item" to="/Badges">Badges</router-link>
-                            <router-link class="dropdown-item" to="/Breadcrumb">Breadcrumb</router-link>
-                            <router-link class="dropdown-item" to="/Button">Button</router-link>
-                            <router-link class="dropdown-item" to="/ButtonGroup">Button Group</router-link>
-                            <router-link class="dropdown-item" to="/Card">Card</router-link>
-                            <router-link class="dropdown-item" to="/Collapse">Collapse</router-link>
-                            <router-link class="dropdown-item" to="/Dropdown">Dropdown</router-link>
-                            <router-link class="dropdown-item" to="/Form">Form</router-link>
-                            <router-link class="dropdown-item" to="/InputGroup">InputGroup</router-link>
-                            <router-link class="dropdown-item" to="/Jumbotron">Jumbotron</router-link>
-                            <router-link class="dropdown-item" to="/ListGroup">ListGroup</router-link>
-                            <router-link class="dropdown-item" to="/Modal">Modal</router-link>
-                            <router-link class="dropdown-item" to="/Navs">Navs</router-link>
-                            <router-link class="dropdown-item" to="/Navbar">Navbar</router-link>
-                            <router-link class="dropdown-item" to="/Pagination">Pagination</router-link>
-                            <router-link class="dropdown-item" to="/Popovers">Popovers</router-link>
-                            <router-link class="dropdown-item" to="/Progress">Progress</router-link>
-                            <router-link class="dropdown-item" to="/Scrollspy">Scrollspy</router-link>
-                            <router-link class="dropdown-item" to="/Tooltips">Tooltips</router-link>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                            <label class="form-check-label" for="dropdownCheck">
+                                Remember me
+                            </label>
                         </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Plugins
-                                </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link class="dropdown-item" to="/Metismenu">Menu</router-link>
-                            <router-link class="dropdown-item" to="/AgGrid">AgGrid</router-link>
-                            <router-link class="dropdown-item" to="/Alerts">Tabs</router-link>
-                            <router-link class="dropdown-item" to="/ECharts">Charts</router-link>
-                        </div>
-                    </li>
-                    <router-link class="nav-item" tag="li" to="/UtilsDemo"><a class="nav-link">Utils</a></router-link>
-                    <router-link class="nav-item" tag="li" to="/Navbar"><a class="nav-link">Widgets</a></router-link>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Icons
-                                </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link class="dropdown-item" to="/IconsThemify">Icons Themify</router-link>
-                            <router-link class="dropdown-item" to="/PremiumLine">Icons Premium Line</router-link>
-                            <router-link class="dropdown-item" to="/PremiumSolid">Icons Premium Solid</router-link>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Pages
-                                </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link class="dropdown-item" to="/Alerts">Mail Box</router-link>
-                            <router-link class="dropdown-item" to="/Alerts">Search</router-link>
-                            <router-link class="dropdown-item" to="/Alerts">FAQ</router-link>
-                            <router-link class="dropdown-item" to="/Alerts">Login</router-link>
-                            <router-link class="dropdown-item" to="/Alerts">404</router-link>
-                            <router-link class="dropdown-item" to="/Tooltips">Regist</router-link>
-                            <router-link class="dropdown-item" to="/Alerts">505</router-link>
-                        </div>
-                    </li>
-                    <router-link class="nav-item" tag="li" to="/About"><a class="nav-link">About</a></router-link>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">New around here? Sign up</a>
+                    <a class="dropdown-item" href="#">Forgot password?</a>
+                </div>
             </div>
-        </nav>
-        <main role="main" class="app-body">
-            <div class="container">
-                <app-main></app-main>
-                <app-footer></app-footer>
-            </div>
-        </main>
-    </div>
+            <button type="button" data-container="body" data-toggle="popover" data-trigger="hover"
+                    data-placement="bottom"
+                    data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                <i class="pli-mail-2"></i>
+            </button>
+            <button type="button" data-container="body" data-toggle="popover" data-trigger="hover"
+                    data-placement="bottom" data-content="退出">
+                <i class="pli-unlock"></i>
+            </button>
+        </template>
+    </app>
 </template>
 
 <script>
-    import AppFooter from "./app.footer.vue"
-    import AppMain from "./app.main.vue"
+    import App from "../../src/components/app"
+
+
     export default {
         components: {
-            AppFooter,
-            AppMain
+            App,
+        },
+        mounted: function () { //渲染完成
+
         }
     }
 </script>

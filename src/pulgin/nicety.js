@@ -49,12 +49,27 @@ let initStore = function (Vue, options) {
     };
     return appStore;
 };
-
+let defaultOptions={
+    routes: [],
+    mainComponent: {},
+    storeModules: {},
+    routeBeforeEach:function(){
+        return Promise.resolve(true);
+    },
+    appSettings: {
+        useTabView: false,
+        version:"0.0.1",
+        lang:"ZH-CN",
+        copyright:"WANG WEI WEI",
+        copyrightTimeRange:"2017-208",
+        siteName:"Nicety"
+    }
+};
 let initRoutes = function (Vue, options, appStore, languageManager) {
+    options= $.extend({},defaultOptions,options)  ;
     Vue.use(VueRouter);
     let router = new VueRouter({routes: options.routes, linkActiveClass: "active"});
     appStore.$store.dispatch('AppNav/initRoutes', options.routes);
-
     router.beforeEach(function (to, from, next) {
         let lang = to.query.lang;
         if (lang){
@@ -67,8 +82,16 @@ let initRoutes = function (Vue, options, appStore, languageManager) {
             if (options.appSettings.useTabView) {
                 appStore.$store.dispatch("AppNav/openTab", to);
             }
-            $('#dashboard-app > div > main').nyOverlay({title: 'LOADING', target: '#dashboard-app > div > main'});
-            next();
+            options.routeBeforeEach(  appStore.$store).then(function (data) {
+                if (data) {
+                    $('#dashboard-app > div > main').nyOverlay({
+                        title: 'LOADING',
+                        target: '#dashboard-app > div > main'
+                    });
+                    next();
+                }
+            });
+
         });
 
     });
