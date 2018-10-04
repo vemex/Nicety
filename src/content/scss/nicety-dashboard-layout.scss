@@ -66,10 +66,9 @@ footer 布局方式靠底部显示，position：绝对布局，宽度100%
   }
 }
 
-
 #dashboard-app.fixed-left-sider {
   header {
-    left:  $dashboard-layout-left-side-width;
+    left: $dashboard-layout-left-side-width;
     .header-bar {
       padding-left: 0;
       margin-left: 0;
@@ -85,6 +84,7 @@ footer 布局方式靠底部显示，position：绝对布局，宽度100%
     }
   }
 }
+
 
 #dashboard-app.fixed-header.fixed-left-sider.fixed-footer {
 
@@ -105,15 +105,16 @@ footer 布局方式靠底部显示，position：绝对布局，宽度100%
       padding-top: $dashboard-layout-header-height+( $dashboard-layout-footer-height);
       margin-top: ($dashboard-layout-header-height+( $dashboard-layout-footer-height))*-1;
       top: $dashboard-layout-header-height;
+
     }
     overflow: auto;
-    .page{
+    .page {
       padding-top: $dashboard-layout-header-height+( $dashboard-layout-footer-height);
       margin-top: ($dashboard-layout-header-height+( $dashboard-layout-footer-height))*-1;
       top: $dashboard-layout-header-height;
       overflow: hidden;
       height: 100vh;
-      > div{
+      > div {
         height: 100%;
         overflow: auto;
         overflow-x: hidden;
@@ -122,7 +123,6 @@ footer 布局方式靠底部显示，position：绝对布局，宽度100%
 
   }
 }
-
 
 body > .mCSB_scrollTools_vertical,
 .aside-left > .mCSB_scrollTools_vertical {

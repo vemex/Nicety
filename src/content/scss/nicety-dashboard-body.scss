@@ -2,24 +2,39 @@
   > .dashboard-body {
     .aside-left {
       width: $dashboard-layout-left-side-width;
-      background: $dashboard-layout-left-side-background;
+      .wrapper {
+        height: 100%;
+        background: $dashboard-layout-left-side-background;
+      }
     }
     display: grid;
-    display: -ms-grid \0;
+    display: -ms-grid \0
+  ;
     grid-template-columns: $dashboard-layout-left-side-width auto;
     -ms-grid-columns: $dashboard-layout-left-side-width 1fr;
-    .page,
-    .aside-left {
-      //padding-top: $dashboard-layout-header-height;
-      //padding-bottom: $dashboard-layout-footer-height;
-      //min-height: 100vh;
-    }
     .page {
       grid-column-start: 2;
       grid-column-end: 2;
       -ms-grid-column: 2 \0
     ;
-      .page-content > div {
+      .page-content .tool-bar {
+        @extend .navbar;
+        @extend .navbar-expand-lg;
+        @extend .navbar-light;
+        padding: 0;
+        ul.wrapper {
+          width: 100%;
+          @extend .navbar-nav;
+          background-color: $gray-100;
+          li {
+            @extend .nav-item;
+            button {
+              @extend .btn-outline-primary;
+            }
+          }
+        }
+      }
+      .page-content .main {
         padding: 1em
       }
       .page-title .breadcrumb {
@@ -28,3 +43,42 @@
     }
   }
 }
+
+
+$dashboard-layout-page-title-height: 2.5rem !default;
+#dashboard-app.fixed-header.fixed-left-sider.fixed-footer.fixed-page-title.no-nav-tab {
+  .page {
+    > .wrapper {
+      > .wrapper {
+        height: 100%;
+      }
+    }
+  }
+}
+
+#dashboard-app.fixed-header.fixed-left-sider.fixed-footer.fixed-page-title {
+  .page {
+    overflow: hidden;
+    > .wrapper {
+      > .wrapper {
+        position: relative;
+        padding-top: $dashboard-layout-page-title-height;
+        margin-top: $dashboard-layout-page-title-height*-1;
+        top: $dashboard-layout-page-title-height;
+        .page-title {
+          position: absolute;
+          width: 100%;
+          top: 0;
+          height: $dashboard-layout-page-title-height;
+        }
+        .page-content {
+          height: 100%;
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+      }
+    }
+
+  }
+}
+

@@ -1,6 +1,9 @@
+$dashboard-layout-nar-bar-height:2.5rem !default;
+
 .dashboard-body {
   .page {
     .nav-tabs { //main tab 样式
+      height: $dashboard-layout-nar-bar-height;
       background: $gray-100;
       border-bottom: 1px solid #c5c5c5;
       .nav-item {
@@ -29,6 +32,30 @@
           background: $breadcrumb-bg;
           border-bottom: 2px $breadcrumb-bg solid;
         }
+      }
+    }
+  }
+}
+
+#dashboard-app.fixed-header.fixed-left-sider.fixed-footer.fixed-nav-tabs {
+  .page {
+    overflow: hidden;
+    > .wrapper {
+      height: 100%;
+      position: relative;
+      padding-top: $dashboard-layout-nar-bar-height;
+      margin-top: $dashboard-layout-nar-bar-height*-1;
+      top: $dashboard-layout-nar-bar-height;
+      .nav-tabs{
+        top: 0;
+        position: absolute;
+        width: 100%;
+
+      }
+      > .wrapper{
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
     }
   }

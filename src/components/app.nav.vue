@@ -1,18 +1,20 @@
 <template>
-    <nav class="sidebar-nav">
-        <div id="main-menu">
+    <div class="wrapper">
+        <nav class="sidebar-nav">
+            <div id="main-menu">
             <span class="sidebar-search-wrapper text-light" style="font-size: 14px;padding: 1rem;font-weight: 600;">
                 导航
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </span>
-            <nicety-menu :mode="'inline'">
-                <template v-for="(route, index) in routes">
-                    <nicety-nav-item v-bind:key="index"
-                                     :route="route"></nicety-nav-item>
-                </template>
-            </nicety-menu>
-        </div>
-    </nav>
+                <nicety-menu :mode="'inline'">
+                    <template v-for="(route, index) in routes">
+                        <nicety-nav-item v-bind:key="index"
+                                         :route="route"></nicety-nav-item>
+                    </template>
+                </nicety-menu>
+            </div>
+        </nav>
+    </div>
 </template>
 <script>
     import NicetyOption from "./Option";
