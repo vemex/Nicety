@@ -8,8 +8,6 @@ import VueI18n from 'vue-i18n'
 import LanguageManager from './languageManager'
 
 
-
-
 const Nicety = {};
 
 
@@ -49,40 +47,40 @@ let initStore = function (Vue, options) {
     };
     return appStore;
 };
-let defaultOptions={
+let defaultOptions = {
     routes: [],
     mainComponent: {},
     storeModules: {},
-    routeBeforeEach:function(){
+    routeBeforeEach: function () {
         return Promise.resolve(true);
     },
     appSettings: {
         useTabView: false,
-        version:"0.0.1",
-        lang:"ZH-CN",
-        copyright:"WANG WEI WEI",
-        copyrightTimeRange:"2017-208",
-        siteName:"Nicety"
+        version: "0.0.1",
+        lang: "ZH-CN",
+        copyright: "WANG WEI WEI",
+        copyrightTimeRange: "2017-208",
+        siteName: "Nicety"
     }
 };
 let initRoutes = function (Vue, options, appStore, languageManager) {
-    options= $.extend({},defaultOptions,options)  ;
+    options = $.extend({}, defaultOptions, options);
     Vue.use(VueRouter);
     let router = new VueRouter({routes: options.routes, linkActiveClass: "active"});
     appStore.$store.dispatch('AppNav/initRoutes', options.routes);
     router.beforeEach(function (to, from, next) {
         let lang = to.query.lang;
-        if (lang){
-            lang=  appStore.$store.getters['AppViewSettings/currentLang']
-        } else{
-            appStore.$store.commit("AppViewSettings/setCurrentLang",lang);
+        if (lang) {
+            lang = appStore.$store.getters['AppViewSettings/currentLang']
+        } else {
+            appStore.$store.commit("AppViewSettings/setCurrentLang", lang);
         }
         languageManager.loadLanguageAsync(lang).then(function (lang) {
             appStore.$store.dispatch("AppNav/activeRoute", to);
             if (options.appSettings.useTabView) {
                 appStore.$store.dispatch("AppNav/openTab", to);
             }
-            options.routeBeforeEach(  appStore.$store).then(function (data) {
+            options.routeBeforeEach(appStore.$store).then(function (data) {
                 if (data) {
                     $('#dashboard-app > div > main').nyOverlay({
                         title: 'LOADING',
@@ -113,13 +111,13 @@ Nicety.install = function (Vue, options) {
     appStore.$store.commit("AppViewSettings/setUseTabView", options.appSettings.useTabView);
 
     Vue.use(VueI18n);
-    let lang=  appStore.$store.getters['AppConstants/defaultLang'];
+    let lang = appStore.$store.getters['AppConstants/defaultLang'];
     const i18n = new VueI18n({
         locale: "", // set locale
         fallbackLocale: lang,
         messages: {}
     });
-    let languageManager = new LanguageManager(i18n,lang);
+    let languageManager = new LanguageManager(i18n, lang);
 
     let router = initRoutes(Vue, options, appStore, languageManager);
     languageManager.loadLanguageAsync(lang).then(function (lang) {
@@ -145,11 +143,12 @@ Nicety.install = function (Vue, options) {
     })
 
 // 3. 注入组件
-    Vue.mixin({
-        created: function () {
-// 逻辑...
-        }
-    })
+    Vue.mixin(
+        {
+            components: {
+                ...options.components
+            }
+        });
 
 // 4. 添加实例方法
     Vue.prototype.$myMethod = function (methodOptions) {
