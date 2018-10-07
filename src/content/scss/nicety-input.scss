@@ -2,3 +2,14 @@
     -webkit-appearance: none;
     -moz-appearance: none;
 }
+.error.form-control{
+    border: 1px $red solid;
+}
+.field.form-group {
+    .alert-danger{
+        color: $light;
+        background-color: $red ;
+        border-color: $red ;
+        padding: 5px;
+    }
+}

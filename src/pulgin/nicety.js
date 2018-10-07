@@ -122,14 +122,16 @@ Nicety.install = function (Vue, options) {
     let languageManager = new LanguageManager(i18n,lang);
 
     let router = initRoutes(Vue, options, appStore, languageManager);
-
-    new Vue({
-        i18n,
-        store: appStore.$store,
-        el: '#app',
-        router: router,
-        render: h => h(options.mainComponent)
+    languageManager.loadLanguageAsync(lang).then(function (lang) {
+        new Vue({
+            i18n,
+            store: appStore.$store,
+            el: '#app',
+            router: router,
+            render: h => h(options.mainComponent)
+        });
     });
+
 // 1. 添加全局方法或属性
     Vue.myGlobalMethod = function () {
 // 逻辑...

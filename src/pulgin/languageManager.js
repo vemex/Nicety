@@ -28,14 +28,15 @@ function getLoadLanguages(that) {
  * @returns {*}
  */
 function loadLanguageResource(that, lang) {
+    let i18n = geti18n(that);
     let loadedLanguages = getLoadLanguages(that);
     if (loadedLanguages.indexOf(lang) > 0) {
         return Promise.resolve(i18n.messages[lang]);
     }
-    return Axios.get(`./i18n/${lang}.json`).then(function (respon) {
-        i18n.setLocaleMessage(lang, messages);
+    return Axios.get(`./i18n/${lang}.json`).then(function (messages) {
+        i18n.setLocaleMessage(lang, messages.data);
         loadedLanguages.push(lang);
-        return respon.data;
+        return  messages.data;
     });
 }
 
@@ -60,8 +61,10 @@ class LanguageManager {
         }
         if (i18n.locale !== lang) {
             let _ = this;
-            return loadLanguageResource(lang).then((messages) => {
+            return loadLanguageResource(this,lang).then((messages) => {
                 return setLang(_, lang)
+            }).catch(function () {
+                console.log(`lang:${lang} load failed.`);
             });
         }
         return Promise.resolve(lang)

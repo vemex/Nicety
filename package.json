@@ -98,6 +98,7 @@
     "@shopify/draggable": "^1.0.0-beta.7",
     "ag-grid": "^17.1.1",
     "ag-grid-vue": "^17.1.0",
+    "axios": "^0.18.0",
     "bootstrap": "^4.1.2",
     "echarts": "^3.8.5",
     "fine-uploader": "^5.16.2",
@@ -107,11 +108,11 @@
     "malihu-custom-scrollbar-plugin": "^3.1.5",
     "metismenu": "^2.7.2",
     "popper.js": "^1.12.9",
+    "vee-validate": "^2.1.0-beta.9",
     "vue": "^2.5.3",
     "vue-fineuploader": "^2.0.0-rc.9",
+    "vue-i18n": "^7.8.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "axios": "^0.18.0",
-    "vue-i18n": "^7.8.0"
+    "vuex": "^3.0.1"
   }
 }
