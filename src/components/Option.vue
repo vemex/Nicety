@@ -1,6 +1,6 @@
 <template>
     <li :class="classObject" @click="clickHandler">
-        <slot>{{ itemDisplay }}</slot>
+        <slot>{{ content }}</slot>
     </li>
 </template>
 <script>
@@ -9,8 +9,7 @@
         props: {
             disabled: { type: Boolean, default: false },
             index: { type: [String, Number], required: true },
-            itemDisplay: { type: String, required: true },
-            data:{ type: Object, required: false }
+            content: { type: String, required: true }
         },
         data () {
             return {
@@ -28,7 +27,7 @@
         },
         methods: {
             clickHandler (evt) {
-                evt.itemKey = this.itemKey;
+                evt.index = this.index
                 this.$emit('click', evt)
             }
         }

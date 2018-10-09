@@ -6,11 +6,11 @@
         <template v-for="item in route.children">
             <nicety-nav-item :route="item" v-if="item.children"></nicety-nav-item>
             <nicety-option :class="[{'active':item.meta.active}]" :index="item.path"
-                           :item-display="item.meta.display" v-else
+                           :content="item.meta.display" v-else
                            @click="itemClickHandler(item.path)"></nicety-option>
         </template>
     </nicety-menu-item>
-    <nicety-option :class="[{'active':route.meta.active}]" :index="route.path" :item-display="route.meta.display"
+    <nicety-option :class="[{'active':route.meta.active}]" :index="route.path" :content="route.meta.display"
                    v-else-if="route.meta.displayInNav" @click="itemClickHandler(route.path)"></nicety-option>
 </template>
 <script>

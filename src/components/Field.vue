@@ -19,13 +19,15 @@
     import TextInput from './Inputs/TextInput'
     import EmailInput from './Inputs/EmailInput'
     import PasswordInput from './Inputs/PasswordInput'
+    import TextareaInput from './Inputs/TextareaInput'
 
     export default {
         name: 'nicety-field',
         components: {
             TextInput,
             EmailInput,
-            PasswordInput
+            PasswordInput,
+            TextareaInput
         },
         props: {
             label: {type: String},//字段标签
@@ -36,7 +38,7 @@
             inline: {type: Boolean, default: false},
             name: {type: String}, // 需校验的字段名
             rules: {type: String}, // 验证规则
-            value: {type: String, default: ""},
+            value: {type: [String,Array,Object], default: ""},
             readonly: {type: Boolean, default: false},
             visible: {type: Boolean, default: true}//可见性
         },
