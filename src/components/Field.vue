@@ -37,12 +37,16 @@
             disabled: {type: Boolean, default: false},
             inline: {type: Boolean, default: false},
             name: {type: String}, // 需校验的字段名
-            rules: {type: String}, // 验证规则
+            rules: {type: String,default:"empty"}, // 验证规则
             value: {type: [String,Array,Object], default: ""},
             readonly: {type: Boolean, default: false},
             visible: {type: Boolean, default: true}//可见性
         },
-        watch: {},
+        watch: {
+            value:function () {
+                this.errors.clear();
+            }
+        },
         created: function () {
         },
         computed: {

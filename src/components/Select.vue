@@ -16,6 +16,7 @@
                    @input.stop="searchInputHandler($event.target.value)"
                    @keyup.up.stop="keyUpHandler"
                    @keyup.down.stop="keyDownHandler"
+                   @keydown.delete.stop="keyDeleteHandler"
                    @keyup.enter.stop="keyEnterHandler"
                    @focus="visible = true"
                    :style="{'width': `${multipleInputWidth}em`}"
@@ -73,7 +74,7 @@
             }
         },
         mounted () {
-            this.initData()
+            this.initData(true)
         },
         watch: {
             value (nowVal, oldVal) {
@@ -82,7 +83,7 @@
                         this.selectedItems = []
                     }
                 } else {
-                    this.initData()
+                    this.initData(false)
                 }
             }
         },
@@ -104,18 +105,50 @@
             }
         },
         methods: {
-            initData () {
-                this.selectedItems = []
-                this.$children.forEach((ele) => {
-                    ele.$el.style.display = 'block'
-                    if (this.values.includes(ele.index)) {
-                        ele.active = true
-                        this.selectedItems.push(ele)
-                    } else {
-                        ele.active = false
-                    }
-                })
-                this.displayItems = this.$children
+            clearInput(){
+                this.$refs.inputSearch.value = '';
+            },
+            pushItem(data){
+                let findItem=this.selectedItems.find((c)=>c.index===data.index);
+                if (findItem) {
+                    return;
+                }
+                if (this.multiple) {
+                    this.selectedItems.push(data);
+                    let nValue = Array.from(this.values);
+                    nValue.push(data.index);
+                    this.emitChange(nValue);
+                }else{
+                    this.selectedItems.splice(0, 1, data);
+                    this.emitChange([data.index]);
+                    this.awayHandler()
+                }
+            },
+            initData (mounted) {
+                if (mounted) {
+                    this.selectedItems = [];
+                    this.$children.forEach((ele) => {
+                        ele.$el.style.display = 'block'
+                        if (this.values.includes(ele.index)) {
+                            ele.active = true
+                            this.pushItem({index: ele.index, content: ele.content});
+                        } else {
+                            ele.active = false
+                        }
+                    })
+                    this.displayItems = this.$children
+                }else {
+                    this.$children.forEach((ele) => {
+                        ele.active = false;
+                    });
+                    let _=this;
+                    this.values.forEach((value) => {
+                        let ele=_.$children.find((c)=>c.index==value);
+                        if (ele) {
+                            ele.active = true;
+                        }
+                    })
+                }
             },
             searchInputHandler (v) {
                 if (this.searchIsFunction) {
@@ -142,6 +175,17 @@
                     this.showText = true
                     this.displayItems = this.$children
                     this.multipleInputWidth = 1
+                }
+            },
+            keyDeleteHandler(evt) {//删除键处理
+                if (this.$refs.inputSearch.value === '') {
+                    let index = this.values.length - 1;
+                    this.closeItemHandler(index, this.selectedItems[index]);
+                    let input = this.$refs.inputSearch;
+                    setTimeout(function () {
+                        input.focus()
+                    }, 50)
+                    this.initData();
                 }
             },
             keyUpHandler () {
@@ -171,8 +215,11 @@
                 }
                 this.currentItem.active = true
             },
-            keyEnterHandler () {
-                if (this.displayItems.length <= 0) return
+            keyEnterHandler (events) {
+                if (this.displayItems.length <= 0 || events.shiftKey) {
+                    this.$emit("enter",events.target.value);
+                    return
+                }
                 if (!this.values.includes(this.currentItem.index)) {
                     this.currentItem.active = false
                     this.changeHandler(this.currentItem)

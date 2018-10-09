@@ -7,14 +7,14 @@
   transition: box-shadow .1s ease,width .1s ease;
   border-radius: 2px;
   cursor: pointer;
-  padding: .5em 2.6em .5em .75em;
+  padding: .3em 2.6em .3em .75em;
   position: relative;
   text-align: left;
   color: rgba(0,0,0,.87);
   font-size: 1em;
   min-width: 10em;
   width: 100%;
-  vertical-align: baseline;
+  vertical-align: top;
   word-wrap: break-word;
   white-space: normal;
   outline: 0;
@@ -76,7 +76,7 @@
   background: #e8e8e8;
   cursor: pointer;
   display: inline-block;
-  padding: .35em .6em;
+  padding: .25em .6em;
   line-height: 1em;
   margin: .23533333em .35em;
   margin-left: 0;

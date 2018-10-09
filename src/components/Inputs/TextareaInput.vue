@@ -4,7 +4,7 @@
 </template>
 <script>
     export default {
-        name: "nicety-password-input",
+        name: "nicety-textarea-input",
         $_veeValidate: {
             name: function () {
                 return this.name;
