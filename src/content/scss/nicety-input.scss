@@ -6,6 +6,9 @@
     border: 1px $red solid;
 }
 .field.form-group {
+    label{
+        font-weight: bold;
+    }
     .alert-danger{
         color: $light;
         background-color: $red ;
