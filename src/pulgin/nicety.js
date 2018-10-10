@@ -129,7 +129,9 @@ Nicety.install = function (Vue, options) {
             render: h => h(options.mainComponent)
         });
     });
-
+    if(options.init) {
+        options.init(appStore.$store,router,languageManager)
+    }
 // 1. 添加全局方法或属性
     Vue.myGlobalMethod = function () {
 // 逻辑...
