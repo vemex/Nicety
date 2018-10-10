@@ -8,7 +8,7 @@
             </span>
                 <nicety-menu :mode="'inline'">
                     <template v-for="(route, index) in routes">
-                        <nicety-nav-item v-bind:key="index"
+                        <nicety-nav-item v-bind:key="index" v-if="checkRole(route.meta.role)"
                                          :route="route"></nicety-nav-item>
                     </template>
                 </nicety-menu>
@@ -32,6 +32,19 @@
             }),
         },
         mounted: function () {
+        },
+        methods: {
+            checkRole(role) {
+                //todo 抽象角色检查服务有外部注入判断
+                if (role===undefined) {
+                    return true;
+                }
+                if (this.$store.getters['User/currentUser'] !== undefined) {
+                    return this.$store.getters['User/currentUser'].account === role;
+                }
+                return false;
+
+            }
         }
     }
 </script>
