@@ -2,7 +2,7 @@
     <ol class="breadcrumb">
         导航：
         <li class="breadcrumb-item" v-for="(item) in breadlist" >
-            <router-link :to="item.path">{{item.name}}</router-link>
+            <router-link :to="item.path">{{$t('router.'+item.name)}}</router-link>
         </li>
     </ol>
 </template>
