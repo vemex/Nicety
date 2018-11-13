@@ -1,0 +1,7 @@
+/build/
+/config/
+/dist/
+/target/
+/webpack/
+/*.js
+/test/unit/coverage/

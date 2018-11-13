@@ -53,16 +53,14 @@
 </template>
 
 <script>
-    import App from "../../src/components/app"
+import App from '../../src/components/app';
 
+export default {
+  components: {
+    App
+  },
+  mounted: function () { // 渲染完成
 
-    export default {
-        components: {
-            App,
-        },
-        mounted: function () { //渲染完成
-
-        }
-    }
+  }
+};
 </script>
-
