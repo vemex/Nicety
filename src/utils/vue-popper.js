@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import {
     PopupManager
-} from 'popup';
+} from './popup';
 
-const PopperJS = Vue.prototype.$isServer ? function () {} : require('popper');
+const PopperJS = Vue.prototype.$isServer ? function () {} : require('popper.js').default;
 const stop = e => e.stopPropagation();
 
 /**
@@ -106,16 +106,16 @@ export default {
             options.placement = this.currentPlacement;
             options.offset = this.offset;
             options.arrowOffset = this.arrowOffset;
-            this.popperJS = new PopperJS(reference, popper, options);
-            this.popperJS.onCreate(_ => {
+            options.onCreate = _ => {
                 this.$emit('created', this);
                 this.resetTransformOrigin();
                 this.$nextTick(this.updatePopper);
-            });
-            if (typeof options.onUpdate === 'function') {
-                this.popperJS.onUpdate(options.onUpdate);
-            }
-            this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+            };
+            this.popperJS = new PopperJS(reference, popper, options);
+            // if (typeof options.onUpdate === 'function') {
+            //     this.popperJS.onUpdate(options.onUpdate);
+            // }
+            this.popperJS.popper.style.zIndex = PopupManager.nextZIndex();
             this.popperElm.addEventListener('click', stop);
         },
 
@@ -123,8 +123,8 @@ export default {
             const popperJS = this.popperJS;
             if (popperJS) {
                 popperJS.update();
-                if (popperJS._popper) {
-                    popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+                if (popperJS.popper) {
+                    popperJS.popper.style.zIndex = PopupManager.nextZIndex();
                 }
             } else {
                 this.createPopper();
@@ -152,9 +152,9 @@ export default {
                 left: 'right',
                 right: 'left'
             };
-            let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0];
+            let placement = this.popperJS.popper.getAttribute('x-placement').split('-')[0];
             let origin = placementMap[placement];
-            this.popperJS._popper.style.transformOrigin = typeof this.transformOrigin === 'string'
+            this.popperJS.popper.style.transformOrigin = typeof this.transformOrigin === 'string'
                 ? this.transformOrigin
                 : ['top', 'bottom'].indexOf(placement) > -1 ? `center ${origin}` : `${origin} center`;
         },

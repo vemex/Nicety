@@ -8,6 +8,7 @@ import VueI18n from 'vue-i18n';
 import LanguageManager from './languageManager';
 import vueLogger from 'vue-logger';
 import loading from '../components/Loading';
+import tooltip from '../components/Tooltip';
 
 const Nicety = {};
 let defaultOptions = {
@@ -180,6 +181,7 @@ Nicety.install = function (Vue, options) {
         // 逻辑...
     };
     loading.install(Vue);
+    tooltip.install(Vue);
     // 2. 添加全局资源
     // Vue.directive('my-directive', {
     //     bind (el, binding, vnode, oldVnode) {
