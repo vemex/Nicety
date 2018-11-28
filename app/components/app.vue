@@ -56,11 +56,11 @@
 import App from '../../src/components/app';
 
 export default {
-  components: {
-    App
-  },
-  mounted: function () { // 渲染完成
+    components: {
+        App
+    },
+    mounted: function () { // 渲染完成
 
-  }
+    }
 };
 </script>

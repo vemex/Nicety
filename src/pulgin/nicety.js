@@ -181,11 +181,11 @@ Nicety.install = function (Vue, options) {
     };
     loading.install(Vue);
     // 2. 添加全局资源
-    Vue.directive('my-directive', {
-        bind (el, binding, vnode, oldVnode) {
-            // 逻辑...
-        }
-    });
+    // Vue.directive('my-directive', {
+    //     bind (el, binding, vnode, oldVnode) {
+    //         // 逻辑...
+    //     }
+    // });
 
     // 3. 注入组件
     Vue.mixin(
@@ -196,9 +196,9 @@ Nicety.install = function (Vue, options) {
         });
 
     // 4. 添加实例方法
-    Vue.prototype.$myMethod = function (methodOptions) {
-        // 逻辑...
-    };
+    // Vue.prototype.$myMethod = function (methodOptions) {
+    //     // 逻辑...
+    // };
 };
 
 export default Nicety;
