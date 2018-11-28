@@ -1,2 +1,2 @@
-import "babel-polyfill";
-//require('../public/manifest.webapp');
+import 'babel-polyfill';
+// require('../public/manifest.webapp');

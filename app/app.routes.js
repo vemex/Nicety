@@ -1,4 +1,4 @@
-import Home from "./pages/Home.vue"
+import Home from './pages/Home.vue';
 
 const ThemeColor = resolve => require.ensure([], () => resolve(require('./pages/ThemeColor.vue')), 'ThemeColor');
 const About = resolve => require.ensure([], () => resolve(require('./pages/About.vue')), 'About');
@@ -41,71 +41,81 @@ const LayoutWarper = {
   `
 };
 const routes = [
-    {name: "Home", path: '/', component: Home, meta: {display: "Home"}},
-    {name: "Theme_Color", path: '/ThemeColor', component: ThemeColor, meta: {display: "Theme Color"}},
+    {name: 'Home', path: '/', component: Home, meta: {display: 'Home'}},
+    {name: 'Theme_Color', path: '/ThemeColor', component: ThemeColor, meta: {display: 'Theme Color'}},
     {
-        name: "layout", path: '/layout', component: LayoutWarper,
+        name: 'layout',
+        path: '/layout',
+        component: LayoutWarper,
         children: [
-            {name: "flex", path: '/flex', component: Flex, meta: {display: "flex"}},
-            {name: "Grid", path: '/Grid', component: Grid, meta: {display: "Grid"}},
-            {name: "Display", path: "/Display", component: Display, meta: {display: "Display"}},
+            {name: 'flex', path: '/flex', component: Flex, meta: {display: 'flex'}},
+            {name: 'Grid', path: '/Grid', component: Grid, meta: {display: 'Grid'}},
+            {name: 'Display', path: '/Display', component: Display, meta: {display: 'Display'}}
         ],
-        meta: {display: "layout"}
+        meta: {display: 'layout'}
     },
     {
-        name: "content", path: '/content', component: LayoutWarper,
+        name: 'content',
+        path: '/content',
+        component: LayoutWarper,
         children: [
-            {name: "Reboot", path: "/Reboot", component: Reboot, meta: {display: "Reboot BaseLine"}},
-            {name: "DataTable", path: "/DataTable", component: DataTable, meta: {display: "DataTable"}},
+            {name: 'Reboot', path: '/Reboot', component: Reboot, meta: {display: 'Reboot BaseLine'}},
+            {name: 'DataTable', path: '/DataTable', component: DataTable, meta: {display: 'DataTable'}}
         ],
-        meta: {display: "Content"}
+        meta: {display: 'Content'}
     },
     {
-        name: "Components", path: '/components', component: LayoutWarper,
+        name: 'Components',
+        path: '/components',
+        component: LayoutWarper,
         children: [
-            {name: "Alerts", path: '/Alerts', component: Alerts, meta: {display: "Alerts"}},
-            {name: "Badges", path: "/Badges", component: Badges, meta: {display: "Badges"}},
-            {name: "Button", path: "/Button", component: Button, meta: {display: "Button"}},
-            {name: "ButtonGroup", path: "/ButtonGroup", component: ButtonGroup, meta: {display: "Button Group"}},
-            {name: "Form", path: "/Form", component: Form, meta: {display: "Form"}},
-            {name: "Popovers", path: "/Popovers", component: Popovers, meta: {display: "Popovers"}},
-            {name: "Navbar", path: "/Navbar", component: Navbar, meta: {display: "Navigation bar"}},
-            {name: "ListGroup", path: "/ListGroup", component: ListGroup, meta: {display: "List Group"}},
-            {name: "Card", path: "/Card", component: Card, meta: {display: "Card"}},
-            {name: "Collapse", path: "/Collapse", component: Collapse, meta: {display: "Collapse"}},
-            {name: "Dropdown", path: "/Dropdown", component: Dropdown, meta: {display: "Dropdown"}},
-            {name: "InputGroup", path: "/InputGroup", component: InputGroup, meta: {display: "InputGroup"}},
-            {name: "Jumbotron", path: "/Jumbotron", component: Jumbotron, meta: {display: "Jumbotron"}},
-            {name: "Modal", path: "/Modal", component: Modal, meta: {display: "Modal"}},
-            {name: "Pagination", path: "/Pagination", component: Pagination, meta: {display: "Pagination"}},
-            {name: "Navs", path: "/Navs", component: Navs, meta: {display: "Navs"}},
-            {name: "Progress", path: "/Progress", component: Progress, meta: {display: "Progress"}},
-            {name: "Scrollspy", path: "/Scrollspy", component: Scrollspy, meta: {display: "Scrollspy"}},
-            {name: "Tooltips", path: "/Tooltips", component: Tooltips, meta: {display: "Tooltips"}},
-            {name: "Breadcrumb", path: "/Breadcrumb", component: Breadcrumb, meta: {display: "Breadcrumb"}},
+            {name: 'Alerts', path: '/Alerts', component: Alerts, meta: {display: 'Alerts'}},
+            {name: 'Badges', path: '/Badges', component: Badges, meta: {display: 'Badges'}},
+            {name: 'Button', path: '/Button', component: Button, meta: {display: 'Button'}},
+            {name: 'ButtonGroup', path: '/ButtonGroup', component: ButtonGroup, meta: {display: 'Button Group'}},
+            {name: 'Form', path: '/Form', component: Form, meta: {display: 'Form'}},
+            {name: 'Popovers', path: '/Popovers', component: Popovers, meta: {display: 'Popovers'}},
+            {name: 'Navbar', path: '/Navbar', component: Navbar, meta: {display: 'Navigation bar'}},
+            {name: 'ListGroup', path: '/ListGroup', component: ListGroup, meta: {display: 'List Group'}},
+            {name: 'Card', path: '/Card', component: Card, meta: {display: 'Card'}},
+            {name: 'Collapse', path: '/Collapse', component: Collapse, meta: {display: 'Collapse'}},
+            {name: 'Dropdown', path: '/Dropdown', component: Dropdown, meta: {display: 'Dropdown'}},
+            {name: 'InputGroup', path: '/InputGroup', component: InputGroup, meta: {display: 'InputGroup'}},
+            {name: 'Jumbotron', path: '/Jumbotron', component: Jumbotron, meta: {display: 'Jumbotron'}},
+            {name: 'Modal', path: '/Modal', component: Modal, meta: {display: 'Modal'}},
+            {name: 'Pagination', path: '/Pagination', component: Pagination, meta: {display: 'Pagination'}},
+            {name: 'Navs', path: '/Navs', component: Navs, meta: {display: 'Navs'}},
+            {name: 'Progress', path: '/Progress', component: Progress, meta: {display: 'Progress'}},
+            {name: 'Scrollspy', path: '/Scrollspy', component: Scrollspy, meta: {display: 'Scrollspy'}},
+            {name: 'Tooltips', path: '/Tooltips', component: Tooltips, meta: {display: 'Tooltips'}},
+            {name: 'Breadcrumb', path: '/Breadcrumb', component: Breadcrumb, meta: {display: 'Breadcrumb'}}
         ],
-        meta: {display: "Components"}
+        meta: {display: 'Components'}
     },
     {
-        name: "Plugins", path: '/Plugins', component: LayoutWarper,
+        name: 'Plugins',
+        path: '/Plugins',
+        component: LayoutWarper,
         children: [
-            {name: "AgGrid", path: "/AgGrid", component: AgGrid, meta: {display: "AgGrid"}},
-            {name: "ECharts", path: "/ECharts", component: ECharts, meta: {display: "ECharts"}},
-            {name: "Metismenu", path: "/Metismenu", component: Metismenu, meta: {display: "Metismenu"}},
+            {name: 'AgGrid', path: '/AgGrid', component: AgGrid, meta: {display: 'AgGrid'}},
+            {name: 'ECharts', path: '/ECharts', component: ECharts, meta: {display: 'ECharts'}},
+            {name: 'Metismenu', path: '/Metismenu', component: Metismenu, meta: {display: 'Metismenu'}}
         ],
-        meta: {display: "Plugins"}
+        meta: {display: 'Plugins'}
     },
     {
-        name: "icons", path: '/icons', component: LayoutWarper,
+        name: 'icons',
+        path: '/icons',
+        component: LayoutWarper,
         children: [
-            {name: "IconsThemify", path: "/IconsThemify", component: IconsThemify, meta: {display: "Icons Themify"}},
-            {name: "PremiumLine", path: "/PremiumLine", component: PremiumLine, meta: {display: "PremiumLine"}},
-            {name: "PremiumSolid", path: "/PremiumSolid", component: PremiumSolid, meta: {display: "PremiumSolid"}},
+            {name: 'IconsThemify', path: '/IconsThemify', component: IconsThemify, meta: {display: 'Icons Themify'}},
+            {name: 'PremiumLine', path: '/PremiumLine', component: PremiumLine, meta: {display: 'PremiumLine'}},
+            {name: 'PremiumSolid', path: '/PremiumSolid', component: PremiumSolid, meta: {display: 'PremiumSolid'}}
         ],
-        meta: {display: "icons"}
+        meta: {display: 'icons'}
     },
-    {name: "About", path: '/About', component: About, meta: {display: "About"}},
-    {name: "Utils", path: "/UtilsDemo", component: UtilsDemo, meta: {display: "Utils"}}
+    {name: 'About', path: '/About', component: About, meta: {display: 'About'}},
+    {name: 'Utils', path: '/UtilsDemo', component: UtilsDemo, meta: {display: 'Utils'}}
 ];
 
 export default routes;

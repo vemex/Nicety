@@ -6,7 +6,7 @@
                 <app-breadcrumb></app-breadcrumb>
             </div>
             <div class="page-content">
-                <div class="main">
+                <div class="main" ref="main">
                     <router-view></router-view>
                 </div>
             </div>

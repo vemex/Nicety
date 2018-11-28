@@ -61,7 +61,7 @@
         computed: {
             ...mapGetters('AppNav', {
                 openTabs: 'openTabs',
-                activePath: 'activePath',
+                activePath: 'activePath'
             }),
         },
         watch: {

@@ -22,6 +22,7 @@ module.exports = {
     // add your custom rules here
     rules: {
         // allow async-await
+        "indent": [2,4, {"SwitchCase":1}],
         'generator-star-spacing': 'off',
         "semi": [2, "always"],//强制使用分号结尾
         // allow debugger during development

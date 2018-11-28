@@ -26,52 +26,52 @@
     </div>
 </template>
 <script>
-    import AppFooter from "./app.footer"
-    import AppMain from "./app.main"
-    import AppHeaderBar from "./app.header.bar.vue"
-    import AppNavHeader from "./app.nav.header.vue"
-    import $ from 'jquery'
-    import AppNav from "./app.nav";
-    import {mapState, mapActions, mapGetters} from 'vuex'
+import AppFooter from './app.footer';
+import AppMain from './app.main';
+import AppHeaderBar from './app.header.bar.vue';
+import AppNavHeader from './app.nav.header.vue';
+import $ from 'jquery';
+import AppNav from './app.nav';
+import {mapState, mapActions, mapGetters} from 'vuex';
 
-    export default {
-        components: {
-            AppNav,
-            AppMain,
-            AppFooter,
-            AppHeaderBar,
-            AppNavHeader,
-        },
-        props: {
-            fixedHeader: [Boolean],
-            fixedFooter: [Boolean],
-            fixedAsideLeft: [Boolean],
-            fixedPageTitle: [Boolean],
-            fixedNavTabs: [Boolean],
-        },
-        computed: {
-            ...mapGetters('AppViewSettings', {
-                useTabView: 'useTabView'
-            }),
-        },
-        mounted: function () { //渲染完成
-
-            $('.collapse').collapse();
-            //  $('#main-menu').metisMenu();
-            $('[data-toggle="popover"]').popover({
-                delay: {'show': 500, 'hide': 100},
-                offset: 1
+export default {
+    components: {
+        AppNav,
+        AppMain,
+        AppFooter,
+        AppHeaderBar,
+        AppNavHeader,
+    },
+    props: {
+        fixedHeader: [Boolean],
+        fixedFooter: [Boolean],
+        fixedAsideLeft: [Boolean],
+        fixedPageTitle: [Boolean],
+        fixedNavTabs: [Boolean]
+    },
+    computed: {
+        ...mapGetters('AppViewSettings', {
+            useTabView: 'useTabView'
+        }),
+    },
+    mounted: function () {
+        // 渲染完成
+        $('.collapse').collapse();
+        //  $('#main-menu').metisMenu();
+        $('[data-toggle="popover"]').popover({
+            delay: {'show': 500, 'hide': 100},
+            offset: 1
+        });
+        if ($('#dashboard-app').hasClass('fixed-left-sider')) {
+            $('#aside_left .wrapper').mCustomScrollbar({
+                theme: 'minimal', scrollInertia: 50, mouseWheel: {
+                    preventDefault: true
+                }
             });
-            if ($('#dashboard-app').hasClass('fixed-left-sider')) {
-                $('#aside_left .wrapper').mCustomScrollbar({
-                    theme: "minimal", scrollInertia: 50, mouseWheel: {
-                        preventDefault: true
-                    }
-                });
-            }
-            // $('#dashboard-app').mCustomScrollbar({theme: "minimal-dark", scrollInertia: 50});
-
-            // $('body').mCustomScrollbar({ theme: "minimal-dark",scrollInertia:0});
         }
+        // $('#dashboard-app').mCustomScrollbar({theme: "minimal-dark", scrollInertia: 50});
+
+        // $('body').mCustomScrollbar({ theme: "minimal-dark",scrollInertia:0});
     }
+};
 </script>
