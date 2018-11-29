@@ -9,6 +9,7 @@ import LanguageManager from './languageManager';
 import vueLogger from 'vue-logger';
 import loading from '../components/Loading';
 import tooltip from '../components/Tooltip';
+import menu from '../components/Menu/index';
 
 const Nicety = {};
 let defaultOptions = {
@@ -182,6 +183,7 @@ Nicety.install = function (Vue, options) {
     };
     loading.install(Vue);
     tooltip.install(Vue);
+    menu.install(Vue);
     // 2. 添加全局资源
     // Vue.directive('my-directive', {
     //     bind (el, binding, vnode, oldVnode) {

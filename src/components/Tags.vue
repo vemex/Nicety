@@ -23,58 +23,58 @@
     </div>
 </template>
 <script>
-    import fishTag from './Tag'
-    export default {
-        name: 'fish-tags',
-        components: {
-            fishTag
+import fishTag from './Tag';
+export default {
+    name: 'fish-tags',
+    components: {
+        fishTag
+    },
+    props: {
+        size: String,
+        edited: { type: Boolean, default: false },
+        items: { type: Array, required: true } //
+    },
+    computed: {
+        classObject () {
+            return ['fish tags', this.size];
         },
-        props: {
-            size: String,
-            edited: { type: Boolean, default: false },
-            items: { type: Array, required: true } //
-        },
-        computed: {
-            classObject () {
-                return ['fish tags', this.size]
-            },
-            onAddExists () {
-                return this._events.add
+        onAddExists () {
+            return this._events.add;
+        }
+    },
+    methods: {
+        clickHandler (event, index) {
+            if (typeof this.items[index] === 'object') {
+                this.$emit('click', index, this.items[index][0] === false);
+            } else {
+                this.$emit('click', index);
             }
         },
-        methods: {
-            clickHandler (event, index) {
-                if (typeof this.items[index] === 'object') {
-                    this.$emit('click', index, this.items[index][0] === false)
-                } else {
-                    this.$emit('click', index)
-                }
-            },
-            closeHandler (event, index) {
-                this.$emit('close', index)
-            },
-            addHandler () {
-                this.isClickAdd = true;
-                this.$nextTick(() => {
-                    this.$refs.newTagInput.focus()
-                })
-            },
-            addEnterHandler (event) {
-                this.$refs.newTagInput.blur()
-            },
-            addDoneHandler (event) {
-                // console.log(event.target)
-                this.isClickAdd = false;
-                let v = event.target.value;
-                if (!/^\s*$/.test(v)) {
-                    this.$emit('add', v)
-                }
-            }
+        closeHandler (event, index) {
+            this.$emit('close', index);
         },
-        data () {
-            return {
-                isClickAdd: false
+        addHandler () {
+            this.isClickAdd = true;
+            this.$nextTick(() => {
+                this.$refs.newTagInput.focus();
+            });
+        },
+        addEnterHandler (event) {
+            this.$refs.newTagInput.blur();
+        },
+        addDoneHandler (event) {
+            // console.log(event.target)
+            this.isClickAdd = false;
+            let v = event.target.value;
+            if (!/^\s*$/.test(v)) {
+                this.$emit('add', v);
             }
         }
+    },
+    data () {
+        return {
+            isClickAdd: false
+        };
     }
+};
 </script>

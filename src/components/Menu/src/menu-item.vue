@@ -1,5 +1,5 @@
 <template>
-  <li class="el-menu-item"
+  <li class="nicety-menu-item"
     role="menuitem"
     tabindex="-1"
     :style="[paddingStyle, itemStyle, { backgroundColor }]"
@@ -13,15 +13,15 @@
     @blur="onMouseLeave"
     @mouseleave="onMouseLeave"
   >
-    <el-tooltip
-      v-if="parentMenu.$options.componentName === 'ElMenu' && rootMenu.collapse && $slots.title"
+    <nicety-tooltip
+      v-if="parentMenu.$options.componentName === 'NicetyMenu' && rootMenu.collapse && $slots.title"
       effect="dark"
       placement="right">
       <div slot="content"><slot name="title"></slot></div>
       <div style="position: absolute;left: 0;top: 0;height: 100%;width: 100%;display: inline-block;box-sizing: border-box;padding: 0 20px;">
         <slot></slot>
       </div>
-    </el-tooltip>
+    </nicety-tooltip>
     <template v-else>
       <slot></slot>
       <slot name="title"></slot>
@@ -30,17 +30,14 @@
 </template>
 <script>
 import Menu from './menu-mixin';
-import ElTooltip from 'element-ui/packages/tooltip';
-import Emitter from 'element-ui/src/mixins/emitter';
+import Emitter from '../../../mixins/emitter';
 
 export default {
-    name: 'ElMenuItem',
+    name: 'NicetyMenuItem',
 
-    componentName: 'ElMenuItem',
+    componentName: 'NicetyMenuItem',
 
     mixins: [Menu, Emitter],
-
-    components: { ElTooltip },
 
     props: {
         index: {
@@ -95,7 +92,7 @@ export default {
         },
         handleClick () {
             if (!this.disabled) {
-                this.dispatch('ElMenu', 'item-click', this);
+                this.dispatch('NicetyMenu', 'item-click', this);
                 this.$emit('click', this);
             }
         }

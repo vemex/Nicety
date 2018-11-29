@@ -50,39 +50,38 @@
     </div>
 </template>
 <script>
-    import AppBreadcrumb from "./app.breadcrumb"
+import AppBreadcrumb from './app.breadcrumb';
 
-    import {mapState, mapActions, mapGetters} from 'vuex'
+import {mapState, mapActions, mapGetters} from 'vuex';
 
-    export default {
-        components: {
-            AppBreadcrumb
-        },
-        computed: {
-            ...mapGetters('AppNav', {
-                openTabs: 'openTabs',
-                activePath: 'activePath'
-            }),
-        },
-        watch: {
-            activePath: function (v) {
-                this.$router.push({path: v});
+export default {
+    components: {
+        AppBreadcrumb
+    },
+    computed: {
+        ...mapGetters('AppNav', {
+            openTabs: 'openTabs',
+            activePath: 'activePath'
+        })
+    },
+    watch: {
+        activePath: function (v) {
+            // this.$router.push({path: v});
+        }
+    },
+    methods: {
+        mouseWheelClick (tabInfo, args) {
+            let event = args[0];
+            if (event.button === 1 && tabInfo.canClose) {
+                this.closeTabHandler(tabInfo.url);
             }
         },
-        methods: {
-            mouseWheelClick(tabInfo, args) {
-                let event = args[0];
-                if (event.button === 1 && tabInfo.canClose) {
-                    this.closeTabHandler(tabInfo.url);
-                }
-            },
-            activeTab(url) {
-                this.$router.push(url);
-            },
-            closeTabHandler: function (url) {
-                this.$store.dispatch("AppNav/closeTab", url);
-
-            }
+        activeTab (url) {
+            this.$router.push(url);
+        },
+        closeTabHandler: function (url) {
+            this.$store.dispatch('AppNav/closeTab', url);
         }
     }
+};
 </script>

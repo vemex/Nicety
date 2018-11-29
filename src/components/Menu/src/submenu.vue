@@ -1,8 +1,8 @@
 <script>
-import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
+import NicetyCollapseTransition from '../../../transitions/collapse-transition';
 import menuMixin from './menu-mixin';
-import Emitter from 'element-ui/src/mixins/emitter';
-import Popper from 'element-ui/src/utils/vue-popper';
+import Emitter from '../../../mixins/emitter';
+import Popper from '../../../utils/vue-popper';
 
 const poperMixins = {
     props: {
@@ -21,13 +21,13 @@ const poperMixins = {
 };
 
 export default {
-    name: 'ElSubmenu',
+    name: 'NicetySubmenu',
 
-    componentName: 'ElSubmenu',
+    componentName: 'NicetySubmenu',
 
     mixins: [menuMixin, Emitter, poperMixins],
 
-    components: { ElCollapseTransition },
+    components: { NicetyCollapseTransition },
 
     props: {
         index: {
@@ -76,7 +76,7 @@ export default {
                 : this.popperAppendToBody;
         },
         menuTransitionName () {
-            return this.rootMenu.collapse ? 'el-zoom-in-left' : 'el-zoom-in-top';
+            return this.rootMenu.collapse ? 'nicety-zoom-in-left' : 'nicety-zoom-in-top';
         },
         opened () {
             return this.rootMenu.openedMenus.indexOf(this.index) > -1;
@@ -137,7 +137,7 @@ export default {
             let isFirstLevel = true;
             let parent = this.$parent;
             while (parent && parent !== this.rootMenu) {
-                if (['ElSubmenu', 'ElMenuItemGroup'].indexOf(parent.$options.componentName) > -1) {
+                if (['NicetySubmenu', 'NicetyMenuItemGroup'].indexOf(parent.$options.componentName) > -1) {
                     isFirstLevel = false;
                     break;
                 } else {
@@ -176,7 +176,7 @@ export default {
             ) {
                 return;
             }
-            this.dispatch('ElMenu', 'submenu-click', this);
+            this.dispatch('NicetyMenu', 'submenu-click', this);
         },
         handleMouseenter () {
             const { rootMenu, disabled } = this;
@@ -187,7 +187,7 @@ export default {
             ) {
                 return;
             }
-            this.dispatch('ElSubmenu', 'mouse-enter-child');
+            this.dispatch('NicetySubmenu', 'mouse-enter-child');
             clearTimeout(this.timeout);
             this.timeout = setTimeout(() => {
                 this.rootMenu.openMenu(this.index, this.indexPath);
@@ -201,7 +201,7 @@ export default {
             ) {
                 return;
             }
-            this.dispatch('ElSubmenu', 'mouse-leave-child');
+            this.dispatch('NicetySubmenu', 'mouse-leave-child');
             clearTimeout(this.timeout);
             this.timeout = setTimeout(() => {
                 !this.mouseInChild && this.rootMenu.closeMenu(this.index);
@@ -270,13 +270,13 @@ export default {
                 <div
                     ref="menu"
                     v-show={opened}
-                    class={[`el-menu--${mode}`, popperClass]}
+                    class={[`nicety-menu--${mode}`, popperClass]}
                     on-mouseenter={this.handleMouseenter}
                     on-mouseleave={this.handleMouseleave}
                     on-focus={this.handleMouseenter}>
                     <ul
                         role="menu"
-                        class={['el-menu el-menu--popup', `el-menu--popup-${currentPlacement}`]}
+                        class={['nicety-menu nicety-menu--popup', `nicety-menu--popup-${currentPlacement}`]}
                         style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
                         {$slots.default}
                     </ul>
@@ -285,26 +285,26 @@ export default {
         );
 
         const inlineMenu = (
-            <el-collapse-transition>
+            <nicety-collapse-transition>
                 <ul
                     role="menu"
-                    class="el-menu el-menu--inline"
+                    class="nicety-menu nicety-menu--inline"
                     v-show={opened}
                     style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
                     {$slots.default}
                 </ul>
-            </el-collapse-transition>
+            </nicety-collapse-transition>
         );
 
         const submenuTitleIcon = (
-            rootMenu.mode === 'horizontal' && isFirstLevel ||
-        rootMenu.mode === 'vertical' && !rootMenu.collapse
-        ) ? 'el-icon-arrow-down' : 'el-icon-arrow-right';
+            (rootMenu.mode === 'horizontal' && isFirstLevel) ||
+            (rootMenu.mode === 'vertical' && !rootMenu.collapse)
+        ) ? 'nicety-icon-arrow-down' : 'nicety-icon-arrow-right';
 
         return (
             <li
                 class={{
-                    'el-submenu': true,
+                    'nicety-submenu': true,
                     'is-active': active,
                     'is-opened': opened,
                     'is-disabled': disabled
@@ -317,7 +317,7 @@ export default {
                 on-focus={this.handleMouseenter}
             >
                 <div
-                    class="el-submenu__title"
+                    class="nicety-submenu__title"
                     ref="submenu-title"
                     on-click={this.handleClick}
                     on-mouseenter={this.handleTitleMouseenter}
@@ -325,7 +325,7 @@ export default {
                     style={[paddingStyle, titleStyle, { backgroundColor }]}
                 >
                     {$slots.title}
-                    <i class={[ 'el-submenu__icon-arrow', submenuTitleIcon ]}></i>
+                    <i class={[ 'nicety-submenu__icon-arrow', submenuTitleIcon ]}></i>
                 </div>
                 {this.isMenuPopup ? popupMenu : inlineMenu}
             </li>

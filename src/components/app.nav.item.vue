@@ -1,40 +1,53 @@
 <template>
-    <nicety-menu-item :class="[{'active':route.meta.active}]" :index="route.path"
-                      v-if="route.children&& route.meta.displayInNav"
-                      :trigger="'click'" :mode="'inline'">
-        <template slot="title">{{route.meta.display}}</template>
-        <template v-for="item in route.children">
-            <nicety-nav-item :route="item" v-if="item.children"></nicety-nav-item>
-            <nicety-option :class="[{'active':item.meta.active}]" :index="item.path"
-                           :content="item.meta.display" v-else
-                           @click="itemClickHandler(item.path)"></nicety-option>
+    <nicety-submenu :class="[{'active':route.meta.active}]" :index="route.path" ref="subMenuItem"
+                    v-if="hasChildren && route.meta.displayInNav">
+        <template slot="title">
+            <i :class="route.meta.icon"></i>
+            <span>{{route.meta.display}}</span>
         </template>
+        <template v-for="item in route.children">
+            <nicety-nav-item :route="item"></nicety-nav-item>
+            <!--<nicety-menu-item :index="item.path"-->
+                              <!--:content="item.meta.display" v-else-->
+                              <!--@click="itemClickHandler(item.path)">-->
+                <!--<i class="nicety-icon-document"></i>-->
+                <!--<span slot="title">{{item.meta.display}}</span>-->
+            <!--</nicety-menu-item>-->
+        </template>
+    </nicety-submenu>
+    <nicety-menu-item :index="route.path" :class="[{'active':route.meta.active}]" :route="route" ref="menuItem"
+                      v-else-if="route.meta.displayInNav"  >
+        <i :class="route.meta.icon"></i>
+        <span slot="title">{{route.meta.display}}</span>
     </nicety-menu-item>
-    <nicety-option :class="[{'active':route.meta.active}]" :index="route.path" :content="route.meta.display"
-                   v-else-if="route.meta.displayInNav" @click="itemClickHandler(route.path)"></nicety-option>
 </template>
 <script>
-    import NicetyMenuItem from "./MenuItem"
-    import NicetyOption from "./Option";
 
-    export default {
-        name: 'nicety-nav-item',
-        components: {NicetyOption, NicetyMenuItem},
-        props: {
-            "route": [Number, String, Array, Object]
-        },
-        watch: {
-            route: function () {
-                console.log(this.route);
-            }
-        },
-        mounted: function () {
-            //console.log(this.route)
-        },
-        methods: {
-            itemClickHandler: function (path) {
-                this.$router.push(path);
+export default {
+    name: 'nicety-nav-item',
+    props: {
+        'route': [Array, Object]
+    },
+    computed: {
+        hasChildren: function () {
+            return this.route.children !== undefined;
+        }
+    },
+    watch: {
+        'route.meta.active': function (newValue, oldValue) {
+            if (newValue && this.$refs.menuItem) {
+                this.$refs.menuItem.rootMenu.activeIndex=this.route.path;
+                this.$refs.menuItem.rootMenu.initOpenedMenu();
             }
         }
+    },
+    mounted: function () {
+        // console.log(this.route)
+    },
+    methods: {
+        itemClickHandler: function (path) {
+            this.$router.push(path);
+        }
     }
+};
 </script>
