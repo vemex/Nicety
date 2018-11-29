@@ -33,39 +33,40 @@
 </template>
 
 <script>
-    import NicetyForm from "nicety/src/components/Form";
-    import NicetyFields from "nicety/src/components/Fileds";
-    import NicetyField from "nicety/src/components/Field";
+    /* eslint-disable indent */
+
+    import NicetyForm from 'nicety/src/components/Form';
+    import NicetyFields from 'nicety/src/components/Fileds';
+    import NicetyField from 'nicety/src/components/Field';
 
     export default {
         components: {NicetyField, NicetyFields, NicetyForm},
         data: function () {
             return {
-                account: "",
-                password: "",
-            }
+                account: '',
+                password: ''
+            };
+        },
+        mounted: function () {
+             this.$securtyManager.getCurrentUser().then(function (currentUser) {
+                 if (currentUser) {
+                     window.location.href = '/';
+                 };
+             })
         },
         methods: {
-            login() {
+            login () {
                 let _ = this;
-                this.$store.dispatch("User/login", {
-                    account: this.account,
-                    password: this.password
-                }).then(function (data) {
-                    if ( data.error) {
-                        for (let key in data.error) {
-                            _.$refs.forms.addError({field: key, errorMsg: data.error[key]});
-                        }
-                    }else if(!data){
-                        _.$refs.forms.addError("登录失败，请重试！");
-                    }else {
-                        window.location.href = "/";
+                this.$securtyManager.login(this.account, this.password).then(function (data) {
+                    if (data.state !== 'Successfully') {
+                        _.$refs.forms.addError(data.message);
+                        return;
                     }
-
+                    window.location.href = '/';
                 });
             }
         }
-    }
+    };
 </script>
 
 <style scoped lang="scss">

@@ -120,3 +120,13 @@ export const isIE = function () {
 export const isEdge = function () {
     return !Vue.prototype.$isServer && navigator.userAgent.indexOf('Edge') > -1;
 };
+
+export const processError = function (data) {
+    if (data.errors) {
+        let result = {error: {}};
+        data.errors.forEach(function (value) {
+            result.error[value.field] = value.defaultMessage;
+        });
+        return result;
+    }
+};

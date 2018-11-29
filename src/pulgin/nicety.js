@@ -6,10 +6,14 @@ import AppNav from '../../src/store/app.nav';
 import AppViewSettings from '../../src/store/app.view.settings';
 import VueI18n from 'vue-i18n';
 import LanguageManager from './languageManager';
+import SecurityManager from './SecurityManager';
 import vueLogger from 'vue-logger';
 import loading from '../components/Loading';
 import tooltip from '../components/Tooltip';
 import menu from '../components/Menu/index';
+import service from '../components/Loading/service';
+
+const NotPermission = resolve => require.ensure([], () => resolve(require('../components/app.common.notPermission.vue')), 'NotPermission');
 
 const Nicety = {};
 let defaultOptions = {
@@ -88,9 +92,10 @@ let routeLoading = null;
  * @param options 选项参数
  * @param appStore vuex store对象
  * @param languageManager 语言管理器
+ * @param securityManager 安全管理对象
  * @returns {VueRouter} vue router 对象
  */
-let initRoutes = function (Vue, options, appStore, languageManager) {
+let initRoutes = function (Vue, options, appStore, languageManager, securityManager) {
     Vue.use(VueRouter);
     let router = new VueRouter({routes: options.routes, linkActiveClass: 'active'});
     appStore.$store.dispatch('AppNav/initRoutes', options.routes);
@@ -105,6 +110,15 @@ let initRoutes = function (Vue, options, appStore, languageManager) {
             appStore.$store.dispatch('AppNav/activeRoute', to);
             if (options.appSettings.useTabView) {
                 appStore.$store.dispatch('AppNav/openTab', to);
+            }
+            if (!securityManager.checkUrl(to)) {
+                if (!securityManager.currentUser) {
+                    securityManager.redirectLoginPage();
+                    return;
+                }
+                router.push(
+                    {path: '/NotPermission/', query: {url: to.fullPath}});
+                return;
             }
             options.router.beforeEach(appStore.$store).then(function (data) {
                 if (data) {
@@ -143,6 +157,13 @@ Nicety.install = function (Vue, options) {
     newOptions.logger = Object.assign({}, defaultOptions.logger, options.logger);
     newOptions.router = Object.assign({}, defaultOptions.router, options.router);
     newOptions.storeModules = Object.assign({}, defaultOptions.storeModules, options.storeModules);
+    newOptions.routes.push({
+        name: 'NotPermission',
+        path: '/NotPermission/',
+        component: NotPermission,
+        props: (route) => ({docId: route.query.docId}),
+        meta: {display: '没有权限', keepAlive: false, displayInNav: false}
+    });
     initLogger(Vue, newOptions.logger);
 
     let appStore = initStore(Vue, newOptions);
@@ -162,16 +183,18 @@ Nicety.install = function (Vue, options) {
         messages: {}
     });
     let languageManager = new LanguageManager(i18n, lang);
-
-    let router = initRoutes(Vue, newOptions, appStore, languageManager);
-    languageManager.loadLanguageAsync(lang).then(function (lang) {
-        // eslint-disable-next-line no-new
-        new Vue({
-            i18n,
-            store: appStore.$store,
-            el: '#app',
-            router: router,
-            render: h => h(options.mainComponent)
+    let securityManager = new SecurityManager({});
+    let router = initRoutes(Vue, newOptions, appStore, languageManager, securityManager);
+    securityManager.getCurrentUser().then(function () {
+        languageManager.loadLanguageAsync(lang).then(function (lang) {
+            // eslint-disable-next-line no-new
+            new Vue({
+                i18n,
+                store: appStore.$store,
+                el: '#app',
+                router: router,
+                render: h => h(options.mainComponent)
+            });
         });
     });
     if (newOptions.init) {
@@ -181,6 +204,7 @@ Nicety.install = function (Vue, options) {
     Vue.myGlobalMethod = function () {
         // 逻辑...
     };
+    Vue.prototype.$securtyManager = securityManager;
     loading.install(Vue);
     tooltip.install(Vue);
     menu.install(Vue);

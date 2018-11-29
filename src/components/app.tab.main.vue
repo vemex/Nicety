@@ -16,30 +16,30 @@
                 <app-breadcrumb></app-breadcrumb>
             </div>
             <div class="page-content">
-                <nav class="tool-bar">
-                    <ul class="wrapper">
-                        <li class="">
-                            <button class="btn">
-                                <i class="pli-mail-2"></i>
-                                Save
-                            </button>
-                        </li>
-                        <li><a href="#" class="nav-link">Link</a></li>
-                        <li class="dropdown"><a href="#" id="navbarDropdown" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false" class="nav-link dropdown-toggle">
-                            Dropdown
-                        </a>
-                            <div aria-labelledby="navbarDropdown" class="dropdown-menu"><a href="#"
-                                                                                           class="dropdown-item">Action</a>
-                                <a href="#" class="dropdown-item">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">Something else here</a></div>
-                        </li>
-                        <li class=""><a href="#" class="nav-link disabled">Disabled</a></li>
-                    </ul>
+                <!--<nav class="tool-bar">-->
+                    <!--<ul class="wrapper">-->
+                        <!--<li class="">-->
+                            <!--<button class="btn">-->
+                                <!--<i class="pli-mail-2"></i>-->
+                                <!--Save-->
+                            <!--</button>-->
+                        <!--</li>-->
+                        <!--<li><a href="#" class="nav-link">Link</a></li>-->
+                        <!--<li class="dropdown"><a href="#" id="navbarDropdown" role="button"-->
+                                                <!--data-toggle="dropdown" aria-haspopup="true"-->
+                                                <!--aria-expanded="false" class="nav-link dropdown-toggle">-->
+                            <!--Dropdown-->
+                        <!--</a>-->
+                            <!--<div aria-labelledby="navbarDropdown" class="dropdown-menu"><a href="#"-->
+                                                                                           <!--class="dropdown-item">Action</a>-->
+                                <!--<a href="#" class="dropdown-item">Another action</a>-->
+                                <!--<div class="dropdown-divider"></div>-->
+                                <!--<a href="#" class="dropdown-item">Something else here</a></div>-->
+                        <!--</li>-->
+                        <!--<li class=""><a href="#" class="nav-link disabled">Disabled</a></li>-->
+                    <!--</ul>-->
 
-                </nav>
+                <!--</nav>-->
                 <div class="main">
                     <keep-alive>
                         <router-view></router-view>

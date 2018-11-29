@@ -1,6 +1,6 @@
 <template>
     <nicety-submenu :class="[{'active':route.meta.active}]" :index="route.path" ref="subMenuItem"
-                    v-if="hasChildren && route.meta.displayInNav">
+                    v-if="hasChildren && route.meta.displayInNav && hasPermission">
         <template slot="title">
             <i :class="route.meta.icon"></i>
             <span>{{route.meta.display}}</span>
@@ -16,7 +16,7 @@
         </template>
     </nicety-submenu>
     <nicety-menu-item :index="route.path" :class="[{'active':route.meta.active}]" :route="route" ref="menuItem"
-                      v-else-if="route.meta.displayInNav"  >
+                      v-else-if="route.meta.displayInNav && hasPermission"  >
         <i :class="route.meta.icon"></i>
         <span slot="title">{{route.meta.display}}</span>
     </nicety-menu-item>
@@ -31,6 +31,9 @@ export default {
     computed: {
         hasChildren: function () {
             return this.route.children !== undefined;
+        },
+        hasPermission: function () {
+            return this.$securtyManager.checkUrl(this.route);
         }
     },
     watch: {

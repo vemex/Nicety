@@ -2,13 +2,9 @@
     <div class="wrapper">
         <nav class="sidebar-nav">
             <div id="main-menu">
-            <span class="sidebar-search-wrapper text-light" style="font-size: 14px;padding: 1rem;font-weight: 600;">
-                导航
-                <!-- END RESPONSIVE QUICK SEARCH FORM -->
-            </span>
                 <nicety-menu :router="true" :unique-opened="true">
                     <template v-for="(route, index) in routes">
-                        <nicety-nav-item v-bind:key="index" v-if="checkRole(route.meta.role)"
+                        <nicety-nav-item v-bind:key="index"
                                          :route="route"></nicety-nav-item>
                     </template>
                 </nicety-menu>
@@ -44,13 +40,7 @@ export default {
     },
     methods: {
         checkRole (role) {
-            // todo 抽象角色检查服务有外部注入判断
-            if (role === undefined) {
-                return true;
-            }
-            if (this.$store.getters['User/currentUser'] !== undefined) {
-                return this.$store.getters['User/currentUser'].account === role;
-            }
+
             return false;
         }
     }
