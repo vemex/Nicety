@@ -185,9 +185,12 @@ Nicety.install = function (Vue, options) {
     let languageManager = new LanguageManager(i18n, lang);
     let securityManager = new SecurityManager({});
     let router = initRoutes(Vue, newOptions, appStore, languageManager, securityManager);
-    securityManager.getCurrentUser().then(function () {
+    let siteLoading = loading.service({target: document.querySelector('body'), text: '正在获取身份信息'});
+    securityManager.getCurrentUser().then(function (user) {
+        siteLoading.text = '正在获取语言信息';
         languageManager.loadLanguageAsync(lang).then(function (lang) {
             // eslint-disable-next-line no-new
+            siteLoading.close();
             new Vue({
                 i18n,
                 store: appStore.$store,
@@ -196,6 +199,8 @@ Nicety.install = function (Vue, options) {
                 render: h => h(options.mainComponent)
             });
         });
+    }).catch(function () {
+        siteLoading.text = '加载失败，请重新刷新页面';
     });
     if (newOptions.init) {
         newOptions.init(appStore.$store, router, languageManager);
