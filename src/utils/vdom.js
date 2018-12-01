@@ -1,4 +1,4 @@
-import { hasOwn } from 'util';
+import { hasOwn } from './util';
 
 /**
  * 判断是否为 vue 虚拟节点

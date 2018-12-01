@@ -1,8 +1,8 @@
-import ElDialog from './src/component';
+import NicetyDialog from './src/component';
 
 /* istanbul ignore next */
-ElDialog.install = function(Vue) {
-  Vue.component(ElDialog.name, ElDialog);
+NicetyDialog.install = function (Vue) {
+    Vue.component(NicetyDialog.name, NicetyDialog);
 };
 
-export default ElDialog;
+export default NicetyDialog;

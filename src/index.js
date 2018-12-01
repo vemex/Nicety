@@ -1,4 +1,4 @@
 // import './overlay'
-import './notification';
+//import './notification';
 import './checkbox';
 import './gridster/index';

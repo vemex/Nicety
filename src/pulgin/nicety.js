@@ -11,9 +11,11 @@ import vueLogger from 'vue-logger';
 import loading from '../components/Loading';
 import tooltip from '../components/Tooltip';
 import menu from '../components/Menu/index';
-import service from '../components/Loading/service';
+import MessageBox from '../components/MessageBox'
+
 
 const NotPermission = resolve => require.ensure([], () => resolve(require('../components/app.common.notPermission.vue')), 'NotPermission');
+
 
 const Nicety = {};
 let defaultOptions = {
@@ -210,6 +212,7 @@ Nicety.install = function (Vue, options) {
         // 逻辑...
     };
     Vue.prototype.$securtyManager = securityManager;
+    MessageBox.install(Vue);
     loading.install(Vue);
     tooltip.install(Vue);
     menu.install(Vue);
