@@ -86,8 +86,8 @@ $--color-text-secondary: $dashboard-layout-left-side-menu-color !default;
     border-right: none;
     & > .nicety-menu-item {
       float: left;
-      height: 60px;
-      line-height: 60px;
+      //height: 60px;
+      //line-height: 60px;
       margin: 0;
       border-bottom: 2px solid transparent;
       color: $--color-text-secondary;
@@ -121,8 +121,8 @@ $--color-text-secondary: $dashboard-layout-left-side-menu-color !default;
       }
 
       & .nicety-submenu__title {
-        height: 60px;
-        line-height: 60px;
+        //height: 60px;
+        //line-height: 60px;
         border-bottom: 2px solid transparent;
         color: $--color-text-secondary;
 
