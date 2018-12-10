@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <ul class="nav nav-tabs">
+        <ul class="header-tab nav nav-tabs">
             <li class="nav-item" v-for="item in openTabs">
                 <div :class="['nav-link' ,{'active':item.active}]" @click.stop="activeTab(item.url)"
                      @mouseup="mouseWheelClick(item,arguments)">

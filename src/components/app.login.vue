@@ -8,20 +8,20 @@
                     <nicety-form ref="forms">
                         <nicety-fields>
                             <nicety-field :label="'用户名'"
-                                          :placeholder="'用户名'"
+                                          :input-placeholder="'用户名'"
                                           :name="'account'"
                                           span="12"
                                           :rules="'required'"
                                           :renderType="'TextInput'"
-                                          :value.sync="account">
+                                          :input-value.sync="account">
                             </nicety-field>
                             <nicety-field :label="'密码'"
-                                          :placeholder="'密码'"
+                                          :input-placeholder="'密码'"
                                           :name="'password'"
                                           span="12"
                                           :rules="'required|remote'"
                                           :renderType="'PasswordInput'"
-                                          :value.sync="password">
+                                          :input-value.sync="password">
                             </nicety-field>
                         </nicety-fields>
                     </nicety-form>

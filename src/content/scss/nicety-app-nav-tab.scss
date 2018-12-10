@@ -2,7 +2,7 @@ $dashboard-layout-nar-bar-height:2.5rem !default;
 
 .dashboard-body {
   .page {
-    .nav-tabs { //main tab 样式
+    .header-tab.nav-tabs { //main tab 样式
       height: $dashboard-layout-nar-bar-height;
       background: $gray-100;
       border-bottom: 1px solid #c5c5c5;
@@ -46,7 +46,7 @@ $dashboard-layout-nar-bar-height:2.5rem !default;
       padding-top: $dashboard-layout-nar-bar-height;
       margin-top: $dashboard-layout-nar-bar-height*-1;
       top: $dashboard-layout-nar-bar-height;
-      .nav-tabs{
+      .header-tab.nav-tabs{
         top: 0;
         position: absolute;
         width: 100%;

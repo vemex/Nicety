@@ -5,55 +5,71 @@
     </form>
 </template>
 <script>
-    /**
-     * 获取所有字段
-     * @param fields
-     * @param children
-     */
-    const getAllFields = (fields, children) => {
-        children.forEach((child) => {
-            // console.log(child.$options.name)
-            if (child.$options.name === 'nicety-field') {
-                if (child.name && child.rules) fields.push(child)
-            } else if (child.$children && child.$children.length > 0) {
-                getAllFields(fields, child.$children)
-            }
-        })
-    };
+/**
+ * 获取所有字段
+ * @param fields
+ * @param children
+ */
+const getAllFields = (fields, children) => {
+    children.forEach((child) => {
+        // console.log(child.$options.name)
+        if (child.$options.name === 'nicety-field') {
+            if (child.name && child.rules) fields.push(child);
+        } else if (child.$children && child.$children.length > 0) {
+            getAllFields(fields, child.$children);
+        }
+    });
+};
 
-    export default {
-        name: 'nicety-form',
-        props: {
-            inline: {type: Boolean, default: false}
+export default {
+    name: 'nicety-form',
+    componentName: 'NicetyForm',
+    props: {
+        inline: {type: Boolean, default: false},
+        disabled: {type: Boolean, default: false},
+        statusIcon: {type: Boolean, default: false}
+    },
+    provide () {
+        return {
+            'nicetyForm': this
+        };
+    },
+    data () {
+        return {
+            errorMsg: null
+        };
+    },
+    methods: {
+        clearError () {
+            this.errorMsg = null;
+            const fields = [];
+            getAllFields(fields, this.$children);
+            fields.forEach((field) => {
+                field.clearError();
+            });
         },
-        data() {
-            return {
-                errorMsg: null
+        addError (errorInfo) {
+            if (typeof errorInfo === 'string') {
+                this.errorMsg = errorInfo;
+                return;
             }
-        },
-        methods: {
-            clearError() {
-                this.errorMsg = null;
-                const fields = [];
-                getAllFields(fields, this.$children);
+            const fields = [];
+            getAllFields(fields, this.$children);
+            let setFiledError = function (error) {
                 fields.forEach((field) => {
-                    field.clearError();
-                })
-            },
-            addError(errorInfo) {
-                if (typeof errorInfo  === 'string') {
-                    this.errorMsg = errorInfo;
-                    return
-                }
-                const fields = [];
-                getAllFields(fields, this.$children);
-                fields.forEach((field) => {
-                    if (field.name === errorInfo.field) {
+                    if (field.name === error.field) {
                         field.clearError();
-                        field.addError(errorInfo.errorMsg)
+                        field.addError(error.errorMsg);
                     }
-                })
+                });
+            };
+            if (Array.isArray(errorInfo)) {
+                errorInfo.forEach(function (error) {
+                    setFiledError(error);
+                });
             }
+            setFiledError(errorInfo);
         }
     }
+};
 </script>

@@ -5,10 +5,20 @@
     </div>
 </template>
 <script>
-    export default {
-        name: 'nicety-fields',
-        props: {
-            label: { type: String }
-        }
+export default {
+    name: 'nicety-fields',
+    props: {
+        label: { type: String }
+    },
+    inject: [
+        'nicetyForm'
+    ],
+    provide () {
+        return {
+            'nicetyForm': this.nicetyForm
+        };
+    },
+    mounted () {
     }
+};
 </script>
