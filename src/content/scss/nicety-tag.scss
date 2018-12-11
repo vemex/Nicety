@@ -1,88 +1,170 @@
+$--tag-padding: 0 10px !default;
+$--tag-fill: rgba($primary, 0.10) !default;
+$--tag-color: $primary !default;
+$--tag-border: rgba($primary, 0.20) !default;
+$--tag-font-size: 12px !default;
+$--tag-border-radius: 4px !default;
 
-.nicety.tag {
-  cursor: pointer;
+$--tag-info-fill: rgba($info, 0.10) !default;
+$--tag-info-border: rgba($info, 0.20) !default;
+$--tag-info-color: $info !default;
+
+$--tag-primary-fill: rgba($primary, 0.10) !default;
+$--tag-primary-border: rgba($primary, 0.20) !default;
+$--tag-primary-color: $primary !default;
+
+$--tag-success-fill: rgba($success, 0.10) !default;
+$--tag-success-border: rgba($success, 0.20) !default;
+$--tag-success-color: $success !default;
+
+$--tag-warning-fill: rgba($warning, 0.10) !default;
+$--tag-warning-border: rgba($warning, 0.20) !default;
+$--tag-warning-color: $warning !default;
+
+$--tag-danger-fill: rgba($danger, 0.10) !default;
+$--tag-danger-border: rgba($danger, 0.20) !default;
+$--tag-danger-color: $danger !default;
+
+@include b(tag) {
+  background-color: $--tag-fill;
   display: inline-block;
-  line-height: 1em;
-  font-size: .85rem;
-  vertical-align: baseline;
-  background: $gray-300 none;
-  padding: .5833rem .833rem;
-  color: $gray-700;
-  text-transform: none;
-  font-weight: 700;
-  border: 0 solid transparent;
-  border-radius: 2px;
-  transition: background .1s ease;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  margin: 0 .5rem .5rem 0;
-  i {
-    opacity: .8;
-    margin-left: .5rem
+  padding: $--tag-padding;
+  height: 32px;
+  line-height: 30px;
+  font-size: $--tag-font-size;
+  color: $--tag-color;
+  border-radius: $--tag-border-radius;
+  box-sizing: border-box;
+  border: 1px solid $--tag-border;
+  white-space: nowrap;
+
+  .nicety-icon-close {
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 12px;
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+    vertical-align: middle;
+    top: -1px;
+    right: -5px;
+    color: $--tag-color;
+
+    &::before {
+      display: block;
+    }
+
+    &:hover {
+      background-color: $--tag-color;
+      color: $white;
+    }
   }
-}
 
-.nicety.tag:first-child {
-  margin-left: 0
-}
+  @include m(info) {
+    background-color: $--tag-info-fill;
+    border-color: $--tag-info-border;
+    color: $--tag-info-color;
 
-.nicety.tag:last-child {
-  margin-right: 0
-}
+    @include when(hit) {
+      border-color: $--tag-info-color;
+    }
 
-.nicety.tag:not(.attached):hover {
-  color: $gray-800;
-  background: $gray-400
-}
+    .nicety-tag__close {
+      color: $--tag-info-color;
+    }
 
-.nicety.tag.circle {
-  border-radius: 50em
-}
+    .nicety-tag__close:hover {
+      background-color: $--tag-info-color;
+      color: $white;
+    }
+  }
 
-.nicety.tag.floating {
-  position: absolute;
-  z-index: 100;
-  top: -1em;
-  left: 100%;
-  margin: 0 0 0 -1em !important;
-  padding: .4em .5em
-}
+  @include m(success) {
+    background-color: $--tag-success-fill;
+    border-color: $--tag-success-border;
+    color: $--tag-success-color;
 
-.nicety.tag.attached {
-  position: absolute;
-  padding: .5em .75em;
-  font-size: 1em;
-  border-radius: 0;
-  margin: 0;
-  border: 1px solid transparent;
-  z-index: 10
-}
+    @include when(hit) {
+      border-color: $--tag-success-color;
+    }
 
-.nicety.tag.attached.bottom,
-.nicety.tag.attached.top {
-  width: 100%;
-  left: 0
-}
+    .nicety-tag__close {
+      color: $--tag-success-color;
+    }
 
-.nicety.tag.attached.bottom.left,
-.nicety.tag.attached.bottom.right,
-.nicety.tag.attached.top.left,
-.nicety.tag.attached.top.right {
-  width: auto
-}
+    .nicety-tag__close:hover {
+      background-color: $--tag-success-color;
+      color: $white;
+    }
+  }
 
-.nicety.tag.attached.bottom.right,
-.nicety.tag.attached.top.right {
-  right: 0;
-  left: auto
-}
+  @include m(warning) {
+    background-color: $--tag-warning-fill;
+    border-color: $--tag-warning-border;
+    color: $--tag-warning-color;
 
-.nicety.tag.attached.top {
-  top: 0
-}
+    @include when(hit) {
+      border-color: $--tag-warning-color;
+    }
 
-.nicety.tag.attached.bottom {
-  bottom: 0
+    .nicety-tag__close {
+      color: $--tag-warning-color;
+    }
+
+    .nicety-tag__close:hover {
+      background-color: $--tag-warning-color;
+      color: $white;
+    }
+  }
+
+  @include m(danger) {
+    background-color: $--tag-danger-fill;
+    border-color: $--tag-danger-border;
+    color: $--tag-danger-color;
+
+    @include when(hit) {
+      border-color: $--tag-danger-color;
+    }
+
+    .nicety-tag__close {
+      color: $--tag-danger-color;
+    }
+
+    .nicety-tag__close:hover {
+      background-color: $--tag-danger-color;
+      color: $white;
+    }
+  }
+
+  @include m(medium) {
+    height: 28px;
+    line-height: 26px;
+
+    .nicety-icon-close {
+      transform: scale(.8);
+    }
+  }
+
+  @include m(small) {
+    height: 24px;
+    padding: 0 8px;
+    line-height: 22px;
+
+    .nicety-icon-close {
+      transform: scale(.8);
+    }
+  }
+
+  @include m(mini) {
+    height: 20px;
+    padding: 0 5px;
+    line-height: 19px;
+
+    .nicety-icon-close {
+      margin-left: -3px;
+      transform: scale(.7);
+    }
+  }
 }

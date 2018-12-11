@@ -1,18 +1,19 @@
 <template>
-    <div :class="['field','form-group',`col-md-${span}`]" v-show="visible">
-        <label v-if="label" class="label">{{ label }}</label>
-        <div>
-            <component :is="renderType"  ref="component"
+    <div :class="['field','form-group',`col-md-${span}`,{'inline-row':inline}]" v-show="visible">
+        <label v-if="label" :class="['label',labelClass]">{{ label }}</label>
+        <div :class="[inputClass]"  :style="inputStyleObject">
+            <component :is="renderType"  ref="component" :style="inputStyleObject"
                        v-model="inputProps.value"
                        v-bind="inputProps"
                        :name="name"  v-validate="rules"
                        :class="[{'error':errorMessage}]"
             >
             </component>
+            <transition name="slide">
+                <p class="alert-danger" v-if="errorMessage">{{ errorMessage }}</p>
+            </transition>
         </div>
-        <transition name="slide">
-            <p class="alert-danger" v-if="errorMessage">{{ errorMessage }}</p>
-        </transition>
+
     </div>
 </template>
 <script>
@@ -20,6 +21,7 @@ import TextInput from './Inputs/TextInput.js';
 import EmailInput from './Inputs/EmailInput.js';
 import PasswordInput from './Inputs/PasswordInput.js';
 import TextareaInput from './Inputs/TextareaInput.js';
+import SelectInput from './Inputs/SelectInput.js';
 export default {
     name: 'nicety-field',
     componentName: 'NicetyFiled',
@@ -27,7 +29,8 @@ export default {
         TextInput,
         EmailInput,
         PasswordInput,
-        TextareaInput
+        TextareaInput,
+        SelectInput
     },
     inject: [
         'nicetyForm'
@@ -45,6 +48,8 @@ export default {
         renderType: {type: String, default: null}, // 显示类型
         span: {type: [String, Number], default: 12},
         inline: {type: Boolean, default: false},
+        labelSpan: {type: [String, Number], default: 4},
+        inputWidth:{type: [String], default: 'auto'},
         name: {type: String}, // 需校验的字段名
         rules: {type: String, default: 'empty'}, // 验证规则
         inputReadonly: {type: Boolean, default: false}, // 只读
@@ -59,6 +64,24 @@ export default {
         this.$refs.component.$slots = this.$slots;
     },
     computed: {
+        inputStyleObject () {
+            if (this.inline && this.inputWidth !== 'auto') {
+                return {width: this.inputWidth, flex: 'none'};
+            }
+            return {width: this.inputWidth};
+        },
+        labelClass () {
+            if (this.inline) {
+                return `col-md-${this.labelSpan} col-form-label`;
+            }
+            return '';
+        },
+        inputClass () {
+            if (this.inline) {
+                return `col-md-${12 - this.labelSpan}`;
+            }
+            return '';
+        },
         inputProps: function () {
             if (this.$inputProps) {
                 return this.$inputProps;
