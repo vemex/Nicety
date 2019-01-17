@@ -1,8 +1,8 @@
 import NicetyDialog from './src/component';
 
 /* istanbul ignore next */
-NicetyDialog.install = function (Vue) {
-    Vue.component(NicetyDialog.name, NicetyDialog);
-};
-
-export default NicetyDialog;
+export default{
+    install : function (Vue) {
+        Vue.component(NicetyDialog.name, NicetyDialog);
+    }
+}

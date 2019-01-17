@@ -69,6 +69,7 @@ const defaultCallback = action => {
 
 const initInstance = () => {
     instance = new MessageBoxConstructor({
+        i18n:Vue.prototype.i18n,
         el: document.createElement('div')
     });
 

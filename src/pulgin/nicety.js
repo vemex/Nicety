@@ -8,10 +8,9 @@ import VueI18n from 'vue-i18n';
 import LanguageManager from './languageManager';
 import SecurityManager from './SecurityManager';
 import vueLogger from 'vue-logger';
+import ComponentIndex from '../index'
 import loading from '../components/Loading';
-import tooltip from '../components/Tooltip';
-import menu from '../components/Menu/index';
-import MessageBox from '../components/MessageBox'
+
 
 
 const NotPermission = resolve => require.ensure([], () => resolve(require('../components/app.common.notPermission.vue')), 'NotPermission');
@@ -100,7 +99,7 @@ let routeLoading = null;
 let initRoutes = function (Vue, options, appStore, languageManager, securityManager) {
     Vue.use(VueRouter);
     let router = new VueRouter({routes: options.routes, linkActiveClass: 'active'});
-    appStore.$store.dispatch('AppNav/initRoutes', options.routes);
+    appStore.$store.dispatch('AppNav/initRoutes', {routes:options.routes,homeRoute:router.matcher.match("/")});
     router.beforeEach(function (to, from, next) {
         let lang = to.query.lang;
         if (lang) {
@@ -176,7 +175,7 @@ Nicety.install = function (Vue, options) {
     appStore.$store.commit('AppConstants/setDefaultLang', newOptions.appSettings.defaultLang);// 设置默认语言
     appStore.$store.commit('AppViewSettings/setCurrentLang', newOptions.appSettings.defaultLang);// 设置当前语言
     appStore.$store.commit('AppViewSettings/setUseTabView', newOptions.appSettings.useTabView);
-
+    //Vue.prototype.$i18n=i18n;
     Vue.use(VueI18n);
     let lang = appStore.$store.getters['AppConstants/defaultLang'];
     const i18n = new VueI18n({
@@ -188,6 +187,9 @@ Nicety.install = function (Vue, options) {
     let securityManager = new SecurityManager({});
     let router = initRoutes(Vue, newOptions, appStore, languageManager, securityManager);
     let siteLoading = loading.service({target: document.querySelector('body'), text: '正在获取身份信息'});
+    Vue.prototype.router=router;
+    Vue.prototype._i18n=i18n;
+
     securityManager.getCurrentUser().then(function (user) {
         siteLoading.text = '正在获取语言信息';
         languageManager.loadLanguageAsync(lang).then(function (lang) {
@@ -207,15 +209,13 @@ Nicety.install = function (Vue, options) {
     if (newOptions.init) {
         newOptions.init(appStore.$store, router, languageManager);
     }
+    ComponentIndex.install(Vue);
     // 1. 添加全局方法或属性
     Vue.myGlobalMethod = function () {
         // 逻辑...
     };
     Vue.prototype.$securtyManager = securityManager;
-    MessageBox.install(Vue);
-    loading.install(Vue);
-    tooltip.install(Vue);
-    menu.install(Vue);
+
     // 2. 添加全局资源
     // Vue.directive('my-directive', {
     //     bind (el, binding, vnode, oldVnode) {

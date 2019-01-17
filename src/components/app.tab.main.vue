@@ -80,7 +80,10 @@ export default {
             this.$router.push(url);
         },
         closeTabHandler: function (url) {
-            this.$store.dispatch('AppNav/closeTab', url);
+            let _=this;
+            this.$store.dispatch('AppNav/closeTab', url).then(function (url) {
+                _.$router.push(url)
+            });
         }
     }
 };

@@ -5,7 +5,7 @@
             @after-leave="afterLeave">
         <div class="modal show" tabindex="-1" v-show="visible" @click.self="handleWrapperClick" role="dialog"
              ref="dialog">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog" role="document" :style="style">
                 <div class="modal-content">
                     <div class="modal-header">
                         <slot name="title">
@@ -97,7 +97,7 @@ export default {
 
         top: {
             type: String,
-            default: '15vh'
+            default: '5vh'
         },
         beforeClose: Function,
         center: {
@@ -137,7 +137,8 @@ export default {
             if (!this.fullscreen) {
                 style.marginTop = this.top;
                 if (this.width) {
-                    style.width = this.width;
+                    style['max-width'] = this.width;
+                    style['width'] = this.width;
                 }
             }
             return style;

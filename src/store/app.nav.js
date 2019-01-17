@@ -22,9 +22,11 @@ const actions = {
      * @param getters
      * @param routes
      */
-    initRoutes({dispatch, commit, getters}, routes) {
+    initRoutes({dispatch, commit, getters},{routes,homeRoute} ) {
         commit("init", routes);
-        commit("pushTab", "/")
+
+        commit("pushTab", homeRoute);
+
     },
     /**
      * 将路由置为 active 状态
@@ -40,7 +42,10 @@ const actions = {
         commit("pushTab", router)
     },
     closeTab({dispatch, commit, getters}, path) {
-        return commit("removeTab", path)
+        commit("removeTab", path);
+        return new Promise(function (resolve) {
+            resolve(getters.activePath)
+        })
     }
 };
 /**
@@ -72,7 +77,7 @@ let createRoute = function (originRoute) {
     }
     return {
         name: originRoute.name,
-        path: originRoute.path,
+        path: originRoute.path==='/'?'':originRoute.path,
         meta: meta,
     }
 };
@@ -85,7 +90,7 @@ let copyRoutes = function (routes, parent) {
     let result = [];
     routes.forEach(function (value) {
         let newRoute = createRoute(value);
-        newRoute.meta.canClose = newRoute.path !== '/';
+        newRoute.meta.canClose = newRoute.path !== '';
         if (value.children) {
             newRoute.children = copyRoutes(value.children, value);
         }
@@ -104,25 +109,38 @@ const mutations = {
         loopRoute(state.routes, null, function (parent, value) {
             value.meta.active = false;
         });
-        loopRoute(state.routes, null, function (parent, value) {
-            if (route.fullPath === value.path) {
-                value.meta.active = true;
-                if (parent != null) {
-                    parent.meta.active = true;
+        let matchItem=route.matched.filter(function(match){
+            return match.regex.test(route.fullPath);
+        });
+        if (matchItem.length>0) {
+            matchItem=matchItem[0];
+            loopRoute(state.routes, null, function (parent, value) {
+                if (matchItem.path===value.path) {
+                    value.meta.active = true;
+                    if (parent != null) {
+                        parent.meta.active = true;
+                    }
                 }
-            }
-        })
+            })
+        }
     },
     pushTab(state, router) {
         let path = undefined;
         if (router instanceof Object) {
             path = router.fullPath;
         } else {
-            path = router;
+            return ;
         }
         let findRouter = undefined;
+        let matchItem=router.matched.filter(function(match){
+            return match.regex.test(router.fullPath);
+        });
+        if (matchItem.length===0){
+            return
+        }
+        matchItem=matchItem[0];
         loopRoute(state.routes, null, function (parent, value) {
-            if (path === value.path) {
+            if (matchItem.path===value.path) {
                 findRouter = value;
             }
         });
@@ -174,6 +192,7 @@ const mutations = {
                 newItem.active = true;
                 state.activePath = newItem.url;
             }
+            return newItem.url;
         }
     }
 };

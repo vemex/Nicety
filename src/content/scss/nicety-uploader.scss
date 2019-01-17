@@ -1,0 +1,32 @@
+.vue-fine-uploader-file-input {
+  display: inline-block;
+}
+
+.vue-fine-uploader-file-input label {
+  cursor: pointer;
+}
+
+.vue-fine-uploader-file-input input[type="file"] {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.vue-fine-uploader-file-progress-bar-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+}
+
+.vue-fine-uploader-file-progress-bar {
+  width: 100%;
+  height: 2px;
+  background: teal;
+}
+.upload-state{
+  position: relative;
+  height: 3rem;
+  padding: 5px
+}

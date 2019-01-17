@@ -1,57 +1,125 @@
+$--tree-node-hover-color: #f5f7fa !default;
+$--tree-text-color: #606266 !default;
+$--tree-expand-icon-color: #c0c4cc !default;
 
-.nicety.tree {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 1em
+@include b(tree) {
+  position: relative;
+  cursor: default;
+  background: $white;
+  color: $--tree-text-color;
+
+  @include e(empty-block) {
+    position: relative;
+    min-height: 60px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(empty-text) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: mix($primary, rgb(158, 68, 0), 50%);
+  }
+
+  @include e(drop-indicator) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: $primary;
+  }
 }
 
-.nicety.tree li {
-  line-height: 2em;
+@include b(tree-node) {
   white-space: nowrap;
-  cursor: pointer
+  outline: none;
+  &:focus { /* focus */
+    > .nicety-tree-node__content {
+      background-color: $--tree-node-hover-color;
+    }
+  }
+
+  @include when(drop-inner) {
+    > .nicety-tree-node__content .nicety-tree-node__label {
+      background-color: $primary;
+      color: #fff;
+    }
+  }
+
+  @include e(content) {
+    display: flex;
+    align-items: center;
+    height: 26px;
+    cursor: pointer;
+
+    & > .nicety-tree-node__expand-icon {
+      padding: 6px;
+    }
+    & > .nicety-checkbox {
+      margin-right: 8px;
+    }
+    &:hover {
+      background-color: $--tree-node-hover-color;
+    }
+
+    .nicety-tree.is-dragging & {
+      cursor: move;
+
+      & * {
+        pointer-events: none;
+      }
+    }
+
+    .nicety-tree.is-dragging.is-drop-not-allow & {
+      cursor: not-allowed;
+    }
+  }
+
+  @include e(expand-icon) {
+    cursor: pointer;
+    color: $--tree-expand-icon-color;
+    font-size: 12px;
+
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+
+    &.expanded {
+      transform: rotate(90deg);
+    }
+
+    &.is-leaf {
+      color: transparent;
+      cursor: default;
+    }
+  }
+
+  @include e(label) {
+    font-size: 1rem;
+  }
+
+  @include e(loading-icon) {
+    margin-right: 8px;
+    font-size: 1rem;
+    color: $--tree-expand-icon-color;
+  }
+
+  & > .nicety-tree-node__children {
+    overflow: hidden;
+    background-color: transparent;
+  }
+
+  &.is-expanded > .nicety-tree-node__children {
+    display: block;
+  }
 }
 
-.nicety.tree li,.nicety.tree li i {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none
+.nicety-tree--highlight-current .nicety-tree-node.is-current > .nicety-tree-node__content {
+  background-color: mix($white, $primary, 92%);
 }
-
-.nicety.tree li i {
-  vertical-align: middle;
-  text-align: center;
-  padding: 0;
-  width: 1em;
-  display: inline-block
+.nicety-icon-caret-right{
+  font: normal normal normal 14px/1 FontAwesome;
 }
-
-.nicety.tree li .title {
-  padding: .2em .4em
-}
-
-.nicety.tree li .title:hover {
-  color: #2185d0
-}
-
-.nicety.tree li.active>.title {
-  background: #ecf6fd
-}
-
-.nicety.tree li>.nicety.tree {
-  padding-left: 1.5em
-}
-
-.nicety.tree-select>.content {
-  box-shadow: 0 1px 5px rgba(0,0,0,.2);
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 0;
-  z-index: 10;
-  background: #fff;
-  min-width: 100%;
-  height: 260px;
-  overflow: auto;
-  padding: 0 .5em
-}
+.nicety-icon-caret-right:before { content: "\f0da"; }

@@ -1,146 +1,324 @@
 <template>
     <transition name="msgbox-fade">
-        <div class="nicety-message-box__wrapper"
-             role="dialog"
-             v-show="visible">
-            <div class="nicety-message-box">
-                <div class="nicety-message-box__header">
-                    <h5 class="nicety-message-box__title">{{title}}</h5>
+        <div
+                class="nicety-message-box__wrapper"
+                tabindex="-1"
+                v-show="visible"
+                @click.self="handleWrapperClick"
+                role="dialog"
+                aria-modal="true"
+                :aria-label="title || 'dialog'">
+            <div class="nicety-message-box" :class="[customClass, center && 'nicety-message-box--center']">
+                <div class="nicety-message-box__header" v-if="title !== null">
+                    <div class="nicety-message-box__title">
+                        <div
+                                :class="['nicety-message-box__status', icon]"
+                                v-if="icon && center">
+                        </div>
+                        <span>{{ title }}</span>
+                    </div>
                     <button type="button"
                             data-dismiss="modal"
                             aria-label="Close"
                             v-if="showClose"
                             @click="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
+                            @keydown.enter="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
                             class="close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="nicety-message-box__content">{{message}}</div>
+                <div class="nicety-message-box__content">
+                    <div
+                            :class="['nicety-message-box__status', icon]"
+                            v-if="icon && !center && message !== ''">
+                    </div>
+                    <div class="nicety-message-box__message" v-if="message !== ''">
+                        <slot>
+                            <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
+                            <p v-else v-html="message"></p>
+                        </slot>
+                    </div>
+                    <div class="nicety-message-box__input" v-show="showInput">
+                        <text-input
+                                v-model="inputValue"
+                                :type="inputType"
+                                @keydown.enter.native="handleInputEnter"
+                                :placeholder="inputPlaceholder"
+                                ref="input"></text-input>
+                        <div class="nicety-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
+                    </div>
+                </div>
                 <div class="nicety-message-box__btns">
-                    <button type="button"
-                            data-role="alert"
-                            v-if="showCancelButton"
+                    <button class="alert-cancel"
                             :loading="cancelButtonLoading"
+                            :class="[ cancelButtonClasses ]"
+                            v-if="showCancelButton"
+                            :round="roundButton"
+                            size="small"
                             @click="handleAction('cancel')"
-                            @keydown.enter="handleAction('cancel')"
-                            class="alert-cancel">取消</button>
-                    <button type="button" data-role="alert" ref="confirm"
+                            @keydown.enter="handleAction('cancel')">
+                        {{ cancelButtonText || $t('nicety.messagebox.cancel') }}
+                    </button>
+                    <button class="alert-confirm"
                             :loading="confirmButtonLoading"
+                            ref="confirm"
+                            :class="[ confirmButtonClasses ]"
                             v-show="showConfirmButton"
+                            :round="roundButton"
+                            size="small"
                             @click="handleAction('confirm')"
-                            @keydown.enter="handleAction('confirm')"
-                            class="alert-confirm">确认</button>
+                            @keydown.enter="handleAction('confirm')">
+                        {{ confirmButtonText || $t('nicety.messagebox.confirm') }}
+                    </button>
                 </div>
             </div>
         </div>
     </transition>
 </template>
-<script>
-import Popup from '../../../utils/popup';
-import Dialog from '../../../utils/aria-dialog';
 
-let messageBox;
-export default {
-    name: 'NicetyMessageBox',
-    mixins: [Popup],
-    props: {
-        modal: {
-            default: true
+<script type="text/babel">
+    import Popup from '../../../utils/popup';
+    import { addClass, removeClass } from '../../../utils/dom';
+    import Dialog from '../../../utils/aria-dialog';
+    import TextInput from  '../../Inputs/TextInput'
+
+    let messageBox;
+    let typeMap = {
+        success: 'success',
+        info: 'info',
+        warning: 'warning',
+        error: 'error'
+    };
+
+    export default {
+        mixins: [Popup],
+        components:{
+            TextInput
         },
-        showClose: {
-            type: Boolean,
-            default: true
-        },
-        lockScroll: {
-            default: true
-        },
-        modalClass: {
-            type: String,
-            default: 'modal-backdrop fade show'
-        }
-    },
-    methods: {
-        handleAction (action) {
-            if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
-                return;
+        props: {
+            modal: {
+                default: true
+            },
+            lockScroll: {
+                default: true
+            },
+            showClose: {
+                type: Boolean,
+                default: true
+            },
+            closeOnClickModal: {
+                default: true
+            },
+            closeOnPressEscape: {
+                default: true
+            },
+            closeOnHashChange: {
+                default: true
+            },
+            center: {
+                default: false,
+                type: Boolean
+            },
+            roundButton: {
+                default: false,
+                type: Boolean
+            },
+            modalClass: {
+                type: String,
+                default: 'modal-backdrop fade show'
             }
-            this.action = action;
-            if (typeof this.beforeClose === 'function') {
-                this.close = this.getSafeClose();
-                this.beforeClose(action, this, this.close);
-            } else {
-                this.doClose();
+        },
+        computed: {
+            icon() {
+                const { type, iconClass } = this;
+                return iconClass || (type && typeMap[type] ? `nicety-icon-${ typeMap[type] }` : '');
+            },
+
+            confirmButtonClasses() {
+                return `nicety-button--primary ${ this.confirmButtonClass }`;
+            },
+            cancelButtonClasses() {
+                return `${ this.cancelButtonClass }`;
             }
         },
-        doClose () {
-            if (!this.visible) return;
-            this.visible = false;
-            this._closing = true;
-            this.onClose && this.onClose();
-            messageBox.closeDialog(); // 解绑
-            if (this.lockScroll) {
-                setTimeout(this.restoreBodyStyle, 200);
-            }
-            this.opened = false;
-            this.doAfterClose();
-            setTimeout(() => {
-                if (this.action) this.callback(this.action, this);
-            });
-        },
-        getFirstFocus () {
-            const btn = this.$el.querySelector('.el-message-box__btns .el-button');
-            const title = this.$el.querySelector('.el-message-box__btns .el-message-box__title');
-            return btn || title;
-        }
-    },
-    watch: {
-        visible (val) {
-            if (val) {
-                this.uid++;
-                if (this.$type === 'alert' || this.$type === 'confirm') {
+
+        methods: {
+            getSafeClose() {
+                const currentId = this.uid;
+                return () => {
                     this.$nextTick(() => {
-                        this.$refs.confirm.focus();
+                        if (currentId === this.uid) this.doClose();
+                    });
+                };
+            },
+            doClose() {
+                if (!this.visible) return;
+                this.visible = false;
+                this._closing = true;
+
+                this.onClose && this.onClose();
+                messageBox.closeDialog(); // 解绑
+                if (this.lockScroll) {
+                    setTimeout(this.restoreBodyStyle, 200);
+                }
+                this.opened = false;
+                this.doAfterClose();
+                setTimeout(() => {
+                    if (this.action) this.callback(this.action, this);
+                });
+            },
+
+            handleWrapperClick() {
+                if (this.closeOnClickModal) {
+                    this.handleAction(this.distinguishCancelAndClose ? 'close' : 'cancel');
+                }
+            },
+
+            handleInputEnter() {
+                if (this.inputType !== 'textarea') {
+                    return this.handleAction('confirm');
+                }
+            },
+
+            handleAction(action) {
+                if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
+                    return;
+                }
+                this.action = action;
+                if (typeof this.beforeClose === 'function') {
+                    this.close = this.getSafeClose();
+                    this.beforeClose(action, this, this.close);
+                } else {
+                    this.doClose();
+                }
+            },
+
+            validate() {
+                if (this.$type === 'prompt') {
+                    const inputPattern = this.inputPattern;
+                    if (inputPattern && !inputPattern.test(this.inputValue || '')) {
+                        this.editorErrorMessage = this.inputErrorMessage || this.$t('nicety.messagebox.error');
+                        addClass(this.getInputElement(), 'invalid');
+                        return false;
+                    }
+                    const inputValidator = this.inputValidator;
+                    if (typeof inputValidator === 'function') {
+                        const validateResult = inputValidator(this.inputValue);
+                        if (validateResult === false) {
+                            this.editorErrorMessage = this.inputErrorMessage || this.$t('nicety.messagebox.error');
+                            addClass(this.getInputElement(), 'invalid');
+                            return false;
+                        }
+                        if (typeof validateResult === 'string') {
+                            this.editorErrorMessage = validateResult;
+                            addClass(this.getInputElement(), 'invalid');
+                            return false;
+                        }
+                    }
+                }
+                this.editorErrorMessage = '';
+                removeClass(this.getInputElement(), 'invalid');
+                return true;
+            },
+            getFirstFocus() {
+                const btn = this.$el.querySelector('.nicety-message-box__btns .nicety-button');
+                const title = this.$el.querySelector('.nicety-message-box__btns .nicety-message-box__title');
+                return btn || title;
+            },
+            getInputElement() {
+                const inputRefs = this.$refs.input.$refs;
+                return inputRefs.input || inputRefs.textarea;
+            }
+        },
+
+        watch: {
+            inputValue: {
+                immediate: true,
+                handler(val) {
+                    this.$nextTick(_ => {
+                        if (this.$type === 'prompt' && val !== null) {
+                            this.validate();
+                        }
                     });
                 }
-                this.focusAfterClosed = document.activeElement;
-                messageBox = new Dialog(this.$el, this.focusAfterClosed, this.getFirstFocus());
+            },
+
+            visible(val) {
+                if (val) {
+                    this.uid++;
+                    if (this.$type === 'alert' || this.$type === 'confirm') {
+                        this.$nextTick(() => {
+                            this.$refs.confirm.focus();
+                        });
+                    }
+                    this.focusAfterClosed = document.activeElement;
+                    messageBox = new Dialog(this.$el, this.focusAfterClosed, this.getFirstFocus());
+                }
+
+                // prompt
+                if (this.$type !== 'prompt') return;
+                if (val) {
+                    setTimeout(() => {
+                        if (this.$refs.input && this.$refs.input.$el) {
+                            this.getInputElement().focus();
+                        }
+                    }, 500);
+                } else {
+                    this.editorErrorMessage = '';
+                    removeClass(this.getInputElement(), 'invalid');
+                }
             }
+        },
+
+        mounted() {
+            this.$nextTick(() => {
+                if (this.closeOnHashChange) {
+                    window.addEventListener('hashchange', this.close);
+                }
+            });
+        },
+
+        beforeDestroy() {
+            if (this.closeOnHashChange) {
+                window.removeEventListener('hashchange', this.close);
+            }
+            setTimeout(() => {
+                messageBox.closeDialog();
+            });
+        },
+
+        data() {
+            return {
+                uid: 1,
+                title: undefined,
+                message: '',
+                type: '',
+                iconClass: '',
+                customClass: '',
+                showInput: false,
+                inputValue: null,
+                inputPlaceholder: '',
+                inputType: 'text',
+                inputPattern: null,
+                inputValidator: null,
+                inputErrorMessage: '',
+                showConfirmButton: true,
+                showCancelButton: false,
+                action: '',
+                confirmButtonText: '',
+                cancelButtonText: '',
+                confirmButtonLoading: false,
+                cancelButtonLoading: false,
+                confirmButtonClass: '',
+                confirmButtonDisabled: false,
+                cancelButtonClass: '',
+                editorErrorMessage: null,
+                callback: null,
+                dangerouslyUseHTMLString: false,
+                focusAfterClosed: null,
+                isOnComposition: false,
+                distinguishCancelAndClose: false
+            };
         }
-    },
-    data: function () {
-        return {
-
-            uid: 1,
-            title: undefined,
-            message: '',
-            type: '',
-            iconClass: '',
-            customClass: '',
-            showInput: false,
-            inputValue: null,
-            inputPlaceholder: '',
-            inputType: 'text',
-            inputPattern: null,
-            inputValidator: null,
-            inputErrorMessage: '',
-            showConfirmButton: true,
-            showCancelButton: false,
-            action: '',
-            confirmButtonText: '',
-            cancelButtonText: '',
-            confirmButtonLoading: false,
-            cancelButtonLoading: false,
-            confirmButtonClass: '',
-            confirmButtonDisabled: false,
-            cancelButtonClass: '',
-            editorErrorMessage: null,
-            callback: null,
-            dangerouslyUseHTMLString: false,
-            focusAfterClosed: null,
-            isOnComposition: false,
-            distinguishCancelAndClose: false
-
-        };
-    }
-};
+    };
 </script>

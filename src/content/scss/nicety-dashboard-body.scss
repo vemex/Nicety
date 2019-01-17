@@ -35,7 +35,9 @@
       }
       .page-content .main {
         position: relative;
-        padding: 1em
+        padding: 1rem;
+        height: 100%;
+        overflow: auto;
       }
       .page-title .breadcrumb {
         margin-bottom: 0px;

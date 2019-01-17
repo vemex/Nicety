@@ -15,7 +15,7 @@
             <!--</nicety-menu-item>-->
         </template>
     </nicety-submenu>
-    <nicety-menu-item :index="route.path" :class="[{'active':route.meta.active}]" :route="route" ref="menuItem"
+    <nicety-menu-item :index="route.path" :class="[{'active':route.meta.active}]" :route="routeObj" ref="menuItem"
                       v-else-if="route.meta.displayInNav && hasPermission"  >
         <i :class="route.meta.icon"></i>
         <span slot="title">{{route.meta.display}}</span>
@@ -34,6 +34,25 @@ export default {
         },
         hasPermission: function () {
             return this.$securtyManager.checkUrl(this.route);
+        },
+        routeObj:function () {
+            let splitByRegx=function (regex,str,result) {
+                let matches= regex.exec(str);
+                if (matches!=null){
+                    result.push(matches[1])
+                    splitByRegx(regex,str,result);
+                }
+            }
+            let parameters=[];
+            splitByRegx(/\/:([a-zA-Z]*)/gi,this.route.path,parameters);
+            let params={};
+            for (let i =0 ;i<parameters.length;i++){
+                params[parameters[i]]='none';
+            }
+            return {
+                name: this.route.name,
+                params
+            }
         }
     },
     watch: {

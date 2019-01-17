@@ -3,3 +3,14 @@ $icons-path: "../../../../node_modules/ag-grid/src/styles/balham-icons/" ;
 @import "~ag-grid/src/styles/ag-grid.scss";
 @import "~ag-grid/src/styles/ag-theme-balham.scss";
 
+.ag-root .form-control{
+  height:calc(1.9rem + 2px);
+
+}
+.ag-theme-balham .ag-cell-focus{
+  border: 1px solid transparent;
+}
+.ag-cell{
+  user-select: text !important;
+}
+

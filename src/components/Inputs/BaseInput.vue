@@ -8,7 +8,7 @@
       'nicety-input--prefix': $slots.prefix || prefixIcon,
       'nicety-input--suffix': $slots.suffix || suffixIcon || clearable
     }
-    ]"
+    ]" v-if="visible"
          @mouseenter="hovering = true"
          @mouseleave="hovering = false"
     >
@@ -111,7 +111,7 @@ export default {
     },
     $_veeValidate: {
         name: function () {
-            return this.name;
+            return this.nicetyFiled.name;
         },
         value: function () {
             return this.value;
@@ -155,7 +155,11 @@ export default {
             type: Boolean,
             default: false
         },
-        tabindex: String
+        tabindex: String,
+        visible:{
+            type:Boolean,
+            default:true,
+        }
     },
     computed: {
         _nicetyFiledSize () {
@@ -328,8 +332,10 @@ export default {
     },
 
     mounted () {
-        this.resizeTextarea();
-        this.updateIconOffset();
+        if (this.visible) {
+            this.resizeTextarea();
+            this.updateIconOffset();
+        }
     },
 
     updated () {

@@ -37,6 +37,7 @@ class SecurityManager {
         return Axios.get(this.options.getCurrentUserUrl).then(function (response) {
             if (response.data.state === 'Successfully') {
                 _.currentUser = response.data.content;
+                _.currentUser.hasPermission = _.options.hasPermission;
                 return _.currentUser;
             }
         });

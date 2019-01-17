@@ -4,5 +4,6 @@ export default {
     install: function (Vue) {
         Vue.prototype.$alert = MessageBox.alert;
         Vue.prototype.$confirm = MessageBox.confirm;
+        Vue.prototype.$prompt = MessageBox.prompt;
     }
 };

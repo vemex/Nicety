@@ -21,9 +21,12 @@
             float: right;
             font-size: 0;
             button {
+                @extend  .btn;
+                @extend  .btn-outline-secondary;
                 font-size: 1rem;
                 border-radius: 0px;
                 height: 100%;
+                border-width: 0px;
                 background: transparent;
             }
             height: 100%

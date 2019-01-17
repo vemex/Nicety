@@ -19,7 +19,7 @@
                                           :input-placeholder="'密码'"
                                           :name="'password'"
                                           span="12"
-                                          :rules="'required|remote'"
+                                          :rules="'required'"
                                           :renderType="'PasswordInput'"
                                           :input-value.sync="password">
                             </nicety-field>
@@ -35,12 +35,7 @@
 <script>
     /* eslint-disable indent */
 
-    import NicetyForm from 'nicety/src/components/Form';
-    import NicetyFields from 'nicety/src/components/Fileds';
-    import NicetyField from 'nicety/src/components/Field';
-
     export default {
-        components: {NicetyField, NicetyFields, NicetyForm},
         data: function () {
             return {
                 account: '',
