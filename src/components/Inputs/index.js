@@ -5,7 +5,7 @@ import TextInput from './TextInput';
 import SelectInput from './SelectInput';
 
 export default {
-    install (Vue) {
+    install(Vue) {
         Vue.component(EmailInput.name, EmailInput);
         Vue.component(PasswordInput.name, PasswordInput);
         Vue.component(TextareaInput.name, TextareaInput);

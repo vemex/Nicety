@@ -54,7 +54,7 @@ $--color-text-secondary: $dashboard-layout-left-side-menu-color !default;
 
   i {
     color: $--color-text-secondary;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 
   &:hover,
@@ -71,6 +71,7 @@ $--color-text-secondary: $dashboard-layout-left-side-menu-color !default;
 }
 
 @include b(menu) {
+  user-select: none;
   border-right: solid 1px #e6e6e6;
   list-style: none;
   position: relative;
@@ -90,7 +91,7 @@ $--color-text-secondary: $dashboard-layout-left-side-menu-color !default;
       //line-height: 60px;
       margin: 0;
       border-bottom: 2px solid transparent;
-      color: $--color-text-secondary;
+      color: $light;
 
       a,
       a:hover {
@@ -267,6 +268,7 @@ $--color-text-secondary: $dashboard-layout-left-side-menu-color !default;
   }
   & .nicety-menu {
     border: none;
+    background:  #2f6192;
   }
   & .nicety-menu-item {
     height: auto;

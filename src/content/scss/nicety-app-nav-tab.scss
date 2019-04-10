@@ -1,36 +1,45 @@
-$dashboard-layout-nar-bar-height:2.5rem !default;
+$dashboard-layout-nar-bar-height: 2.5rem !default;
 
 .dashboard-body {
   .page {
-    .header-tab.nav-tabs { //main tab 样式
-      height: $dashboard-layout-nar-bar-height;
-      background: $gray-100;
-      border-bottom: 1px solid #c5c5c5;
-      .nav-item {
-        user-select: none;
-        border-right: 1px solid #c5c5c5;
-      }
-      .nav-link {
-        border: 0;
-        * {
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
+    .header-tab {
+      .nav-tabs { //main tab 样式
+        //height: $dashboard-layout-nar-bar-height;
+        background: $gray-100;
+        border-bottom: 1px solid #c5c5c5;
+
+        .nav-item {
           user-select: none;
-          cursor: default;
+          border-right: 1px solid #c5c5c5;
         }
-        .close-tab {
-          transition: 0.3s;
-          &:hover {
-            transform: rotate(90deg) scale(1);
-            color: $gray-600;
+
+        .nav-link {
+          border: 0;
+
+          * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: default;
           }
-          cursor: pointer;
-        }
-        &:hover,
-        &.active {
-          background: $breadcrumb-bg;
-          border-bottom: 2px $breadcrumb-bg solid;
+
+          .close-tab {
+            transition: 0.3s;
+
+            &:hover {
+              transform: rotate(90deg) scale(1);
+              color: $gray-600;
+            }
+
+            cursor: pointer;
+          }
+
+          &:hover,
+          &.active {
+            background: $white;
+            border-bottom: 2px $white solid;
+          }
         }
       }
     }
@@ -40,19 +49,22 @@ $dashboard-layout-nar-bar-height:2.5rem !default;
 #dashboard-app.fixed-header.fixed-left-sider.fixed-footer.fixed-nav-tabs {
   .page {
     overflow: hidden;
+
     > .wrapper {
       height: 100%;
       position: relative;
       padding-top: $dashboard-layout-nar-bar-height;
       margin-top: $dashboard-layout-nar-bar-height*-1;
       top: $dashboard-layout-nar-bar-height;
-      .header-tab.nav-tabs{
+
+      .header-tab {
         top: 0;
         position: absolute;
         width: 100%;
 
       }
-      > .wrapper{
+
+      > .wrapper {
         height: 100%;
         overflow-y: auto;
         overflow-x: hidden;

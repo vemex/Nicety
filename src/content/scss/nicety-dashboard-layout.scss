@@ -88,12 +88,12 @@ footer 布局方式靠底部显示，position：绝对布局，宽度100%
 
 #dashboard-app.fixed-header.fixed-left-sider.fixed-footer {
 
-  header {
+  & > header {
     left: 0;
     .aside-header {
       display: block;
     }
-    .header-bar {
+    & > .header-bar {
       padding-left: $dashboard-layout-left-side-width;
       margin-left: $dashboard-layout-left-side-width*-1;
     }

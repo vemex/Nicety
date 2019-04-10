@@ -176,9 +176,10 @@ export default {
         _nicetyFiledSize () {
             return (this.nicetyFiled || {}).nicetyFiledSize;
         },
-        readonly () {
-            return !this.filterable || this.multiple || (!isIE() && !isEdge() && !this.visible);
-        },
+        // readonly () {
+        //     this.nice
+        //     return !this.filterable || this.multiple || (!isIE() && !isEdge() && !this.visible);
+        // },
 
         showClose () {
             let hasValue = this.multiple
@@ -248,6 +249,7 @@ export default {
     props: {
         name: String,
         id: String,
+        readonly:{type:Boolean,default:false},
         value: {
             required: true
         },

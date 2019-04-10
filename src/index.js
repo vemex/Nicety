@@ -19,6 +19,13 @@ import Tooltip from './components/Tooltip'
 import Uploader from './components/Uploader'
 import Form from './components/Form'
 import Tree from './components/Tree/index'
+import Assists from './components/Assists/index'
+import Layout from './components/Layout'
+import Inputs from './components/Inputs'
+import DatePicker from './components/DatePicker'
+import InputNumber from './components/InputNumber'
+import Notification from './components/Notification'
+import Directives from './directives'
 
 
 export default {
@@ -38,6 +45,13 @@ export default {
         Uploader.install(Vue);
         Form.install(Vue);
         Tree.install(Vue);
+        Assists.install(Vue);
+        Layout.install(Vue);
+        Inputs.install(Vue);
+        DatePicker.install(Vue);
+        InputNumber.install(Vue);
+        Notification.install(Vue);
+        Directives.install(Vue)
     }
 };
 

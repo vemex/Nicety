@@ -1,6 +1,24 @@
-.modal{
+.modal {
   display: block;
 }
+
+@media  screen and(min-height: 900px) {
+  .modal-body >div {
+    max-height: 700px;
+  }
+}
+
+.modal-body >div {
+  max-height: 600px;
+  overflow: auto;
+}
+
+@media  screen and(max-height: 700px) {
+  .modal-body >div {
+    max-height: 400px;
+  }
+}
+
 
 .dialog-fade-enter-active {
   animation: dialog-fade-in .3s;

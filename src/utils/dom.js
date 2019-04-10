@@ -64,7 +64,7 @@ export const once = function (el, event, fn) {
 };
 
 /* istanbul ignore next */
-export function hasClass (el, cls) {
+export function hasClass(el, cls) {
     if (!el || !cls) return false;
     if (cls.indexOf(' ') !== -1) throw new Error('className should not contain space.');
     if (el.classList) {
@@ -75,7 +75,7 @@ export function hasClass (el, cls) {
 };
 
 /* istanbul ignore next */
-export function addClass (el, cls) {
+export function addClass(el, cls) {
     if (!el) return;
     var curClass = el.className;
     var classes = (cls || '').split(' ');
@@ -96,7 +96,7 @@ export function addClass (el, cls) {
 };
 
 /* istanbul ignore next */
-export function removeClass (el, cls) {
+export function removeClass(el, cls) {
     if (!el || !cls) return;
     var classes = cls.split(' ');
     var curClass = ' ' + el.className + ' ';
@@ -154,7 +154,7 @@ export const getStyle = ieVersion < 9 ? function (element, styleName) {
 };
 
 /* istanbul ignore next */
-export function setStyle (element, styleName, value) {
+export function setStyle(element, styleName, value) {
     if (!element || !styleName) return;
 
     if (typeof styleName === 'object') {
@@ -172,3 +172,13 @@ export function setStyle (element, styleName, value) {
         }
     }
 };
+
+export function getStyleNumber(value) {
+    let index= value.indexOf("px");
+    if (index>0){
+        return Number.parseFloat(value.substr(0,index)) ;
+    } else {
+        return Number.parseFloat(value);
+    }
+
+}

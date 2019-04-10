@@ -4,7 +4,6 @@ let TextInputRender = {
     name: 'TextInputRender',
     extends: BaseInput,
     props: {
-        rowData:[Object],
         type: {type: String, default: 'text'}
     },
     watch:{

@@ -12,7 +12,7 @@
          @mouseenter="hovering = true"
          @mouseleave="hovering = false"
     >
-        <template v-if="type !== 'textarea'">
+        <template v-if="type !== 'textarea' && !readonly">
             <!-- 前置元素 -->
             <div class="input-group-prepend" v-if="$slots.prepend">
                 <span class="input-group-text"><slot name="prepend"></slot></span>
@@ -21,7 +21,7 @@
             <input
                     :tabindex="tabindex"
                     v-if="type !== 'textarea'"
-                    class="form-control"
+                    class="form-control nicety-input__inner"
                     v-bind="$attrs"
                     :type="type"
                     :disabled="inputDisabled"
@@ -51,9 +51,11 @@
                         <slot name="suffix"></slot>
                         <i class="nicety-input__icon" v-if="suffixIcon" :class="suffixIcon"></i>
                     </template>
-                    <i v-else class="nicety-input__icon nicety-icon-circle-close nicety-input__clear" @click="clear"></i>
+                    <i v-else class="nicety-input__icon nicety-icon-circle-close nicety-input__clear"
+                       @click="clear"></i>
                 </span>
-                <i class="nicety-input__icon" v-if="validateState" :class="['nicety-input__validateIcon', validateIcon]">
+                <i class="nicety-input__icon" v-if="validateState"
+                   :class="['nicety-input__validateIcon', validateIcon]">
                 </i>
             </span>
             <!-- 后置元素 -->
@@ -62,6 +64,9 @@
                     <slot name="append"></slot>
                 </span>
             </div>
+        </template>
+        <template v-else-if="type !== 'textarea' && readonly">
+            <label>{{value}}</label>
         </template>
         <textarea
                 v-else
@@ -87,259 +92,259 @@
     </div>
 </template>
 <script>
-import emitter from '../../mixins/emitter';
-import Migrating from '../../mixins/migrating';
-import calcTextareaHeight from './calcTextareaHeight';
-import merge from '../../utils/merge';
+    import emitter from '../../mixins/emitter';
+    import Migrating from '../../mixins/migrating';
+    import calcTextareaHeight from './calcTextareaHeight';
+    import merge from '../../utils/merge';
 
-export default {
-    name: 'NicetyBaseInput',
+    export default {
+        name: 'NicetyBaseInput',
 
-    componentName: 'NicetyBaseInput',
+        componentName: 'NicetyBaseInput',
 
-    mixins: [emitter, Migrating],
+        mixins: [emitter, Migrating],
 
-    inheritAttrs: false,
+        inheritAttrs: false,
 
-    inject: {
-        'nicetyForm': {
-            default: ''
+        inject: {
+            'nicetyForm': {
+                default: ''
+            },
+            'nicetyFiled': {
+                default: ''
+            }
         },
-        'nicetyFiled': {
-            default: ''
-        }
-    },
-    $_veeValidate: {
-        name: function () {
-            return this.nicetyFiled.name;
+        $_veeValidate: {
+            name: function () {
+                return this.nicetyFiled.name;
+            },
+            value: function () {
+                return this.value;
+            }
         },
-        value: function () {
-            return this.value;
-        }
-    },
-    data () {
-        return {
-            textareaCalcStyle: {},
-            hovering: false,
-            focused: false,
-            isOnComposition: false
-        };
-    },
-    props: {
-        value: [String, Number],
-        size: String,
-        resize: String,
-        form: String,
-        disabled: Boolean,
-        readonly: Boolean,
-        type: {
-            type: String,
-            default: 'text'
-        },
-        autosize: {
-            type: [Boolean, Object],
-            default: false
-        },
-        autocomplete: {
-            type: String,
-            default: 'off'
-        },
-        validateEvent: {
-            type: Boolean,
-            default: true
-        },
-        suffixIcon: String,
-        prefixIcon: String,
-        label: String,
-        clearable: {
-            type: Boolean,
-            default: false
-        },
-        tabindex: String,
-        visible:{
-            type:Boolean,
-            default:true,
-        }
-    },
-    computed: {
-        _nicetyFiledSize () {
-            return (this.nicetyFiled || {}).nicetyFiledSize;
-        },
-        validateState () {
-            return this.nicetyFiled ? this.nicetyFiled.validateState : '';
-        },
-        needStatusIcon () {
-            return this.nicetyForm ? this.nicetyForm.statusIcon : false;
-        },
-        validateIcon () {
+        data() {
             return {
-                validating: 'nicety-icon-loading',
-                success: 'nicety-icon-circle-check',
-                error: 'nicety-icon-circle-close'
-            }[this.validateState];
+                textareaCalcStyle: {},
+                hovering: false,
+                focused: false,
+                isOnComposition: false
+            };
         },
-        textareaStyle () {
-            return merge({}, this.textareaCalcStyle, {resize: this.resize});
-        },
-        inputSizeClass () {
-            let size = this.size || this._nicetyFiledSize || (this.$ELEMENT || {}).size;
-            if (!size || size === 'small') {
-                return '';
+        props: {
+            value: [String, Number],
+            size: String,
+            resize: String,
+            form: String,
+            disabled: Boolean,
+            readonly: Boolean,
+            type: {
+                type: String,
+                default: 'text'
+            },
+            autosize: {
+                type: [Boolean, Object],
+                default: false
+            },
+            autocomplete: {
+                type: String,
+                default: 'off'
+            },
+            validateEvent: {
+                type: Boolean,
+                default: true
+            },
+            suffixIcon: String,
+            prefixIcon: String,
+            label: String,
+            clearable: {
+                type: Boolean,
+                default: false
+            },
+            tabindex: String,
+            visible: {
+                type: Boolean,
+                default: true,
             }
-            if (size === 'medium') {
-                return 'input-group-lg';
-            }
-            if (size === 'mini') {
-                return 'input-group-sm';
-            }
         },
-        inputDisabled () {
-            return this.disabled || (this.nicetyForm || {}).disabled;
-        },
-        nativeInputValue () {
-            return this.value === null || this.value === undefined ? '' : this.value;
-        },
-        showClear () {
-            return this.clearable &&
+        computed: {
+            _nicetyFiledSize() {
+                return (this.nicetyFiled || {}).nicetyFiledSize;
+            },
+            validateState() {
+                return this.nicetyFiled ? this.nicetyFiled.validateState : '';
+            },
+            needStatusIcon() {
+                return this.nicetyForm ? this.nicetyForm.statusIcon : false;
+            },
+            validateIcon() {
+                return {
+                    validating: 'nicety-icon-loading',
+                    success: 'nicety-icon-circle-check',
+                    error: 'nicety-icon-circle-close'
+                }[this.validateState];
+            },
+            textareaStyle() {
+                return merge({}, this.textareaCalcStyle, {resize: this.resize});
+            },
+            inputSizeClass() {
+                let size = this.size || this._nicetyFiledSize || (this.$ELEMENT || {}).size;
+                if (!size || size === 'small') {
+                    return '';
+                }
+                if (size === 'medium') {
+                    return 'input-group-lg';
+                }
+                if (size === 'mini') {
+                    return 'input-group-sm';
+                }
+            },
+            inputDisabled() {
+                return this.disabled || (this.nicetyForm || {}).disabled;
+            },
+            nativeInputValue() {
+                return this.value === null || this.value === undefined ? '' : this.value;
+            },
+            showClear() {
+                return this.clearable &&
                     !this.inputDisabled &&
                     !this.readonly &&
                     this.nativeInputValue &&
                     (this.focused || this.hovering);
-        }
-    },
-
-    watch: {
-        value (val) {
-            this.$nextTick(this.resizeTextarea);
-            if (this.validateEvent) {
-                this.dispatch('NicetyFiled', 'nicety.form.change', [val]);
             }
-        }
-    },
+        },
 
-    methods: {
-        focus () {
-            (this.$refs.input || this.$refs.textarea).focus();
-        },
-        blur () {
-            (this.$refs.input || this.$refs.textarea).blur();
-        },
-        getMigratingConfig () {
-            return {
-                props: {
-                    'icon': 'icon is removed, use suffix-icon / prefix-icon instead.',
-                    'on-icon-click': 'on-icon-click is removed.'
-                },
-                events: {
-                    'click': 'click is removed.'
+        watch: {
+            value(val) {
+                this.$nextTick(this.resizeTextarea);
+                if (this.validateEvent) {
+                    this.dispatch('NicetyFiled', 'nicety.form.change', [val]);
                 }
-            };
-        },
-        handleBlur (event) {
-            this.focused = false;
-            this.$emit('blur', event);
-            if (this.validateEvent) {
-                this.dispatch('NicetyFiled', 'el.form.blur', [this.value]);
             }
         },
-        select () {
-            (this.$refs.input || this.$refs.textarea).select();
-        },
-        resizeTextarea () {
-            if (this.$isServer) return;
-            const {autosize, type} = this;
-            if (type !== 'textarea') return;
-            if (!autosize) {
-                this.textareaCalcStyle = {
-                    minHeight: calcTextareaHeight(this.$refs.textarea).minHeight
+
+        methods: {
+            focus() {
+                (this.$refs.input || this.$refs.textarea).focus();
+            },
+            blur() {
+                (this.$refs.input || this.$refs.textarea).blur();
+            },
+            getMigratingConfig() {
+                return {
+                    props: {
+                        'icon': 'icon is removed, use suffix-icon / prefix-icon instead.',
+                        'on-icon-click': 'on-icon-click is removed.'
+                    },
+                    events: {
+                        'click': 'click is removed.'
+                    }
                 };
-                return;
-            }
-            const minRows = autosize.minRows;
-            const maxRows = autosize.maxRows;
-
-            this.textareaCalcStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
-        },
-        handleFocus (event) {
-            this.focused = true;
-            this.$emit('focus', event);
-        },
-        handleComposition (event) {
-            if (event.type === 'compositionstart') {
-                this.isOnComposition = true;
-            }
-            if (event.type === 'compositionend') {
-                this.isOnComposition = false;
-                this.handleInput(event);
-            }
-        },
-        handleInput (event) {
-            if (this.isOnComposition) return;
-
-            // hack for https://github.com/ElemeFE/element/issues/8548
-            // should remove the following line when we don't support IE
-            if (event.target.value === this.nativeInputValue) return;
-
-            this.$emit('input', event.target.value);
-
-            // set input's value, in case parent refuses the change
-            // see: https://github.com/ElemeFE/element/issues/12850
-            this.$nextTick(() => {
-                if (this.$refs.input) {
-                    this.$refs.input.value = this.value;
+            },
+            handleBlur(event) {
+                this.focused = false;
+                this.$emit('blur', event);
+                if (this.validateEvent) {
+                    this.dispatch('NicetyFiled', 'el.form.blur', [this.value]);
                 }
-            });
-        },
-        handleChange (event) {
-            this.$emit('change', event.target.value);
-        },
-        calcIconOffset (place) {
-            let elList = [].slice.call(this.$el.querySelectorAll(`.nicety-input__${place}`) || []);
-            if (!elList.length) return;
-            let el = null;
-            for (let i = 0; i < elList.length; i++) {
-                if (elList[i].parentNode === this.$el) {
-                    el = elList[i];
-                    break;
+            },
+            select() {
+                (this.$refs.input || this.$refs.textarea).select();
+            },
+            resizeTextarea() {
+                if (this.$isServer) return;
+                const {autosize, type} = this;
+                if (type !== 'textarea') return;
+                if (!autosize) {
+                    this.textareaCalcStyle = {
+                        minHeight: calcTextareaHeight(this.$refs.textarea).minHeight
+                    };
+                    return;
                 }
-            }
-            if (!el) return;
-            const pendantMap = {
-                suffix: 'append',
-                prefix: 'prepend'
-            };
+                const minRows = autosize.minRows;
+                const maxRows = autosize.maxRows;
 
-            const pendant = pendantMap[place];
-            if (this.$slots[pendant]) {
-                el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${this.$el.querySelector(`.input-group-${pendant}`).offsetWidth}px)`;
-            } else {
-                el.removeAttribute('style');
+                this.textareaCalcStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
+            },
+            handleFocus(event) {
+                this.focused = true;
+                this.$emit('focus', event);
+            },
+            handleComposition(event) {
+                if (event.type === 'compositionstart') {
+                    this.isOnComposition = true;
+                }
+                if (event.type === 'compositionend') {
+                    this.isOnComposition = false;
+                    this.handleInput(event);
+                }
+            },
+            handleInput(event) {
+                if (this.isOnComposition) return;
+
+                // hack for https://github.com/ElemeFE/element/issues/8548
+                // should remove the following line when we don't support IE
+                if (event.target.value === this.nativeInputValue) return;
+
+                this.$emit('input', event.target.value);
+
+                // set input's value, in case parent refuses the change
+                // see: https://github.com/ElemeFE/element/issues/12850
+                this.$nextTick(() => {
+                    if (this.$refs.input) {
+                        this.$refs.input.value = this.value;
+                    }
+                });
+            },
+            handleChange(event) {
+                this.$emit('change', event.target.value);
+            },
+            calcIconOffset(place) {
+                let elList = [].slice.call(this.$el.querySelectorAll(`.nicety-input__${place}`) || []);
+                if (!elList.length) return;
+                let el = null;
+                for (let i = 0; i < elList.length; i++) {
+                    if (elList[i].parentNode === this.$el) {
+                        el = elList[i];
+                        break;
+                    }
+                }
+                if (!el) return;
+                const pendantMap = {
+                    suffix: 'append',
+                    prefix: 'prepend'
+                };
+
+                const pendant = pendantMap[place];
+                if (this.$slots[pendant]) {
+                    el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${this.$el.querySelector(`.input-group-${pendant}`).offsetWidth}px)`;
+                } else {
+                    el.removeAttribute('style');
+                }
+            },
+            updateIconOffset() {
+                this.calcIconOffset('prefix');
+                this.calcIconOffset('suffix');
+            },
+            clear() {
+                this.$emit('input', '');
+                this.$emit('change', '');
+                this.$emit('clear');
             }
         },
-        updateIconOffset () {
-            this.calcIconOffset('prefix');
-            this.calcIconOffset('suffix');
+
+        created() {
+            this.$on('inputSelect', this.select);
         },
-        clear () {
-            this.$emit('input', '');
-            this.$emit('change', '');
-            this.$emit('clear');
+
+        mounted() {
+            if (this.visible) {
+                this.resizeTextarea();
+                this.updateIconOffset();
+            }
+        },
+
+        updated() {
+            this.$nextTick(this.updateIconOffset);
         }
-    },
-
-    created () {
-        this.$on('inputSelect', this.select);
-    },
-
-    mounted () {
-        if (this.visible) {
-            this.resizeTextarea();
-            this.updateIconOffset();
-        }
-    },
-
-    updated () {
-        this.$nextTick(this.updateIconOffset);
-    }
-};
+    };
 </script>

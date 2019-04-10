@@ -1,4 +1,8 @@
-@import "./nicety-variables.scss";  
+@import "./nicety-variables.scss";
 .dropdown-menu {
     border-radius: 0;
+}
+
+#dashboard-app > header .header-bar .right-container > .dropdown .dropdown-item{
+    @extend .dropdown-item;
 }

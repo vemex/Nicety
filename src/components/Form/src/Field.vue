@@ -24,6 +24,10 @@
     import TextareaInput from '../../Inputs/TextareaInput.js';
     import SelectInput from '../../Inputs/SelectInput.js';
     import CheckboxInput from '../../Inputs/CheckboxInput.js';
+    import RouteLink from '../../Inputs/RouteLink.js'
+    import LinkButton from '../../Inputs/LinkButton'
+    import DatePicker from '../../Inputs/DatePicker'
+    import NumberInput from '../../Inputs/NumberInput'
 
     export default {
         name: 'nicety-field',
@@ -34,7 +38,11 @@
             PasswordInput,
             TextareaInput,
             SelectInput,
-            CheckboxInput
+            CheckboxInput,
+            RouteLink,
+            LinkButton,
+            DatePicker,
+            NumberInput
         },
         inject: [
             'nicetyForm'
@@ -46,7 +54,7 @@
             };
         },
         props: {
-            'inputValue': {type: [String, Array, Object, Number, Boolean], default: null},
+            'inputValue': {type: [String, Array, Object, Number, Boolean,Date], default: null},
             label: {type: String}, // 字段标签
             inputPlaceholder: {type: String},
             renderType: {type: String, default: null}, // 显示类型
@@ -57,11 +65,14 @@
             name: {type: String}, // 需校验的字段名
             rules: {type: String, default: 'empty'}, // 验证规则
             inputReadonly: {type: Boolean, default: false}, // 只读
-            visible: {type: Boolean, default: true}// 可见性
+            visible: {type: Boolean, default: true},// 可见性
         },
         watch: {
             value: function () {
                 this.errors.clear();
+            },
+            name: function () {
+                console.log(this.name);
             }
         },
         mounted: function () {
@@ -120,6 +131,13 @@
                         this._owner.$emit('update:' + index, value);
                     });
                 }
+                Obj.prototype.__defineGetter__("readonly", function () {
+                    return this._owner.inputReadonly || this._owner.nicetyForm.isReadOnly;
+                });
+                Obj.prototype.__defineSetter__("readonly", function (value) {
+                    this._owner.$emit('update:inputReadonly', value);
+                    this._owner.nicetyForm.$emit('update:readonly', value);
+                });
                 this.$inputProps = new Obj(this);
                 return this.$inputProps;
             },

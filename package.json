@@ -112,6 +112,8 @@
     "ag-grid-vue": "^17.1.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.2",
+    "chart.js": "^2.8.0",
+    "deepmerge": "^3.2.0",
     "echarts": "^3.8.5",
     "fine-uploader": "^5.16.2",
     "highcharts": "^6.0.4",

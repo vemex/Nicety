@@ -114,7 +114,15 @@ export default {
 
             this.sizeHeight = (heightPercentage < 100) ? (heightPercentage + '%') : '';
             this.sizeWidth = (widthPercentage < 100) ? (widthPercentage + '%') : '';
-        }
+        },
+        scrollX(value){
+            const wrap = this.wrap;
+            wrap.scrollLeft=value;
+        },
+        scrollY(value){
+            const wrap = this.wrap;
+            wrap.scrollTop=value;
+        },
     },
 
     mounted() {
@@ -122,6 +130,7 @@ export default {
         this.$nextTick(this.update);
         !this.noresize && addResizeListener(this.$refs.resize, this.update);
     },
+
 
     beforeDestroy() {
         if (this.native) return;

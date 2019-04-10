@@ -1,0 +1,198 @@
+$--input-small-font-size:1rem;
+$--input-mini-font-size:1rem;
+$--input-medium-font-size:1rem;
+$--input-medium-height:1rem;
+$--input-small-height:1rem;
+$--input-mini-height:1rem;
+$--input-disabled-fill:$input-disabled-bg;
+$--input-disabled-border:$input-border-color;
+$--input-disabled-color:$input-placeholder-color;
+$--input-disabled-placeholder-color:$input-placeholder-color;
+
+@include b(date-editor) {
+  position: relative;
+  display: inline-block;
+  text-align: left;
+
+  &.nicety-input,
+  &.nicety-input__inner {
+    width: 220px;
+  }
+
+  @include m((daterange, timerange)) {
+    &.nicety-input,
+    &.nicety-input__inner {
+      width: 350px;
+    }
+  }
+
+  @include m(datetimerange) {
+    &.nicety-input,
+    &.nicety-input__inner {
+      width: 400px;
+    }
+  }
+
+  @include m(dates) {
+    .nicety-input__inner {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .nicety-icon-circle-close {
+    cursor: pointer;
+  }
+
+  .nicety-range__icon {
+    font-size: 14px;
+    margin-left: -5px;
+    color: $--color-text-placeholder;
+    float: left;
+    line-height: 32px;
+  }
+
+  .nicety-range-input {
+    appearance: none;
+    border: none;
+    outline: none;
+    display: inline-block;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 39%;
+    text-align: center;
+    font-size: 1rem;
+    color: $--color-text-regular;
+
+    &::placeholder {
+      color: $--color-text-placeholder;
+    }
+  }
+
+  .nicety-range-separator {
+    display: inline-block;
+    height: 100%;
+    padding: 0 5px;
+    margin: 0;
+    text-align: center;
+    line-height: 32px;
+    font-size: 14px;
+    width: 5%;
+    color: $--color-text-primary;
+  }
+
+  .nicety-range__close-icon {
+    font-size: 14px;
+    color: $--color-text-placeholder;
+    width: 25px;
+    display: inline-block;
+    float: right;
+    line-height: 32px;
+  }
+}
+
+@include b(range-editor) {
+  &.nicety-input__inner {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+  }
+
+  .nicety-range-input {
+    line-height: 1;
+  }
+
+  @include when(active) {
+    border-color: $--color-primary;
+
+    &:hover {
+      border-color: $--color-primary;
+    }
+  }
+
+  @include m(medium) {
+    &.nicety-input__inner {
+      height: $--input-medium-height;
+    }
+
+    .nicety-range-separator {
+      line-height: 28px;
+      font-size: $--input-medium-font-size;
+    }
+
+    .nicety-range-input {
+      font-size: $--input-medium-font-size;
+    }
+
+    .nicety-range__icon,
+    .nicety-range__close-icon {
+      line-height: 28px;
+    }
+  }
+
+  @include m(small) {
+    &.nicety-input__inner {
+      height: $--input-small-height;
+    }
+
+    .nicety-range-separator {
+      line-height: 24px;
+      font-size: $--input-small-font-size;
+    }
+
+    .nicety-range-input {
+      font-size: $--input-small-font-size;
+    }
+
+    .nicety-range__icon,
+    .nicety-range__close-icon {
+      line-height: 24px;
+    }
+  }
+
+  @include m(mini) {
+    &.nicety-input__inner {
+      height: $--input-mini-height;
+    }
+
+    .nicety-range-separator {
+      line-height: 20px;
+      font-size: $--input-mini-font-size;
+    }
+
+    .nicety-range-input {
+      font-size: $--input-mini-font-size;
+    }
+
+    .nicety-range__icon,
+    .nicety-range__close-icon {
+      line-height: 20px;
+    }
+  }
+
+  @include when(disabled) {
+    background-color: $--input-disabled-fill;
+    border-color: $--input-disabled-border;
+    color: $--input-disabled-color;
+    cursor: not-allowed;
+
+    &:hover, &:focus {
+      border-color: $--input-disabled-border;
+    }
+
+    input {
+      background-color: $--input-disabled-fill;
+      color: $--input-disabled-color;
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: $--input-disabled-placeholder-color;
+      }
+    }
+
+    .nicety-range-separator {
+      color: $--input-disabled-color;
+    }
+  }
+}

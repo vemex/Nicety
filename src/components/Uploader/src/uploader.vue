@@ -9,11 +9,11 @@
                 <progress-bar :id="currentUploadId" :uploader="uploader" style="height: 2px"></progress-bar>
             </div>
         </div>
-        <dropzone
+        <dropzone :path="storagePath" :multiple="false"
                 :style="{ border: 'dashed 2px #5182E4', height: '200px', width: '100%' , 'display': 'table'  , 'text-align': 'center'}"
                 :uploader="uploader">
             <div style="display: table-cell;vertical-align: middle">
-                <file-input multiple :accept='accessType' :uploader="uploader" :style="{}" :path="storagePath" v-if="resetInput">
+                <file-input :accept='accessType' :uploader="uploader" :style="{}" :path="storagePath" v-if="resetInput">
                     点击上传文件
                 </file-input>
                 <span> 或者拖拽上传</span>
@@ -23,7 +23,7 @@
 </template>
 <script>
     import FineUploaderTraditional from 'fine-uploader-wrappers'
-    import Dropzone from 'vue-fineuploader/dropzone'
+    import Dropzone from './dropzone'
     import FileInput from './fileInput'
     import Filename from 'vue-fineuploader/filename'
     import CancelButton from './cancelButton'

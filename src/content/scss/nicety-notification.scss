@@ -1,54 +1,121 @@
-@import "./nicety-variables.scss";
+//@import "mixins/mixins";
+//@import "common/var";
+/* Notification
+-------------------------- */
+$--box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
+$--notification-width: 330px !default;
+$--notification-padding: 14px 26px 14px 13px !default;
+$--notification-radius: 3px !default;
+$--notification-shadow: $--box-shadow-light !default;
+$--notification-border-color: $light !default;
+$--notification-icon-size: 24px !default;
+$--notification-close-font-size: 16px !default;
+$--notification-group-margin: 13px !default;
+$--notification-font-size: 1.2rem !default;
+$--notification-color: $dark !default;
+$--notification-title-font-size: 16px !default;
+$--notification-title-color: $primary !default;
 
-.notify-alert-warp {
-    position: relative;
-    .notify-alert-div {
+$--notification-close-color: $secondary !default;
+$--notification-close-hover-color: $dark !default;
 
-        @include transition($card-hover-transition);
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 9999;
-        background-color: $alert-mark-background;
-        text-align: center;
-        .notify-alert-content {
-            background: $alert-content-background;
-            width:100%;
-            display: inline-block;
-            vertical-align: middle;
-            text-align: center;
-            padding: 20px;
-            >div{
-                .alert-message{
-                    color: $gray-100;
-                    font-size: 1.5rem;
-                    margin-bottom: 20px;
-                    text-align: left;
-                }
-                .alert-operation{
-                    text-align: right;
-                }
-                .alert-cancel{
-                    @extend .btn !optional;
-                    @extend .btn-secondary !optional;
-                }
-                .alert-confirm{
-                    @extend .btn !optional;
-                    @extend .btn-primary !optional;
-                }
-                width:700px;
-                display: inline-block;
-            }
-        }
+$--notification-success-color: $success !default;
+$--notification-info-color: $info !default;
+$--notification-warning-color: $warning !default;
+$--notification-danger-color: $danger !default;
+
+@include b(notification) {
+  display: flex;
+  width: $--notification-width;
+  padding: $--notification-padding;
+  border-radius: $--notification-radius;
+  box-sizing: border-box;
+  border: 1px solid $--notification-border-color;
+  position: fixed;
+  background-color: $--color-white;
+  box-shadow: $--notification-shadow;
+  transition: opacity .3s, transform .3s, left .3s, right .3s, top 0.4s, bottom .3s;
+  overflow: hidden;
+
+  &.right {
+    right: 16px;
+  }
+
+  &.left {
+    left: 16px;
+  }
+
+  @include e(group) {
+    margin-left: $--notification-group-margin;
+  }
+
+  @include e(title) {
+    font-weight: bold;
+    font-size: $--notification-title-font-size;
+    color: $--notification-title-color;
+    margin: 0;
+  }
+
+  @include e(content) {
+    font-size: $--notification-font-size;
+    line-height: 21px;
+    margin: 6px 0 0 0;
+    color: $--notification-color;
+    text-align: justify;
+
+    p {
+      margin: 0;
     }
-    .notify-alert-div:before {
-        content: "";
-        display: inline-block;
-        height: 100%;
-        width: 1px;
-        vertical-align: middle;
-        margin-left: -5px;
+  }
+
+  @include e(icon) {
+    height: $--notification-icon-size;
+    width: $--notification-icon-size;
+    font-size: $--notification-icon-size;
+  }
+
+  @include e(closeBtn) {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    cursor: pointer;
+    color: $--notification-close-color;
+    font-size: $--notification-close-font-size;
+
+    &:hover {
+      color: $--notification-close-hover-color;
     }
+  }
+
+  .nicety-icon-success {
+    color: $--notification-success-color;
+  }
+
+  .nicety-icon-error {
+    color: $--notification-danger-color;
+  }
+
+  .nicety-icon-info {
+    color: $--notification-info-color;
+  }
+
+  .nicety-icon-warning {
+    color: $--notification-warning-color;
+  }
+}
+
+.nicety-notification-fade-enter {
+  &.right {
+    right: 0;
+    transform: translateX(100%);
+  }
+
+  &.left {
+    left: 0;
+    transform: translateX(-100%);
+  }
+}
+
+.nicety-notification-fade-leave-active {
+  opacity: 0;
 }

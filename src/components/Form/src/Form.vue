@@ -27,6 +27,7 @@
         props: {
             inline: {type: Boolean, default: false},
             disabled: {type: Boolean, default: false},
+            type:{type:String,default:"edit"},
             statusIcon: {type: Boolean, default: false}
         },
         provide() {
@@ -38,6 +39,11 @@
             return {
                 errorMsg: null
             };
+        },
+        computed:{
+            isReadOnly:function () {
+                return this.type.toLowerCase()==="view";
+            }
         },
         methods: {
             clearError() {
@@ -51,6 +57,15 @@
             addError(errorInfo) {
                 if (typeof errorInfo === 'string') {
                     this.errorMsg = errorInfo;
+                    return;
+                }
+                if(typeof  errorInfo ==='object' && errorInfo.code){
+                    let localString= this.$t("form."+errorInfo.code);
+                    if (localString.startsWith("form")) {
+                        this.errorMsg =errorInfo.defaultMessage;
+                    }else {
+                        this.errorMsg =errorInfo.localString;
+                    }
                     return;
                 }
                 const fields = [];

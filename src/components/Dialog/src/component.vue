@@ -21,7 +21,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <slot></slot>
+                        <div>
+                            <slot></slot>
+                        </div>
+                        <div class="alert alert-danger" v-show="errorMsg">{{errorMsg}}</div>
                     </div>
                     <div class="modal-footer" v-if="$slots.footer">
                         <slot name="footer"></slot>
@@ -39,13 +42,21 @@ import emitter from '../../../mixins/emitter';
 
 export default {
     name: 'NicetyDialog',
-
+    componentName:'NicetyDialog',
     mixins: [Popup, emitter, Migrating],
-
+    provide () {
+        return {
+            'dialog': this
+        };
+    },
     props: {
         title: {
             type: String,
             default: ''
+        },
+        errorMsg:{
+            type: String,
+            default: null
         },
 
         modal: {

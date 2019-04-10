@@ -11,24 +11,34 @@
   label {
     font-weight: bold;
   }
-  &.inline-row{
+
+  &.inline-row {
     display: flex;
     flex-wrap: wrap;
-    > [class*="col-"]{
+
+    > [class*="col-"] {
       padding-left: 0;
       padding-right: 0;
     }
-    .col-form-label{
+
+    .col-form-label {
       text-align: right;
       padding-right: 1rem;
 
     }
 
-    .nicety-checkbox{
-      margin-top: 5px ;
+    .nicety-checkbox {
+      margin-top: 5px;
     }
 
   }
+
+  .nicety-input label {
+    @extend .col-form-label;
+    text-align: left !important;
+    font-weight: 400;
+  }
+
   .alert-danger {
     color: $light;
     background-color: $red;
@@ -38,12 +48,16 @@
 }
 
 .nicety-input {
+
   position: relative;
+
   &.nicety-input--prefix {
     transition: all .3s;
+
     input {
       padding-left: 2.5rem;
     }
+
     .nicety-input__prefix {
       left: 0.5rem;
       position: absolute;
@@ -57,12 +71,14 @@
     }
   }
 
-  &.nicety-input--suffix{
+  &.nicety-input--suffix {
 
     transition: all .3s;
+
     input {
       padding-right: 2.5rem;
     }
+
     .nicety-input__suffix {
       right: 0.5rem;
       position: absolute;
@@ -75,10 +91,13 @@
       width: 1.5rem;
     }
   }
-  .nicety-input__icon{
+
+  .nicety-input__icon {
+    font: normal normal normal 14px/1 FontAwesome;
     display: block;
     height: 100%;
   }
+
   .nicety-input__icon:after {
     content: "";
     height: 100%;
@@ -87,3 +106,12 @@
     vertical-align: middle;
   }
 }
+
+
+@each $color, $value in $theme-colors {
+  .text-#{$color} .form-control {
+    color: $value !important;;
+  }
+}
+
+

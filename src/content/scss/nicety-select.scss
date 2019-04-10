@@ -1,11 +1,11 @@
 $--index-normal: 1 !default;
 $--index-top: 1000 !default;
 $--border-radius-base:$border-radius;
-$--color-white:$white;
+//$--color-white:$white;
 $--border-color-light:$light;
 $--border-radius-circle: 100% !default;
-$--color-text-placeholder: #c0c4cc !default;
-$--color-text-secondary:$secondary;
+//$--color-text-placeholder: #c0c4cc !default;
+//$--color-text-secondary:$secondary;
 /* Select
 -------------------------- */
 $--select-border-color-hover: $input-focus-border-color !default;
@@ -15,16 +15,16 @@ $--select-close-hover-color: $secondary !default;
 
 $--select-input-color: $input-color !default;
 $--select-multiple-input-color: #666 !default;
-$--select-input-focus-background: $input-focus-bg !default;
+$--select-input-focus-background: $input-focus-border-color !default;
 $--select-input-font-size: 14px !default;
 
 $--select-option-color: $yiq-text-dark !default;
 $--select-option-disabled-color: #c0c4cc !default;
 $--select-option-disabled-background: $white !default;
 $--select-option-height: 34px !default;
-$--select-option-hover-background: $secondary !default;
+$--select-option-hover-background: lighten($primary, 50%) !default;
 $--select-option-selected: $primary !default;
-$--select-option-selected-hover: $secondary !default;
+$--select-option-selected-hover: $--select-option-hover-background !default;
 
 $--select-group-color: $info !default;
 $--select-group-height: 30px !default;
@@ -36,7 +36,7 @@ $--select-dropdown-empty-color: #999 !default;
 $--select-dropdown-max-height: 274px !default;
 $--select-dropdown-padding: 6px 0 !default;
 $--select-dropdown-empty-padding: 10px 0 !default;
-$--select-dropdown-border: solid 1px $light !default;
+$--select-dropdown-border: solid 1px $input-border-color !default;
 
 @import "./nicety-select-dropdown";
 @import "./nicety-option";

@@ -32,9 +32,9 @@ function loadLanguageResource (that, lang) {
         return Promise.resolve(i18n.messages[lang]);
     }
     return Axios.get(`./i18n/${lang}.json`).then(function (messages) {
-        i18n.setLocaleMessage(lang, messages.data);
+        i18n.setLocaleMessage(lang, messages);
         loadedLanguages.push(lang);
-        return messages.data;
+        return messages;
     });
 }
 

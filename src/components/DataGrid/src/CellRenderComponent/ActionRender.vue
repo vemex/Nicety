@@ -8,7 +8,7 @@
 <script>
     export default {
         props: {
-            rowData: [Object],
+            rowData: {},
             actions: [Array]
         },
         methods: {

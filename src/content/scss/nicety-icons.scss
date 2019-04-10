@@ -1,17 +1,83 @@
 .icon-lg {
-    font-size: 1.333em;
-    line-height: 1.095em;
-    vertical-align: middle;
+  font-size: 1.333em;
+  line-height: 1.095em;
+  vertical-align: middle;
 }
 
 .icon-md {
-    font-size: 1.0em;
-    line-height: 1em;
-    vertical-align: middle;
+  font-size: 1.0em;
+  line-height: 1em;
+  vertical-align: middle;
 }
 
 .icon-md {
-    font-size: 0.83em;
-    line-height: 1.0em;
-    vertical-align: middle;
+  font-size: 0.83em;
+  line-height: 1.0em;
+  vertical-align: middle;
 }
+
+[class^="nicety-icon-"], [class*=" nicety-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: FontAwesome;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.nicety-icon-date:before {
+  content: "\f073";
+}
+
+.nicety-icon-d-arrow-left:before {
+  content: '\f100';
+}
+
+.nicety-icon-d-arrow-right:before {
+  content: "\f101";
+}
+
+.nicety-icon-arrow-left:before {
+  content: "\f104";
+}
+
+.nicety-icon-arrow-right:before {
+  content: "\f105";
+}
+
+.nicety-icon-minus:before {
+  content: "\f068";
+}
+
+.nicety-icon-plus:before {
+  content: "\f067";
+}
+
+.nicety-icon-info:before {
+  content: "\f05a";
+}
+
+.nicety-icon-error:before {
+  content: "\f057";
+}
+
+.nicety-icon-success:before {
+  content: "\f05d";
+}
+
+.nicety-icon-warning:before {
+  content: "\f06a";
+}
+.nicety-icon-close:before{
+  content: "\f00d";
+}
+

@@ -200,7 +200,11 @@
             getCheckedNodes(leafOnly, includeHalfChecked) {
                 return this.store.getCheckedNodes(leafOnly, includeHalfChecked);
             },
-
+            /**
+             * @description 获取选择的节点 nodeKey 值
+             * @param {Boolean} leafOnly 是否只返回叶子节点
+             * @returns {String[]} 所有选中的节点的 nodeKey 值的集合
+             */
             getCheckedKeys(leafOnly) {
                 return this.store.getCheckedKeys(leafOnly);
             },
@@ -220,8 +224,13 @@
                 if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
                 this.store.setCheckedNodes(nodes, leafOnly);
             },
-
+            /**
+             * @description 设置选中的节点
+             * @param {String[]} keys 需要选中的节点的 nodeKey 所对应的值的集合
+             * @param {Boolean} leafOnly 是否只选中叶子节点
+             */
             setCheckedKeys(keys, leafOnly) {
+                debugger;
                 if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedKeys');
                 this.store.setCheckedKeys(keys, leafOnly);
             },

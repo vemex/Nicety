@@ -22,7 +22,7 @@ const resolveConfig = require("./config/resolve.config.js");
 const vueConfig = require("./config/vue.module.config.js");
 
 
-let option = {env: "development", apiURL: ''};
+let option = {env: "development", apiURL: '/api/v1',baseURL:'/'};
 
 let config = webpackMerge(
     baseModuleConfig(option),

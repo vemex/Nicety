@@ -1,0 +1,21 @@
+.page .header-bar {
+  @extend .d-flex;
+  @extend .justify-content-between;
+  @extend .border-bottom;
+  @extend .mb-4;
+  @extend .pb-1;
+  @extend .pt-2;
+  border-bottom: 1px dashed #b6b6b6 !important;
+}
+
+.align-right{
+  text-align: right !important;
+}
+
+.align-left{
+  text-align: left !important;
+}
+
+.align-center{
+  text-align: center !important;
+}
